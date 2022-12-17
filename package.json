@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon index.js"
+    "start": "nodemon index.js"
   },
   "author": "Group11",
   "license": "ISC",
@@ -14,7 +14,10 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
-    "mongoose": "^6.8.0",
+    "mongoose": "^6.8.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.20"
   }
 }
