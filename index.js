@@ -44,20 +44,29 @@ app.get("/",(req,res)=>{
   
 ///// page 404
 app.get("/404",(req,res)=>{
-    // return res.send("haha đây là dòng test");
     res.render("layouts/Error/404");
 })
 /// Page LogIn
 app.get("/login",(req,res)=>{
-    // return res.send("haha đây là dòng test");
     res.render("layouts/Login/login");
   })
 // Page SignUp
 app.get("/signup",(req,res)=>{
-    // return res.send("haha đây là dòng test");
     res.render("layouts/Signup/signup");
   })
+//headerHome test
+app.get("/home",(req,res)=>{
+    res.render("layouts/partials/HeaderHome");
+  })
 
+//header test
+app.get("/header",(req,res)=>{
+    res.render("layouts/partials/Header");
+  })
+//footer test
+app.get("/footer",(req,res)=>{
+    res.render("layouts/partials/Footer");
+  })
 
 app.listen(port, () => {
     console.log( `Example app listening at http://localhost:${port}`)
