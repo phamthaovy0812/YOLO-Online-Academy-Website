@@ -242,3 +242,64 @@ a :hover {
   color: #F0AE00;
   padding-top: 130px;
   margin-left: 20px; }
+
+.edit {
+  margin: 60px;
+  padding: 30px;
+  color: #373737; }
+
+.search {
+  margin: 35px;
+  padding: 30px;
+  color: #373737;
+  width: 95%; }
+
+.itemcard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  margin: 20px;
+  padding-top: 20px;
+  text-align: center;
+  font-family: arial;
+  height: 350px; }
+
+.itemprice {
+  color: grey;
+  font-size: 25px; }
+
+.itemcard button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  margin: 15px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer; }
+
+.itemcard button:hover {
+  opacity: 0.7; }
+
+.mlshow {
+  width: 95%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px; }
+
+.mlbar {
+  background-color: #273238;
+  color: whitesmoke;
+  font-weight: bolder;
+  height: 170px; }
+
+.mltitle {
+  padding-left: 150px;
+  padding-top: 40px;
+  font-size: 30px;
+  font-weight: bolder; }
+
+.mltab {
+  padding: 30px;
+  margin-left: 150px; }

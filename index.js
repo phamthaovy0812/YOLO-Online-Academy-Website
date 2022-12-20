@@ -44,12 +44,14 @@ app.get("/",(req,res)=>{
    
   })
 */
-  
+
+// Non Account
+
 ///// page 404
 app.get("/404",(req,res)=>{
     res.render("Error/404",{ layout: false }); // layout false là để k hiển thị header và footer
 })
-
+//login
 app.get('/login',(req, res)=> {
     res.render('vwAccount/login', { layout: false });
   });
@@ -62,22 +64,33 @@ app.get("/",(req,res)=>{
     res.render("vwAccount/home");
   })
 
+//Search
+app.get('/search',(req, res)=> {
+  res.render('vwAccount/search');
+});
+
+//item test
+app.get('/item',(req, res)=> {
+  res.render('cources/item');
+});
 
 
-/*
-//headerHome test
-app.get("/home",(req,res)=>{
-    res.render("layouts/partials/HeaderHome");
-  })
-//header test
-app.get("/header",(req,res)=>{
-    res.render("layouts/partials/Header");
-  })
-//footer test
-app.get("/footer",(req,res)=>{
-    res.render("layouts/partials/Footer");
-  })
-*/
+//Student
+
+// Edit Profile
+
+app.get("/edit",(req,res)=>{
+  res.render("vwStudent/editprofile");
+})
+//profile page
+app.get("/profile",(req,res)=>{
+  res.render("vwStudent/profile");
+})
+//my learning page
+app.get("/mylearning",(req,res)=>{
+  res.render("vwStudent/mylearning");
+})
+
 
 app.listen(port, () => {
     console.log( `Example app listening at http://localhost:${port}`)
