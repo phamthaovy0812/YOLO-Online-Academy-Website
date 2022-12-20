@@ -27,6 +27,8 @@ app.engine('hbs', engine({
 }));
 
 app.use(express.static("public/img"));
+app.use(express.static("public"));
+
 app.set('view engine', 'hbs');
 app.set('views', './views');
 //app.set('views', path.join(__dirname,'views/layouts/Teacher'));
@@ -36,29 +38,37 @@ app.use(rout); // router root
 
 
 
-
+/*
 app.get("/",(req,res)=>{
     return res.send("haha đây là dòng test");
    
   })
+*/
   
 ///// page 404
 app.get("/404",(req,res)=>{
-    res.render("layouts/Error/404");
+    res.render("Error/404",{ layout: false }); // layout false là để k hiển thị header và footer
 })
-/// Page LogIn
-app.get("/login",(req,res)=>{
-    res.render("layouts/Login/login");
-  })
+
+app.get('/login',(req, res)=> {
+    res.render('vwAccount/login', { layout: false });
+  });
 // Page SignUp
 app.get("/signup",(req,res)=>{
-    res.render("layouts/Signup/signup");
+    res.render("vwAccount/signup",{ layout: false });
   })
+// Page Home
+app.get("/",(req,res)=>{
+    res.render("vwAccount/home");
+  })
+
+
+
+/*
 //headerHome test
 app.get("/home",(req,res)=>{
     res.render("layouts/partials/HeaderHome");
   })
-
 //header test
 app.get("/header",(req,res)=>{
     res.render("layouts/partials/Header");
@@ -67,6 +77,7 @@ app.get("/header",(req,res)=>{
 app.get("/footer",(req,res)=>{
     res.render("layouts/partials/Footer");
   })
+*/
 
 app.listen(port, () => {
     console.log( `Example app listening at http://localhost:${port}`)
