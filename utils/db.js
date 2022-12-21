@@ -8,7 +8,7 @@ export default {
     run() {
         // Connection URI
         const uri =
-            // "mongodb+srv://buiquangthanh:buiquangthanh1709@cluster0.4j0rdaz.mongodb.net/?retryWrites=true&w=majority";
+            "mongodb+srv://buiquangthanh:buiquangthanh1709@cluster0.4j0rdaz.mongodb.net/?retryWrites=true&w=majority";
         mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
             console.log("Connected DB");
 

@@ -2,10 +2,11 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import cookieParser from 'cookie-parser';
 import rout from './routes/index.js';
+import db from './utils/db.js'
 const app = express()
 const port = 3000;
 
-
+db.run();
 app.use(express.urlencoded({
     extended: true
 }))
