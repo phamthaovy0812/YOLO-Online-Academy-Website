@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "watch":"node-sass --watch scss/app.scss public/css/app.css"
+    "watch": "node-sass --watch scss/app.scss public/css/app.css"
   },
   "author": "Group11",
   "license": "ISC",
@@ -15,7 +15,8 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
-    "mongoose": "^6.8.0"
+    "mongoose": "^6.8.0",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
