@@ -5,6 +5,7 @@ import express from 'express';
 
 
 const router = express.Router();
+//
 // // router.use('/api/user', UserRoute);
 // router.use('/api/courses', CourseRoute);
 // router.use('/api/categories', CategoryRoute);
