@@ -2,8 +2,9 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import cookieParser from 'cookie-parser';
 import rout from './routes/index.js';
-
+const  cors   = require( 'cors');
 import path from 'path'; // thu vien path de chuyen duong dan thu muc
+const dotenv = require('dotenv');
 import { fileURLToPath } from 'url';
 //const morgan=require("morgan");
 //const handlebars= require("express-handlebars");
@@ -12,12 +13,23 @@ const port = 3000;
 const __filename=fileURLToPath(import.meta.url);
 const __dirname= path.dirname(__filename);
 
+dotenv.config({ path: './config.env' });
+
+const DB = process.env.DATABASE;
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+  })
+  .then((con) => {  
+    console.log('DB connection successful');
+  });
 
 app.use(express.urlencoded({
     extended: true
 }))
 
 app.use(cookieParser())
+app.use(cors());
 
 // khai bao engine voi ten hbs
 app.engine('hbs', engine({
