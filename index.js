@@ -1,13 +1,14 @@
 import express from 'express';
-import { engine } from 'express-handlebars';
+
 import cookieParser from 'cookie-parser';
 import rout from './routes/index.js';
-const  cors   = require( 'cors');
-import path from 'path'; // thu vien path de chuyen duong dan thu muc
-const dotenv = require('dotenv');
+import  cors  from 'cors';
+import path from 'path'; 
+import dotenv from 'dotenv';
+import mongoose  from 'mongoose';
+import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
-//const morgan=require("morgan");
-//const handlebars= require("express-handlebars");
+
 const app = express();
 const port = 3000;
 const __filename=fileURLToPath(import.meta.url);
