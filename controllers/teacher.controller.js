@@ -1,6 +1,6 @@
-const Teacher = require("../models/teacher.model");
+import  Teacher from "../models/teacher.model.js";
 
-exports.GetAllTeacher = async (req, res) => {
+const GetAllTeacher = async (req, res) => {
   try {
     const teacher = await Teacher.find();
 
@@ -17,7 +17,7 @@ exports.GetAllTeacher = async (req, res) => {
   }
 };
 
-exports.CreateTeacher = async (req, res, id_account) => {
+const CreateTeacher = async (req, res, id_account) => {
   const data = new Teacher({
     id_account: id_account,
     fullname: req.body.fullname,
@@ -29,7 +29,7 @@ exports.CreateTeacher = async (req, res, id_account) => {
 
 };
 
-exports.DeleteTeacher = async (req, res, id_account) => {
+const DeleteTeacher = async (req, res, id_account) => {
   try {
     const id = req.params.id;
     const data = await Teacher.findOneAndDelete({ "id_account" : id_account})
@@ -41,3 +41,5 @@ exports.DeleteTeacher = async (req, res, id_account) => {
     });
   }
 };
+
+export default { GetAllTeacher, CreateTeacher, DeleteTeacher }

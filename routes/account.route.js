@@ -1,17 +1,17 @@
-const  express = require( 'express');
-const  { GetAllAccount,CreateAccount, DeleteAccount, GetOneAccount }  = require( '../controllers/account.controller.js');
-var bodyParser = require('body-parser');
+import express from  'express';
+import Account  from  '../controllers/account.controller.js';
+import bodyParser from 'body-parser';
 var jsonParser = bodyParser.json();
 const router = express.Router();
 
 router 
     .route('/')
-        .get(GetAllAccount)
-        .post(jsonParser,CreateAccount)
+        .get(Account.GetAllAccount)
+        .post(jsonParser,Account.CreateAccount)
 router
     .route('/:id')
-        .delete(DeleteAccount)
-        .get( GetOneAccount);
+        .delete(Account.DeleteAccount)
+        .get( Account.GetOneAccount);
     
 
-module.exports =  router ; 
+export default router ;  

@@ -1,6 +1,6 @@
-const Student = require( '../models/student.model');
+import Student from '../models/student.model.js';
 
-exports.GetAllStudent = async(req, res) =>{
+const GetAllStudent = async(req, res) =>{
     try{
         const student = await Student.find();
 
@@ -19,7 +19,7 @@ exports.GetAllStudent = async(req, res) =>{
     }
 };
  
-exports.CreateStudent = async(req, res, id_account ) =>{
+const CreateStudent = async(req, res, id_account ) =>{
     const data = new Student({
         id_account: id_account,
         fullname: req.body.fullname
@@ -35,7 +35,7 @@ exports.CreateStudent = async(req, res, id_account ) =>{
 } 
 
 
-exports.DeleteStudent = async (req, res, id_account) => {
+const DeleteStudent = async (req, res, id_account) => {
     try {
       const id = req.params.id;
       const data = await Student.findOneAndDelete({ "id_account" : id_account})
@@ -48,3 +48,4 @@ exports.DeleteStudent = async (req, res, id_account) => {
     }
   };
   
+  export default { GetAllStudent, CreateStudent, DeleteStudent };

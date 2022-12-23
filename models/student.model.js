@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const objectCourse = {
   id_course : {
@@ -26,6 +26,6 @@ const studentSchema = new mongoose.Schema({
   courses_enroll: [objectCourse],
 });
 
-const Student = mongoose.model("Student", studentSchema);
+export default mongoose.model("Student", studentSchema);
 
-module.exports = Student;
+

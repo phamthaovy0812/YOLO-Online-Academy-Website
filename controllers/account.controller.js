@@ -1,11 +1,10 @@
-const Account = require("../models/account.model");
-const  {  CreateStudent, DeleteStudent }  = require( './student.controller.js');
-const  {  CreateTeacher, DeleteTeacher }  = require( './teacher.controller.js');
+import Account from "../models/Account.model.js";
+import Student from "./student.controller.js";
+import Teacher from "./teacher.controller.js";
 
-exports.GetAllAccount = async (req, res) => {
+const GetAllAccount = async (req, res) => {
   try {
-    const accounts = await Account.find();
-
+    const accounts = await Account.find(); 
     res.status(200).json({
       status: "success",
       length: accounts.length,
@@ -18,7 +17,7 @@ exports.GetAllAccount = async (req, res) => {
     });
   }
 };
-exports.GetOneAccount = async (req, res) => {
+const GetOneAccount = async (req, res) => {
   try {
     const account = await Account.findById(req.params.id);
 
@@ -34,8 +33,7 @@ exports.GetOneAccount = async (req, res) => {
   }
 };
 
-exports.CreateAccount = async (req, res) => {
-  
+const CreateAccount = async (req, res) => {
   try {
     const newAccount = new Account({
       email: req.body.email,
@@ -44,18 +42,17 @@ exports.CreateAccount = async (req, res) => {
       role: req.body.role,
     });
 
-    console.log("BODY : ", req.body)
+    console.log("BODY : ", req.body);
 
     const dataToSave = await newAccount.save();
 
-    if(dataToSave.role ==0)  { 
-      CreateStudent(req, res, dataToSave._id );
-    }
-    else if(dataToSave.role ==1){
-      CreateTeacher( req, res, dataToSave._id);
+    if (dataToSave.role == 0) {
+      Student.CreateStudent(req, res, dataToSave._id);
+    } else if (dataToSave.role == 1) {
+      Teacher.CreateTeacher(req, res, dataToSave._id);
     }
 
-    const mergedObject = Object.assign({}, req.body, dataToSave._doc) 
+    const mergedObject = Object.assign({}, req.body, dataToSave._doc);
     res.status(200).json(mergedObject);
   } catch (err) {
     res.status(404).json({
@@ -65,23 +62,21 @@ exports.CreateAccount = async (req, res) => {
   }
 };
 
-exports.DeleteAccount = async (req, res) => {
+const DeleteAccount = async (req, res) => {
   try {
     const id = req.params.id;
     const queryAccount = await Account.findById(id);
-    if( queryAccount.role == 0 ){
-      DeleteStudent(req, res, id);
-    }
-    else if( queryAccount.role== 1 )
-    {
-      DeleteTeacher(req, res, id);
+    if (queryAccount.role == 0) {
+      Student.DeleteStudent(req, res, id);
+    } else if (queryAccount.role == 1) {
+      Teacher.DeleteTeacher(req, res, id);
     }
     // else if( queryAccount.role == 2 )
     // {
 
     // }
     const data = await Account.findByIdAndDelete(id);
-    res.send(`Document with ${data.name} has been deleted..`)
+    res.send(`Document with ${data.name} has been deleted..`);
   } catch (err) {
     res.status(404).json({
       status: "fail",
@@ -89,4 +84,5 @@ exports.DeleteAccount = async (req, res) => {
     });
   }
 };
-  
+
+export default { GetAllAccount, CreateAccount, DeleteAccount, GetOneAccount };

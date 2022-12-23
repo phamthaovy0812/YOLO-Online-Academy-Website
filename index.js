@@ -6,6 +6,9 @@ import  cors  from 'cors';
 import path from 'path'; 
 import dotenv from 'dotenv';
 import mongoose  from 'mongoose';
+import AccountRoute from './routes/account.route.js';
+import TeacherRoute from './routes/teacher.route.js';
+import StudentRoute from './routes/student.route.js';
 import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
 
@@ -32,9 +35,11 @@ app.use(express.urlencoded({
 app.use(cookieParser())
 app.use(cors());
 
-// khai bao engine voi ten hbs
+app.use('/api/accounts', AccountRoute); 
+app.use('/api/students', StudentRoute); 
+app.use('/api/teachers', TeacherRoute); 
+
 app.engine('hbs', engine({
-    // defaultLayout: 'main.hbs'
     extname: 'hbs',
     defaultLayout: 'main'
 }));
@@ -50,4 +55,3 @@ app.use(rout); // router root
 app.listen(port, () => {
     console.log( `Example app listening at http://localhost:${port}`)
 })
-// Run :npm start
