@@ -1,0 +1,9 @@
+.test {
+  font-size: 100px;
+  font-weight: 10px; }
+
+.father {
+  text-align: center; }
+
+.son {
+  display: inline-block; }
