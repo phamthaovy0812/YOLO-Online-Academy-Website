@@ -6,7 +6,9 @@ const router = express.Router();
 
 router 
     .route('/')
-    .get(Student.GetAllStudent)
-  //  .post(jsonParser,Student.CreateStudent);
+      .get(Student.GetAllStudent);
+router    
+    .route('/:id')
+      .patch(jsonParser, Student.UpdateStudent);
   
 export default  router ;  

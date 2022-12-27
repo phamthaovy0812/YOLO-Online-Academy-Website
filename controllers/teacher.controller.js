@@ -26,7 +26,6 @@ const CreateTeacher = async (req, res, id_account) => {
   });
 
     const dataToSave = await data.save();
-
 };
 
 const DeleteTeacher = async (req, res, id_account) => {
@@ -42,4 +41,19 @@ const DeleteTeacher = async (req, res, id_account) => {
   }
 };
 
-export default { GetAllTeacher, CreateTeacher, DeleteTeacher }
+const UpdateTeacher = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Teacher.findOneAndUpdate({ "id_account" : id}, req.body, {
+      returnOriginal: false
+    })
+    res.status(200).send(data);
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: "ID invalid",
+    });
+  }
+};
+
+export default { GetAllTeacher, CreateTeacher, DeleteTeacher, UpdateTeacher }
