@@ -1,6 +1,16 @@
 import mongoose from "mongoose";
 
-
+const objectCourse = {
+  id_course : {
+    type : String
+  },
+  name_course : {
+    type : String
+  },
+  avatar_course : {
+    type : String
+  },
+};
 const teacherSchema = new mongoose.Schema({
 
   id_account: {
@@ -12,6 +22,7 @@ const teacherSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  course_posted : [objectCourse],
   skill: {
     type: String
   },

@@ -11,7 +11,8 @@ router
 router
     .route('/:id')
         .delete(Account.DeleteAccount)
-        .get( Account.GetOneAccount);
+        .get( Account.GetOneAccount)
+        .patch(jsonParser,Account.UpdateAccount);
     
 
 export default router ;  

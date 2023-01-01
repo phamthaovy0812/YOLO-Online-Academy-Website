@@ -14,12 +14,10 @@ const objectCourse = {
 const studentSchema = new mongoose.Schema({
 
   id_account: {
-    type: String,
-    required: true,
+    type: String, 
   },
   fullname: {
-    type: String,
-    trim: true,
+    type: String, 
     required: true,
   },
   wishlist: [objectCourse],

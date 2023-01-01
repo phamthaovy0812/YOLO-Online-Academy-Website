@@ -9,6 +9,8 @@ import mongoose  from 'mongoose';
 import AccountRoute from './routes/account.route.js';
 import TeacherRoute from './routes/teacher.route.js';
 import StudentRoute from './routes/student.route.js';
+import AdminRoute from './routes/admin.route.js';
+import AuthenRoute from './routes/authen.js';
 import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
 const app = express();
@@ -38,7 +40,11 @@ app.use(cors());
 app.use('/api/accounts', AccountRoute); 
 app.use('/api/students', StudentRoute); 
 app.use('/api/teachers', TeacherRoute); 
+app.use('/api/admins', AdminRoute); 
+app.use('/api/login', AuthenRoute);
 
+
+//
 app.engine('hbs', engine({
     extname: 'hbs',
     defaultLayout: 'main'

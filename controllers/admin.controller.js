@@ -1,13 +1,13 @@
-import Student from '../models/student.model.js';
+import Admin from '../models/admin.model.js';
 
-const GetAllStudent = async(req, res) =>{
+const GetAllAdmin = async(req, res) =>{
     try{
-        const student = await Student.find();
+        const admin = await Admin.find();
 
         res.status(200).json({
             status : 'success',
-            length : student.length,
-            student 
+            length : admin.length,
+            admin 
         
         });
 
@@ -19,8 +19,8 @@ const GetAllStudent = async(req, res) =>{
     }
 };
  
-const CreateStudent = async(req, res, id_account ) =>{
-    const data = new Student({
+const CreateAdmin = async(req, res, id_account ) =>{
+    const data = new Admin({
         id_account: id_account,
         fullname: req.body.fullname
     })
@@ -35,10 +35,10 @@ const CreateStudent = async(req, res, id_account ) =>{
 } 
 
 
-const DeleteStudent = async (req, res, id_account) => {
+const DeleteAdmin = async (req, res, id_account) => {
     try {
       const id = req.params.id;
-      const data = await Student.findOneAndDelete({ "id_account" : id_account})
+      const data = await Admin.findOneAndDelete({ "id_account" : id_account})
       res.send(`Document with data has been deleted..`)
     } catch (err) {
       res.status(404).json({
@@ -47,14 +47,12 @@ const DeleteStudent = async (req, res, id_account) => {
       });
     }
   };
-
-  const UpdateStudent = async (req, res) => {
+  
+  const UpdateAdmin = async (req, res) => {
     try {
       const id = req.params.id;
-      const data = await Student.findOneAndUpdate({ "id_account" : id}, req.body, {
-        returnOriginal: false
-      })
-      res.status(200).send(data)
+      const data = await Admin.findOneAndUpdate({ "id_account" : id}, req.body)
+      res.send(data)
     } catch (err) {
       res.status(404).json({
         status: "fail",
@@ -62,5 +60,5 @@ const DeleteStudent = async (req, res, id_account) => {
       });
     }
   };
-  
-  export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent };
+
+  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin };
