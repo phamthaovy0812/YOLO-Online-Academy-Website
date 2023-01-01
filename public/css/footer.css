@@ -1,0 +1,52 @@
+  .ft_text {
+      color: #EEB00D;
+      font-weight: bold;
+  }
+
+  .footer {
+
+      margin: 0;
+      padding: 50px;
+      background: #373737;
+
+  }
+
+  .ft_kc {
+      color: #373737;
+  }
+
+  .ft_li {
+      display: block;
+
+      text-align: center;
+      padding: 10px 15px;
+
+
+  }
+
+  .text {
+      color: white;
+      text-decoration: none;
+
+  }
+
+
+  .ft_imglink {
+      width: 80px;
+      padding: 14px 16px;
+      margin: 15px;
+
+
+  }
+
+  .father {
+      text-align: center;
+  }
+
+  .son {
+      display: inline-block;
+  }
+
+  .logo {
+      width: 60px;
+  }

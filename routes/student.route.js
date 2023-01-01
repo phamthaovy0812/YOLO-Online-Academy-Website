@@ -4,9 +4,19 @@ import bodyParser from 'body-parser';
 var jsonParser = bodyParser.json();
 const router = express.Router();
 
-router 
-    .route('/')
-    .get(Student.GetAllStudent)
-  //  .post(jsonParser,Student.CreateStudent);
+// router 
+//     .route('/')
+//     .get(Student.GetAllStudent)
+//   //  .post(jsonParser,Student.CreateStudent);
   
-export default  router ;  
+router.get("/courseDetail",(req,res)=>{
+    res.render('Student/courseDetail');
+})
+router.get("/courseDetailBought",(req,res)=>{
+    res.render('Student/courseDetailBought');
+})
+router.get("/DevelopmentCategory",(req,res)=>{
+    res.render('Student/DevelopmentCategory');
+})
+
+export default router;  

@@ -1,0 +1,308 @@
+<div class="courseDetail">
+
+    <!-- Begin: Course Detail -->
+    <section class="course_detail spad">
+        <div class="container ">
+            <div class="row">
+                <!-- Img -->
+                <div class="col-md-6 px-0">
+                    <img class="img-fluid rounded w-100 h-100" src="/student/js.png"
+                        alt="This is image of JavaScript for Beginners Course">
+                </div>
+
+                <!-- Text -->
+                <div class="col-md-6">
+                    <div class="course__details__text">
+                        <h3>JavaScript for Beginners</h3>
+                        <div class="course__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 reviews)</span>
+                            <span>12,001 students</span>
+                        </div>
+                        <div class="course__details__price">$50.00</div>
+                        <p>Learn javascript online and supercharge your web design with this Javascript for beginners
+                            training course.</p>
+
+                        <div>
+                            <button href="#" type="button" class="btn btn-warning primary-btn">ADD TO CART</button>
+                            <a href="#" class="heart-icon"><span class="bi bi-heart-fill"></span></a>
+                        </div>
+                        <button href="#" type="button" class="btn btn-outline-success btn-buy">Buy now</button>
+                        <hr>
+
+                        <ul>
+                            <li><b>Last updated</b> <span>11/2022</span></li>
+                            <li><b>Course outline</b>
+                                <span>https://github.com/buiquangthanhcode/Online-Academy-Project.git</span>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+
+                {{!-- Begin: NAV --}}
+                <div class="col-lg-12 course-detail-tab">
+                    <ul class="nav nav-pills changeColor separator" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                aria-selected="true">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">Course
+                                Content</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                aria-selected="false">Teacher Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"
+                                aria-selected="false">Reviews<span>(1)</span></a>
+                        </li>
+
+                    </ul>
+
+                    {{!-- TAB CONTENT (MOCK DATA!!!)--}}
+                    <div class="tab-content">
+                        {{!-- Begin: TAB 1 - Description --}}
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="course__details__tab__desc">
+                                <h6>Course Infomation</h6>
+                                <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                    Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Vivamus
+                                    suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam
+                                    vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.
+                                    Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur arcu erat,
+                                    accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a
+                                    pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula
+                                    elementum sed sit amet dui. Vestibulum ante ipsum primis in faucibus orci luctus
+                                    et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam
+                                    vel, ullamcorper sit amet ligula. Proin eget tortor risus.</p>
+                                <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                    ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
+                                    elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
+                                    porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
+                                    nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
+                                    Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Sed
+                                    porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum
+                                    sed sit amet dui. Proin eget tortor risus.</p>
+                            </div>
+                        </div>
+                        {{!-- End: TAB 1 - Description --}}
+
+
+                        {{!-- Begin: TAB 2 - Course Content --}}
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="course__details__tab__desc">
+                                <h6>Course Content</h6>
+                                <div class="wrapper_dropdown">
+                                    <div class="flip_chapter">
+                                        <button class="text-left">Chapter 1</button>
+                                    </div>
+                                    <div class="panel_lessons">
+                                        <div href="#" class="link_video_lesson ">
+                                            <a href="#" class="d-flex" style="color: #EEB00D">
+                                                <i class="bi bi-play-circle-fill mr-2"></i>
+                                                <p>Link 1</p>
+                                            </a>
+                                            <div class="d-flex ">
+                                                <a href="#" class="mr-2" style="color: #EEB00D">Preview</a>
+                                                <div>Duration</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        const arr_chapterName = ['Chapter 2', 'Chapter 3', 'Chapter 4', 'Chapter 5', 'Chapter 6']
+                                        const arr_LinkName = ['Link 2', 'Link 3', 'Link 4', 'Link 5', 'Link 6']
+                                        for (let i = 0; i < 5; i++) 
+                                        {
+                                            document.write(`<div class="flip_chapter">
+                                                                <button class="text-left">${arr_chapterName[i]}</button>
+                                                            </div>
+                                                            <div class="panel_lessons">
+                                                                <div  class="link_video_lesson ">
+                                                                    <div  class="d-flex" style="color: #EEB00D">
+                                                                        <i class="bi bi-play-circle-fill mr-2"></i>
+                                                                        <p>${arr_LinkName[i]}</p>
+                                                                    </div>
+                                                                    <div class="d-flex ">
+                                                                        <div  class="mr-2" style="color: #EEB00D">Preview</div>
+                                                                        <div>Duration</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>`)
+                                        }
+                                    </script>
+                                </div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $(".flip_chapter").click(function () {
+                                            console.log($(this).next(".panel_lessons"))
+                                            $(this).next(".panel_lessons").slideToggle("fast");
+                                        });
+                                    });
+                                </script>
+
+                            </div>
+                        </div>
+                        {{!-- End: TAB 2 - Course Content --}}
+
+
+                        {{!-- Begin: TAB 3 - Instructor Information --}}
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="course__details__tab__desc">
+                                <h6>Instructor</h6>
+                                <div class="instructorName">
+                                    {{!-- Link to Profile of Teacher --}}
+                                    <a href="#">Lalisa Manoban</a>
+                                    {{!-- <div>Software Developer, Architect and UX Designer</div> --}}
+                                    <p>Software Developer, Architect and UX Designer</p>
+                                </div>
+                                <div class="instructorImgandInfo">
+                                    <a href="" class="imgInstructorBox">
+                                        <img class="instructorImg" src="/student/instructor.jpg" alt="Instructor image">
+                                    </a>
+                                    <div class="ud-unstyled-list">
+                                        <div>
+                                            <div class="listItem">
+                                                <i class="bi bi-bookmark-star-fill"></i>
+                                                <p>100,017 Reviews</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="listItem">
+                                                <i class="bi bi-people-fill"></i>
+                                                <p>324,864 Students</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="listItem">
+                                                <i class="bi bi-play-circle-fill"></i>
+                                                <p>10 Courses</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                    Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
+                                    Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
+                                    sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
+                                    eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
+                                    Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
+                                    sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
+                                    diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
+                                    ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                                    Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                    Proin eget tortor risus.</p>
+                            </div>
+                        </div>
+                        {{!-- End: TAB 3 - Instructor Information --}}
+
+
+                        {{!-- Begin: TAB 4 - Student's Feedback --}}
+                        <div class="tab-pane" id="tabs-4" role="tabpanel">
+                            <div class="course__details__tab__desc">
+                                <h6>Course Feedback</h6>
+                                <div class="reviewsAndRating">
+                                    <script>
+                                        const arr_imgStudent = ['/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg']
+                                        const arr_nameStudent = ['Brian K.', 'Brian K.', 'Brian K.', 'Brian K.', 'Brian K.']
+                                        for (let i = 0; i < 5; i++) {
+                                            document.write(`<div class="studentComment">
+                                        <div class="review_Heading">
+                                            <div class="review_Heading_Name_Rating">
+                                                <div class="review_Heading_Rating_1">
+                                                    <a class="imgStudentBox">
+                                                        <img class="imgStudent" src="${arr_imgStudent[i]}" alt="">
+                                                    </a>
+                                                    <div>${arr_nameStudent[i]}</div>
+                                                </div>
+                                                
+                                                <div class="review_Heading_Rating_2">
+                                                    <div>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="review_Heading_time">2 months ago</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="padding-top: 1rem">
+                                            <span>
+                                                I really liked this course from both trainers. The one thing I'd love to see for future would be a bit around these ECMA
+                                                modules and handling those versus require statements. I'm running into that more and more with online training and I was
+                                                really hoping this course would cover that, maybe on future editions? Otherwise, very happy with the value for money and
+                                                training skill.
+                                            </span>
+                                        </div>
+                                    </div>`);
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        {{!-- End: Student's Feedback --}}
+                    </div>
+                    {{!-- End: NAV --}}
+
+
+                </div>
+            </div>
+    </section>
+    <!-- End: Course Detail -->
+
+
+    {{!-- Begin: 5 other courses in the same category are bought the most --}}
+    <section class="featured-course">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title featured__product__title">
+                        <h2>Featured Courses</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <script>
+                    const img_arr = ['/student/HTML_COURSE.png', '/student/HTML_COURSE.png', '/student/HTML_COURSE.png', '/student/HTML_COURSE.png', '/student/HTML_COURSE.png']
+                    const courseName_arr = ['1 Hour HTML', '1 Hour HTML', '1 Hour HTML', '1 Hour HTML', '1 Hour HTML']
+                    const cost_arr = ['$30.00', '$30.00', '$30.00', '$30.00', '$30.00']
+
+                    for (let i = 0; i < 5; i++) {
+                        document.write(`
+                            <div class="m-2">
+                                <div class= "course__item " >
+                                    <div class="course__item__pic set-bg">
+                                        <a href="#">
+                                            <img src="${img_arr[i]}" alt="">
+                                        </a>
+                                        <ul class="course__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="course__item__text">
+                                        <h6><a href="#">${courseName_arr[i]}</a></h6>
+                                        <h5>${cost_arr[i]}</h5> 
+                                    </div>
+                                </div>
+                            </div>
+                    `);
+                    }
+                </script>
+            </div>
+        </div>
+    </section>
+    {{!-- End: 5 other courses in the same category are bought the most --}}
+</div>

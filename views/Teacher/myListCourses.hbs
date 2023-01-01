@@ -1,0 +1,86 @@
+<div class="myListCourse">
+    <!-- Begin: SIDEBAR -->
+    <div id="side">
+        <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px">
+            <a href="#" class="mySide" class="side w3-bar-item"><i class="bi bi-house-door fa-xm"></i></a>
+            <a href="./postCourse.html" class="mySide active" class="side w3-bar-item "><i
+                    class="bi bi-camera-reels fa-xm"></i></i></a>
+            <a href="#" class="mySide" class="side w3-bar-item "><i class="bi bi-card-list fa-xm"></i></a>
+        </div>
+    </div>
+
+    <script>
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("side");
+        var btns = header.getElementsByClassName("mySide");
+
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+    <!-- End: SIDEBAR -->
+
+
+    <!-- Begin: My List Body -->
+    <div class="body">
+        <h1 class="font-text">MY LIST</h1>
+
+        {{!-- 1: Create Course --}}
+        <div class="container d-flex  flex-column align-items-start">
+            <div class="container d-flex  searchInMyList vh-100 justify-content-end">
+                <div class="container d-flex align-items-center  item">
+                    <button href="./createCourse.hbs" type="button"
+                        class="btn btn-lg text-light buttonCreateCourse">New Course</button>
+                </div>
+            </div>
+        </div>
+
+        {{!-- 2: List of Course --}}
+        <div class="listOfCourse">
+            <script>
+                for(let i = 0; i< 5; i++){
+                    document.write(`<div class="container d-flex p-0 course" >
+                    <div class="container  imgAndInfo d-flex m-0 ">
+                        <img src="/student/HTML_COURSE.png" alt="This is avatar of HTML Course">
+                        <div class="info">
+                            <div>
+                                <p>1 Hour HTML</p>
+                            </div>
+                            <div>
+                                <p>Last update: 11/2022</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="starRating">
+                            <div>4.50</div>
+                            <div class="starColor">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </div>
+                        </div>
+                        <div>Course rating</div>
+
+                    </div>
+                    
+                    <div class="box_btn_edit">
+                        <button class="btn_edit" href="#" type="button">Edit</button>    
+                    </div>
+                </div>`)
+                }
+            </script>
+                
+        </div>
+
+
+    </div>
+    <!-- End: My List Body -->
+
+</div>
