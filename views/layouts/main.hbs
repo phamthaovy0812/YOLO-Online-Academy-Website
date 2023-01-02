@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
     <title>Document</title>
     <!-- Link Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    
+
     <!-- Link Bootstrap JS and JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -15,70 +16,91 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/public/css/header.css">
-    <link rel="stylesheet" href="/public/css/footer.css">
+    {{!-- <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css"> --}}
+    <link rel="stylesheet" href="/public/css/app.css">
     <link rel="stylesheet" href="/public/css/teacher/home_teacher.css">
     <link rel="stylesheet" href="/public/css/teacher/courseDetail.css">
     <link rel="stylesheet" href="/public/css/teacher/myListCourses.css">
-  
+
 
 
     <!-- Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    
+
     <!-- Sidebar -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Link Bootstrap CSS -->
+    {{!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> --}}
+
+
+    <!-- Link Bootstrap JS and JQuery -->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
+
 <body>
-    
-        <div class="header">
-            <div style="display: flex; width: 100px;">
-                <div> <img src="/img_logo.png" alt="logo" class="logo"></div>
-                <a href="/">
-                    <div
-                        style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 30px;font-weight: bolder; color: black;">
-                        YOLO</div>
-                </a>
-            </div>
-        
-            <div class="dropdown">
-                <a href="#">
-                    <div class="catelories">Catelories</div>
-                </a>
-                <div class="dropdown-content">
-                    <a href="#">Mobile Development</a>
-                    <a href="#">Web Development</a>
+    <div>
+        <header>
+            <div class="header">
+                <div style="display: flex; width: 100px;">
+                    <div> <img src="/img/img_logo.png" alt="logo" class="logo"></div>
+                    <a class="navbar-brand" href="/">
+                        <h2>YOLO</h2>
+                    </a>
                 </div>
-            </div>
-            <div>
-                <input type="text" class="input" placeholder="Search..">
-            </div>
-            <div style="display: flex;">
-                <div><a href="/login"><button class="btnlogin">Log In</button></a></div>
-                <div><a href="/signup"><button class="btnsignup">Sign Up</button></a></div>
-        
-            </div>
-        
-        </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mt-2 ml-4" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Categories</a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">Web Development</a></li>
+                        <li><a class="dropdown-item" href="#">Mobile Development</a></li>
+                    </ul>
+                </div>
 
-        <div class="containe-fluid">
+                <div>
+                    <input type="text" class="inputsearch" placeholder="Search..">
+                    <a href="/search"><button class="btnlogin">Search</button></a>
+                </div>
+                <div style="display: flex;">
+                    <div><a href="/login"><button class="btnlogin">Log In</button></a></div>
+                    <div><a href="/signup"><button class="btnsignup">Sign Up</button></a></div>
+                    <!-- If login success  -->
+                    <div class="btn-group">
+                        <button type="button" class="btnlogin  dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            User
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                            <li><a class="dropdown-item" href="/edit">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="/mylearning">My Learning</a></li>
+                        </ul>
+                    </div>
 
+                </div>
+        </header>
+
+        <div>
             {{{body}}}
 
         </div>
 
         <div class='footer'>
-        
+
             <div class='father'>
                 <div class='son'>
                     <div className='logo' style="display: flex;">
-                        <img class="logo" src="/img_logo.png" style="margin-bottom: 20px;"></img>
+                        <img class="logo" src="/img/img_logo.png" style="margin-bottom: 20px;"></img>
                         <h1 class="ft_text" style="margin-bottom: 30px;">YOLO</h1>
                     </div>
                 </div>
             </div>
-        
+
             <div class='father'>
                 <div class='son'>
                     <div className='menuFootBar'>
@@ -103,7 +125,7 @@
                                     <div class="text">CATELORIES</div>
                                 </a>
                             </li>
-        
+
                             <li className='itemFBar' class='ft_li'>
                                 <a href="/profile">
                                     <div class="text">PROFILE</div>
@@ -113,7 +135,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class='father'>
                 <div class='son'>
                     <div className='infolink'>
@@ -139,7 +161,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class='father'>
                 <div class='son'>
                     <div className='infotext' style="display: flex;">
@@ -149,11 +171,20 @@
                     </div>
                 </div>
             </div>
-        
+
         </div>
 
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+            crossorigin="anonymous"></script>
 
-    
+
 </body>
+
 </html>
