@@ -5,6 +5,12 @@ const Chapter = new mongoose.Schema({
         type: String,
         required: true,
     },
+    timeCreate: {
+        type: String,
+    },
+    deleteAt: {
+        type: String
+    },
     lessons: [
         {
             type: Schema.Types.ObjectId,

@@ -1,0 +1,340 @@
+<div class="postCodeByTeacher d-flex p-0 m-0 border border-dark " style="box-sizing:border-box; height:10000px;">
+    <div class="col-md-1  position-relative border borde-dark p-0 m-0">
+        <!-- Begin: SIDEBAR -->
+        <div id="side p-0 m-0">
+            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge p-0 m-0"
+                style="width:70px;position: absolute !important; box-sizing:border-box;">
+                <a href="#" class="mySide" class="side w3-bar-item"><i class="bi bi-house-door fa-xm"></i></a>
+                <a href="./postCourse.hbs" class="mySide active" class="side w3-bar-item "><i
+                        class="bi bi-camera-reels fa-xm"></i></i></a>
+                <a href="./myListCourses.hbs" class="mySide" class="side w3-bar-item "><i
+                        class="bi bi-card-list fa-xm"></i></a>
+            </div>
+        </div>
+
+        <script>
+            // Add active class to the current button (highlight it)
+            var header = document.getElementById("side");
+            var btns = header.getElementsByClassName("mySide");
+
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function () {
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                });
+            }
+        </script>
+    </div>
+    <div class="col border borde-dark ">
+        <h1>Detail</h1>
+        <form enctype="multipart/form-data" action="/api/teachers/create" onsubmit="handleSubmit()" method="post">
+
+            <div class="form-group">
+                <h5 for="ftitle">Title Course</h5>
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control " id="ftitle"
+                    name="title" placeholder="Enter title of course">
+            </div>
+            <div class="form-group">
+                <h5 for="fsubcategory">SubCategory</h5>
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fsubcategory"
+                    name="sub_category" placeholder="Enter title of subcategory">
+            </div>
+
+            <div class="form-group ">
+                <h5 for="fsubcategory">Subtitle</h5>
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fsubtitle"
+                    name="subtitle" placeholder="Enter title of subtitle">
+            </div>
+
+            <div class="form-group ">
+                <h5 for="fdescription">Description</h5>
+                <textarea style="background-color:rgb( 233 234	236	); height:200px;" type="text" class="form-control"
+                    id="fdescription" name="description" placeholder="Enter description"></textarea>
+            </div>
+
+            <div class="form-group ">
+                <h5 for="fauthor">Author</h5>
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fauthor"
+                    name="author_id" placeholder="Enter title of author">
+            </div>
+
+
+
+
+
+            <div class="form-group ">
+                <h5 for="fprice">Price</h5>
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fprice"
+                    name="price" placeholder="Enter title of price">
+            </div>
+
+            <div class="form-group ">
+                <h5 for="price">Promotion</h5>
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="promotion"
+                    name="promotion" placeholder="Enter title of promotion">
+            </div>
+
+            <div class="form-group ">
+                <h5 for="fsyslabus">Syslabus</h5>
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fsyllabus"
+                    name="syllabus" placeholder="Enter link syllabus">
+            </div>
+
+
+
+
+            <div class="form-group ">
+                <h5 for="fvideoDemo">Chapter</h5>
+
+                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fchapter"
+                    name="chapter" placeholder="Enter link Chapter">
+            </div>
+
+            <div class="form-group ">
+                <div class="form-input">
+                    <div class="preview">
+                        <img id="file-ip-1-preview" style="width:100%;">
+                    </div>
+                    <label for="file-ip-1">Upload Image</label>
+                    <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+
+                </div>
+
+                <style>
+                    .form-input input {
+                        display: none;
+                    }
+
+                    .form-input img {
+                        width: 100%;
+                        display: none;
+                        margin-bottom: 30px;
+                        margin-top: 30px;
+
+                    }
+
+                    .form-input label {
+                        display: block;
+                        width: 45%;
+                        height: 45px;
+                        margin-left: 25%;
+                        line-height: 50px;
+                        text-align: center;
+                        background: rgb(233 234 236);
+                        color: black;
+                        font-size: 15px;
+                        font-family: "Open Sans", sans-serif;
+                        text-transform: Uppercase;
+                        font-weight: 600;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                </style>
+                <script>
+                    function showPreview(event) {
+                        if (event.target.files.length > 0) {
+                            const src = URL.createObjectURL(event.target.files[0]);
+                            console.log(src);
+                            const preview = document.getElementById("file-ip-1-preview");
+                            preview.src = src;
+                            preview.style.display = "block";
+                        }
+                    }
+                    function showPreviewVideo(event) {
+                        if (event.target.files.length > 0) {
+                            const src = URL.createObjectURL(event.target.files[0]);
+                            console.log(src);
+                            const preview = document.getElementById("file-video-1-preview");
+                            preview.src = src;
+                            preview.style.display = "block";
+                        }
+                    }
+                </script>
+            </div>
+
+            <div class="form-group ">
+                <div class="form-input">
+                    <div class="preview" style="position: relative;">
+                        <video id="file-video-1-preview" style="position:absolute;" autoplay></video>
+                    </div>
+                    <label for="file-video-1">Upload Short Video</label>
+                    <input type="file" id="file-video-1" accept="video/*" onchange="showPreviewVideo(event);">
+                </div>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+    <div class="col border borde-dark">
+        <form id="createChapter" method="POST" action="/api/chapter/create">
+            <div class="modal fade" id="modalChapter" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog  mw-100 w-75">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Create chapter</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+
+                                <label data-error="wrong" data-success="right" for="defaultForm-email"
+                                    id="nameChapter">Name of
+                                    chapter</label>
+                                <input type="text" id="defaultForm-email" class="form-control validate" name="name">
+                            </div>
+                            <div class="md-form mb-5">
+
+
+                                <input type="hidden" id="lessonArray" class="form-control validate" name="lessons">
+                            </div>
+                            <div class="md-form mb-5">
+
+
+                                <input type="hidden" id="timeCreate" class="form-control validate" name="timeCreate">
+                            </div>
+
+                            <table id="cartTableBody">
+
+                            </table>
+
+
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="submit" class="btn btn-default" onclick="handleChapter()">Save
+                                Chapter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function handleChapter() {
+                    const time = Date.now();
+                    $("#timeCreate").val(time)
+                    let lessonArray = new Array();
+                    if (localStorage.getItem('chapter')) {
+                        lessonArray = JSON.parse(localStorage.getItem('chapter'));
+                    }
+                    lessonArray.push(time);
+                    const lessonJSON = JSON.stringify(lessonArray);
+                    localStorage.setItem("chapter", lessonJSON);
+                }
+
+                function handleGroup(id) {
+
+                        document.getElementById("chapterIDLabel").innerHTML = id.value;
+                        document.getElementById("chapterID").value = id.value;
+
+
+
+                    }
+            </script>
+
+
+
+
+        </form>
+
+        <div class="text-center mt-5">
+            <a href="" class="btn btn-default btn-rounded mb-4 border border-dark rounded" data-toggle="modal"
+                data-target="#modalChapter">Add Chapter
+            </a>
+
+            
+        </div>
+        {{!-- <div class="text-center">
+            <a href="" class="btn btn-default btn-rounded mb-4 border border-dark" data-toggle="modal"
+                data-target="#modalLesson">Add Lesson</a>
+        </div> --}}
+       
+        
+
+        <form id="createLesson" enctype="multipart/form-data" method="POST" action="/api/lesson/create">
+            <div class="modal fade " id="modalLesson" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered mw-80 w-65">
+                    <div class="modal-content" role="document">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title font-weight-bold">Create lesson by Course</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body ">
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <label data-error="wrong" data-success="right" id="chapterIDLabel"
+                                    for="orangeForm-name">Chapter</label>
+                                <input type="hidden" id="chapterID" name="chapterID">
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <label data-error="wrong" data-success="right" for="orangeForm-name">Name of
+                                    Lesson</label>
+                                <input type="text" id="nameofLesson" class="form-control validate" name="name">
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <label data-error="wrong" data-success="right" for="orangeForm-email">Do you
+                                    accepted preview
+                                    video ? </label>
+                                <input type="text" id="" class="form-control validate" name="preview">
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <label data-error="wrong" data-success="right" for="orangeForm-pass">Upload
+                                    video Lesson</label>
+                                <input type="file" id="videoLesson" class="form-control validate" name="video">
+                            </div>
+                            <button type="submit" class="btn btn-deep-orange">Create Lesson</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="displayChapterTemp">
+            <script>
+                const chapter = localStorage.getItem("chapter");
+
+            </script>
+            <table id="lessonCount">
+                {{#each chapters}}
+                <tr>
+                    <script>
+
+                        if (JSON.parse(chapter).includes(parseInt("{{timeCreate}}"))) {
+                            const template = '<button onclick="handleGroup(this)" data-toggle="modal" data-target="#modalLesson" class="btn d-block border border-dark markChapter m-3" value="{{_id}}"> {{ name }}</button>'
+                            document.write(template)
+
+
+                        }
+                    </script>
+                    {{#each lessons}}
+                    <div>{{video}}</div>
+                    <div>{{name}}</div>
+            
+                    <video src={{video}}></video>
+                    {{/each}}
+                </tr>
+            
+                {{/each}}
+            
+            </table>
+
+        </div>
+
+    </div>
+</div>

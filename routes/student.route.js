@@ -10,6 +10,7 @@ router
 router    
     .route('/:id')
       .patch(jsonParser, Student.UpdateStudent);
+
   
 router.get("/courseDetail",(req,res)=>{
     res.render('Student/courseDetail');
