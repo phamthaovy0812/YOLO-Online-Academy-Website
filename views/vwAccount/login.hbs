@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-    <div class="login">
+    <form class="login" method="post">
         <div class="loginbanner">
             <div class="father">
                 <div class="son">
@@ -43,20 +43,20 @@
                     </div>
                     <div >Username:</div>
                     <div>
-                        <input class="logininput">
+                        <input class="logininput" name="username">
                     </div>
                     <div>Password:</div>
                     <div>
-                        <input class="logininput">
+                        <input class="logininput" name="password">
                     </div>
                     <div style="display: flex;">
                         <a href="#">Forgotten password?/</a>
-                        <a href="/signup">Sign Up</a>
+                        <a href="/api/accounts/signup">Sign Up</a>
                     </div>
 
-                    <div class="father">
+                    <div class="father"> 
                         <div class="son">
-                            <a href="/"> <button class="btn"> Log In</button></a>
+                         <button class="btn"> Log In</button>
                         </div>
                     </div>
 

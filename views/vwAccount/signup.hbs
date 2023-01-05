@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-    <div class="signup">
+    <form class="signup" method="post">
         <div class="signupbanner">
             <div class="father">
                 <div class="son">
@@ -47,33 +47,36 @@
                 </div>
                  
                 <div>
-                    <input class="signupinput" placeholder="Full Name..">
+                    <input class="signupinput" name="fullname" placeholder="Full Name..">
                 </div>
                 <div>
-                    <input class="signupinput" placeholder="User Name..">
+                    <input class="signupinput" name="username"  placeholder="User Name..">
                 </div>
                 <div>
-                    <input class="signupinput" placeholder="Email..">
+                    <input class="signupinput" name="email"  placeholder="Email..">
                 </div>
                 <div>
-                    <input class="signupinput" placeholder="Password..">
+                    <input class="signupinput" name="password"  placeholder="Password..">
                 </div>
                 <div>
-                    <input class="signupinput" placeholder="Confirm Password..">
+                    <input class="signupinput"  name="confirmpassword"  placeholder="Confirm Password..">
                 </div>
                 
 
                 <div class="father">
                     <div class="son">
-                        <a href="/"> <button class="btn"> Sign Up</button></a>
-
+                        {{!-- <a href="/">  --}}
+                            <button class="btn"> 
+                                Sign Up
+                            </button>
+                        {{!-- </a> --}}
                     </div>
                 </div>
 
             </div>
         <div>
         </div>
-    </div>
-    
+    </form>
+
 </body>
 </html>

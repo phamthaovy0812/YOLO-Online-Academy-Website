@@ -19,19 +19,19 @@ const GetAllStudent = async(req, res) =>{
     }
 };
  
-const CreateStudent = async(req, res, id_account ) =>{
-    const data = new Student({
-        id_account: id_account,
-        fullname: req.body.fullname
-    })
+const CreateStudent = async(req,  id_account ) =>{
+  const data = new Student({
+      id_account: id_account,
+      fullname: req.body.fullname
+  })
 
-    try {
-        const dataToSave = await data.save();
-        res.status(200).json(dataToSave)
-    }
-    catch (error) {
-        res.status(400).json({message: error.message})
-    }
+  try {
+      const dataToSave = await data.save();
+      return json(dataToSave)
+  }
+  catch (error) {
+     return json({message: error.message})
+  }
 } 
 
 

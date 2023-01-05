@@ -66,7 +66,7 @@ const viewCreateCourse = async (req, res) => {
 
     console.log((story));
     res.render("Teacher/createCourse", { chapters: story });
-  });// Ch
+  });
 }
 const createCourse= async (req, res) => {
   try {

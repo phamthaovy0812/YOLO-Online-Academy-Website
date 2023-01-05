@@ -4,6 +4,9 @@ import Student from "./student.controller.js";
 import Teacher from "./teacher.controller.js";
 import Admin from "./admin.controller.js";
 import bcrypt from "bcryptjs";
+import fs from 'fs';
+
+
 
 const GetAllAccount = async (req, res) => {
   try {
@@ -36,56 +39,6 @@ const GetOneAccount = async (req, res) => {
   }
 };
 
-const CreateAccount = async (req, res) => {
-
-  const {email, username, password,role} = req.body;
-
-  try {
-
-    const handleCreateAccount = async ()=>{
-      const newAccount = new Account({
-        email, 
-        username, 
-        password,
-        role
-      });
-  
-      const dataToSave = await newAccount.save();
-  
-      if (dataToSave.role == 1) {
-        Teacher.CreateTeacher(req, res, dataToSave._id);
-      }
-      else if (dataToSave.role == 2) {
-        Admin.CreateAdmin(req, res, dataToSave._id);
-      }
-      else  {
-        Student.CreateStudent(req, res, dataToSave._id);
-      } 
-  
-      const mergedObject = Object.assign({}, req.body, dataToSave._doc);
-      res.status(200).json(mergedObject);
-    }
-
-    Account.findOne({ $or:[{username},{email}]})
-    .then(function(doc) {
-          if(doc)
-          {
-            res.status(300).json("account or Email exist");
-          }
-          else {
-            handleCreateAccount();
-          }
-     });
-     
-   
-    
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
 
 const DeleteAccount = async (req, res) => {
   try {
@@ -126,6 +79,66 @@ const UpdateAccount = async (req, res) => {
       message: "ID invalid",
     });
   }
+};
+
+
+
+const CreateAccount = async (req) => {
+  
+  const {email, username, password,role,avatar} = req.body;
+ 
+ 
+  try {
+   
+    const handleCreateAccount = async ()=>{
+      const newAccount = new Account({
+        avatar,
+        email, 
+        username, 
+        password,
+        role
+       
+      });
+      
+      const dataToSave = await newAccount.save();
+  
+      if (dataToSave.role == 1) {
+        Teacher.CreateTeacher(req, dataToSave._id);
+      }
+      else if (dataToSave.role == 2) {
+        Admin.CreateAdmin(req, dataToSave._id);
+      }
+      else  {
+        Student.CreateStudent(req, dataToSave._id);
+      } 
+  
+      const mergedObject = Object.assign({}, req.body, dataToSave._doc);
+     console.log(mergedObject)
+      return json(mergedObject);
+    }
+
+    Account.findOne({ $or:[{username},{email}]})
+    .then(function(doc) {
+      
+          if(doc)
+          {
+            return json("account or Email exist");
+          }
+          else {
+           
+            handleCreateAccount();
+          }
+     });
+     
+   
+    
+  } catch (err) {
+    return json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+  
 };
 
 export default { GetAllAccount, CreateAccount, DeleteAccount, GetOneAccount, UpdateAccount };

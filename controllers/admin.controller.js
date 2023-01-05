@@ -20,18 +20,18 @@ const GetAllAdmin = async(req, res) =>{
 };
  
 const CreateAdmin = async(req, res, id_account ) =>{
-    const data = new Admin({
-        id_account: id_account,
-        fullname: req.body.fullname
-    })
+  const data = new Admin({
+      id_account: id_account,
+      fullname: req.body.fullname
+  })
 
-    try {
-        const dataToSave = await data.save();
-        res.status(200).json(dataToSave)
-    }
-    catch (error) {
-        res.status(400).json({message: error.message})
-    }
+  try {
+      const dataToSave = await data.save();
+      res.status(200).json(dataToSave)
+  }
+  catch (error) {
+      res.status(400).json({message: error.message})
+  }
 } 
 
 
