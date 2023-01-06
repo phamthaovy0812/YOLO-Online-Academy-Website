@@ -1,6 +1,6 @@
-import LessonModel from "../models/Lesson.model.js";
+
+import ChapterModel from "../models/Chapter.model.js";
 import Lesson from "../models/Lesson.model.js";
-import LessonServices from "../services/Lesson.services.js";
 export default {
     async create(req, res) {
         try {
@@ -9,11 +9,15 @@ export default {
             const lessonObject = {
                 name: lessonParam.name,
                 preview: lessonParam.preview,
-                video: file.path,
+                video: "localhost:3000/" + file.path || "",
+                chapterID: lessonParam.chapterID,
             }
             const LessonSchema = new Lesson(lessonObject);
             await LessonSchema.save();
-            res.status(200).json(lessonObject);
+            const chapter = await ChapterModel.findById(lessonParam.chapterID);
+            chapter.lessons.push(LessonSchema._id)
+            await chapter.save();
+            res.redirect("../teachers/postCourse");
         } catch (error) {
             res.status(500).json(error);
         }
@@ -47,9 +51,10 @@ export default {
     },
     async delete(req,res){
         try {
-            const deleteLesson = await LessonServices.deletebyID(req.params.id);
+            const deleteLesson = await Lesson.findByIdAndDelete(req.params.id);
             if (deleteLesson) {
-                res.status(200).json({ message: "Success" });
+                return res.redirect("../../teachers/postCourse");
+               
             }
             else{
                 res.status(200).json({ message: "Failed" });

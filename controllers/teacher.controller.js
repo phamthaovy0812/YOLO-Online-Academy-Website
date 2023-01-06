@@ -1,6 +1,8 @@
 import  Teacher from "../models/teacher.model.js";
 import ChapterModel from '../models/Chapter.model.js';
 import LessonModel from '../models/Lesson.model.js';
+import TeacherSevice from "../services/Teacher.sevice.js";
+import CourseModel from "../models/Course.model.js";
 const GetAllTeacher = async (req, res) => {
   try {
     const teacher = await Teacher.find();
@@ -59,22 +61,25 @@ const UpdateTeacher = async (req, res) => {
 
 
 const viewCreateCourse = async (req, res) => {
-  let chapters = await ChapterModel.find().lean();
-
+  
+  const subCategorys = await TeacherSevice.getSubCategory();
   ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
     if (err) return (err);
+    console.log(subCategorys);
 
-    console.log((story));
-    res.render("Teacher/createCourse", { chapters: story });
+    res.render("Teacher/createCourse", { chapters: story, subCategory: subCategorys });
   });// Ch
 }
 const createCourse= async (req, res) => {
   try {
     const course = req.body;
+    const chapter =   await TeacherSevice.getChapterByTime(course.chapter);
+    const IDSubCategory = await TeacherSevice.getIDCategory(course.sub_category);
+    console.log(course.sub_category);
     const file = req.files;
     const courseObject = {
       title: course.title,
-      sub_category: course.sub_category,
+      sub_category: IDSubCategory,
       subtitle: course.subtitle,
       description: course.description,
       author_id: course.author_id,
@@ -87,14 +92,14 @@ const createCourse= async (req, res) => {
       promotion: course.promotion,
       syllabus: course.syllabus,
       videoDemo: file.videoDemo[0].path,
-      chapter: course.chapter || [],
+      chapter:  chapter || [],
 
     }
     console.log(courseObject);
-    res.status(200).json(courseObject);
     const course_Data = new CourseModel(courseObject);
 
     const value = await course_Data.save();
+
     if (value) {
       res.status(200).json(value);
     }

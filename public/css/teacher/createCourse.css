@@ -1,0 +1,79 @@
+.flip_chapter_create {
+
+  background-color: #f7f9fa;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+}
+.flip_chapter_create > button {
+  width: 100%;
+  border: none;
+}
+.panel_lessons_create {
+  box-sizing: border-box;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top:10px;
+  margin-bottom:10px;
+  padding: 10px;
+  border: 1px solid gray;;
+  display: none;
+}
+.link_video_lesson {
+  /* color: #EEB00D; */
+  display: flex;
+  justify-content: space-between;
+  border: none;
+}
+
+.form-input input {
+  display: none;
+}
+
+.form-input img {
+  width: 50%;
+  display: none;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.form-input label {
+  display: block;
+  width: 45%;
+  height: 45px;
+  margin-left: 25%;
+  line-height: 50px;
+  text-align: center;
+  background: rgb(233 234 236);
+  color: black;
+  font-size: 15px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: Uppercase;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+#img-upload {
+  width: 100%;
+}

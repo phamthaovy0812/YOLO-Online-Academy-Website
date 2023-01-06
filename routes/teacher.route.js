@@ -16,11 +16,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 // router 
 //     .route('/')
-//     .get(Teacher.GetAllTeacher);
+//     .get(Teacher.GetAllTeacher); 
 
 router.get("/homepage",Teacher.homepage);
 router.get("/edit", Teacher.editCourse);
 router.get("/myListCourses",Teacher.myListCourses );
 router.get("/postCourse", Teacher.viewCreateCourse);
-// router.post("/postCourse", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'videoDemo', maxCount: 1 }]), Teacher.createCourse);
+router.post("/postCourse", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'videoDemo', maxCount: 1 }]), Teacher.createCourse);
 export default router;  
