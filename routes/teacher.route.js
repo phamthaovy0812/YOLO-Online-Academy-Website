@@ -11,10 +11,13 @@ const router = express.Router();
 router.get("/homepage",(req,res)=>{
     res.render('Teacher/home');
 })
-router.get("/edit",(req,res)=>{
+router.get("/editCourse",(req,res)=>{
     res.render("Teacher/editCourse");
+})
+router.get("/createCourse",(req,res)=>{
+    res.render('Teacher/createCourse');
 })
 router.get("/myListCourses",(req,res)=>{
     res.render("Teacher/myListCourses");
 })
-export default  router ;  
+export default router ;

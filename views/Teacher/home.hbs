@@ -3,13 +3,13 @@
     <!-- Begin: SIDEBAR -->
     <div id="side">
         <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px">
-            <a href="#" class="mySide" class="side w3-bar-item"><i class="bi bi-house-door fa-xm"></i></a>
-            <a href="./postCourse.hbs" class="mySide active" class="side w3-bar-item "><i
+            <a href="/api/teachers/homepage" class="mySide active" class="side w3-bar-item"><i class="bi bi-house-door fa-xm"></i></a>
+            <a href="/api/teachers/createCourse" class="mySide " class="side w3-bar-item "><i
                     class="bi bi-camera-reels fa-xm"></i></i></a>
-            <a href="./myListCourses.hbs" class="mySide" class="side w3-bar-item "><i class="bi bi-card-list fa-xm"></i></a>
+            <a href="/api/teachers/myListCourses" class="mySide" class="side w3-bar-item "><i class="bi bi-card-list fa-xm"></i></a>
         </div>
     </div>
-    
+
     <script>
         // Add active class to the current button (highlight it)
         var header = document.getElementById("side");
@@ -24,45 +24,47 @@
         }
     </script>
     <!-- End: SIDEBAR -->
-    
-    
+
+
     <!-- Begin: Home Course Body -->
     <div class="body">
-        <h1 class="font-text">HOME</h1>
-    
+        <h1 class="container font-text">HOME</h1>
+
         <!-- 1 -->
         <div class="container d-flex  flex-column align-items-start">
-            <div class="d-flex  colorCreateCourse vh-100">
-    
+            <div class="d-flex colorCreateCourse vh-100">
+
                 <div class="container d-flex align-items-center justify-content-center item">
                     <p>Jump Into Course Creation</p>
                 </div>
                 <div class="container d-flex align-items-center justify-content-center item">
-                    <button href="./createCourse.hbs" type="button" class="btn btn-lg text-light  buttonCreateCourse">Create
+                    <button href="./Teacher/createCourse.hbs" type="button"
+                        class="btn btn-lg btn-warning buttonCreateCourse">Create
                         Your Course</button>
                 </div>
-    
+
             </div>
         </div>
-    
-    
+
+
         <div class="container d-flex align-items-center justify-content-center item ">
             <p style="padding-top: 20px">Based on your experience, we think these resources will be helpful </p>
         </div>
-    
+
         <!-- 2 -->
         <div class="container d-flex  flex-column align-items-start">
             <div class="d-flex  box_create_engaging vh-100">
-    
+
                 <div class="container d-flex align-items-center justify-content-center item">
                     <img src="/teacher/Create_Engaging_Course.png" alt="" style="width: 50%;">
                 </div>
-    
+
                 <div class="d-flex align-items-center ">
                     <div class="container d-block">
                         <h3 style="padding-bottom: 15px">Create an Engaging Course</h3>
                         <blockquote>
-                            <p>Whether you've been teaching for years or are teaching for the first time, you can make an
+                            <p>Whether you've been teaching for years or are teaching for the first time, you can make
+                                an
                                 engaging course. We've compiled resources and best practices to help you get to the next
                                 level, no matter where you're starting.</p>
                         </blockquote>
@@ -70,29 +72,30 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- 3 -->
         <div class="container mt-4 d-flex">
             <div class="d-flex box_small vh-100 ">
                 <div class="container d-flex align-items-center justify-content-center item">
                     <img src="/teacher/started_video.png" alt="" style="width: 70%">
                 </div>
-    
+
                 <div class="d-flex align-items-center ">
                     <div class="container d-block ">
                         <h3 style="padding-bottom: 15px; font-size: 23px">Get Started with Video</h3>
                         <blockquote>
-                            <p class=" d-flex flex-wrap">Quality video lectures can set your course apart. Use our resources to learn the basics.</p>
+                            <p class=" d-flex flex-wrap">Quality video lectures can set your course apart. Use our
+                                resources to learn the basics.</p>
                         </blockquote>
                     </div>
                 </div>
             </div>
-    
+
             <div class="d-flex box_small vh-100 ">
                 <div class="container d-flex align-items-center justify-content-center item">
                     <img src="/teacher/build_audience.png" alt="" style="width: 70%">
                 </div>
-    
+
                 <div class="d-flex align-items-center">
                     <div class="container d-block">
                         <h3 style="padding-bottom: 15px; font-size: 23px">Build Your Audience</h3>
@@ -103,13 +106,13 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="container d-flex align-items-center justify-content-center item ">
             <p style="padding-top: 40px; padding-bottom: 20px">Have questions? Here are our most popular instructor
                 resources.</p>
         </div>
-    
-    
+
+
         <!-- 4 -->
         <div class="container mt4 d-flex flex-direction-column">
             <script>
