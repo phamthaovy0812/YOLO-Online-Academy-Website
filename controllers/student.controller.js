@@ -19,19 +19,19 @@ const GetAllStudent = async(req, res) =>{
     }
 };
  
-const CreateStudent = async(req, res, id_account ) =>{
-    const data = new Student({
-        id_account: id_account,
-        fullname: req.body.fullname
-    })
+const CreateStudent = async(req,  id_account ) =>{
+  const data = new Student({
+      id_account: id_account,
+      fullname: req.body.fullname
+  })
 
-    try {
-        const dataToSave = await data.save();
-        res.status(200).json(dataToSave)
-    }
-    catch (error) {
-        res.status(400).json({message: error.message})
-    }
+  try {
+      const dataToSave = await data.save();
+      return json(dataToSave)
+  }
+  catch (error) {
+     return json({message: error.message})
+  }
 } 
 
 
@@ -62,5 +62,10 @@ const DeleteStudent = async (req, res, id_account) => {
       });
     }
   };
+  const detailUI = async (req,res)=>{
+    
+    const courseDetail={"title":"JavaScript for Beginners test","price":"$50.00 test","subtitle":"Learn javascript online and supercharge your web design with this Javascript for beginners training course. Test","lastUpdate":"11/2022 test","image":"/student/js.png","number_review":"18 test"}
+    res.render('Student/courseDetail',{course:courseDetail});
+}
   
-  export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent };
+  export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, detailUI};

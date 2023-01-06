@@ -1,0 +1,61 @@
+<div class="father">
+    <div class="son">
+        <div class="d-flex align-items-start bg-light edit border ">
+            <div class="nav flex-column nav-pills me-3 " id="v-pills-tab" role="tablist" aria-orientation="vertical" style="width: 200px; height: 400px;">
+                <img src="/img/avata.png" alt="..." class="rounded-circle " style="width: 50%; margin-left: 40px; margin-bottom: 20px;">
+                <button class="nav-link active " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-edit" type="button" role="tab" aria-controls="v-pills-edit" aria-selected="true">Edit Public Profile</button>
+                <button class="nav-link " id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab" aria-controls="v-pills-security" aria-selected="true">Account Security</button>
+                <button class="nav-link " id="v-pills-closeacc-tab" data-bs-toggle="pill" data-bs-target="#v-pills-closeacc" type="button" role="tab" aria-controls="v-pills-closeacc" aria-selected="true">Close account</button>
+                <button class="nav-link " id="v-pills-logout-tab" data-bs-toggle="pill" data-bs-target="#v-pills-logout" type="button" role="tab" aria-controls="v-pills-logout" aria-selected="true">Log out</button>
+            </div>
+            <div class="tab-content border-start" id="v-pills-tabContent" style="width: 400px;">
+                <div class="tab-pane fade show active" id="v-pills-edit" role="tabpanel" aria-labelledby="v-pills-edit-tab" tabindex="0">
+                    <div class="text-center font-weight-bold my-4">Edit your public profile</div>
+                    <div>
+                        <form >
+                            <input type="text" class="logininput"  placeholder="Full Name..">
+                            <input type="text"class="logininput" placeholder="Description..">
+                            <input type="text"class="logininput" placeholder="Email..">
+                            <input type="text"class="logininput" placeholder="Facebook..">
+                            <input type="text"class="logininput" placeholder="Phone-number">
+                            <input type="text"class="logininput" placeholder="Address..">
+                            <div class="mb-3">
+                            <label for="formFile" class="form-label">Change avata</label>
+                            <input class="form-control w-75 ml-5 " type="file" id="formFile">
+                            </div>
+                            <button class="btnsignup" style=" margin:20px" >Save</button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-security" role="tabpanel" aria-labelledby="v-pills-security-tab" tabindex="0">
+                    <div class="text-center font-weight-bold my-4">Account Security</div>
+                    
+                    <div>
+                        <form >
+                            <div class="text-left font-weight-bold my-4 ms-2">Password:</div>
+                            <input type="text" class="logininput"  placeholder="Email..">
+                            <input type="text"class="logininput" placeholder="Current Password..">
+                            <input type="text"class="logininput" placeholder="New Password..">
+                            <input type="text"class="logininput" placeholder="Re-type New Password..">
+                           
+                            <button class="btnsignup" style=" margin:20px" >Change</button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-closeacc" role="tabpanel" aria-labelledby="v-pills-closeacc-tab" tabindex="0">
+                    <div style=" font-size: larger; font-weight: bolder; text-align: center; margin:20px;">WARNING</div>
+                    <div class="ms-2">If you close your account, you will be unsubscribed from all your 0 courses, and will lose access forever.</div>
+                    <button class="btnsignup" style="margin-top: 20px; margin-left: 65px; ">Close</button>
+                </div>
+                <div class="tab-pane fade" id="v-pills-logout" role="tabpanel" aria-labelledby="v-pills-logout-tab" tabindex="0" style="margin-top: 100px;">
+                    <div  style=" font-size: larger; font-weight: bolder; text-align: center; ">Are you sure you want to log out?</div>
+                     <button class="btnsignup" style="margin-top: 20px; margin-left: 65px; ">Log out</button>
+
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+

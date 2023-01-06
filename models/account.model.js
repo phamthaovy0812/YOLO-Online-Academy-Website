@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const accountSchema = new mongoose.Schema({
+  avatar:{
+    type: String,
+  },
   email: {
     type: String,
     required: true,

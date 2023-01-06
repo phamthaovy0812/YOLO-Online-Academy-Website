@@ -5,7 +5,6 @@ const Course = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        
     },
     sub_category: {
         type: Schema.Types.ObjectId,

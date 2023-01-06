@@ -13,19 +13,18 @@
                 <!-- Text -->
                 <div class="col-md-6">
                     <div class="course__details__text">
-                        <h3>JavaScript for Beginners</h3>
+                        <h3>{{course.title}}</h3>
                         <div class="course__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                            <i class="fa fa-star"></i>
+                            <span>({{course.number_review}} reviews)</span>
                             <span>12,001 students</span>
                         </div>
-                        <div class="course__details__price">$50.00</div>
-                        <p>Learn javascript online and supercharge your web design with this Javascript for beginners
-                            training course.</p>
+                        <div class="course__details__price">{{course.price}}</div>
+                        <p>{{course.subtitle}}</p>
 
                         <div>
                             <button href="#" type="button" class="btn btn-warning primary-btn">ADD TO CART</button>
@@ -35,9 +34,9 @@
                         <hr>
 
                         <ul>
-                            <li><b>Last updated</b> <span>11/2022</span></li>
-                            <li><b>Course outline</b>
-                                <span>https://github.com/buiquangthanhcode/Online-Academy-Project.git</span>
+                            <li><b>Last updated</b> <span>{{course.lastUpdate}}</span></li>
+                            <li><b>Syllabus</b>
+                                <span><link rel="stylesheet" href="https://github.com/buiquangthanhcode/Online-Academy-Project.git"> </span>
                             </li>
                         </ul>
 

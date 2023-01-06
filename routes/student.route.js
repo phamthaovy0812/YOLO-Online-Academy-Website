@@ -10,15 +10,16 @@ router
 router    
     .route('/:id')
       .patch(jsonParser, Student.UpdateStudent);
+
   
-router.get("/courseDetail",(req,res)=>{
-    res.render('Student/courseDetail');
-})
+router.get("/courseDetail",Student.detailUI);
 router.get("/courseDetailBought",(req,res)=>{
     res.render('Student/courseDetailBought');
 })
 router.get("/DevelopmentCategory",(req,res)=>{
     res.render('Student/DevelopmentCategory');
 })
+
+
 
 export default router;  

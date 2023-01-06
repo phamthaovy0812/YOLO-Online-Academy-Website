@@ -11,10 +11,10 @@ const router = express.Router();
 //     .route('/:id')
 //         .patch(jsonParser, Admin.UpdateAdmin);
 
-router.get("/homepage",(req,res)=>{
+router.get("/category",(req,res)=>{
     const test=[{"name": "Thanh"},{"name":"ngulon"}];
     const test2 = [{"age": "18"},{"age":"81"}];
-    res.render('Admin/homeAdmin',{value:test, value2:test2});
+    res.render('Admin/categoryCensor',{value:test, value2:test2});
 })
 
 
