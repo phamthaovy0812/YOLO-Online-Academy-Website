@@ -41,7 +41,7 @@ app.use(cookieParser())
 app.use(cors());
 
 
-//sendEmail();
+sendEmail();
 
 activate_session(app);
 //
@@ -81,7 +81,7 @@ app.get("/404",(req,res)=>{
 
 // Page Home
 app.get("/",(req,res)=>{
-    console.log("->>>>",req.session.authAccount)
+   // console.log("->>>>",req.session.authAccount)
     res.render("vwAccount/home");
   })
 
