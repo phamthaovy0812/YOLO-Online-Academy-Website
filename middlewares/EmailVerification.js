@@ -4,8 +4,8 @@ export default function sendEmail(){
     var transporter = nodemailer.createTransport({
     service : 'gmail',
     auth:{
-        user : ' ',
-        pass:" "
+        user : 'hongtan1422002@gmail.com',
+        pass:"thanthao123"
     }
     });
 
