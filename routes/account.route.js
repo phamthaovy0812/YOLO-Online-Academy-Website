@@ -25,11 +25,15 @@ router.post('/login', async (req, res)=>{
     console.log(req.body)
     var dataRes = await  Login(req);
     
-   
-    if(dataRes.status == 200)
+  
+    if(dataRes && dataRes.status == 200)
     {
+        console.log(dataRes)
+        req.session.auth = true
+        req.session.authAccount = dataRes
         res.redirect('/');
     }
+
     res.render("vwAccount/login");  
 });
 router 

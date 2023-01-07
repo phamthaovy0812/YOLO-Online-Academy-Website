@@ -62,7 +62,7 @@ const UpdateTeacher = async (req, res) => {
 
 
 const viewCreateCourse = async (req, res) => {
-  
+
   const subCategorys = await TeacherSevice.getSubCategory();
   ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
     if (err) return (err);
@@ -146,36 +146,36 @@ const handleUpdateCourse = async (req, res) => {
     console.log(courseUpdatePagram)
     const chapter = await TeacherSevice.getChapterByTime(courseUpdatePagram.chapter);
 
-  const IDSubCategory = await TeacherSevice.getIDCategory(courseUpdatePagram.sub_category);
-  console.log(IDSubCategory)
+    const IDSubCategory = await TeacherSevice.getIDCategory(courseUpdatePagram.sub_category);
+    console.log(IDSubCategory)
 
-  const updateCourse = await CourseModel.findByIdAndUpdate(id, {
-    title: courseUpdatePagram.title,
-    sub_category: IDSubCategory,
-    subtitle: courseUpdatePagram.subtitle,
-    description: courseUpdatePagram.description,
-    author_id: courseUpdatePagram.author_id,
-    number_review: courseUpdatePagram.number_review||0,
-    scores_review: courseUpdatePagram.scores_review||0,
-    list_reviews: courseUpdatePagram.list_reviews||[],
-    image: file.image[0].path,
-    price: courseUpdatePagram.price,
-    lastUpdate: courseUpdatePagram.lastUpdate||2022,
-    promotion: courseUpdatePagram.promotion,
-    syllabus: courseUpdatePagram.syllabus,
-    videoDemo: file.videoDemo[0].path,
-    chapter: chapter||[],
+    const updateCourse = await CourseModel.findByIdAndUpdate(id, {
+      title: courseUpdatePagram.title,
+      sub_category: IDSubCategory,
+      subtitle: courseUpdatePagram.subtitle,
+      description: courseUpdatePagram.description,
+      author_id: courseUpdatePagram.author_id,
+      number_review: courseUpdatePagram.number_review || 0,
+      scores_review: courseUpdatePagram.scores_review || 0,
+      list_reviews: courseUpdatePagram.list_reviews || [],
+      image: file.image[0].path,
+      price: courseUpdatePagram.price,
+      lastUpdate: courseUpdatePagram.lastUpdate || 2022,
+      promotion: courseUpdatePagram.promotion,
+      syllabus: courseUpdatePagram.syllabus,
+      videoDemo: file.videoDemo[0].path,
+      chapter: chapter || [],
 
-  }, { new: true });
+    }, { new: true });
 
-  if (updateCourse)
-  res.render("Teacher/editCourseDetail");
-  else
-    res.send("Failed");
+    if (updateCourse)
+      res.render("Teacher/editCourseDetail");
+    else
+      res.send("Failed");
   } catch (error) {
-    
+
   }
-  
+
 }
 const myListCourses = (req, res) => {
   res.render("Teacher/myListCourses");
