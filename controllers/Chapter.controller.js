@@ -1,3 +1,4 @@
+import { ExpressHandlebars } from "express-handlebars";
 import ChapterModel from "../models/Chapter.model.js";
 export default {
     test(req, res) {
@@ -13,9 +14,15 @@ export default {
             }
             const chapterModel = new ChapterModel(chapter);
             const chaptermain = await chapterModel.save();
-          
+            console.log(chapterValue);
+            if (chapterValue.type=="postCourse"){
+                return res.redirect("../teachers/postCourse");
+            }
+            else{
+                return res.redirect("../teachers/edit");
+            }
 
-            return res.redirect("../teachers/postCourse");
+           
 
         } catch (error) {
             res.status(500).json(error);

@@ -5,14 +5,9 @@ import  cors  from 'cors';
 import path from 'path'; 
 import dotenv from 'dotenv';
 import mongoose  from 'mongoose';
-import AccountRoute from './routes/account.route.js';
-import TeacherRoute from './routes/teacher.route.js';
-import StudentRoute from './routes/student.route.js';
-import AdminRoute from './routes/admin.route.js';
-import AuthenRoute from './routes/authen.js';
 import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
-
+import sendEmail from './middlewares/EmailVerification.js'
 
 
 const app = express();
@@ -44,11 +39,8 @@ app.use(express.urlencoded({
 app.use(cookieParser())
 app.use(cors());
 
-app.use('/api/accounts', AccountRoute); 
-app.use('/api/students', StudentRoute); 
-app.use('/api/teachers', TeacherRoute); 
-app.use('/api/admins', AdminRoute); 
-app.use('/api/login', AuthenRoute);
+
+// sendEmail();
 
 
 //
@@ -83,13 +75,9 @@ app.get("/404",(req,res)=>{
     res.render("Error/404",{ layout: false }); // layout false là để k hiển thị header và footer
 })
 //login
-app.get('/login',(req, res)=> {
-    res.render('vwAccount/login', { layout: false });
-  });
+
 // Page SignUp
-app.get("/signup",(req,res)=>{
-    res.render("vwAccount/signup",{ layout: false });
-  })
+
 // Page Home
 app.get("/",(req,res)=>{
     res.render("vwAccount/home");
@@ -105,6 +93,9 @@ app.get('/item',(req, res)=> {
   res.render('cources/item');
 });
 
+app.get("/viewlesson", (req, res) => {
+  res.render("Teacher/test");
+})
 
 //Student
 

@@ -7,7 +7,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "./public/img")
+        cb(null, "./public/img/A&V")
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + "-" + file.originalname)
@@ -20,7 +20,10 @@ const upload = multer({ storage: storage })
 
 router.get("/homepage",Teacher.homepage);
 router.get("/edit", Teacher.editCourse);
+router.get("/edit/:id", Teacher.editCourseDetail);
+router.post("/edit/:id", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'videoDemo', maxCount: 1 }]), Teacher.handleUpdateCourse);
 router.get("/myListCourses",Teacher.myListCourses );
 router.get("/postCourse", Teacher.viewCreateCourse);
 router.post("/postCourse", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'videoDemo', maxCount: 1 }]), Teacher.createCourse);
+
 export default router;  

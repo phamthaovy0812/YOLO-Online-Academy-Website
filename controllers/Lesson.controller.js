@@ -9,7 +9,7 @@ export default {
             const lessonObject = {
                 name: lessonParam.name,
                 preview: lessonParam.preview,
-                video: "localhost:3000/" + file.path || "",
+                video:  file.path || "",
                 chapterID: lessonParam.chapterID,
             }
             const LessonSchema = new Lesson(lessonObject);
@@ -17,7 +17,12 @@ export default {
             const chapter = await ChapterModel.findById(lessonParam.chapterID);
             chapter.lessons.push(LessonSchema._id)
             await chapter.save();
-            res.redirect("../teachers/postCourse");
+            if (lessonParam.type=="postCourse"){
+                res.redirect("../teachers/postCourse");
+            }
+            else{
+                res.redirect("../teachers/edit");
+            }
         } catch (error) {
             res.status(500).json(error);
         }

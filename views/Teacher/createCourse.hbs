@@ -1,17 +1,32 @@
 <script>
+    var isFirstLoad = localStorage.getItem('isFirstLoad');
+    if (!isFirstLoad) {
+            sessionStorage.setItem("title",   " ");
+            sessionStorage.setItem("subcate", " ");
+            sessionStorage.setItem("sub", " ");
+            sessionStorage.setItem("des", " ");
+            sessionStorage.setItem("price", " ");
+            sessionStorage.setItem("pro", " ");
+            sessionStorage.setItem("sys", " ");
+
+            localStorage.setItem('isFirstLoad', 'true');
+        }
+    
+
     // Run on page load
     window.onload = function () {
 
 
-        // If values are not blank, restore them to the fields
+
+            // If values are not blank, restore them to the fields
         var name = sessionStorage.getItem('title');
         if (name !== null) $('#ftitle').val(name);
 
-        var email = sessionStorage.getItem('subcate');
-        if (email !== null) $('#fsubcategory').val(email);
+            var email = sessionStorage.getItem('subcate');
+            if (email !== null) $('#fsubcategory').val(email);
 
         var subject = sessionStorage.getItem('sub');
-        if (subject !== null) $('#fsubtitle').val(subject);
+        if (subject !== null) $('#fsubtitle').val(subject); 
 
         var message = sessionStorage.getItem('des');
         if (message !== null) $('#fdescription').val(message);
@@ -99,6 +114,7 @@
                             $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
                             console.log($(this).text());
                             $("#fsubcategory").val($(this).text());
+                           
                         });
                     </script>
                 </div>
@@ -106,6 +122,7 @@
                 <br>
                 <br>
                 <input type="hidden" class="form-control" id="fsubcategory" name="sub_category">
+                 
             </div>
 
             <div class="form-group ">
@@ -199,7 +216,7 @@
             
 
             </script>
-
+         
             
 
             <div class="modal fade" id="uploadAvartar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -255,8 +272,8 @@
                 
                 function handleImage()
                 {
-                    $('#uploadAvartar').modal('toggle');
-                    event.preventDefault();
+                        $('#uploadAvartar').modal('toggle');
+                        event.preventDefault();
                 }
             </script>
 
@@ -287,7 +304,7 @@
                             </div>
                             <div class="md-form mb-5">
 
-
+                                <input type="hidden" name="type" value="postCourse">
                                 <input type="hidden" id="lessonArray" class="form-control validate" name="lessons">
                             </div>
                             <div class="md-form mb-5">
@@ -316,12 +333,12 @@
                     const time = Date.now();
                     $("#timeCreate").val(time)
                     let lessonArray = new Array();
-                    if (localStorage.getItem('chapter')) {
-                        lessonArray = JSON.parse(localStorage.getItem('chapter'));
+                    if (localStorage.getItem('chapter_post')) {
+                        lessonArray = JSON.parse(localStorage.getItem('chapter_post'));
                     }
                     lessonArray.push(time);
                     const lessonJSON = JSON.stringify(lessonArray);
-                    localStorage.setItem("chapter", lessonJSON);
+                    localStorage.setItem("chapter_post", lessonJSON);
                 }
 
                 function handleGroup(id) {
@@ -332,11 +349,20 @@
 
 
                 }
-                const chapter = localStorage.getItem('chapter');
-                $("#fchapter").val(chapter);
+                $("#fchapter").val(localStorage.getItem('chapter_post'));
                 function handleSubmit() {
-                  window.localStorage.removeItem('chapter');
-
+                
+                 
+                    sessionStorage.setItem("title", " ");
+                    sessionStorage.setItem("subcate"," " );
+                    sessionStorage.setItem("sub", " ");
+                    sessionStorage.setItem("des", " ");
+                    sessionStorage.setItem("price", " ");
+                    sessionStorage.setItem("pro", " ");
+                    sessionStorage.setItem("sys", " ");
+                    window.localStorage.removeItem('chapter_post');
+                    window.localStorage.removeItem('isFirstLoad');
+                    
                 }
             </script>
 
@@ -371,6 +397,7 @@
                                 <label data-error="wrong" data-success="right" id="chapterIDLabel"
                                     for="orangeForm-name">Chapter</label>
                                 <input type="hidden" id="chapterID" name="chapterID">
+                                <input type="hidden"  name="type" value="postCourse" >
                             </div>
                             <div class="md-form mb-5">
                                 <i class="fas fa-user prefix grey-text"></i>
@@ -406,7 +433,7 @@
 
         <div class="displayChapterTemp">
             <script>
-                const chapter = localStorage.getItem("chapter");
+                const chapter = localStorage.getItem("chapter_post");
             </script>
             <table id="lessonCount">
                 {{#each chapters}}
@@ -417,6 +444,9 @@
                             const template = ''
                             const templateDropDown = '<div class="flip_chapter_create m-1"><button  onclick="handleGroup(this)"  class="text-left w-100 mr-1" value="{{_id}}"> {{ name }} </button></div>  <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST" action="/api/lesson/delete/{{_id}}"> <div  class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}" class="d-flex" style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i> <p>{{name}}</p> </a> <div class="d-flex ">  </div> <button class="btn btn_del_les" value={{_id}}><i class="fa fa-remove" style="color:red;"></i></button> </div></form>{{/each}} <div class="d-flex justify-content-between"><button class="btn "  data-toggle="modal" data-target="#modalLesson">Add lesson</button> <form method="POST" action="/api/chapter/delete/{{_id}}" id={{ _id }}> <button class="btn btn_del_chapter" value = {{ _id }}> Remove chapter <i class="fa fa-remove" style="color:black;"></i></button ></form></div></div>'
                             document.write(templateDropDown)
+
+
+
 
 
                         }
