@@ -13,8 +13,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
 
 
+=======
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+>>>>>>> b683e5ba511945f53d9c655a4db22cdc535572e0
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     {{!-- <link rel="stylesheet" href="/public/css/header.css">
@@ -52,13 +57,13 @@
     <div>
         <header>
             <div class="header">
-                <div style="display: flex; width: 100px;">
+                <div style="display: flex; width: 100px; ">
                     <div> <img src="/img/img_logo.png" alt="logo" class="logo"></div>
                     <a class="navbar-brand" href="/">
-                        <h2>YOLO</h2>
+                        <div class="mb-2 mt-2">YOLO</div>
                     </a>
                 </div>
-                <div class="nav-item dropdown">
+                <div class="dropdown ">
                     <a class="nav-link dropdown-toggle mt-2 ml-4" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">Categories</a>
                     <ul class="dropdown-menu dropdown-menu-dark">
@@ -69,25 +74,35 @@
 
                 <div>
                     <input type="text" class="inputsearch" placeholder="Search..">
-                    <a href="/search"><button class="btnlogin">Search</button></a>
+                    
+                    <a href="/search" class="pl-2"><button class="btnlogin">Search</button></a>
                 </div>
+                
+                {{#if isLogin}}
+                     <div class="btn-group">
                 <div style="display: flex;">
-                    <div><a href="/login"><button class="btnlogin">Log In</button></a></div>
-                    <div><a href="/signup"><button class="btnsignup">Sign Up</button></a></div>
+                    <div><a href="/api/accounts/login"><button class="btnlogin">Log In</button></a></div>
+                    <div><a href="/api/accounts/signup"><button class="btnsignup">Sign Up</button></a></div>
                     <!-- If login success  -->
                     <div class="btn-group">
                         <button type="button" class="btnlogin  dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            User
+                            {{account.username}}
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/profile">My Profile</a></li>
-                            <li><a class="dropdown-item" href="/edit">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="/api/accounts/changeinfo">Edit Profile</a></li>
                             <li><a class="dropdown-item" href="/mylearning">My Learning</a></li>
+                            <li><a class="dropdown-item" href="/shopping">Shopping Cart</a></li>
                         </ul>
                     </div>
+                {{else}}
+                    <div style="display: flex;">
+                        <div><a href="/api/accounts/login"><button class="btnlogin">Log In</button></a></div>
+                        <div><a href="/api/accounts/signup"><button class="btnsignup">Sign Up</button></a></div>
+                    </div>
+                {{/if}}
 
-                </div>
         </header>
 
         <div>
@@ -179,7 +194,23 @@
 
         </div>
 
+<<<<<<< HEAD
         {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+=======
+<<<<<<< HEAD
+       
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+
+=======
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+>>>>>>> b683e5ba511945f53d9c655a4db22cdc535572e0
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -189,7 +220,9 @@
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script> --}}
 
-
+        <script>
+        </script>
+>>>>>>> c9c633be15c3b959da20a4e9d7d8746160a5d47b
 </body>
 
 </html>

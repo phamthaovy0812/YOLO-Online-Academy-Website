@@ -18,4 +18,5 @@ CourseRoute.get('/getAllCourses', Course.getAllCourse);
 CourseRoute.get('/getCourse/:id', Course.getCourse);
 CourseRoute.delete('/delete/:id', Course.deleteCourse);
 CourseRoute.get('/show', Course.show);
+
 export default CourseRoute;

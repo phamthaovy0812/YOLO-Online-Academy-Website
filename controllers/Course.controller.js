@@ -114,5 +114,7 @@ export default {
     uploadImage(req,res){
         console.log('uploadImage');
         res.send("Tinh nang them anh");
-    }
+    },
+    
+
 }

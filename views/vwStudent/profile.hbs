@@ -1,17 +1,15 @@
 <div style="height: 800px;">
     <div style="height: 100px; background: #273238;">
-        <div style="padding-top: 25px; padding-left: 100px; color: whitesmoke; font-size: 30px; font-weight: bolder;">Con meo ngu ngok</div>
+        <div style="padding-top: 25px; padding-left: 100px; color: whitesmoke; font-size: 30px; font-weight: bolder;">My profile</div>
     </div>
     <div style="height: 200px; background: #E9EAEC;">
         <div class="father">
             <div class="son">
                 <div style="padding: 20px;display: flex; ">
-                    <img src="/img/avata.png" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
-                    <div style="text-align: left; margin: 20px; ">
-                        <div style="margin-bottom:10px ;">Description:</div>
-                        <div style="margin-bottom:10px ;">Facebook: </div>
-                        <div style="margin-bottom:10px ;">Phone-number:</div>
-                        <div>Address:</div>
+                    <img src="{{account.avatar}}" name="avatar" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
+                    <div style="text-align: left; margin: 40px; ">
+                        <div style="margin-bottom:10px ;">User name:{{account.username}}</div>
+                        <div style="margin-bottom:10px ;">Email: {{account.email}}</div>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,7 @@ router.get("/courseDetailBought",(req,res)=>{
 router.get("/category",(req,res)=>{
     res.render('Student/Category');
 })
+router.get("/home",Student.topCourse);
 
 
 

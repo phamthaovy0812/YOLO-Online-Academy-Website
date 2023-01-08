@@ -48,17 +48,18 @@ const DeleteAdmin = async (req, res, id_account) => {
     }
   };
   
-  const UpdateAdmin = async (req, res) => {
+  const UpdateAdmin = async (req) => {
+    var data ;
     try {
-      const id = req.params.id;
-      const data = await Admin.findOneAndUpdate({ "id_account" : id}, req.body)
-      res.send(data)
+      const id = req.session.authAccount?.account?._id ;
+       data = await Admin.findOneAndUpdate({ "id_account" : id}, {fullname : req.body.fullname}, {
+        returnOriginal: false
+      })
+      
     } catch (err) {
-      res.status(404).json({
-        status: "fail",
-        message: "ID invalid",
-      });
+      data =  {status : 400, message : "error"}
     }
+    return data
   };
 
   const categoryCensor = async(req, res) => {

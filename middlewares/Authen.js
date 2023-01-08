@@ -11,6 +11,7 @@ export default  async( req ) =>{
     });
        if(!data || !bcrypt.compareSync( req.body.password, data.password ) )
         {
+           
             dataRes = {"status":300, message : "wrong username or password"};
         }
         else {
@@ -18,16 +19,16 @@ export default  async( req ) =>{
             if(data.role==1)
             { 
                 const teacher = await Teacher.findOne({"id_account":data.id});
-                dataRes =  {"status":200, account , teacher};
+                dataRes =  {"status":200, account , detail : teacher};
             }
             else if(data.role==2)
             {
                 const admin = await Admin.findOne({"id_account":data.id});
-                dataRes = {"status":200, account , admin};
+                dataRes = {"status":200, account , detail : admin};
             }
             else {
                 const student = await Student.findOne({"id_account":data.id});
-                dataRes = {"status":200, account , student}; 
+                dataRes = {"status":200, account , detail : student}; 
             }
          }
 
