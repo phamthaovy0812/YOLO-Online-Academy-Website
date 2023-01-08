@@ -62,13 +62,13 @@ const UpdateTeacher = async (req, res) => {
 
 
 const viewCreateCourse = async (req, res) => {
-
+  const user = req.session.authAccount;
   const subCategorys = await TeacherSevice.getSubCategory();
   ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
     if (err) return (err);
     console.log(subCategorys);
 
-    res.render("Teacher/createCourse", { chapters: story, subCategory: subCategorys });
+    res.render("Teacher/createCourse", { chapters: story, subCategory: subCategorys, user: user });
   });// Ch
 }
 const createCourse = async (req, res) => {
@@ -114,23 +114,27 @@ const createCourse = async (req, res) => {
   }
 }
 const homepage = (req, res) => {
-  res.render('Teacher/home')
+  const user = req.session.authAccount;
+  console.log(user);
+  res.render('Teacher/home', { user: user })
 };
 
 const editCourse = async (req, res) => {
-  const course = await CourseModel.find().lean();
+  const user = req.session.authAccount;
+  console.log(user);
+  const course = await CourseModel.find({ author_id: user.account._id }).lean();
   console.log(course);
 
   res.render("Teacher/editCourse", { course: course });
 };
 
 const editCourseDetail = async (req, res) => {
-
+  const user = req.session.authAccount;
   const subCategorys = await TeacherSevice.getSubCategory();
   const allchapter = await ChapterModel.find({}).lean();
   CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
     if (err) return (err);
-    res.render("Teacher/editCourseDetail", { course: story, chapter: story.chapter, subCategory: subCategorys, chapters: allchapter });
+    res.render("Teacher/editCourseDetail", { course: story, chapter: story.chapter, subCategory: subCategorys, chapters: allchapter,user:user });
 
 
   });// Ch
@@ -177,7 +181,13 @@ const handleUpdateCourse = async (req, res) => {
   }
 
 }
-const myListCourses = (req, res) => {
-  res.render("Teacher/myListCourses");
+const myListCourses = async (req, res) => {
+
+  const user = req.session.authAccount;
+  console.log(user);
+  const course = await CourseModel.find({ author_id: user.account._id }).lean();
+  console.log(course);
+
+  res.render("Teacher/myListCourses", { course: course });
 };
 export default { GetAllTeacher, CreateTeacher, DeleteTeacher, UpdateTeacher, viewCreateCourse, homepage, editCourse, myListCourses, createCourse, editCourseDetail, handleUpdateCourse }

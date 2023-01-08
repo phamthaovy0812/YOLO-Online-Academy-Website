@@ -83,7 +83,7 @@
         </script>
     </div>
     <div class="col">
-        <h1>Detail</h1>
+        <h1><strong>Update Detail</strong></h1>
         <form enctype="multipart/form-data" onsubmit="handleSubmit()" method="POST"
             action="/api/teachers/edit/{{course._id}}">
 
@@ -139,10 +139,11 @@
             </div>
 
             <div class="form-group ">
-                <h5 for="fauthor">Author</h5>
-                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fauthor"
-                    name="author_id" placeholder="Enter title of author">
+            
+                <input style="background-color:rgb( 233 234	236	);" type="hidden" class="form-control" id="fauthor" name="author_id"
+                    value="{{user.account._id}}" placeholder="Enter title of author">
             </div>
+
 
 
             <input type="hidden" name="type" value="edit">
@@ -260,6 +261,9 @@
 
                                 </script>
                             </div>
+
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -278,7 +282,7 @@
 
 
 
-            <button onclick="handleImage()" class="btn btn-primary">Add Course</button>
+            <button onclick="handleImage()" class="btn btn-primary w-100 bg-success">Upload information</button>
 
         </form>
     </div>
