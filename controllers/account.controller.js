@@ -7,7 +7,6 @@ import bcrypt from "bcryptjs";
 
 
 
-import fs from "fs";
 
 const GetAllAccount = async (req, res) => {
   try {

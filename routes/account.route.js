@@ -72,6 +72,6 @@ router
         .patch(jsonParser,Account.UpdatePasswordAccount);
 
 
-    
+
  
 export default router ;  
