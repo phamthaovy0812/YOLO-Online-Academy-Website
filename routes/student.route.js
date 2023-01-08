@@ -12,12 +12,14 @@ router
       .patch(jsonParser, Student.UpdateStudent);
 
   
-router.get("/courseDetail",Student.detailUI);
+
+router.get("/Category", Student.categoryUI);
+
 router.get("/courseDetailBought",(req,res)=>{
     res.render('Student/courseDetailBought');
 })
-router.get("/DevelopmentCategory",(req,res)=>{
-    res.render('Student/DevelopmentCategory');
+router.get("/category",(req,res)=>{
+    res.render('Student/Category');
 })
 
 

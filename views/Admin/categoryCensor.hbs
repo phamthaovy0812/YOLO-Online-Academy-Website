@@ -1,29 +1,29 @@
-<div class="adminHomePage d-flex" style="height:1200px;">
+<div class="categoryCensor d-flex" style="height:1200px;">
     {{!-- {{#each value}}
-        <div>{{name}}</div>
+    <div>{{name}}</div>
     {{/each}}
 
     {{#each value2}}
-    <div>{{age}}</div> 
+    <div>{{age}}</div>
     {{/each}}
 
     {{#if condition}}
-        
+
     {{/if}} --}}
 
     <!-- BeginSIDEBAR -->
     <div class="col-md-1 position-relative p-0 m-0">
         <div id="side">
             <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px; position:absolute!important;">
-                <a href="#" class="mySide" class="side w3-bar-item"><i
+                <a href="/api/admins/categoryCensor" class="mySide active" class="side w3-bar-item"><i
                         class="bi bi-house-door fa-xm"></i></a>
-                <a href="#" class="mySide " class="side w3-bar-item "><i
-                        class="bi bi-camera-reels fa-xm"></i></i></a>
-                <a href="#" class="mySide active" class="side w3-bar-item "><i
-                        class="bi bi-card-list fa-xm"></i></a>
+                <a href="/api/admins/teacherCensor" class="mySide " class="side w3-bar-item "><i
+                        class="bi bi-person-workspace"></i></i></a>
+                <a href="/api/admins/studentCensor" class="mySide " class="side w3-bar-item "><i
+                        class="bi bi-person"></i></a>
             </div>
         </div>
-    
+
         <script>
             // Add active class to the current button (highlight it)
             var header = document.getElementById("side");
@@ -37,7 +37,7 @@
                 });
             }               
         </script>
-    </div> 
+    </div>
     <!-- End: SIDEBAR -->
 
     <div class="col m-5">
@@ -45,19 +45,20 @@
 
         {{!-- List Category --}}
         <div class="listOfCourse">
+            {{#each category}}
             <div class="container course border border-dark rounded">
                 <div class=" d-flex courseImgAndInfo">
                     <div class="ud-unstyled-list ">
                         <div class="listItem">
-                            <p>IT</p>
+                            <p style="font-weight: 550"><a href="#">{{name}}</a></p>
                         </div>
                         <div class="listItem">
-                            <p>Total of courses: 1</p>
+                            <p>Total of courses: 0</p>
                         </div>
                     </div>
                 </div>
-        
-                <div class="d-flex justify-content-between flex-wrap">
+
+                {{!-- <div class="d-flex justify-content-between flex-wrap">
                     <div class="ud-unstyled-list rating" style="margin-right:5rem;">
                         <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
                             <div>5.0</div>
@@ -73,12 +74,114 @@
                             <p>Course rating</p>
                         </div>
                     </div>
-                    <div class="box_btn_edit">
-                        <a href="/api/teachers/editCourse"><button type="button" class="btn btn-dark btn_edit">Edit</button></a>
+                </div> --}}
+
+                <div class="box_btn_edit">
+                    <button type="button" class="btn btn-warning btn_edit border border-dark" data-toggle="modal"
+                        data-target="#removeCategory">Remove</button>
+                </div>
+                <!-- Modal Remove Category -->
+                <div class="modal" id="removeCategory">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Remove</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="category">Category:</label>
+                                    <input type="text" class="form-control" id="chapter"
+                                        placeholder="Enter name of category" name="category">
+                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-        
+            </div>
+            {{/each}}
+
+        </div>
+
+
+        {{!-- Button Add Category --}}
+        <div class="container box_btn_AddChapter">
+            <button type="button" class="btn btn-warning btn_addChapter border border-dark" data-toggle="modal"
+                data-target="#addCategory">Add Category</button>
+        </div>
+        <!-- Modal Add Category -->
+        <div class="modal" id="addCategory">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Chapter</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <input type="text" class="form-control" id="chapter" placeholder="Enter name of category"
+                                name="category">
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
             </div>
         </div>
+
+
+
+        <!-- Button trigger modal -->
+        <!-- Button to Open the Modal -->
+        {{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Open modal
+        </button>
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div> --}}
+
     </div>
 </div>

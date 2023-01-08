@@ -24,7 +24,6 @@ export default {
                 syllabus: course.syllabus,
                 videoDemo: file.videoDemo[0].path,
                 chapter: course.chapter,
-
             }
             console.log(courseObject);
 

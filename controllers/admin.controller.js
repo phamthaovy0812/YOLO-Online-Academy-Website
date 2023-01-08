@@ -61,4 +61,19 @@ const DeleteAdmin = async (req, res, id_account) => {
     }
   };
 
-  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin };
+  const categoryCensor = async(req, res) => {
+    const categoryList = [{"name":"DEVELOPMENT test"}, {"name":"Business"}, {"name":"Design"}];
+    res.render('Admin/categoryCensor',{category:categoryList})
+  }
+
+  const teacherCensor = async(req, res) => {
+    const teacherList = [{"fullname":"Nguyen Thi Minh Thao", "skill":"ReactJS, React Hooks"}, {"fullname": "Bui Quang Thanh", "skill": "Python, Data Science"},{"fullname": "Bui Thi Dung", "skill": "Out Trinh"}];
+    res.render('Admin/teacherCensor',{teacher: teacherList})
+  }
+
+  const studentCensor = async(req, res) => {
+    const studentList = [{"fullname": "Pham Thao Vy"}, {"fullname": "Pham Hong Tan"}, {"fullname": "Ha Thi Thanh Tu"}];
+    res.render('Admin/studentCensor', {student: studentList})
+  }
+
+  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor };

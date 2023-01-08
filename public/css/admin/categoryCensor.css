@@ -1,0 +1,12 @@
+.btn_addChapter{
+    width: 10rem;
+    height: 2.5rem;
+    background-color: #E9EAEC;
+    color: #000000;
+    /* padding-right: 0; */
+}
+.box_btn_AddChapter{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

@@ -62,10 +62,11 @@ const DeleteStudent = async (req, res, id_account) => {
       });
     }
   };
-  const detailUI = async (req,res)=>{
-    
-    const courseDetail={"title":"JavaScript for Beginners test","price":"$50.00 test","subtitle":"Learn javascript online and supercharge your web design with this Javascript for beginners training course. Test","lastUpdate":"11/2022 test","image":"/student/js.png","number_review":"18 test"}
-    res.render('Student/courseDetail',{course:courseDetail});
-}
+
+
+  const categoryUI = async (req,res)=>{
+    const categoryView = {"name":"DEVELOPMENT test"}
+    res.render('Student/category',{category:categoryView})
+  };
   
-  export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, detailUI};
+  export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, categoryUI};
