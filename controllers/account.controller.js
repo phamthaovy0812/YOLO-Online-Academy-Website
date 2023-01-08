@@ -4,7 +4,7 @@ import Student from "./student.controller.js";
 import Teacher from "./teacher.controller.js";
 import Admin from "./admin.controller.js";
 import bcrypt from "bcryptjs";
-import fs, { rmSync } from 'fs';
+
 
 
 import fs from "fs";
