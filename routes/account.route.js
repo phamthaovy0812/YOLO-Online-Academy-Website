@@ -21,7 +21,9 @@ router.post('/signup', (req, res)=>{
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login');
 })
-router.get("/courseDetail",Account.detailCourseUI);
+router.get("/courseDetail/:id",Account.detailCourseUI);
+router.get("/home", Account.topCourse);
+
 
 router.post('/login', async (req, res)=>{
    
@@ -33,7 +35,7 @@ router.post('/login', async (req, res)=>{
         
         req.session.auth = true
         req.session.authAccount = dataRes
-        const url='/api/students/home';
+        const url='/api/accounts/home';
        
         req.session.save(function (err) {
             // session saved

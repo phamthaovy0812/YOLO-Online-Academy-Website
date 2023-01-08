@@ -1,9 +1,48 @@
-<div>
-    <div>
-        <source  src="https://www.youtube.com/embed/watch?v=mm1mcwu3c3A" ></source>
 
+<div style="display: flex;">
+
+    <div style=" margin: 30px; ">
+        <video width="800" height="440" controls>
+            <source  src="/{{course.videoDemo}}" ></source>
+        </video>     
     </div>
-    <div>
+
+    <div style="margin: 30px; width: ;">
+        <div style="font-size: large;font-weight: bold; color: #EEB00D;">{{course.title}}</div>
+        <div class="course__details__tab__desc">
+            {{#each chapter}}
+            <div class="wrapper_dropdown">
+                <div class="flip_chapter">
+                    <button class="text-left">{{name}}</button>
+                </div>
+
+                <div class="panel_lessons border border-dark ">
+                    {{#each lessons}}
+                    <div href="#" class="link_video_lesson p-2 border border-dark m-1">
+                        <a href="#" class="d-flex" style="color: #EEB00D">
+                            <i class="bi bi-play-circle-fill mr-2"></i>
+                            <p>{{name}}</p>
+                        </a>
+                        <div class="d-flex ">
+                            <a href="#" class="mr-2" style="color: #EEB00D">Preview</a>
+                            <div>Duration</div>
+                        </div>
+                    </div>
+
+                    {{/each}}
+                </div>
+            </div>
+        {{/each}}
+        
+        <script>
+            $(document).ready(function () {
+                $(".flip_chapter").click(function () {
+                    console.log($(this).next(".panel_lessons"))
+                    $(this).next(".panel_lessons").slideToggle("fast");
+                });
+            });
+        </script>
+        </div>
 
     </div>
 </div>
