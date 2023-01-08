@@ -4,7 +4,7 @@ import Student from "./student.controller.js";
 import Teacher from "./teacher.controller.js";
 import Admin from "./admin.controller.js";
 import bcrypt from "bcryptjs";
-import fs from 'fs';
+import fs, { rmSync } from 'fs';
 
 
 
@@ -129,9 +129,7 @@ const CreateAccount = async (req) => {
             handleCreateAccount();
           }
      });
-     
-   
-    
+
   } catch (err) {
     return json({
       status: "fail",
@@ -140,5 +138,9 @@ const CreateAccount = async (req) => {
   }
   
 };
+const accountUI= async(req,res)=>{
+  const profile={"avatar":"/avata.png","email":"ptvy@gmail.com","username":"vyvy","password":"1","role":"3"};
+  res.render('vwStudent/profile',  {account:profile});
+}
 
-export default { GetAllAccount, CreateAccount, DeleteAccount, GetOneAccount, UpdateAccount };
+export default { GetAllAccount, CreateAccount, DeleteAccount, GetOneAccount, UpdateAccount,accountUI };

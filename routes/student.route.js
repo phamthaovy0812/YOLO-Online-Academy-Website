@@ -21,5 +21,6 @@ router.get("/courseDetailBought",(req,res)=>{
 router.get("/DevelopmentCategory",(req,res)=>{
     res.render('Student/DevelopmentCategory');
 })
+router.get("/home",Student.topCourse);
 
 export default router;  

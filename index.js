@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 import sendEmail from './middlewares/EmailVerification.js'
 
 
+
 const app = express();
 
 
@@ -109,6 +110,25 @@ app.get("/profile",(req,res)=>{
 app.get("/mylearning",(req,res)=>{
   res.render("vwStudent/mylearning");
 })
+
+// shopping cart 
+app.get("/shopping",(req,res)=>{
+  res.render("vwStudent/shopping");
+})
+
+//view lesson
+app.get("/viewlesson",(req,res)=>{
+  res.render("Student/viewlesson");
+})
+
+
+// app.get("/",Student.topCourse);
+// app.get("/checkout",(req,res)=>{
+//   res.render("vwStudent/checkout")
+// })
+
+
+
 
 
 app.listen(port, () => {
