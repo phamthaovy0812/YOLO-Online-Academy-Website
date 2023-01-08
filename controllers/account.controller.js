@@ -7,7 +7,6 @@ import bcrypt from "bcryptjs";
 import fs, { rmSync } from 'fs';
 
 
-import fs from "fs";
 
 const GetAllAccount = async (req, res) => {
   try {
@@ -183,10 +182,7 @@ const CreateAccount = async (req) => {
     });
   }
 };
-const accountUI= async(req,res)=>{
-  const profile={"avatar":"/avata.png","email":"ptvy@gmail.com","username":"vyvy","password":"1","role":"3"};
-  res.render('vwStudent/profile',  {account:profile});
-}
+
 
 export default {
   GetAllAccount,
@@ -195,5 +191,5 @@ export default {
   GetOneAccount,
   UpdatePasswordAccount,
   UpdateInfoAccount,
-  accountUI
+
 };
