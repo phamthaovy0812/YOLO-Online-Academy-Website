@@ -172,4 +172,5 @@ const WishList= async (req,res)=>{
   res.render("vwStudent/profile",{wish:wishList})
 }
 
+
 export default { WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};

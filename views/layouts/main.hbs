@@ -77,11 +77,11 @@
                     <a href="/search" class="pl-2"><button class="btnlogin">Search</button></a>
                 </div>
 
-                {{#if isLogin}}
+                {{#if islogin}}
                
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{acc.detail.fullname}}
+                            {{data.detail.fullname}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/api/students/profile">My Profile</a>

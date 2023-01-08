@@ -1,44 +1,9 @@
+<div>
+    <div>
+        <source  src="https://www.youtube.com/embed/watch?v=mm1mcwu3c3A" ></source>
 
-
-<div class="d-flex">
-    <div class="embed-responsive embed-responsive-16by9 w-75 p-3 mt-3 ml-3 mb-3">
-        
-        <source class="embed-responsive-item" src="https://www.youtube.com/embed/watch?v=mm1mcwu3c3A" allowfullscreen></source>
     </div>
-       <div class="tab-pane w-25 ml-3 mr-3 " id="tabs-2" role="tabpanel">
-            <div class="course__details__tab__desc ">
-                
-                <div class="wrapper_dropdown">
-                    <div class="font-weight-bold"> Bài giảng khóa học</div>
-                    <script>
-                        const arr_chapterName = ['Chapter 1','Chapter 2', 'Chapter 3', 'Chapter 4', 'Chapter 5', 'Chapter 6']
-                        const arr_LinkName = ['Link 1','Link 2', 'Link 3', 'Link 4', 'Link 5', 'Link 6']
-                        for (let i = 0; i < 6; i++) 
-                        {
-                            document.write(`<div class="flip_chapter ">
-                                                <button class="text-left chapter">${arr_chapterName[i]}</button>
-                                            </div>
-                                            <div class="panel_lessons">
-                                                <div  class="link_video_lesson ">
-                                                    <div  class="d-flex" style="color: #EEB00D">
-                                                        <i class="bi bi-play-circle-fill mr-2"></i>
-                                                        <p>${arr_LinkName[i]}</p>
-                                                    </div>
-                                                </div>
-                                            </div>`)
-                        }
-                    </script>
-                </div>
+    <div>
 
-                <script>
-                    $(document).ready(function () {
-                        $(".flip_chapter").click(function () {
-                            console.log($(this).next(".panel_lessons"))
-                            $(this).next(".panel_lessons").slideToggle("fast");
-                        });
-                    });
-                </script>
-
-            </div>
-        </div>
+    </div>
 </div>
