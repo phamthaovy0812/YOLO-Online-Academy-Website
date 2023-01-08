@@ -16,11 +16,12 @@ router.post('/signup', (req, res)=>{
     
     Account.CreateAccount(req)
     res.render("vwAccount/signup");
-});
+});''
 
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login');
 })
+router.get("/courseDetail",Account.detailCourseUI);
 
 router.post('/login', async (req, res)=>{
    
@@ -33,7 +34,11 @@ router.post('/login', async (req, res)=>{
         req.session.auth = true
         req.session.authAccount = dataRes
         const url='/api/students/home';
-        res.redirect(url); // sua thi sua o day nha Vy, sua dieu huong home a'
+       
+        req.session.save(function (err) {
+            // session saved
+            res.redirect(url); // sua thi sua o day nha Vy, sua dieu huong home a'
+        })
     }
 
     res.render("vwAccount/login");  
@@ -46,17 +51,7 @@ router.post('/logout',async function (req,res){
     res.redirect(url);
 })
 
-router.get('/profile',(req,res)=>{
-    res.render("vwStudent/profile")
-})
-// router.post('/profile',async(req, res)=>{
-//     var dataRes=await Account.GetOneAccount(req);
-//     console.log(req.session.authAccount );
-//     res.render("vwStudent/profile")
 
-// }
-// )
-router.get('/profile',Account.AccountData);
 
 router.get('/changeInfo',(req,res)=>{
     res.render("vwStudent/editprofile")

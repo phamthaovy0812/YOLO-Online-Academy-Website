@@ -1,0 +1,203 @@
+<div class="col border borde-dark " style="height: 1200px;">
+    <form id="createChapter" method="POST" action="/api/chapter/create">
+        <div class="modal fade" id="modalChapter" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog  mw-100 w-75">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Create chapter</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+
+                            <label data-error="wrong" data-success="right" for="defaultForm-email" id="nameChapter">Name
+                                of
+                                chapter</label>
+                            <input type="text" id="defaultForm-email" class="form-control validate" name="name">
+                        </div>
+                        <div class="md-form mb-5">
+
+                            <input type="hidden" name="type" value="postCourse">
+                            <input type="hidden" id="lessonArray" class="form-control validate" name="lessons">
+                        </div>
+                        <div class="md-form mb-5">
+
+
+                            <input type="hidden" id="timeCreate" class="form-control validate" name="timeCreate">
+                        </div>
+
+                        <table id="cartTableBody">
+
+                        </table>
+
+
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="submit" class="btn btn-default" onclick="handleChapter()">Save
+                            Chapter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function handleChapter() {
+
+                const time = Date.now();
+                $("#timeCreate").val(time)
+                let lessonArray = new Array();
+                if (localStorage.getItem('chapter_post')) {
+                    lessonArray = JSON.parse(localStorage.getItem('chapter_post'));
+                }
+                lessonArray.push(time);
+                const lessonJSON = JSON.stringify(lessonArray);
+                localStorage.setItem("chapter_post", lessonJSON);
+            }
+
+            function handleGroup(id) {
+
+                document.getElementById("chapterIDLabel").innerHTML = id.value;
+                document.getElementById("chapterID").value = id.value;
+
+
+
+            }
+            $("#fchapter").val(localStorage.getItem('chapter_post'));
+            function handleSubmit() {
+
+
+                sessionStorage.setItem("title", " ");
+                sessionStorage.setItem("subcate", " ");
+                sessionStorage.setItem("sub", " ");
+                sessionStorage.setItem("des", " ");
+                sessionStorage.setItem("price", " ");
+                sessionStorage.setItem("pro", " ");
+                sessionStorage.setItem("sys", " ");
+                window.localStorage.removeItem('chapter_post');
+                alert("XOa thanh cong")
+            }
+        </script>
+
+
+
+
+    </form>
+
+    <div class="text-center mt-5">
+        <a href="" class="btn btn-default btn-rounded mb-4 border border-dark rounded" data-toggle="modal"
+            data-target="#modalChapter">Add Chapter
+        </a>
+
+
+    </div>
+
+    <form id="createLesson" enctype="multipart/form-data" method="POST" action="/api/lesson/create">
+        <div class="modal fade " id="modalLesson" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered mw-80 w-65">
+                <div class="modal-content" role="document">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title font-weight-bold">Create lesson by Course</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+
+                        <div class="md-form mb-5">
+                            <i class="fas fa-user prefix grey-text"></i>
+                            <label data-error="wrong" data-success="right" id="chapterIDLabel"
+                                for="orangeForm-name">Chapter</label>
+                            <input type="hidden" id="chapterID" name="chapterID">
+                            <input type="hidden" name="type" value="postCourse">
+                        </div>
+                        <div class="md-form mb-5">
+                            <i class="fas fa-user prefix grey-text"></i>
+                            <label data-error="wrong" data-success="right" for="orangeForm-name">Name of
+                                Lesson</label>
+                            <input type="text" id="nameofLesson" class="form-control validate" name="name">
+                        </div>
+                        <div class="md-form mb-5">
+                            <i class="fas fa-envelope prefix grey-text"></i>
+                            <label data-error="wrong" data-success="right" for="orangeForm-email">Do you
+                                accepted preview
+                                video ? </label>
+                            <input type="text" id="" class="form-control validate" name="preview">
+                        </div>
+
+                        <div class="md-form mb-4">
+                            <i class="fas fa-lock prefix grey-text"></i>
+                            <label data-error="wrong" data-success="right" for="orangeForm-pass">Upload
+                                video Lesson</label>
+                            <input type="file" id="videoLesson" class="form-control validate" name="video">
+                        </div>
+
+                        <button type="submit" class="btn btn-deep-orange">Create Lesson</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="displayChapterTemp">
+        <script>
+            const chapter = localStorage.getItem("chapter_post");
+        </script>
+        <table id="lessonCount">
+            {{#each chapters}}
+            <tr>
+                <script>
+                    
+                    if (JSON.parse(chapter).includes(parseInt("{{timeCreate}}"))) {
+                        const template = ''
+                        const templateDropDown = '<div class="flip_chapter_create m-1"><button  onclick="handleGroup(this)"  class="text-left w-100 mr-1" value="{{_id}}"> {{ name }} </button></div>  <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST" action="/api/lesson/delete/{{_id}}"> <div  class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}" class="d-flex" style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i> <p>{{name}}</p> </a> <div class="d-flex ">  </div> <button class="btn btn_del_les" value={{_id}}><i class="fa fa-remove" style="color:red;"></i></button> </div></form>{{/each}} <div class="d-flex justify-content-between"><button class="btn "  data-toggle="modal" data-target="#modalLesson">Add lesson</button> <form method="POST" action="/api/chapter/delete/{{_id}}" id={{ _id }}> <button class="btn btn_del_chapter" value = {{ _id }}> Remove chapter <i class="fa fa-remove" style="color:black;"></i></button ></form></div></div>'
+                        document.write(templateDropDown)
+
+
+
+
+
+                    }
+
+                </script>
+
+            </tr>
+
+            {{/each}}
+        </table>
+
+
+        </table>
+        <script>
+            $(document).ready(function () {
+
+                $(".flip_chapter_create").click(function () {
+                    event.preventDefault();
+
+                    $(this).next(".panel_lessons_create").slideToggle("slow");
+                });
+            });
+            $(".btn_del_les").click(function () {
+                event.preventDefault();
+                alert(this.value)
+
+                $("#" + this.value).submit();
+            });
+            $(".btn_del_chapter").click(function () {
+                event.preventDefault();
+                alert(this.value)
+
+                $("#" + this.value).submit();
+
+            });
+        </script>
+
+    </div>
+
+</div>

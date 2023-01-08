@@ -182,9 +182,9 @@ const CreateAccount = async (req) => {
     });
   }
 };
+
 const AccountDataCourse= async(req,res)=>{
   
- 
   const teacherList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"}]
   const studentList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
   const wishList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
@@ -201,7 +201,17 @@ const AccountData= async (req,res)=>{
  
   res.render("vwStudent/profile",{authaccount: req.session.authAccount});
 };
+  const detailCourseUI = async (req,res)=>{
+    
+    const courseDetail={"title":"JavaScript for Beginners test","price":"$50.00 test","subtitle":"Learn javascript online and supercharge your web design with this Javascript for beginners training course. Test","lastUpdate":"11/2022 test","image":"/student/js.png","number_review":"18 test"}
+    res.render('Student/courseDetail',{course:courseDetail})
+  };
 
+
+const accountUI= async(req,res)=>{
+  const profile={"avatar":"/avata.png","email":"ptvy@gmail.com","username":"vyvy","password":"1","role":"3"};
+  res.render('vwStudent/profile',  {account:profile});
+}
 
 export default {
   GetAllAccount,
@@ -211,5 +221,7 @@ export default {
   UpdatePasswordAccount,
   UpdateInfoAccount,
   AccountData,
-  AccountDataCourse
+  AccountDataCourse,
+  accountUI,
+  detailCourseUI
 };

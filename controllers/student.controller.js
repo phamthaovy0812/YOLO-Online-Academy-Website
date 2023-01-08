@@ -1,3 +1,4 @@
+import CourseModel from '../models/Course.model.js';
 import Student from '../models/student.model.js';
 
 const GetAllStudent = async(req, res) =>{
@@ -88,7 +89,8 @@ const DeleteStudent = async (req, res, id_account) => {
   }
 
   const UpdateWishList = async (req) =>{
-    const id = req.session.authAccount?.account?._id ;
+   // const id = req.session.authAccount?.account?._id ;
+   const id = "63aa8e69e21b9e47d25fce49"
     const data = await Student.findOne({ "id_account" : id})
 
     const course = {
@@ -102,7 +104,32 @@ const DeleteStudent = async (req, res, id_account) => {
     const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { wishlist :wishlist }, {
       returnOriginal: false
     })
- 
+    console.log(wishlist)
+    return dataUpdate
+  }
+
+  const DeleteWishList = async (req) =>{
+    const id = req.session.authAccount?.account?._id ;
+    const data = await Student.findOne({ "id_account" : id})
+
+    const course = {
+      id_course : req.body.idCourse,
+      name_course : req.body.name_course,
+      avatar_course : req.body.avatar_course
+    }
+    const wishlist = data.wishlist;
+    
+    for(var i=0;i<wishlist.length ; i++)
+    {
+      if(wishlist[i].id_course == course.id_course)
+      {
+        wishlist.splice(i,1);
+      }
+    }
+
+    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { wishlist :wishlist }, {
+      returnOriginal: false
+    })
     return dataUpdate
   }
 
@@ -117,6 +144,12 @@ const DeleteStudent = async (req, res, id_account) => {
     
   };
 
+
+  const categoryUI = async (req,res)=>{
+    const categoryView = {"name":"DEVELOPMENT test"}
+    res.render('Student/category',{category:categoryView})
+  };
+  
 
 const topCourse= async (req,res)=>{
   const toppopularcourse=[{"title":"Mobile for beginerrrrrrrrrrr rrrrrrr rrrrrr rrrrrr rrrrr rrrrrrrrr","sub_category":"Web developmet","author_id":{"fullname":"Pham Vy"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","sub_category":"Web developmet","author_id":{"fullname":"Nguyen Thao"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","sub_category":"Web developmet","author_id":{"fullname":"Bui Thanh"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","sub_category":"Web developmet","author_id":{"fullname":"Nguyen Tan"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
@@ -134,5 +167,9 @@ const payCourse=async(req,res)=>{
   res.render("vwStudent/shopping",{paycourse: PayCourse})
 };
 
+const WishList= async (req,res)=>{
+  const wishList=[{"title":"Mobile for beginerrrrrrrrrrr rrrrrrr rrrrrr rrrrrr rrrrr rrrrrrrrr","sub_category":"Web developmet","author_id":{"fullname":"Pham Vy"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","sub_category":"Web developmet","author_id":{"fullname":"Nguyen Thao"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","sub_category":"Web developmet","author_id":{"fullname":"Bui Thanh"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","sub_category":"Web developmet","author_id":{"fullname":"Nguyen Tan"},"number_review":"12344","scores_review":"4.5","subtitle":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
+  res.render("vwStudent/profile",{wish:wishList})
+}
 
-export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};
+export default { WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};

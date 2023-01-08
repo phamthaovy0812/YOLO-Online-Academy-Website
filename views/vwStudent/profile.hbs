@@ -15,28 +15,29 @@
             </div>
         </div>
     </div>
-     <!--   {{#ifCond authaccount.account.role "0"}}       student-->
-        <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
-        {{#each studentlist }}
-            <div class="father">
-                <div class="son">
-                    <div style="display: flex; margin-top: 20px;">
-                        <div class="itemcard">
-                        <img src="/student/js.png" alt="" style="width:100px; height: 80px;">
-                        <div class="itemtitle">{{studentlist.title}}</div>
-                        <div class="itemprice">{{studentlist.price}}</div>
-                        <div style="height: 80px;">{{studentlist.description}}</div>
-                        <div style="display: flex;">
-                            <p><button>Add to Wishlist</button></p>
-                            <p><button>Add to Cart</button></p>
-                        </div>
-                        </div>
-                    </div>
+     <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
+    <div style="display: flex; justify-content: space-around;">
+        {{#each wish}}
+            <div class="itemcard" style="display: inline-block; ">
+                <img src="{{image}}" alt="" style="width:223px; height: 150px;">
+                <div class="itemtitle">{{title}}</div>
+                <div class="itemcate"> {{sub_category}}</div>
+                <div class="itemauthor">Teacher: {{author_id.fullname}}</div>
+                <div style="display: flex;">
+                    <div class="itemrate">Rate: {{scores_review}}</div>
+                    <div class="itemnum">({{number_review}})</div>
+                </div>
+                <div class="itemdes">{{subtitle}}</div>
+                <div class="itemprice">{{price}}</div>
+                <div style="display: flex; align-items: flex-end;">
+                    <button><div class="itembtn">Add to Wishlist</div></button>
+                    <button><div class="itembtn">Add to card</div></button>
                 </div>
             </div>
         {{/each}}
 
-  
+    </div>
+
+
 
 </div>
-

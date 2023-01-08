@@ -1,1 +1,77 @@
-<h1>Edit</h1>
+<div class="editPage  d-flex p-0 m-0 " style="height:2300px;">
+    <div class="col-md-1 position-relative p-0 m-0">
+        <!-- Begin: SIDEBAR -->
+        <div id="side p-0 m-0">
+            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge  p-0 m-0"
+                style="width:70px;position: absolute !important; box-sizing:border-box;">
+                <a href="" class="mySide active" class="side w3-bar-item"><i class="bi bi-house-door fa-xm"></i></a>
+                <a href="/api/teachers/postCourse" class="mySide" class="side w3-bar-item "><i
+                        class="bi bi-camera-reels fa-xm"></i></i></a>
+                <a href="/api/teachers/myListCourses" class="mySide" class="side w3-bar-item "><i
+                        class="bi bi-card-list fa-xm"></i></a>
+            </div>
+        </div>
+
+        <script>
+            // Add active class to the current button (highlight it)
+            var header = document.getElementById("side");
+            var btns = header.getElementsByClassName("mySide");
+
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function () {
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                });
+            }
+        </script>
+        <!-- End: SIDEBAR -->
+    </div>
+    <div class="col">
+        {{#each course}}
+        <div class="container d-flex p-0 course">
+            <div class="container  imgAndInfo d-flex m-0 ">
+                <img src="/{{image}}" alt="This is avatar of HTML Course">
+                <div class="info">
+                    <div>
+                        <p>{{title}}</p>
+                    </div>
+                    <div>
+                        <p>Last Update : {{lastUpdate}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rating">
+                <div class="starRating">
+                    <div>4.50</div>
+                    <div class="starColor">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                </div>
+                <div>Course rating</div>
+
+            </div>
+
+            <div class="box_btn_edit">
+                <a href="/api/teachers/edit/{{_id}}" onclick="handleRemove()" ><button class="btn_edit" type="button">Edit</button></a>
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
+
+    <script>
+      function handleRemove() {
+        localStorage.removeItem('isFirstLoad');
+      }
+    </script>
+
+
+
+
+</div>

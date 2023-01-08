@@ -1,13 +1,12 @@
 {
-  
   "name": "project",
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js", 
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
+    "start": "node server.js",
     "watch": "node-sass --watch scss/app.scss public/css/app.css"
   },
   "author": "Group11",
@@ -28,7 +27,6 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "node-sass": "^8.0.0",
     "nodemon": "^2.0.20",
     "tailwindcss": "^3.2.4"
   }

@@ -1,6 +1,9 @@
-import  Teacher from "../models/teacher.model.js";
+import Teacher from "../models/teacher.model.js";
 import ChapterModel from '../models/Chapter.model.js';
 import LessonModel from '../models/Lesson.model.js';
+import TeacherSevice from "../services/Teacher.sevice.js";
+import CourseModel from "../models/Course.model.js";
+import CourseController from "./Course.controller.js";
 const GetAllTeacher = async (req, res) => {
   try {
     const teacher = await Teacher.find();
@@ -26,13 +29,13 @@ const CreateTeacher = async (req, res, id_account) => {
     description: req.body.description,
   });
 
-    const dataToSave = await data.save();
+  const dataToSave = await data.save();
 };
 
 const DeleteTeacher = async (req, res, id_account) => {
   try {
     const id = req.params.id;
-    const data = await Teacher.findOneAndDelete({ "id_account" : id_account})
+    const data = await Teacher.findOneAndDelete({ "id_account": id_account })
     res.send(`Document with data has been deleted..`)
   } catch (err) {
     res.status(404).json({
@@ -58,44 +61,52 @@ const UpdateTeacher = async (req) => {
 
 
 const viewCreateCourse = async (req, res) => {
+  const user = req.session.authAccount;
+  const subCategorys = await TeacherSevice.getSubCategory();
   let chapters = await ChapterModel.find().lean();
-
+  
   ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
     if (err) return (err);
+    console.log(subCategorys);
 
-    console.log((story));
-    res.render("Teacher/createCourse", { chapters: story });
-  });
+    res.render("Teacher/createCourse", { chapters: story, subCategory: subCategorys, user: user });
+  });// Ch
 }
-const createCourse= async (req, res) => {
+const createCourse = async (req, res) => {
   try {
     const course = req.body;
+    const user = req.session.authAccount;
+    const chapter = await TeacherSevice.getChapterByTime((course.chapter));
+    const IDSubCategory = await TeacherSevice.getIDCategory(course.sub_category);
+    var datetime = new Date();
+    console.log(chapter);
     const file = req.files;
     const courseObject = {
       title: course.title,
-      sub_category: course.sub_category,
+      slug_category: course.sub_category,
+      sub_category: IDSubCategory,
       subtitle: course.subtitle,
       description: course.description,
-      author_id: course.author_id,
+      author_id: user.account._id,
       number_review: course.number_review || 0,
       scores_review: course.scores_review || 0,
       list_reviews: course.list_reviews || [],
       image: file.image[0].path,
       price: course.price,
-      lastUpdate: course.lastUpdate || 1970,
+      lastUpdate: datetime.toISOString().slice(0, 10) || 2022,
       promotion: course.promotion,
       syllabus: course.syllabus,
       videoDemo: file.videoDemo[0].path,
-      chapter: course.chapter || [],
+      chapter: chapter || [],
 
     }
     console.log(courseObject);
-    res.status(200).json(courseObject);
     const course_Data = new CourseModel(courseObject);
 
     const value = await course_Data.save();
+
     if (value) {
-      res.status(200).json(value);
+      res.redirect("/api/teachers/homepage");
     }
     else {
       res.status(200).json({ message: "Failed" });
@@ -105,13 +116,92 @@ const createCourse= async (req, res) => {
     res.status(500).json(error);
   }
 }
-const homepage = (req, res) => {
-  res.render('Teacher/home')};
 
-const editCourse = (req, res) => {
-  res.render("Teacher/editCourse");
+const homepage = (req, res) => {
+  const user = req.session.authAccount;
+  console.log(user);
+  res.render('Teacher/home', { user: user })
 };
-const myListCourses = (req, res) => {
-  res.render("Teacher/myListCourses");
+
+const editCourse = async (req, res) => {
+  const user = req.session.authAccount;
+  console.log(user);
+  const course = await CourseModel.find({ author_id: user.account._id }).lean();
+  console.log(course);
+
+  res.render("Teacher/editCourse", { course: course });
 };
-export default { GetAllTeacher, CreateTeacher, DeleteTeacher, UpdateTeacher, viewCreateCourse, homepage, editCourse, myListCourses, createCourse }
+
+const editCourseDetail = async (req, res) => {
+  try {
+    const user = req.session.authAccount;
+    const subCategorys = await TeacherSevice.getSubCategory();
+    CourseModel.findOne({ _id: req.params.id, }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+      if (err) return (err);
+      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: story.chapter, user: user });
+
+
+    });// Ch
+  } catch (error) {
+    return error
+  } 
+  
+
+
+
+};
+const handleUpdateCourse = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const courseUpdatePagram = req.body;
+    const file = req.files;
+    
+    const chapter = await TeacherSevice.getChapterByTime(courseUpdatePagram.chapter);
+    console.log(courseUpdatePagram)
+    const IDSubCategory = await TeacherSevice.getIDCategory(courseUpdatePagram.sub_category);
+    var datetime = new Date();
+    const updateCourse = await CourseModel.findByIdAndUpdate(id, {
+      title: courseUpdatePagram.title,
+      sub_category: IDSubCategory,
+      subtitle: courseUpdatePagram.subtitle,
+      description: courseUpdatePagram.description,
+      author_id: courseUpdatePagram.author_id,
+      number_review: courseUpdatePagram.number_review || 0,
+      scores_review: courseUpdatePagram.scores_review || 0,
+      list_reviews: courseUpdatePagram.list_reviews || [],
+      image: file.image[0].path,
+      price: courseUpdatePagram.price,
+      lastUpdate: datetime.toISOString().slice(0, 10) || 2022,
+      promotion: courseUpdatePagram.promotion||"No",
+      syllabus: courseUpdatePagram.syllabus,
+      videoDemo: file.videoDemo[0].path,
+
+    }, { new: true });
+
+
+
+
+
+    if (updateCourse)
+      res.render("Teacher/editCourseDetail");
+    else
+      res.send("Failed");
+  } catch (error) {
+
+  }
+
+}
+const myListCourses = async (req, res) => {
+  try {
+    const user = req.session.authAccount;
+    console.log(user);
+    const course = await CourseModel.find({ author_id: user.account._id }).lean();
+    console.log(course);
+
+    res.render("Teacher/myListCourses", { course: course });
+  } catch (error) {
+      return error;
+  }
+ 
+};
+export default { GetAllTeacher, CreateTeacher, DeleteTeacher, UpdateTeacher, viewCreateCourse, homepage, editCourse, myListCourses, createCourse, editCourseDetail, handleUpdateCourse }

@@ -6,7 +6,7 @@
 .resize {
     width: 280px;
     height: 80px;
-}
+}ß
 
 .square {
     width: 100px;
@@ -43,7 +43,7 @@
     font-weight: 700;
     font-size: 30px;
     line-height: 61px;
-    padding-left: 200px;
+ 
     padding-top: 50px;
     color: #000000;
 }
@@ -59,10 +59,7 @@
     background: #EEB00D;
     height: 60px;
     font-weight: 600;
-    color: white;
-}
-.buttonCreateCourse:hover{
-    color: black;
+    color: #ffffff;
 }
 
 .box_create_engaging {
@@ -85,4 +82,5 @@
 }
 .body{
     margin-bottom: 150px;
+    
 }
