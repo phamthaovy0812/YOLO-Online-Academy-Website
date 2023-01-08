@@ -13,19 +13,18 @@
                 <!-- Text -->
                 <div class="col-md-6">
                     <div class="course__details__text">
-                        <h3>JavaScript for Beginners</h3>
+                        <h3>{{course.title}}</h3>
                         <div class="course__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                            <i class="fa fa-star"></i>
+                            <span>({{course.number_review}} reviews)</span>
                             <span>12,001 students</span>
                         </div>
-                        <div class="course__details__price">$50.00</div>
-                        <p>Learn javascript online and supercharge your web design with this Javascript for beginners
-                            training course.</p>
+                        <div class="course__details__price">{{course.price}}</div>
+                        <p>{{course.subtitle}}</p>
 
                         <div>
                             <button href="#" type="button" class="btn btn-warning primary-btn">ADD TO CART</button>
@@ -35,9 +34,9 @@
                         <hr>
 
                         <ul>
-                            <li><b>Last updated</b> <span>11/2022</span></li>
-                            <li><b>Course outline</b>
-                                <span>https://github.com/buiquangthanhcode/Online-Academy-Project.git</span>
+                            <li><b>Last updated</b> <span>{{course.lastUpdate}}</span></li>
+                            <li><b>Syllabus</b>
+                                <span><link rel="stylesheet" href="https://github.com/buiquangthanhcode/Online-Academy-Project.git"> </span>
                             </li>
                         </ul>
 
@@ -166,7 +165,7 @@
                                     <p>Software Developer, Architect and UX Designer</p>
                                 </div>
                                 <div class="instructorImgandInfo">
-                                    <a href="" class="imgInstructorBox">
+                                    <a href="#" class="imgInstructorBox">
                                         <img class="instructorImg" src="/student/instructor.jpg" alt="Instructor image">
                                     </a>
                                     <div class="ud-unstyled-list">
@@ -209,20 +208,23 @@
                         {{!-- Begin: TAB 4 - Student's Feedback --}}
                         <div class="tab-pane" id="tabs-4" role="tabpanel">
                             <div class="course__details__tab__desc">
+                                <div class="">
+
+                                </div>
                                 <h6>Course Feedback</h6>
                                 <div class="reviewsAndRating">
                                     <script>
                                         const arr_imgStudent = ['/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg']
                                         const arr_nameStudent = ['Brian K.', 'Brian K.', 'Brian K.', 'Brian K.', 'Brian K.']
-                                        for (let i = 0; i < 5; i++) {
-                                            document.write(`<div class="studentComment">
+                                        for (let i = 0; i < 20; i++) {
+                                            document.write(`<div class=" studentComment">
                                         <div class="review_Heading">
                                             <div class="review_Heading_Name_Rating">
                                                 <div class="review_Heading_Rating_1">
                                                     <a class="imgStudentBox">
-                                                        <img class="imgStudent" src="${arr_imgStudent[i]}" alt="">
+                                                        <img class="imgStudent" src="/student/avtStudent.jpg" alt="">
                                                     </a>
-                                                    <div>${arr_nameStudent[i]}</div>
+                                                    <div>Brian K.</div>
                                                 </div>
                                                 
                                                 <div class="review_Heading_Rating_2">
@@ -233,18 +235,18 @@
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                     </div>
-                                                    <div class="review_Heading_time">2 months ago</div>
+                                                    {{!-- <div class="review_Heading_time">2 months ago</div> --}}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style="padding-top: 1rem">
+                                        {{!-- <div style="padding-top: 1rem">
                                             <span>
                                                 I really liked this course from both trainers. The one thing I'd love to see for future would be a bit around these ECMA
                                                 modules and handling those versus require statements. I'm running into that more and more with online training and I was
                                                 really hoping this course would cover that, maybe on future editions? Otherwise, very happy with the value for money and
                                                 training skill.
                                             </span>
-                                        </div>
+                                        </div> --}}
                                     </div>`);
                                         }
                                     </script>

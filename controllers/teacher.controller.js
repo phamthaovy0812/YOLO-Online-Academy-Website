@@ -59,7 +59,7 @@ const UpdateTeacher = async (req) => {
 
 const viewCreateCourse = async (req, res) => {
   let chapters = await ChapterModel.find().lean();
-
+  
   ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
     if (err) return (err);
 

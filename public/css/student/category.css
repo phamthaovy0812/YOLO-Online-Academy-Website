@@ -1,0 +1,31 @@
+/*  */
+.font-text-part{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 61px;
+    color: #000000;
+}
+.category-tab-list{
+    max-width: none;
+    max-height: none;
+    position: relative;
+}
+.category-course-element{
+    min-width: 0.1rem;
+    scroll-snap-align: start;
+    /* position: relative; */
+    flex-direction: column;
+    max-width: 37.5rem;
+    min-width: 17.3rem;
+    align-items: flex-start;
+}
+.category-course-element-img{
+   padding-right: 0;
+   border: 1px solid #d1d7dc;
+}
+.category-course-element-img > img{
+    height: 230px;
+    width: 210px;
+}
