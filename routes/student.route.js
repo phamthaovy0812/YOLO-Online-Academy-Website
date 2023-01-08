@@ -30,7 +30,7 @@ router.post("/addWishList", async (req, res) => {
     try {
         const infor = req.body;
         console.log(infor);
-        
+
         res.redirect("/")
     } catch (error) {
         
@@ -38,19 +38,6 @@ router.post("/addWishList", async (req, res) => {
     
 })
   
-router.get("/courseDetail/:id",  async (req,res)=>{
- 
-    const course = await CourseModel.find().lean();
-    const user = req.session.authAccount;
-
-
-    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
-        if (err) return (err);
-        res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account });});
-
-    })
-
-
 router.get("/courseDetail",(req,res)=>{
     res.render('Student/courseDetail');
 })
@@ -66,7 +53,7 @@ router.get("/category",(req,res)=>{
     res.render('Student/Category');
 })
 router.get("/home",Student.topCourse);
-router.get("/profile",Student.WishList);
+router.get("/profile", Student.profile);
 router.get("/shopping",Student.payCourse);
 
 

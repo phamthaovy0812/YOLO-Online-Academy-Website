@@ -21,7 +21,9 @@ router.post('/signup', (req, res)=>{
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login');
 })
-router.get("/courseDetail",Account.detailCourseUI);
+router.get("/courseDetail/:id",Account.detailCourseUI);
+
+
 
 router.post('/login', async (req, res)=>{
    
