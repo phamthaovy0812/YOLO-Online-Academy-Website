@@ -48,19 +48,73 @@ const DeleteStudent = async (req, res, id_account) => {
     }
   };
 
-  const UpdateStudent = async (req, res) => {
-    try {
-      const id = req.params.id;
-      const data = await Student.findOneAndUpdate({ "id_account" : id}, req.body, {
+  const UpdateRating = async (req) =>{
+    const id = req.session.authAccount?.account?._id ;
+    const data = await Student.findOne({ "id_account" : id})
+
+    const rating = {
+      id_course : req.body.idPost,
+      scores : req.body.scores,
+      comment : req.body.comment
+    }
+    const ratingList = data.rating_list;
+    ratingList.push(rating)
+
+    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { rating_list :ratingList }, {
+      returnOriginal: false
+    })
+ 
+    return dataUpdate
+  }
+
+
+  const UpdateEnrollCourse = async (req) =>{
+    const id = req.session.authAccount?.account?._id ;
+    const data = await Student.findOne({ "id_account" : id})
+
+    const course = {
+      id_course : req.body.idCourse,
+      name_course : req.body.name_course,
+      avatar_course : req.body.avatar_course
+    }
+    const courses_enroll = data.courses_enroll;
+    courses_enroll.push(course)
+
+    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { courses_enroll :courses_enroll }, {
+      returnOriginal: false
+    })
+ 
+    return dataUpdate
+  }
+
+  const UpdateWishList = async (req) =>{
+    const id = req.session.authAccount?.account?._id ;
+    const data = await Student.findOne({ "id_account" : id})
+
+    const course = {
+      id_course : req.body.idCourse,
+      name_course : req.body.name_course,
+      avatar_course : req.body.avatar_course
+    }
+    const wishlist = data.wishlist;
+    wishlist.push(course)
+
+    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { wishlist :wishlist }, {
+      returnOriginal: false
+    })
+ 
+    return dataUpdate
+  }
+
+  const UpdateStudent = async (req) => {
+    
+      const id = req.session.authAccount?.account?._id ;
+      const data = await Student.findOneAndUpdate({ "id_account" : id}, {fullname : req.body.fullname}, {
         returnOriginal: false
       })
-      res.status(200).send(data)
-    } catch (err) {
-      res.status(404).json({
-        status: "fail",
-        message: "ID invalid",
-      });
-    }
+   
+      return data
+    
   };
   
-  export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent };
+  export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList };

@@ -14,9 +14,9 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({ storage: storage })
-// router 
-//     .route('/')
-//     .get(Teacher.GetAllTeacher); 
+router 
+    .route('/')
+    .get(Teacher.GetAllTeacher);
 
 router.get("/homepage",Teacher.homepage);
 router.get("/edit", Teacher.editCourse);

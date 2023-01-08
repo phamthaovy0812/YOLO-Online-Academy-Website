@@ -14,7 +14,8 @@ export default {
         timeChapter.forEach(item =>{
             for (let i = 0; i < chapter.length; i++) {
                 if (chapter[i].timeCreate == item) {
-                    chapterList.push(chapter[i]._id.valueOf());
+                    if(!chapterList.includes(chapter[i]._id))
+                        chapterList.push(chapter[i]._id.valueOf());
                 }
             }
         })

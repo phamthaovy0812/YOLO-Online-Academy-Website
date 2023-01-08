@@ -6,11 +6,13 @@ export default {
     },
     async create(req, res) {
         try {
+            const user = req.session.authAccount;
             const chapterValue = req.body;
             const chapter = {
                 name: chapterValue.name || "",
                 lessons: chapterValue.lessons || [],
                 timeCreate: chapterValue.timeCreate || "",
+                author: user.account._id ,
             }
             const chapterModel = new ChapterModel(chapter);
             const chaptermain = await chapterModel.save();

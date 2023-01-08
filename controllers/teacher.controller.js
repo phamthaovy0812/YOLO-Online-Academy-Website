@@ -45,19 +45,18 @@ const DeleteTeacher = async (req, res, id_account) => {
   }
 };
 
-const UpdateTeacher = async (req, res) => {
+const UpdateTeacher = async (req) => {
+  var data ;
   try {
-    const id = req.params.id;
-    const data = await Teacher.findOneAndUpdate({ "id_account": id }, req.body, {
+    const id = req.session.authAccount?.account?._id ;
+    data = await Teacher.findOneAndUpdate({ "id_account" : id}, {fullname : req.body.fullname}, {
       returnOriginal: false
     })
-    res.status(200).send(data);
+    
   } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: "ID invalid",
-    });
+    data = {status : 400, message : "error"}
   }
+  return data;
 };
 
 
@@ -74,9 +73,10 @@ const viewCreateCourse = async (req, res) => {
 const createCourse = async (req, res) => {
   try {
     const course = req.body;
-    const chapter = await TeacherSevice.getChapterByTime(course.chapter);
+    const user = req.session.authAccount;
+    const chapter = await ChapterModel.find({ author: user.account._id }).lean();
     const IDSubCategory = await TeacherSevice.getIDCategory(course.sub_category);
-    console.log(course.sub_category);
+    console.log(chapter);
     const file = req.files;
     const courseObject = {
       title: course.title,
@@ -129,15 +129,20 @@ const editCourse = async (req, res) => {
 };
 
 const editCourseDetail = async (req, res) => {
-  const user = req.session.authAccount;
-  const subCategorys = await TeacherSevice.getSubCategory();
-  const allchapter = await ChapterModel.find({}).lean();
-  CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
-    if (err) return (err);
-    res.render("Teacher/editCourseDetail", { course: story, chapter: story.chapter, subCategory: subCategorys, chapters: allchapter,user:user });
+  try {
+    const user = req.session.authAccount;
+    const subCategorys = await TeacherSevice.getSubCategory();
+    const allchapter = await ChapterModel.find({ author: user.account._id }).lean();
+    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+      if (err) return (err);
+      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: allchapter, user: user });
 
 
-  });// Ch
+    });// Ch
+  } catch (error) {
+    return error
+  }
+  
 
 
 
@@ -147,11 +152,10 @@ const handleUpdateCourse = async (req, res) => {
     const id = req.params.id;
     const courseUpdatePagram = req.body;
     const file = req.files;
+    
+    const chapter = await ChapterModel.find({ author: courseUpdatePagram.author_id }).lean();
     console.log(courseUpdatePagram)
-    const chapter = await TeacherSevice.getChapterByTime(courseUpdatePagram.chapter);
-
     const IDSubCategory = await TeacherSevice.getIDCategory(courseUpdatePagram.sub_category);
-    console.log(IDSubCategory)
 
     const updateCourse = await CourseModel.findByIdAndUpdate(id, {
       title: courseUpdatePagram.title,
@@ -182,12 +186,16 @@ const handleUpdateCourse = async (req, res) => {
 
 }
 const myListCourses = async (req, res) => {
+  try {
+    const user = req.session.authAccount;
+    console.log(user);
+    const course = await CourseModel.find({ author_id: user.account._id }).lean();
+    console.log(course);
 
-  const user = req.session.authAccount;
-  console.log(user);
-  const course = await CourseModel.find({ author_id: user.account._id }).lean();
-  console.log(course);
-
-  res.render("Teacher/myListCourses", { course: course });
+    res.render("Teacher/myListCourses", { course: course });
+  } catch (error) {
+      return error;
+  }
+ 
 };
 export default { GetAllTeacher, CreateTeacher, DeleteTeacher, UpdateTeacher, viewCreateCourse, homepage, editCourse, myListCourses, createCourse, editCourseDetail, handleUpdateCourse }
