@@ -10,8 +10,22 @@ router
 router    
     .route('/:id')
       .patch(jsonParser, Student.UpdateStudent);
+router    
+    .route('/wishlist/delete')
+        .post(jsonParser, Student.DeleteWishList);
+router    
+    .route('/wishlist/update')
+        .post(jsonParser, Student.UpdateWishList);
 
-  
+router    
+    .route('/rating')
+        .post(jsonParser, Student.UpdateRating);
+router    
+.route('/enroll')
+    .post(jsonParser, Student.UpdateEnrollCourse);
+            
+            
+
 router.get("/courseDetail",(req,res)=>{
     res.render('Student/courseDetail');
 })

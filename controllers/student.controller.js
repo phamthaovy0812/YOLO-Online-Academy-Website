@@ -88,7 +88,8 @@ const DeleteStudent = async (req, res, id_account) => {
   }
 
   const UpdateWishList = async (req) =>{
-    const id = req.session.authAccount?.account?._id ;
+   // const id = req.session.authAccount?.account?._id ;
+   const id = "63aa8e69e21b9e47d25fce49"
     const data = await Student.findOne({ "id_account" : id})
 
     const course = {
@@ -102,7 +103,32 @@ const DeleteStudent = async (req, res, id_account) => {
     const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { wishlist :wishlist }, {
       returnOriginal: false
     })
- 
+    console.log(wishlist)
+    return dataUpdate
+  }
+
+  const DeleteWishList = async (req) =>{
+    const id = req.session.authAccount?.account?._id ;
+    const data = await Student.findOne({ "id_account" : id})
+
+    const course = {
+      id_course : req.body.idCourse,
+      name_course : req.body.name_course,
+      avatar_course : req.body.avatar_course
+    }
+    const wishlist = data.wishlist;
+    
+    for(var i=0;i<wishlist.length ; i++)
+    {
+      if(wishlist[i].id_course == course.id_course)
+      {
+        wishlist.splice(i,1);
+      }
+    }
+
+    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { wishlist :wishlist }, {
+      returnOriginal: false
+    })
     return dataUpdate
   }
 
@@ -127,4 +153,4 @@ const topCourse= async (req,res)=>{
 };
 
 
-export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse };
+export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList, topCourse, DeleteWishList };
