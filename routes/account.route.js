@@ -6,7 +6,7 @@ var jsonParser = bodyParser.json();
 const router = express.Router();
 
 router.get('/signup',(req,res)=>{
-    res.render("vwAccount/signup",{ layout: false });
+    res.render("vwAccount/signup");
   })
 
 router.post('/signup', (req, res)=>{
@@ -18,18 +18,47 @@ router.post('/signup', (req, res)=>{
 });
 
 router.get('/login',(req,res)=>{
-    res.render('vwAccount/login', { layout: false });
+    res.render('vwAccount/login');
 })
 
 router.post('/login', async (req, res)=>{
-    console.log(req.body)
+   
     var dataRes = await  Login(req);
     
-    if(dataRes.status == 200)
+  
+    if(dataRes && dataRes.status == 200)
     {
+        console.log(dataRes)
+        req.session.auth = true
+        req.session.authAccount = dataRes
         res.redirect('/');
     }
-    res.render("vwAccount/login",{isLogin:dataRes});  
+
+    res.render("vwAccount/login");  
+});
+
+router.get('/changeInfo',(req,res)=>{
+    res.render("vwStudent/editprofile")
+})
+router.post('/changeInfo', async (req, res)=>{
+    
+    var dataRes = await Account.UpdateInfoAccount(req);
+    // var dataRes = await  Login(req);
+    
+    
+    req.session.authAccount.email = dataRes.email ;
+    req.session.authAccount.fullname = dataRes.detail.fullname
+
+     console.log(req.session.authAccount )
+    // if(dataRes && dataRes.status == 200)
+    // {
+    //     console.log(dataRes)
+    //     req.session.auth = true
+    //     req.session.authAccount = dataRes
+    //     res.redirect('/');
+    // }
+
+    res.render("vwStudent/editprofile") 
 });
 router 
     .route('/')
@@ -39,7 +68,7 @@ router
     .route('/:id')
         .delete(Account.DeleteAccount)
         .get( Account.GetOneAccount)
-        .patch(jsonParser,Account.UpdateAccount);
+        .patch(jsonParser,Account.UpdatePasswordAccount);
 
 
     

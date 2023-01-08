@@ -42,19 +42,18 @@ const DeleteTeacher = async (req, res, id_account) => {
   }
 };
 
-const UpdateTeacher = async (req, res) => {
+const UpdateTeacher = async (req) => {
+  var data ;
   try {
-    const id = req.params.id;
-    const data = await Teacher.findOneAndUpdate({ "id_account" : id}, req.body, {
+    const id = req.session.authAccount?.account?._id ;
+    data = await Teacher.findOneAndUpdate({ "id_account" : id}, {fullname : req.body.fullname}, {
       returnOriginal: false
     })
-    res.status(200).send(data);
+    
   } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: "ID invalid",
-    });
+    data = {status : 400, message : "error"}
   }
+  return data;
 };
 
 

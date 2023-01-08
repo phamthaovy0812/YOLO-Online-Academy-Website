@@ -8,7 +8,8 @@ import mongoose  from 'mongoose';
 import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
 import sendEmail from './middlewares/EmailVerification.js'
-
+import activate_session from './middlewares/session.js';
+import activate_locals from './middlewares/localStorage.js';
 
 
 const app = express();
@@ -43,7 +44,7 @@ app.use(cors());
 
 sendEmail();
 
-
+activate_session(app);
 //
 app.engine('hbs', engine({
     extname: 'hbs',
@@ -60,7 +61,7 @@ app.set('views', './views');
 //console.log('Path:',path.join(__dirname,'views/Teacher'));
 app.use(rout); // router root 
 
-
+activate_locals(app);
 
 /*
 app.get("/",(req,res)=>{
@@ -81,6 +82,7 @@ app.get("/404",(req,res)=>{
 
 // Page Home
 app.get("/",(req,res)=>{
+   // console.log("->>>>",req.session.authAccount)
     res.render("vwAccount/home");
   })
 
