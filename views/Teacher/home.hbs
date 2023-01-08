@@ -1,109 +1,138 @@
-<div class="homepageTeacher">
-
-    <!-- Begin: SIDEBAR -->
-    <div id="side">
-        <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px">
-            <a href="/api/teachers/homepage" class="mySide active" class="side w3-bar-item"><i class="bi bi-house-door fa-xm"></i></a>
-            <a href="/api/teachers/createCourse" class="mySide " class="side w3-bar-item "><i
-                    class="bi bi-camera-reels fa-xm"></i></i></a>
-            <a href="/api/teachers/myListCourses" class="mySide" class="side w3-bar-item "><i class="bi bi-card-list fa-xm"></i></a>
+<div class="homepageTeacher  d-flex p-0 m-0 ">
+    <div class="col-md-1 position-relative p-0 m-0">
+        <!-- Begin: SIDEBAR -->
+        <div id="side p-0 m-0">
+            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge  p-0 m-0" style="width:70px;position: absolute !important; box-sizing:border-box;">
+                <a href="" class="mySide active" class="side w3-bar-item"><i class="bi bi-house-door fa-xm"></i></a>
+                <a href="/api/teachers/postCourse" class="mySide" class="side w3-bar-item "><i
+                        class="bi bi-camera-reels fa-xm"></i></i></a>
+                <a href="/api/teachers/myListCourses" class="mySide" class="side w3-bar-item "><i
+                        class="bi bi-card-list fa-xm"></i></a>
+            </div>
         </div>
+        
+        <script>
+            // Add active class to the current button (highlight it)
+            var header = document.getElementById("side");
+            var btns = header.getElementsByClassName("mySide");
+
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function () {
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                });
+            }
+        </script>
+        <!-- End: SIDEBAR -->
     </div>
-
-    <script>
-        // Add active class to the current button (highlight it)
-        var header = document.getElementById("side");
-        var btns = header.getElementsByClassName("mySide");
-
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
-            });
-        }
-    </script>
-    <!-- End: SIDEBAR -->
-
-
-    <!-- Begin: Home Course Body -->
-    <div class="body">
-        <h1 class="container font-text">HOME</h1>
-
-        <!-- 1 -->
-        <div class="container d-flex  flex-column align-items-start">
-            <div class="d-flex colorCreateCourse vh-100">
-
-                <div class="container d-flex align-items-center justify-content-center item">
-                    <p>Jump Into Course Creation</p>
-                </div>
-                <div class="container d-flex align-items-center justify-content-center item">
-                    <button href="./Teacher/createCourse.hbs" type="button"
-                        class="btn btn-lg btn-warning buttonCreateCourse">Create
-                        Your Course</button>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="container d-flex align-items-center justify-content-center item ">
-            <p style="padding-top: 20px">Based on your experience, we think these resources will be helpful </p>
-        </div>
-
-        <!-- 2 -->
-        <div class="container d-flex  flex-column align-items-start">
-            <div class="d-flex  box_create_engaging vh-100">
-
-                <div class="container d-flex align-items-center justify-content-center item">
-                    <img src="/teacher/Create_Engaging_Course.png" alt="" style="width: 50%;">
-                </div>
-
-                <div class="d-flex align-items-center ">
-                    <div class="container d-block">
-                        <h3 style="padding-bottom: 15px">Create an Engaging Course</h3>
-                        <blockquote>
-                            <p>Whether you've been teaching for years or are teaching for the first time, you can make
-                                an
-                                engaging course. We've compiled resources and best practices to help you get to the next
-                                level, no matter where you're starting.</p>
-                        </blockquote>
+    <div class="col">
+            <!-- Begin: Home Course Body -->
+            <div class="body">
+                <h1 class="font-text">HOME {{user.account.username}}</h1>
+            
+                <!-- 1 -->
+                <div class="container d-flex  flex-column align-items-start">
+                    <div class="d-flex  colorCreateCourse vh-100">
+            
+                        <div class="container d-flex align-items-center justify-content-center item">
+                            <p>Jump Into Course Creation</p>
+                        </div>
+                        <div class="container d-flex align-items-center justify-content-center item">
+                            <a href="/api/teachers/postCourse" type="button"
+                                class="btn btn-lg text-light  buttonCreateCourse">Create
+                                Your Course</a>
+                        </div>
+            
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="container mt-4 d-flex">
-            <div class="d-flex box_small vh-100 ">
-                <div class="container d-flex align-items-center justify-content-center item">
-                    <img src="/teacher/started_video.png" alt="" style="width: 70%">
+            
+            
+                <div class="container d-flex align-items-center justify-content-center item ">
+                    <p style="padding-top: 20px">Based on your experience, we think these resources will be helpful </p>
                 </div>
-
-                <div class="d-flex align-items-center ">
-                    <div class="container d-block ">
-                        <h3 style="padding-bottom: 15px; font-size: 23px">Get Started with Video</h3>
-                        <blockquote>
-                            <p class=" d-flex flex-wrap">Quality video lectures can set your course apart. Use our
-                                resources to learn the basics.</p>
-                        </blockquote>
+            
+                <!-- 2 -->
+                <div class="container d-flex  flex-column align-items-start">
+                    <div class="d-flex  box_create_engaging vh-100">
+            
+                        <div class="container d-flex align-items-center justify-content-center item">
+                            <img src="/teacher/Create_Engaging_Course.png" alt="" style="width: 50%;">
+                        </div>
+            
+                        <div class="d-flex align-items-center ">
+                            <div class="container d-block">
+                                <h3 style="padding-bottom: 15px">Create an Engaging Course</h3>
+                                <blockquote>
+                                    <p>Whether you've been teaching for years or are teaching for the first time, you can make an
+                                        engaging course. We've compiled resources and best practices to help you get to the next
+                                        level, no matter where you're starting.</p>
+                                </blockquote>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="d-flex box_small vh-100 ">
-                <div class="container d-flex align-items-center justify-content-center item">
-                    <img src="/teacher/build_audience.png" alt="" style="width: 70%">
-                </div>
-
-                <div class="d-flex align-items-center">
-                    <div class="container d-block">
-                        <h3 style="padding-bottom: 15px; font-size: 23px">Build Your Audience</h3>
-                        <blockquote>
-                            <p class=" d-flex flex-wrap">Set your course up for success by building your audience.</p>
-                        </blockquote>
+            
+                <!-- 3 -->
+                <div class="container mt-4 d-flex">
+                    <div class="d-flex box_small vh-100 ">
+                        <div class="container d-flex align-items-center justify-content-center item">
+                            <img src="/teacher/started_video.png" alt="" style="width: 70%">
+                        </div>
+            
+                        <div class="d-flex align-items-center ">
+                            <div class="container d-block ">
+                                <h3 style="padding-bottom: 15px; font-size: 23px">Get Started with Video</h3>
+                                <blockquote>
+                                    <p class=" d-flex flex-wrap">Quality video lectures can set your course apart. Use our resources
+                                        to learn the basics.</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="d-flex box_small vh-100 ">
+                        <div class="container d-flex align-items-center justify-content-center item">
+                            <img src="/teacher/build_audience.png" alt="" style="width: 70%">
+                        </div>
+            
+                        <div class="d-flex align-items-center">
+                            <div class="container d-block">
+                                <h3 style="padding-bottom: 15px; font-size: 23px">Build Your Audience</h3>
+                                <blockquote>
+                                    <p class=" d-flex flex-wrap">Set your course up for success by building your audience.</p>
+                                </blockquote>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            
+                <div class="container d-flex align-items-center justify-content-center item ">
+                    <p style="padding-top: 40px; padding-bottom: 20px">Have questions? Here are our most popular instructor
+                        resources.</p>
+                </div>
+            
+            
+                <!-- 4 -->
+                <div class="container mt4 d-flex flex-direction-column">
+                    <script>
+                        const arr_icon = ['bi bi-camera-reels-fill', 'bi bi-chat-left-fill', 'bi bi-person-video3', 'bi bi-stars', 'bi bi-question-square-fill']
+                        const arr_title = ["Test Video", "Instructor Community", "Teaching Center", "Marketplace Insights", "Help and Support"]
+                        const arr_script = ["Send us sample video and get expert feedback.", "Connect with experienced instructors. Ask questions, browse discussions, and more.", "Learn about best practices for teaching on Yolo.", "Validate your course topic by exploring our marketplace supply and demand.", "Browse our Help Center or contact our support team"]
+
+                        for (let i = 0; i < 5; i++) {
+                            document.write(` <div class="container box_small_small ">
+                                <i class="${arr_icon[i]} fa-2x d-flex justify-content-center item" style="padding-top: 10px"></i>
+                                <p class="d-flex justify-content-center item" style="padding-top: 15px; color: #EEB00D; font-weight: 700;">${arr_title[i]}</p>
+                                <blockquote >
+                                    <p style="text-align:center">${arr_script[i]}</p>
+                                </blockquote>
+                            </div>`);
+                        }
+                    </script>
+                </div>
+                <!-- End: Home Course Body -->
+            
             </div>
         </div>
 
@@ -134,4 +163,10 @@
         <!-- End: Home Course Body -->
 
     </div>
+
+  
+    
+    
+    
+    
 </div>

@@ -6,6 +6,9 @@ const Course = new mongoose.Schema({
         type: String,
         required: true,
     },
+    slug_category: {
+        type: String,
+    },
     sub_category: {
         type: Schema.Types.ObjectId,
         ref: "SubCategory",

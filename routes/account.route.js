@@ -15,7 +15,7 @@ router.post('/signup', (req, res)=>{
     
     Account.CreateAccount(req)
     res.render("vwAccount/signup");
-});
+});''
 
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login');
@@ -32,7 +32,10 @@ router.post('/login', async (req, res)=>{
         console.log(dataRes)
         req.session.auth = true
         req.session.authAccount = dataRes
-        res.redirect('/');
+        req.session.save(function (err) {
+            // session saved
+            res.redirect('/')
+        })
     }
 
     res.render("vwAccount/login");  

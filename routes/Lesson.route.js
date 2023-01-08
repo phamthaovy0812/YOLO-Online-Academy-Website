@@ -14,7 +14,7 @@ const upload = multer({ storage: storage })
 const LessonRoute = express.Router();
 LessonRoute.post('/create', upload.single('video'),Lesson.create); // render view here
 LessonRoute.post('/update/:id', upload.single('video'),Lesson.update);
-LessonRoute.delete('/delete/:id', Lesson.delete); //);
+LessonRoute.post('/delete/:id', Lesson.delete); //);x
 LessonRoute.get('/getAllLesson', Lesson.getAllLesson); //);
 LessonRoute.get('/getLesson/:id', Lesson.getLesson);  
 

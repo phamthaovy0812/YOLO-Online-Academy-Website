@@ -1,3 +1,4 @@
+import { ExpressHandlebars } from "express-handlebars";
 import ChapterModel from "../models/Chapter.model.js";
 export default {
     test(req, res) {
@@ -5,10 +6,26 @@ export default {
     },
     async create(req, res) {
         try {
-            const chapter = req.body;
+            const user = req.session.authAccount;
+            const chapterValue = req.body;
+            const chapter = {
+                name: chapterValue.name || "",
+                lessons: chapterValue.lessons || [],
+                timeCreate: chapterValue.timeCreate || "",
+                author: user.account._id ,
+            }
             const chapterModel = new ChapterModel(chapter);
-            await chapterModel.save();
-            res.status(200).json(chapter);
+            const chaptermain = await chapterModel.save();
+            console.log(chapterValue);
+            if (chapterValue.type=="postCourse"){
+                return res.redirect("../teachers/postCourse");
+            }
+            else{
+                return res.redirect("../teachers/edit");
+            }
+
+           
+
         } catch (error) {
             res.status(500).json(error);
         }
@@ -39,9 +56,10 @@ export default {
     async deleteChapter(req, res) {
         try {
             await ChapterModel.findByIdAndDelete(req.params.id);
-            res.status(200).json({ message: "Success" });
+            // res.status(200).json({ message: "Success" });
+            res.redirect("../../teachers/postCourse");
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json(error);    
         }
     },
     async getChapter(req,res){
