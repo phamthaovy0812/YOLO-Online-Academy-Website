@@ -6,48 +6,38 @@
         <div class="father">
             <div class="son">
                 <div style="padding: 20px;display: flex; ">
-                    <img src="{{account.avatar}}" name="avatar" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
+                    <img src="/avata.png" name="avatar" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
                     <div style="text-align: left; margin: 40px; ">
-                        <div style="margin-bottom:10px ;">User name:{{account.username}}</div>
-                        <div style="margin-bottom:10px ;">Email: {{account.email}}</div>
+                        <div style="margin-bottom:10px ;">Full name:{{authaccount.detail.fullname}}</div>
+                        <div style="margin-bottom:10px ;">Email: {{authaccount.account.email}}</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div>
-        <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
-        <div class="father">
-            <div class="son">
-                <div style="display: flex; margin-top: 20px;">
-                    
-                    <!-- Sửa chỗ này nè-->
-                    <div class="itemcard">
-                    <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-                    <div>Courses Name</div>
-                    <div class="itemprice">$19.99</div>
-                    <div style="height: 80px;">Description about courses...</div>
-                    <div style="display: flex;">
-                        <p><button>Add to Wishlist</button></p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    </div>
-
-                    <div class="itemcard">
-                    <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-                    <div>Courses Name</div>
-                    <div class="itemprice">$19.99</div>
-                    <div style="height: 80px;">Description about courses...</div>
-                    <div style="display: flex;">
-                        <p><button>Add to Wishlist</button></p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    </div>
-
-
-
+     <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
+    <div style="display: flex; justify-content: space-around;">
+        {{#each wish}}
+            <div class="itemcard" style="display: inline-block; ">
+                <img src="{{image}}" alt="" style="width:223px; height: 150px;">
+                <div class="itemtitle">{{title}}</div>
+                <div class="itemcate"> {{sub_category}}</div>
+                <div class="itemauthor">Teacher: {{author_id.fullname}}</div>
+                <div style="display: flex;">
+                    <div class="itemrate">Rate: {{scores_review}}</div>
+                    <div class="itemnum">({{number_review}})</div>
+                </div>
+                <div class="itemdes">{{subtitle}}</div>
+                <div class="itemprice">{{price}}</div>
+                <div style="display: flex; align-items: flex-end;">
+                    <button><div class="itembtn">Add to Wishlist</div></button>
+                    <button><div class="itembtn">Add to card</div></button>
                 </div>
             </div>
-        </div>
+        {{/each}}
+
     </div>
+
+
+
 </div>

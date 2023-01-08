@@ -9,6 +9,7 @@ router.get('/signup',(req,res)=>{
     res.render("vwAccount/signup");
   })
 
+
 router.post('/signup', (req, res)=>{
     req.body.role=0;
     req.body.avatar="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png";
@@ -26,20 +27,31 @@ router.post('/login', async (req, res)=>{
    
     var dataRes = await  Login(req);
     
-  
+    console.log(dataRes)
     if(dataRes && dataRes.status == 200)
     {
-        console.log(dataRes)
+        
         req.session.auth = true
         req.session.authAccount = dataRes
+        const url='/api/students/home';
+       
         req.session.save(function (err) {
             // session saved
-            res.redirect('/')
+            res.redirect(url); // sua thi sua o day nha Vy, sua dieu huong home a'
         })
     }
 
     res.render("vwAccount/login");  
 });
+
+router.post('/logout',async function (req,res){
+    req.session.auth=false;
+    req.session.authAccount=null;
+    const url='/api/students/home';
+    res.redirect(url);
+})
+
+
 
 router.get('/changeInfo',(req,res)=>{
     res.render("vwStudent/editprofile")
@@ -74,7 +86,9 @@ router
         .get( Account.GetOneAccount)
         .patch(jsonParser,Account.UpdatePasswordAccount);
 
+// router.get('/home',(req,res)=>{
+//     res.render("vwAccount/home");
+// })
 
-
- 
+// router.get("/home",Account.TopCourse);
 export default router ;  

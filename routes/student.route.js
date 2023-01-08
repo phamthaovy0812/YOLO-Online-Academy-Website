@@ -65,7 +65,9 @@ router.get("/courseDetailBought",(req,res)=>{
 router.get("/category",(req,res)=>{
     res.render('Student/Category');
 })
+router.get("/home",Student.topCourse);
+router.get("/profile",Student.WishList);
+router.get("/shopping",Student.payCourse);
 
 
-router.get("/home", Student.topCourse);
 export default router;  
