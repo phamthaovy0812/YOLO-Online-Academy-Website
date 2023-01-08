@@ -1,0 +1,83 @@
+<div class="teacherCensor d-flex" style="height:1200px;">
+
+    <!-- BeginSIDEBAR -->
+    <div class="col-md-1 position-relative p-0 m-0">
+        <div id="side">
+            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px; position:absolute!important;">
+                <a href="/api/admins/categoryCensor" class="mySide" class="side w3-bar-item"><i
+                        class="bi bi-house-door fa-xm"></i></a>
+                <a href="/api/admins/teacherCensor" class="mySide" class="side w3-bar-item "><i
+                        class="bi bi-person-workspace"></i></i></a>
+                <a href="/api/admins/studentCensor" class="mySide active" class="side w3-bar-item "><i
+                        class="bi bi-person"></i></a>
+            </div>
+        </div>
+
+        <script>
+            // Add active class to the current button (highlight it)
+            var header = document.getElementById("side");
+            var btns = header.getElementsByClassName("mySide");
+
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function () {
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                });
+            }               
+        </script>
+    </div>
+    <!-- End: SIDEBAR -->
+
+
+    <!-- Begin: My List Body -->
+    <div class="col m-5">
+        <h6 class="font-text container">STUDENT LIST</h6>
+
+        {{!-- 2: List of Course --}}
+        <div class="listOfUsers">
+
+            {{#each student}}
+            <div class="container user border border-dark rounded">
+                <div class=" d-flex userImgAndInfo">
+                    <div class="imgUserBox">
+                        <img src="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png"
+                            alt="This is image of student">
+                    </div>
+                    <div class="ud-unstyled-list ">
+                        <div class="listItem">
+                            <p style="font-weight: 600">{{fullname}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between flex-wrap">
+                    {{!-- <div class="ud-unstyled-list rating" style="margin-right:5rem;">
+                        <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
+                            <div>5.0</div>
+                            <div class="starColor">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="listItem">
+                            <p>Course rating</p>
+                        </div>
+                    </div> --}}
+                    <div class="box_btn_block">
+                        <a href="#"><button type="button"
+                                class="btn btn-danger btn_edit border border-dark">Block</button></a>
+                    </div>
+                </div>
+
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+
+
+</div>

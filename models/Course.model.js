@@ -5,7 +5,6 @@ const Course = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        
     },
     slug_category: {
         type: String,

@@ -68,7 +68,7 @@
 }
 .heart-icon:hover{
     background-color: black;
-    color: red;
+    color: red; 
 }
 
 .btn-buy {
@@ -76,19 +76,22 @@
     margin-top: 10px;
 }
 
-hr {
+/* hr {
     width: 100%;
     margin-top: 40px;
     margin-bottom: 40px;
     border-bottom: 1px solid red;
-}
+} */
 
-ul {
+
+
+
+.course__item__pic > ul,.course__details__text>ul,.course-detail-tab>ul {
     line-height: 200%;
     padding-left: 0;
 }
 
-li {
+.course__details__text>ul > li,  .course-detail-tab>ul>li, .course__item__pic__hover > li {
     list-style-type: none;
 }
 
@@ -102,10 +105,10 @@ b {
 
 
 
-.changeColor .active a,
+/* .changeColor .active a,
 .changeColor .active a:hover {
     background-color: red;
-}
+} */
 
 .separator{
     display: flex;
@@ -227,7 +230,7 @@ b {
 }
 .reviewsAndRating{
     margin-bottom: 3.2rem;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     flex-wrap: wrap;
 }

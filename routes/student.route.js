@@ -11,6 +11,21 @@ router
 router    
     .route('/:id')
       .patch(jsonParser, Student.UpdateStudent);
+router    
+    .route('/wishlist/delete')
+        .post(jsonParser, Student.DeleteWishList);
+router    
+    .route('/wishlist/update')
+        .post(jsonParser, Student.UpdateWishList);
+
+router    
+    .route('/rating')
+        .post(jsonParser, Student.UpdateRating);
+router    
+.route('/enroll')
+    .post(jsonParser, Student.UpdateEnrollCourse);
+            
+            
 
   
 router.get("/courseDetail/:id",  async (req,res)=>{
@@ -23,13 +38,21 @@ router.get("/courseDetail/:id",  async (req,res)=>{
         if (err) return (err);
         res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });});
 
+    })
 
+    
+router.get("/courseDetail",(req,res)=>{
+    res.render('Student/courseDetail');
 })
+
+
+router.get("/Category", Student.categoryUI);
+
 router.get("/courseDetailBought",(req,res)=>{
     res.render('Student/courseDetailBought');
 })
-router.get("/DevelopmentCategory",(req,res)=>{
-    res.render('Student/DevelopmentCategory');
+router.get("/category",(req,res)=>{
+    res.render('Student/Category');
 })
 
 

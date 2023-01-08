@@ -20,6 +20,7 @@ router.post('/signup', (req, res)=>{
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login');
 })
+router.get("/courseDetail",Account.detailCourseUI);
 
 router.post('/login', async (req, res)=>{
    
@@ -74,6 +75,6 @@ router
         .patch(jsonParser,Account.UpdatePasswordAccount);
 
 
-    
+
  
 export default router ;  

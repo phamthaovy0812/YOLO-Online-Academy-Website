@@ -89,7 +89,8 @@ const DeleteStudent = async (req, res, id_account) => {
   }
 
   const UpdateWishList = async (req) =>{
-    const id = req.session.authAccount?.account?._id ;
+   // const id = req.session.authAccount?.account?._id ;
+   const id = "63aa8e69e21b9e47d25fce49"
     const data = await Student.findOne({ "id_account" : id})
 
     const course = {
@@ -103,7 +104,32 @@ const DeleteStudent = async (req, res, id_account) => {
     const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { wishlist :wishlist }, {
       returnOriginal: false
     })
- 
+    console.log(wishlist)
+    return dataUpdate
+  }
+
+  const DeleteWishList = async (req) =>{
+    const id = req.session.authAccount?.account?._id ;
+    const data = await Student.findOne({ "id_account" : id})
+
+    const course = {
+      id_course : req.body.idCourse,
+      name_course : req.body.name_course,
+      avatar_course : req.body.avatar_course
+    }
+    const wishlist = data.wishlist;
+    
+    for(var i=0;i<wishlist.length ; i++)
+    {
+      if(wishlist[i].id_course == course.id_course)
+      {
+        wishlist.splice(i,1);
+      }
+    }
+
+    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { wishlist :wishlist }, {
+      returnOriginal: false
+    })
     return dataUpdate
   }
 
@@ -119,6 +145,12 @@ const DeleteStudent = async (req, res, id_account) => {
   };
 
 
+  const categoryUI = async (req,res)=>{
+    const categoryView = {"name":"DEVELOPMENT test"}
+    res.render('Student/category',{category:categoryView})
+  };
+  
+
 const topCourse= async (req,res)=>{
   const coursetop = await CourseModel.find().lean();
   const toppopularcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
@@ -128,5 +160,11 @@ const topCourse= async (req,res)=>{
   res.render('vwAccount/home', { viewcourse: coursetop,newcourse: Newcourse, popularcourse:toppopularcourse,mostcategory:mostCategory});
 };
 
+const AccountData= async(req,res)=>{
+  const profile={"avatar":"/avata.png","email":"ptvy@gmail.com","username":"vyvy","password":"1","role":"3"};
+  const myList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
+  const wishList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
+  res.render('vwStudent/profile',  {account:profile,mylist:myList,wishlist:wishList});
+}
 
-export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse };
+export default {categoryUI, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList, topCourse, DeleteWishList };

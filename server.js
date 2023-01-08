@@ -34,7 +34,7 @@ mongoose
     console.log('DB connection successful');
   });
 
-app.use(express.urlencoded({
+app.use(express.urlencoded({  
     extended: true
 }))
 
@@ -42,7 +42,7 @@ app.use(cookieParser())
 app.use(cors());
 
 
-sendEmail();
+// sendEmail();
 
 activate_session(app);
 //

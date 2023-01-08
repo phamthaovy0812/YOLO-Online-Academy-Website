@@ -63,6 +63,8 @@ const UpdateTeacher = async (req) => {
 const viewCreateCourse = async (req, res) => {
   const user = req.session.authAccount;
   const subCategorys = await TeacherSevice.getSubCategory();
+  let chapters = await ChapterModel.find().lean();
+  
   ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
     if (err) return (err);
     console.log(subCategorys);

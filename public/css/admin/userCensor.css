@@ -1,0 +1,33 @@
+.listOfUsers{
+    box-sizing: border-box;
+    display: block;
+}
+.user{
+    margin-bottom: 1rem;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.userImgAndInfo{
+    justify-content: flex-start;
+}
+.imgUserBox{
+    flex: 0 0 auto;
+    min-width: 0.1rem;
+    margin: 0 0.1rem 0 0;
+    margin-left: 0.5rem;
+    /* margin-right: 1rem; */
+}
+.user img {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 130px;
+}
+.box_btn_block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
