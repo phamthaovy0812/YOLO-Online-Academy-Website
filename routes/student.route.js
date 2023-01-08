@@ -26,7 +26,17 @@ router
     .post(jsonParser, Student.UpdateEnrollCourse);
             
             
-
+router.post("/addWishList", async (req, res) => {
+    try {
+        const infor = req.body;
+        console.log(infor);
+        
+        res.redirect("/")
+    } catch (error) {
+        
+    }
+    
+})
   
 router.get("/courseDetail/:id",  async (req,res)=>{
  
@@ -36,14 +46,15 @@ router.get("/courseDetail/:id",  async (req,res)=>{
 
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
         if (err) return (err);
-        res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });});
+        res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account });});
 
     })
 
-    
+
 router.get("/courseDetail",(req,res)=>{
     res.render('Student/courseDetail');
 })
+
 
 
 router.get("/Category", Student.categoryUI);

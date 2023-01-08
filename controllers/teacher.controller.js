@@ -136,9 +136,10 @@ const editCourseDetail = async (req, res) => {
   try {
     const user = req.session.authAccount;
     const subCategorys = await TeacherSevice.getSubCategory();
+    const allchap = await ChapterModel.find({ author: user.account._id }).lean();
     CourseModel.findOne({ _id: req.params.id, }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
       if (err) return (err);
-      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: story.chapter, user: user });
+      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: story.chapter, user: user, allChapter: allchap });
 
 
     });// Ch
@@ -175,7 +176,7 @@ const handleUpdateCourse = async (req, res) => {
       promotion: courseUpdatePagram.promotion||"No",
       syllabus: courseUpdatePagram.syllabus,
       videoDemo: file.videoDemo[0].path,
-
+      
     }, { new: true });
 
 
