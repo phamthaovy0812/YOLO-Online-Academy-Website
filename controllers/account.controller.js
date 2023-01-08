@@ -92,24 +92,22 @@ const UpdateInfoAccount = async (req) => {
   if (existEmail) {
     dataRes = { status: 300, message: "exist email" };
   } else {
-    
+
     const response = await Account.findByIdAndUpdate(data.id, { email: data.email },
-      { returnOriginal: false  });
-    
-    var responseRole ;
-    if(req.session.authAccount?.account?.role ==0 )
-    {
+      { returnOriginal: false });
+
+    var responseRole;
+    if (req.session.authAccount?.account?.role == 0) {
       responseRole = await Student.UpdateStudent(req);
     }
-    else if(req.session.authAccount?.account?.role ==1 )
-    {
+    else if (req.session.authAccount?.account?.role == 1) {
       responseRole = await Teacher.UpdateTeacher(req);
     }
     else {
-      responseRole =await Admin.UpdateAdmin(req);
+      responseRole = await Admin.UpdateAdmin(req);
     }
-   
-    dataRes = {...response._doc, detail : responseRole ,status:200, message: "update success" }
+
+    dataRes = { ...response._doc, detail: responseRole, status: 200, message: "update success" }
   }
   return dataRes;
 
@@ -150,18 +148,17 @@ const CreateAccount = async (req) => {
         Student.CreateStudent(req, dataToSave._id);
       }
 
-    Account.findOne({ $or:[{username},{email}]})
-    .then(function(doc) {
-      
-          if(doc)
-          {
+      Account.findOne({ $or: [{ username }, { email }] })
+        .then(function (doc) {
+
+          if (doc) {
             return json("account or Email exist");
           }
           else {
-           
+
             handleCreateAccount();
           }
-     });
+        });
 
       const mergedObject = Object.assign({}, req.body, dataToSave._doc);
       console.log(mergedObject);
@@ -183,40 +180,51 @@ const CreateAccount = async (req) => {
   }
 };
 
-const AccountDataCourse= async(req,res)=>{
-  
-  const teacherList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"}]
-  const studentList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
-  const wishList=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
-  res.render('vwStudent/profile',  {studentlist:studentList,teacherlist:teacherList ,wishlist:wishList});
+const AccountDataCourse = async (req, res) => {
+
+  const teacherList = [{ "title": "Mobile for beginer", "description": "day la mot khoa hoc mobile danh cho nguoi moi bat dau.", "price": "$113", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$1133", "image": "/student/js.png" }]
+  const studentList = [{ "title": "Mobile for beginer", "description": "day la mot khoa hoc mobile danh cho nguoi moi bat dau.", "price": "$113", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$1133", "image": "/student/js.png" }, { "title": "nau an for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$123", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$13", "image": "/student/js.png" }]
+  const wishList = [{ "title": "Mobile for beginer", "description": "day la mot khoa hoc mobile danh cho nguoi moi bat dau.", "price": "$113", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$1133", "image": "/student/js.png" }, { "title": "nau an for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$123", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$13", "image": "/student/js.png" }]
+  res.render('vwStudent/profile', { studentlist: studentList, teacherlist: teacherList, wishlist: wishList });
 }
 
 
-const AccountData= async (req,res)=>{
+const AccountData = async (req, res) => {
   // const toppopularcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
   // const topviewcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
   // const Newcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
   // const mostCategory=[{"name":"Mobile Development"}]
-//   res.render('vwAccount/home',{viewcourse: topviewcourse,newcourse: Newcourse, popularcourse:toppopularcourse,mostcategory:mostCategory,isLogin:req.session.auth,acc: req.session.authAccount});
- 
-  res.render("vwStudent/profile",{authaccount: req.session.authAccount});
+  //   res.render('vwAccount/home',{viewcourse: topviewcourse,newcourse: Newcourse, popularcourse:toppopularcourse,mostcategory:mostCategory,isLogin:req.session.auth,acc: req.session.authAccount});
+
+  res.render("vwStudent/profile", { authaccount: req.session.authAccount });
 };
-  const detailCourseUI = async (req,res)=>{
-    const course = await CourseModel.find().lean();
-    const user = req.session.authAccount;
+const detailCourseUI = async (req, res) => {
+  const course = await CourseModel.find().lean();
+  const user = req.session.authAccount;
 
 
-    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
-      if (err) return (err);
-      res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
-    });
-  };
+  CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+    if (err) return (err);
+    res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
+  });
+};
 
 
-const accountUI= async(req,res)=>{
-  const profile={"avatar":"/avata.png","email":"ptvy@gmail.com","username":"vyvy","password":"1","role":"3"};
-  res.render('vwStudent/profile',  {account:profile});
+const accountUI = async (req, res) => {
+  const profile = { "avatar": "/avata.png", "email": "ptvy@gmail.com", "username": "vyvy", "password": "1", "role": "3" };
+  res.render('vwStudent/profile', { account: profile });
 }
+
+const topCourse = async (req, res) => {
+  const coursetop = await CourseModel.find().lean();
+  const toppopularcourse = await CourseModel.find().lean();
+  const topviewcourse = await CourseModel.find().lean();
+
+  const Newcourse = await CourseModel.find().lean();
+
+  const mostCategory = [{ "name": "Mobile Development" }]
+  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: mostCategory, isLogin: req.session.auth, acc: req.session.authAccount });
+};
 
 export default {
   GetAllAccount,
@@ -228,5 +236,6 @@ export default {
   AccountData,
   AccountDataCourse,
   accountUI,
-  detailCourseUI
+  detailCourseUI,
+  topCourse
 };

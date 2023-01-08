@@ -1,54 +1,77 @@
-<form class="father" method="post">
-    <div class="son">
-        <div class="d-flex align-items-start edit border ">
-            <div class="nav flex-column nav-pills mr-5" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="width: 200px; height: 400px;">
-                <img src="/img/avata.png" alt="..." class="rounded-circle " style="width: 50%; margin-left: 40px; margin-bottom: 20px;">
-                <button class="nav-link active " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-edit" type="button" role="tab" aria-controls="v-pills-edit" aria-selected="true">Edit Public Profile</button>
-                <button class="nav-link " id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab" aria-controls="v-pills-security" aria-selected="true">Account Security</button>
-                <button class="nav-link " id="v-pills-closeacc-tab" data-bs-toggle="pill" data-bs-target="#v-pills-closeacc" type="button" role="tab" aria-controls="v-pills-closeacc" aria-selected="true">Close account</button>
-                <button class="nav-link " id="v-pills-logout-tab" data-bs-toggle="pill" data-bs-target="#v-pills-logout" type="button" role="tab" aria-controls="v-pills-logout" aria-selected="true">Log out</button>
-            </div>
-            <div class="tab-content border-start" id="v-pills-tabContent" style="width: 400px;">
-                <div class="tab-pane fade show active" id="v-pills-edit" role="tabpanel" aria-labelledby="v-pills-edit-tab" tabindex="0">
-                    <div class="text-center font-weight-bold my-4">Edit your public profile</div>
-                    <div>
-                        <form >
-                            <input type="text" class="logininput"  placeholder="Fullname..">
-                            <input type="text" class="logininput"  placeholder="Username..">
-                            <input type="text"class="logininput" placeholder="Email..">                     
-                            <button class="btnsignup" style=" margin:20px" >Save</button>
-
-                        </form>
+<div>
+    <div style="height: 10px;">
+        <div class="mltitle">Edit Profile</div>
+    </div>
+    <div class="col-lg-12 course-detail-tab">
+        <ul class="nav nav-pills changeColor separator" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                    aria-selected="true">Edit Public Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">Account Security</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="false">Close account</a>
+            </li>
+        </ul>
+        {{!-- NAV --}}
+        <div class="tab-content">
+            {{!-- Edit public profile Tab --}}
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                <div class="father">
+                    <div class="son">
+                         <div style="width: 400px;height: 300px; border-radius: 5px; border: 2px; background-color:rgb(117, 117, 124);padding: 10px; margin: 20px;">
+                            <div class="text-center font-weight-bold my-4">Edit your public profile</div>
+                            <div>
+                                <form method="post" >
+                                    <input type="text" class="logininput"  placeholder="Fullname..">
+                                    <input type="text" class="logininput"  placeholder="Username..">
+                                    <input type="text"class="logininput" placeholder="Email..">                     
+                                    <button class="btnsignup" style=" margin:20px" >Save</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-security" role="tabpanel" aria-labelledby="v-pills-security-tab" tabindex="0">
-                    <div class="text-center font-weight-bold my-4">Account Security</div>
-                    
-                    <div>
-                        <form >
-                            <div class="text-left font-weight-bold my-4 ms-2">Password:</div>
-                            <input type="password" class="logininput" placeholder="Current Password..">
-                            <input type="password" class="logininput" placeholder="New Password..">
-                            <input type="password" class="logininput" placeholder="Re-type New Password..">
-                            <button class="btnsignup" style=" margin:20px" >Change</button>
+               
+            </div>
+            {{!-- End: Edit public profile Tab --}}
 
-                        </form>
+            {{!-- Account Security tab --}}
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                <div class="father">
+                    <div class="son">
+                         <div style="width: 400px;height: 300px; border-radius: 5px; border: 2px; background-color:rgb(117, 117, 124);padding: 10px; margin: 20px;">
+                            <div class="text-center font-weight-bold my-4">Account Security</div>
+                            <div>
+                                <form method="post" >
+                                    <input type="text" class="logininput"  placeholder="Current Password..">
+                                    <input type="text" class="logininput"  placeholder="New Password..">
+                                    <input type="text"class="logininput" placeholder="Re-type New Password..">                     
+                                    <button class="btnsignup" style=" margin:20px" >Save</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-closeacc" role="tabpanel" aria-labelledby="v-pills-closeacc-tab" tabindex="0">
-                    <div style=" font-size: larger; font-weight: bolder; text-align: center; margin:20px;">WARNING</div>
-                    <div class="ms-2">If you close your account, you will be unsubscribed from all your 0 courses, and will lose access forever.</div>
-                    <button class="btnsignup" style="margin-top: 20px; margin-left: 65px; ">Close</button>
-                </div>
-                <div class="tab-pane fade" id="v-pills-logout" role="tabpanel" aria-labelledby="v-pills-logout-tab" tabindex="0" style="margin-top: 100px;">
-                    <div  style=" font-size: larger; font-weight: bolder; text-align: center; ">Are you sure you want to log out?</div>
-                    <form id="frmLogout" action="/accounts/logout" method="post">
-                    <a href="javascript: $('frmLogout').submit()"> Logout</a>      
-                    </form>
-                   
+            </div>
+            {{!-- End: Account Security tab --}}
+
+             {{!-- Close account tab --}}
+            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                <div class="father">
+                    <div class="son" style="margin-bottom: 20px;">
+                        <div style=" font-size: larger; font-weight: bolder; text-align: center; margin:20px; color: red;">WARNING</div>
+                        <div class="ms-2" style="color: red;">If you close your account, you will be unsubscribed from all your 0 courses, and will lose access forever.</div>
+                        <button class="btnsignup" style="margin-top: 20px; margin-left: 65px; ">Close</button>
+                    </div>
                 </div>
             </div>
+            {{!-- End: Close account tab --}}
+            
         </div>
+    </div>
+
 </div>
-</form>
 
