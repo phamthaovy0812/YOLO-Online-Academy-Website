@@ -165,4 +165,4 @@ const AccountData= async(req,res)=>{
   res.render('vwStudent/profile',  {account:profile,mylist:myList,wishlist:wishList});
 }
 
-export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse };
+export default { GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse, DeleteWishList, categoryUI };
