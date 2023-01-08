@@ -22,5 +22,6 @@ router.get("/DevelopmentCategory",(req,res)=>{
     res.render('Student/DevelopmentCategory');
 })
 router.get("/home",Student.topCourse);
+router.get("/shopping",Student.payCourse);
 
 export default router;  

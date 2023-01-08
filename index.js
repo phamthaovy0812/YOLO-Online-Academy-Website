@@ -105,18 +105,18 @@ app.get("/edit",(req,res)=>{
   res.render("vwStudent/editprofile");
 })
 //profile page
-app.get("/profile",(req,res)=>{
-  res.render("vwStudent/profile");
-})
+// app.get("/profile",(req,res)=>{
+//   res.render("vwStudent/profile");
+// })
 //my learning page
 app.get("/mylearning",(req,res)=>{
   res.render("vwStudent/mylearning");
 })
 
 // shopping cart 
-app.get("/shopping",(req,res)=>{
-  res.render("vwStudent/shopping");
-})
+// app.get("/shopping",(req,res)=>{
+//   res.render("vwStudent/shopping");
+// })
 
 //view lesson
 app.get("/viewlesson",(req,res)=>{
@@ -128,10 +128,6 @@ app.get("/viewlesson",(req,res)=>{
 // app.get("/checkout",(req,res)=>{
 //   res.render("vwStudent/checkout")
 // })
-
-
-
-
 
 app.listen(port, () => {
     console.log( `Example app listening at http://localhost:${port}`)

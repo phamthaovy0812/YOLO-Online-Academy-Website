@@ -257,21 +257,50 @@ a :hover {
 
 .itemtitle {
   font-weight: bold;
-  color: #F0AE00; }
+  color: #F0AE00;
+  font-size: 15px;
+  font-weight: bold; }
+
+.itemcate {
+  font-size: 10px;
+  color: #373737;
+  font-weight: bold; }
+
+.itemrate {
+  color: red;
+  font-weight: bolder;
+  font-size: 12px; }
+
+.itemnum {
+  font-weight: bolder;
+  font-size: 12px; }
+
+.itemauthor {
+  font-size: 10px;
+  color: #373737; }
+
+.itembtn {
+  height: 15px;
+  width: 60px;
+  font-size: 8px;
+  text-align: center; }
+
+.itemdes {
+  font-size: 10px; }
 
 .itemcard {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 230px;
-  margin: 20px;
+  max-width: 235px;
+  margin: 10px;
   padding-top: 20px;
-  text-align: center;
   font-family: arial;
-  font-size: medium;
-  height: 350px; }
+  height: 400px;
+  padding: 5px; }
 
 .itemprice {
-  color: grey;
-  font-size: 25px; }
+  color: black;
+  font-size: 17px;
+  font-weight: bold; }
 
 .itemcard button {
   border: none;

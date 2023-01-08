@@ -6,48 +6,37 @@
         <div class="father">
             <div class="son">
                 <div style="padding: 20px;display: flex; ">
-                    <img src="{{account.avatar}}" name="avatar" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
+                    <img src="/avata.png" name="avatar" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
                     <div style="text-align: left; margin: 40px; ">
-                        <div style="margin-bottom:10px ;">User name:{{account.username}}</div>
-                        <div style="margin-bottom:10px ;">Email: {{account.email}}</div>
+                        <div style="margin-bottom:10px ;">Full name:{{authaccount.detail.fullname}}</div>
+                        <div style="margin-bottom:10px ;">Email: {{authaccount.account.email}}</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div>
+     <!--   {{#ifCond authaccount.account.role "0"}}       student-->
         <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
-        <div class="father">
-            <div class="son">
-                <div style="display: flex; margin-top: 20px;">
-                    
-                    <!-- Sửa chỗ này nè-->
-                    <div class="itemcard">
-                    <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-                    <div>Courses Name</div>
-                    <div class="itemprice">$19.99</div>
-                    <div style="height: 80px;">Description about courses...</div>
-                    <div style="display: flex;">
-                        <p><button>Add to Wishlist</button></p>
-                        <p><button>Add to Cart</button></p>
+        {{#each studentlist }}
+            <div class="father">
+                <div class="son">
+                    <div style="display: flex; margin-top: 20px;">
+                        <div class="itemcard">
+                        <img src="/student/js.png" alt="" style="width:100px; height: 80px;">
+                        <div class="itemtitle">{{studentlist.title}}</div>
+                        <div class="itemprice">{{studentlist.price}}</div>
+                        <div style="height: 80px;">{{studentlist.description}}</div>
+                        <div style="display: flex;">
+                            <p><button>Add to Wishlist</button></p>
+                            <p><button>Add to Cart</button></p>
+                        </div>
+                        </div>
                     </div>
-                    </div>
-
-                    <div class="itemcard">
-                    <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-                    <div>Courses Name</div>
-                    <div class="itemprice">$19.99</div>
-                    <div style="height: 80px;">Description about courses...</div>
-                    <div style="display: flex;">
-                        <p><button>Add to Wishlist</button></p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
-                    </div>
-
-
-
                 </div>
             </div>
-        </div>
-    </div>
+        {{/each}}
+
+  
+
 </div>
+
