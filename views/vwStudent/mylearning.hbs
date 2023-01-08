@@ -1,43 +1,41 @@
 <div>
-
-</div>
-<div>
-    <nav class="mlbar">
-        <div style="height: 100px;">
-            <div class="mltitle">My Learning</div>
-        </div>
-        
-        <div class="nav nav-tabs mltab" id="nav-tab" role="tablist">
-            <button class="nav-link active " id="nav-mycourses-tab" data-bs-toggle="tab" data-bs-target="#nav-mycourses" type="button" role="tab" aria-controls="nav-mycourses" aria-selected="true">My Courses</button>
-            <button class="nav-link" id="nav-wishlist-tab" data-bs-toggle="tab" data-bs-target="#nav-wishlist" type="button" role="tab" aria-controls="nav-wishlist" aria-selected="false">My Wishlist</button>
-            <button class="nav-link" id="nav-sthing-tab" data-bs-toggle="tab" data-bs-target="#nav-sthing" type="button" role="tab" aria-controls="nav-sthing" aria-selected="false">Somethings</button>
-        </div>
-         
-    </nav>
-        <div class="tab-content mlshow" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-mycourses" role="tabpanel" aria-labelledby="nav-mycourses-tab" tabindex="0">
-                <div>
-                                        
-                    <div class="itemcard">
-                    <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-                    <div>Courses Name</div>
-                    <div class="itemprice">$19.99</div>
-                    <div style="height: 80px;">Description about courses...</div>
-                    <div style="display: flex;">
-                        <p><button>Add to Wishlist</button></p>
-                        <p><button>Add to Cart</button></p>
+    <div style="height: 10px;">
+        <div class="mltitle">My Learning</div>
+    </div>
+    <div class="col-lg-12 course-detail-tab">
+        <ul class="nav nav-pills changeColor separator" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                    aria-selected="true">My Course</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">My Wishlist</a>
+            </li>
+        </ul>
+        {{!-- NAV --}}
+        <div class="tab-content">
+            {{!-- Mycourse Tab --}}
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                <div style="display: flex; justify-content: center;">
+                    <div style="display: inline-block;">
+                        <h6>My courses</h6>
                     </div>
-                    </div>
-
-
+                    
                 </div>
             </div>
-            <div class="tab-pane fade" id="nav-wishlist" role="tabpanel" aria-labelledby="nav-wishlist-tab" tabindex="0">
-                <div></div>
+            {{!-- End: TAB 1 --}}
+
+            {{!-- My wishlist tab --}}
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                <div style="display: flex; justify-content: center;">
+                    <div style="display: inline-block;">
+                        <h6>My Wishlist</h6>
+                    </div>
+                </div>
             </div>
-            <div class="tab-pane fade" id="nav-sthing" role="tabpanel" aria-labelledby="nav-sthing-tab" tabindex="0">
-                <div></div>
-            </div>
+            
         </div>
-           
+    </div>
+
 </div>
+
