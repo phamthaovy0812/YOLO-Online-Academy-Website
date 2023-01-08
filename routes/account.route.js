@@ -15,7 +15,7 @@ router.post('/signup', (req, res)=>{
     
     Account.CreateAccount(req)
     res.render("vwAccount/signup");
-});
+});''
 
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login');

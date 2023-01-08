@@ -103,7 +103,7 @@
                     <div class="dropdown-menu" style="width: 100% !important;" aria-labelledby="dropdownMenuButton">
 
                         {{#each subCategory}}
-                        <a class="dropdown-item" href="#">{{this.name}}</a>
+                        <a class="dropdown-item" href="#">{{name}}</a>
 
                         {{/each}}
                     </div>
@@ -366,13 +366,13 @@ background: linear-gradient(0deg, rgba(243,244,239,1) 12%, rgba(234,226,200,1) 9
                     window.localStorage.removeItem('isFirstLoad');
                     
                 }
-            </script>
+            </script> 
 
 
 
 
         </form>
-        <h3 class="border border-dark rounded text-center p-1" style=" background-color:rgb( 233 234	236	);">Chapter</h3>
+        <h3 class="border border-dark rounded text-center   " style=" background-color:rgb( 233 234	236	);">Chapter</h3>
         <div class="text-center mt-5">
             <a href="" class="btn btn-default btn-rounded mb-4 border border-dark rounded" data-toggle="modal"
                 data-target="#modalChapter"><strong>Add Chapter</strong>
@@ -440,23 +440,20 @@ background: linear-gradient(0deg, rgba(243,244,239,1) 12%, rgba(234,226,200,1) 9
             <table id="lessonCount">
                 {{#each chapters}}
                 <tr>
-                <div class="flip_chapter_create m-1"><button onclick="handleGroup(this)" class="text-left w-100 mr-1" value="{{_id}}">
-                        {{ name }} </button></div>
-                <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST"
-                        action="/api/lesson/delete/{{_id}}">
-                        <div class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}" class="d-flex"
-                                style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i>
-                                <p>{{name}}</p>
-                            </a>
-                            <div class="d-flex "> </div> <button class="btn btn_del_les" value={{_id}}><i class="fa fa-remove"
-                                    style="color:red;"></i></button>
-                        </div>
-                    </form>{{/each}} <div class="d-flex justify-content-between"><button class="btn " data-toggle="modal"
-                            data-target="#modalLesson">Add lesson</button>
-                        <form method="POST" action="/api/chapter/delete/{{_id}}" id={{ _id }}> <button class="btn btn_del_chapter"
-                                value={{ _id }}> Remove chapter <i class="fa fa-remove" style="color:black;"></i></button></form>
-                    </div>
-                </div>
+                    <script>
+
+                        if (JSON.parse(chapter).includes(parseInt("{{timeCreate}}"))) {
+                            const template = ''
+                            const templateDropDown = '<div class="flip_chapter_create m-1"><button  onclick="handleGroup(this)"  class="text-left w-100 mr-1" value="{{_id}}"> {{ name }} </button></div>  <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST" action="/api/lesson/delete/{{_id}}"> <div  class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}" class="d-flex" style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i> <p>{{name}}</p> </a> <div class="d-flex ">  </div> <button class="btn btn_del_les" value={{_id}}><i class="fa fa-remove" style="color:red;"></i></button> </div></form>{{/each}} <div class="d-flex justify-content-between"><button class="btn "  data-toggle="modal" data-target="#modalLesson">Add lesson</button> <form method="POST" action="/api/chapter/delete/{{_id}}" id={{ _id }}> <button class="btn btn_del_chapter" value = {{ _id }}> Remove chapter <i class="fa fa-remove" style="color:black;"></i></button ></form></div></div>'
+                            document.write(templateDropDown)
+
+
+
+
+
+                        }
+
+                    </script>
 
                 </tr>
 

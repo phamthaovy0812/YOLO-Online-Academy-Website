@@ -74,8 +74,9 @@ const createCourse = async (req, res) => {
   try {
     const course = req.body;
     const user = req.session.authAccount;
-    const chapter = await ChapterModel.find({ author: user.account._id }).lean();
+    const chapter = await TeacherSevice.getChapterByTime((course.chapter));
     const IDSubCategory = await TeacherSevice.getIDCategory(course.sub_category);
+    var datetime = new Date();
     console.log(chapter);
     const file = req.files;
     const courseObject = {
@@ -84,13 +85,13 @@ const createCourse = async (req, res) => {
       sub_category: IDSubCategory,
       subtitle: course.subtitle,
       description: course.description,
-      author_id: course.author_id,
+      author_id: user.account._id,
       number_review: course.number_review || 0,
       scores_review: course.scores_review || 0,
       list_reviews: course.list_reviews || [],
       image: file.image[0].path,
       price: course.price,
-      lastUpdate: course.lastUpdate || 20222,
+      lastUpdate: datetime.toISOString().slice(0, 10) || 2022,
       promotion: course.promotion,
       syllabus: course.syllabus,
       videoDemo: file.videoDemo[0].path,
@@ -113,6 +114,7 @@ const createCourse = async (req, res) => {
     res.status(500).json(error);
   }
 }
+
 const homepage = (req, res) => {
   const user = req.session.authAccount;
   console.log(user);
@@ -132,16 +134,15 @@ const editCourseDetail = async (req, res) => {
   try {
     const user = req.session.authAccount;
     const subCategorys = await TeacherSevice.getSubCategory();
-    const allchapter = await ChapterModel.find({ author: user.account._id }).lean();
-    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+    CourseModel.findOne({ _id: req.params.id, }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
       if (err) return (err);
-      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: allchapter, user: user });
+      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: story.chapter, user: user });
 
 
     });// Ch
   } catch (error) {
     return error
-  }
+  } 
   
 
 
@@ -153,10 +154,10 @@ const handleUpdateCourse = async (req, res) => {
     const courseUpdatePagram = req.body;
     const file = req.files;
     
-    const chapter = await ChapterModel.find({ author: courseUpdatePagram.author_id }).lean();
+    const chapter = await TeacherSevice.getChapterByTime(courseUpdatePagram.chapter);
     console.log(courseUpdatePagram)
     const IDSubCategory = await TeacherSevice.getIDCategory(courseUpdatePagram.sub_category);
-
+    var datetime = new Date();
     const updateCourse = await CourseModel.findByIdAndUpdate(id, {
       title: courseUpdatePagram.title,
       sub_category: IDSubCategory,
@@ -168,13 +169,16 @@ const handleUpdateCourse = async (req, res) => {
       list_reviews: courseUpdatePagram.list_reviews || [],
       image: file.image[0].path,
       price: courseUpdatePagram.price,
-      lastUpdate: courseUpdatePagram.lastUpdate || 2022,
-      promotion: courseUpdatePagram.promotion,
+      lastUpdate: datetime.toISOString().slice(0, 10) || 2022,
+      promotion: courseUpdatePagram.promotion||"No",
       syllabus: courseUpdatePagram.syllabus,
       videoDemo: file.videoDemo[0].path,
-      chapter: chapter || [],
 
     }, { new: true });
+
+
+
+
 
     if (updateCourse)
       res.render("Teacher/editCourseDetail");

@@ -4,6 +4,8 @@ import Student from "./student.controller.js";
 import Teacher from "./teacher.controller.js";
 import Admin from "./admin.controller.js";
 import bcrypt from "bcryptjs";
+
+
 import fs from "fs";
 
 const GetAllAccount = async (req, res) => {
@@ -148,6 +150,19 @@ const CreateAccount = async (req) => {
         Student.CreateStudent(req, dataToSave._id);
       }
 
+    Account.findOne({ $or:[{username},{email}]})
+    .then(function(doc) {
+      
+          if(doc)
+          {
+            return json("account or Email exist");
+          }
+          else {
+           
+            handleCreateAccount();
+          }
+     });
+
       const mergedObject = Object.assign({}, req.body, dataToSave._doc);
       console.log(mergedObject);
       return json(mergedObject);
@@ -167,6 +182,10 @@ const CreateAccount = async (req) => {
     });
   }
 };
+const accountUI= async(req,res)=>{
+  const profile={"avatar":"/avata.png","email":"ptvy@gmail.com","username":"vyvy","password":"1","role":"3"};
+  res.render('vwStudent/profile',  {account:profile});
+}
 
 export default {
   GetAllAccount,
@@ -175,4 +194,5 @@ export default {
   GetOneAccount,
   UpdatePasswordAccount,
   UpdateInfoAccount,
+  accountUI
 };
