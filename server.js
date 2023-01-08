@@ -17,7 +17,7 @@ const app = express();
 
 //const morgan=require("morgan");
 //const handlebars= require("express-handlebars");
-const port = 3000;
+const port =  process.env.PORT || 3000;;
 const __filename=fileURLToPath(import.meta.url);
 const __dirname= path.dirname(__filename);
 
