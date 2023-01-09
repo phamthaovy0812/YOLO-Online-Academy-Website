@@ -125,16 +125,16 @@ const UpdateCart = async (req) => {
 };
 
 const UpdateWishList = async (req) => {
-  // const id = req.session.authAccount?.account?._id ;
-  const id = req.session.authAccount._id;
+  const id = req.session.authAccount?.account?._id ;
+  // const id = req.session.authAccount._id;
   const data = await Student.findOne({ id_account: id });
   // id_course: req.params.id,
   //     name_course: courses.title,
   //     avatar_course: courses.image,
   const course = {
     id_course: req.params.id,
-    name_course:  courses.title,
-    avatar_course:courses.image,
+    name_course:  req.body.title,
+    avatar_course: req.body.image,
   };
   const wishlist = data.wishlist;
   wishlist.push(course);

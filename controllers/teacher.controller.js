@@ -106,7 +106,7 @@ const createCourse = async (req, res) => {
     const value = await course_Data.save();
 
     if (value) {
-      res.redirect("/api/teachers/homepage");
+      res.redirect("/api/teachers/homepage"); 
     }
     else {
       res.status(200).json({ message: "Failed" });
@@ -176,7 +176,7 @@ const handleUpdateCourse = async (req, res) => {
       promotion: courseUpdatePagram.promotion||"No",
       syllabus: courseUpdatePagram.syllabus,
       videoDemo: file.videoDemo[0].path,
-      
+
     }, { new: true });
 
 
