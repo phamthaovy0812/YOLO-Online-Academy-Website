@@ -122,9 +122,9 @@ app.get("/mylearning",(req,res)=>{
 // })
 
 //view lesson
-app.get("/viewlesson",(req,res)=>{
-  res.render("Student/viewlesson");
-})
+// app.get("/viewlesson",(req,res)=>{
+//   res.render("Student/viewlesson");
+// })
 
 
 // app.get("/",Student.topCourse);

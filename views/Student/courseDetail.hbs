@@ -26,9 +26,14 @@
                         <div class="course__details__price">{{course.price}}</div>
                         <p>{{course.subtitle}}</p>
 
-                        <div>
+                        <div class="d-flex">
                             <button href="#" type="button" class="btn btn-warning primary-btn">ADD TO CART</button>
-                            <a href="#" class="heart-icon"><span class="bi bi-heart-fill"></span></a>
+                            <form method="POST" action="/api/students/addWishList">
+                                <input type="hidden" name="idUser" value="{{user._id}}">
+                                <input type="hidden" name="idCourse" value="{{course._id}}">
+                                <button type="submit" class="heart-icon"><span class="bi bi-heart-fill"></span></button>
+                            </form>
+                           
                         </div>
                         <button href="#" type="button" class="btn btn-outline-success btn-buy">Buy now</button>
                         <hr>
@@ -79,42 +84,39 @@
                         {{!-- End: TAB 1 - Description --}}
 
                         {{!-- Begin: TAB 2 - Course Content --}}
-                        {{#each chapter}}
+                      
                         <div class="tab-pane" id="tabs-2" role="tabpanel">
                             <div class="course__details__tab__desc">
                                 <h6>Course Content</h6>
-                                <div class="wrapper_dropdown">
-                                    <div class="flip_chapter">
-                                        <button class="text-left">{{name}}</button>
-                                    </div>
-
-                                    <div class="panel_lessons border border-dark ">
-                                        {{#each lessons}}
-                                        <div href="#" class="link_video_lesson p-2 border border-dark m-1">
-                                            <a href="#" class="d-flex" style="color: #EEB00D">
-                                                <i class="bi bi-play-circle-fill mr-2"></i>
-                                                <p>{{name}}</p>
-                                            </a>
-                                            <div class="d-flex ">
-                                                <a href="#" class="mr-2" style="color: #EEB00D">Preview</a>
-                                                <div>Duration</div>
-                                            </div>
+                                {{#each chapter}}
+                                    <div class="wrapper_dropdown">
+                                        <div class="flip_chapter">
+                                            <button class="text-left">{{name}}</button>
                                         </div>
 
-                                        {{/each}}
+                                        <div class="panel_lessons border border-dark ">
+                                            {{#each lessons}}
+                                            <div href="#" class="link_video_lesson p-2 border border-dark m-1">
+                                                <a href="#" class="d-flex" style="color: #EEB00D">
+                                                    <i class="bi bi-play-circle-fill mr-2"></i>
+                                                    <p>{{name}}</p>
+                                                </a>
+                                                <div class="d-flex ">
+                                                    <a href="#" class="mr-2" style="color: #EEB00D">Preview</a>
+                                                    <div>Duration</div>
+                                                </div>
+                                            </div>
+
+                                            {{/each}}
+                                        </div>
                                     </div>
-
-
-
-
-                                </div>
-
+                                {{/each}}
 
 
 
                             </div>
                         </div>
-                        {{/each}}
+                      
                         <script>
                             $(document).ready(function () {
                                 $(".flip_chapter").click(function () {

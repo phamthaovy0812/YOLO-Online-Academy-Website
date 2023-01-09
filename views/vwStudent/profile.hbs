@@ -8,16 +8,16 @@
                 <div style="padding: 20px;display: flex; ">
                     <img src="/avata.png" name="avatar" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
                     <div style="text-align: left; margin: 40px; ">
-                        <div style="margin-bottom:10px ;">Full name:{{authaccount.detail.fullname}}</div>
-                        <div style="margin-bottom:10px ;">Email: {{authaccount.account.email}}</div>
+                        <div style="margin-bottom:10px ;">Full name:{{infor.username}}</div>
+                        <div style="margin-bottom:10px ;">Email: {{infor.email}}</div>
                     </div>
                 </div>
-            </div>
+        </div>
         </div>
     </div>
      <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
     <div style="display: flex; justify-content: space-around;">
-        {{#each wish}}
+        {{#each infor}}
             <div class="itemcard" style="display: inline-block; ">
                 <img src="{{image}}" alt="" style="width:223px; height: 150px;">
                 <div class="itemtitle">{{title}}</div>

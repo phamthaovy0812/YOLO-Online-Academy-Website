@@ -1,5 +1,9 @@
 <script>
     // Run on page load
+     let lessonArray = new Array();
+
+    const names = "{{course._id}}"
+    console.log(names)
     var isFirstLoad = localStorage.getItem('isFirstLoad');
 
     if (!isFirstLoad) {
@@ -342,14 +346,14 @@
                     const time = Date.now();
                     $("#timeCreate").val(time)
                     let lessonArray = new Array();
-                    if (localStorage.getItem('{{course._id}}')) {
-                        lessonArray = JSON.parse(localStorage.getItem('{{course._id}}'));
+                    if (localStorage.getItem(names)) {
+                        lessonArray = JSON.parse(localStorage.getItem(names));
                     }
                     if(!lessonArray.includes(time))
                     {
                           lessonArray.push(time);
                     const lessonJSON = JSON.stringify(lessonArray);
-                    localStorage.setItem("{{course._id}}", lessonJSON);
+                    localStorage.setItem(names, lessonJSON);
                     }
                   
                 }
@@ -364,9 +368,9 @@
                 }
 
                 function handleSubmit() {
-                    const s = localStorage.getItem('{{course._id}}');
+                    const s = localStorage.getItem(names);
                     $("#fchapter").val(s);
-                    window.localStorage.removeItem('{{course._id}}');
+                    window.localStorage.removeItem(names);
 
                 }
             </script>
@@ -435,13 +439,9 @@
                 </div>
             </div>
         </form>
-            <script>
-                let lessonArray = new Array();
-            </script>
+          
         <div class="displayChapterTemp_edit">
-            <script>
-                const chapters = localStorage.getItem("{{course._id}}");
-            </script>
+           
             <table id="lessonCount_edit">
 
                 {{#each chapters}}
@@ -449,6 +449,7 @@
                         value="{{_id}}">
                         {{ name }} </button></div>
 
+               
                 <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST"
                         action="/api/lesson/delete/{{_id}}">
                         <div class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}"
@@ -468,11 +469,11 @@
                 </div>
                 {{/each}}
            
-                {{#each chapters}}
+                {{!-- {{#each allChapter}}
                 <tr>
                     <script>
 
-                        if (JSON.parse(chapters).includes(parseInt("{{timeCreate}}"))) {
+                        if () {
 
                             const templateDropDown_edit = '<div class="flip_chapter_create m-1"><button  onclick="handleGroup(this)"  class="text-left w-100 mr-1" value="{{_id}}"> {{ name }} </button></div>  <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST" action="/api/lesson/delete/{{_id}}"> <div  class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}" class="d-flex" style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i> <p>{{name}}</p> </a> <div class="d-flex ">  </div> <button class="btn btn_del_les" value={{_id}}><i class="fa fa-remove" style="color:red;"></i></button> </div></form>{{/each}} <div class="d-flex justify-content-between"><button class="btn "  data-toggle="modal" data-target="#modalLesson">Add lesson</button> <form method="POST" action="/api/chapter/delete/{{_id}}" id={{ _id }}> <button class="btn btn_del_chapter" value = {{ _id }}> Remove chapter <i class="fa fa-remove" style="color:black;"></i></button ></form></div></div>'
                             document.write(templateDropDown_edit)
@@ -485,7 +486,7 @@
 
                 </tr>
 
-                {{/each}}
+                {{/each}} --}}
             </table>
 
 

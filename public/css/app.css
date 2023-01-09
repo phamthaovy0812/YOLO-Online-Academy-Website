@@ -297,7 +297,6 @@ a :hover {
   margin: 35px;
   padding: 30px;
   color: #373737;
-<<<<<<< HEAD
   width: 95%; }
 
 .itemtitle {
@@ -335,21 +334,11 @@ a :hover {
 
 .itemcard {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 235px;
-  margin: 10px;
-=======
-  width: 95%;
-}
-
-.itemcard {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 200px;
   margin: 20px;
 
->>>>>>> ecea47918f3a0c16efde84627b036aeb95224ab7
   padding-top: 20px;
   font-family: arial;
-<<<<<<< HEAD
   height: 400px;
   padding: 5px; }
 
@@ -357,15 +346,9 @@ a :hover {
   color: black;
   font-size: 17px;
   font-weight: bold; }
-=======
-  height: 350px;
-}
+ 
 
-.itemprice {
-  color: grey;
-  font-size: 25px;
-}
->>>>>>> ecea47918f3a0c16efde84627b036aeb95224ab7
+
 
 .itemcard button {
   border: none;

@@ -308,6 +308,16 @@
     }
 
     // css item home
+    .itemcard {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 250px;
+        margin: 10px;
+        padding-top: 20px;
+        font-family: arial;
+        height: 400px;
+        padding: 5px;
+      }
+      
   
     .itemtitle{
         font-weight: bold;
@@ -346,17 +356,7 @@
     .itemdes{
         font-size: 10px;
     }
-    .itemcard {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 235px;
-        margin: 10px;
-        padding-top: 20px;
-        font-family: arial;
-        height: 400px;
-        padding: 5px;
-    
-      }
-      
+ 
       .itemprice {
         color: black;
         font-size: 17px;
