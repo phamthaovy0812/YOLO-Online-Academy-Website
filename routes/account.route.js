@@ -48,7 +48,6 @@ router.post("/buy", async(req, res)=>{
 })
 router.get("/home", Account.topCourse);
 
-
 router.post('/login', async (req, res)=>{
    
     var dataRes = await  Login(req);
@@ -78,6 +77,8 @@ router.post('/logout',async function (req,res){
 
 
 
+
+
 router.get('/changeInfo',(req,res)=>{
     res.render("vwStudent/editprofile")
 })
@@ -101,9 +102,9 @@ router.post('/changeInfo', async (req, res)=>{
 
     res.render("vwStudent/editprofile") 
 });
-router 
-    .route('/')
-        .get(Account.GetAllAccount);
+// router 
+//     .route('/')
+//         .get(Account.GetAllAccount);
         // .post(jsonParser,Account.CreateAccount)
 router
     .route('/:id')
