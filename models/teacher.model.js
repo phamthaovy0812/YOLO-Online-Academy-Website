@@ -7,6 +7,9 @@ const objectCourse = {
   name_course : {
     type : String
   },
+  description : {
+    type : String
+  },
   avatar_course : {
     type : String
   },

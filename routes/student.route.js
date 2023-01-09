@@ -1,5 +1,6 @@
 import  express from  'express';
 import Student from "../controllers/student.controller.js";
+
 import bodyParser from 'body-parser';
 import CourseModel from '../models/Course.model.js';
 var jsonParser = bodyParser.json();
@@ -33,10 +34,25 @@ router.get("/courseDetail/:id",  async (req,res)=>{
     const course = await CourseModel.find().lean();
     const user = req.session.authAccount;
 
+    console.log(req.session)
+    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+        if (err) return (err);
+        res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });
+    
+    });
+
+    })
+router.post("/courseDetail/:id",  async (req,res)=>{
+    const course = await CourseModel.find().lean();
+    const dataAccount = await Student.UpdateRating(req);
+    const user = req.session.authAccount;
+    console.log(dataAccount)
 
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
         if (err) return (err);
-        res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });});
+        res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });
+    
+    });
 
     })
 

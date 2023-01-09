@@ -54,10 +54,11 @@ const DeleteStudent = async (req, res, id_account) => {
     const data = await Student.findOne({ "id_account" : id})
 
     const rating = {
-      id_course : req.body.idPost,
-      scores : req.body.scores,
+      id_course : req.params.id,
+      scores : req.body.scores, 
       comment : req.body.comment
     }
+    console.log(data)
     const ratingList = data.rating_list;
     ratingList.push(rating)
 

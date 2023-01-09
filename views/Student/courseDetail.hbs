@@ -1,4 +1,4 @@
-<div class="courseDetail">
+<form class="courseDetail" method="post">
 
     <!-- Begin: Course Detail -->
     <section class="course_detail spad">
@@ -183,7 +183,30 @@
                                 <div class="">
 
                                 </div>
-                                <h6>Course Feedback</h6>
+                                <h6>Đánh giá</h6>
+                                <div style="display: flex; flex-direction: column;"> 
+                                    <input type="text" name="comment" style="width:50%; height: 80px; border-radius: 10px; border-width: 2px;" >
+
+                                    <label for="cars" style=" margin-top: 10px;">Đánh giá:</label>
+                                    <select name="scores" id="cars" style="width: 50%;  border-radius: 10px; border-width: 2px;">
+                                        <option value="0">0</option>
+                                        <option value="0.5">0.5</option>
+                                        <option value="1">1</option>
+                                        <option value="1.5">1.5</option>
+                                        <option value="2">2</option>
+                                        <option value="2.5">2.5</option>
+                                        <option value="3">3</option>
+                                        <option value="3.5">3.5</option>
+                                        <option value="4">4</option>
+                                        <option value="4.5">4.5</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <button class="" style="width: 50%; margin-top: 10px; border-radius: 10px; border-width: 2px; border-color: cornflowerblue; margin-bottom: 10px; background-color: cornflowerblue; color: white" >
+                                        Gửi đánh giá
+                                    </button>
+                                </div>
+                               
+                                
                                 <div class="reviewsAndRating">
                                     <script>
                                         const arr_imgStudent = ['/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg']
