@@ -231,6 +231,7 @@ const detailCourseUI = async (req, res) => {
        
       var isBuy = false ;
       var isAddCart = false;
+      var isWishList = false ;
       var listEnroll = account.courses_enroll;
       for( var i=0;i<listEnroll.length ; i++)
       {
@@ -243,10 +244,17 @@ const detailCourseUI = async (req, res) => {
         if(listCart[i].id_course == req.params.id)
         isAddCart = true;
       }
+
+      var wishlist = account.wishlist;
+      for( var i=0;i<wishlist.length ; i++)
+      {
+        if(wishlist[i].id_course == req.params.id)
+        isWishList = true;
+      }
        console.log(" BUY IS ", req.params.id, account.courses_enroll,isBuy)
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
-       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart });
+       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart, isWishList:isWishList });
        // , 
      });
    }

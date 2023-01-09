@@ -40,8 +40,12 @@
                               {{/if}}
                             <form method="POST" action="/api/students/addWishLists/{{course._id}}">
                                 <input type="hidden" name="idUser" value="{{user._id}}">
-                                <input type="hidden" name="idCourse" value="{{course._id}}">        
-                                <button type="submit" class="heart-icon"><span class="bi bi-heart-fill"></span></button>
+                                <input type="hidden" name="idCourse" value="{{course._id}}">     
+                                {{#if isWishList}}   
+                                    <button type="submit" class="heart-icon-black"><span class="bi bi-heart-fill"></span></button>
+                                 {{else}}
+                                 <button type="submit" class="heart-icon"><span class="bi bi-heart-fill"></span></button>
+                                 {{/if}}
                             </form>
                            
                         </div>
