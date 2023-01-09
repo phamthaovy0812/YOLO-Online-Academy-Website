@@ -228,14 +228,15 @@ const detailCourseUI = async (req, res) => {
    if(user){
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
-       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title });
+       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title });
        // , 
      });
    }
    else {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
-      return res.render("Student/courseDetail", { course: story, chapter: story.chapter });
+      console.log(story);
+      return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });}
 

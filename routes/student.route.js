@@ -27,7 +27,7 @@ router
     .post(jsonParser, Student.UpdateEnrollCourse);
             
             
-router.post("/addWishLists/:id", Student.addWishList);
+router.get("/addWishLists/:id", Student.addWishList);
   
 router.get("/viewlesson/:id",Student.detailCourseUI);
 
@@ -50,4 +50,4 @@ router.get('/viewlesson',(req,res)=>{
 })
 
 
-export default router;  
+export default router;
