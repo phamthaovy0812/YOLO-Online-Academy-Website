@@ -11,7 +11,7 @@ const router = express.Router();
 //     .route('/:id')
 //         .patch(jsonParser, Admin.UpdateAdmin);
 
-router.get("/categoryCensor", Admin.categoryCensor);
+// router.get("/categoryCensor", Admin.categoryCensor);
 router.get("/teacherCensor", Admin.teacherCensor);
 router.get("/studentCensor", Admin.studentCensor);
 // router.get("/courseCensor", Adm);
