@@ -54,10 +54,11 @@ const DeleteStudent = async (req, res, id_account) => {
     const data = await Student.findOne({ "id_account" : id})
 
     const rating = {
-      id_course : req.body.idPost,
-      scores : req.body.scores,
+      id_course : req.params.id,
+      scores : req.body.scores, 
       comment : req.body.comment
     }
+    console.log(data)
     const ratingList = data.rating_list;
     ratingList.push(rating)
 
@@ -176,4 +177,16 @@ const profile = async (req,res)=>{
   res.render("vwStudent/profile", { infor: user.account, isLogin: req.session.auth, acc: req.session.authAccount })
 }
 
-export default { profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};
+const detailCourseUI = async (req, res) => {
+  const course = await CourseModel.find().lean();
+  console.log( req.params.id );
+  const user = req.session.authAccount;
+  CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+    if (err) return (err);
+    res.render("Student/viewlesson", { course: story, chapter: story.chapter, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
+  });
+};
+
+
+
+export default {detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};

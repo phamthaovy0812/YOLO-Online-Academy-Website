@@ -2,6 +2,8 @@ import express from  'express';
 import Account  from  '../controllers/account.controller.js';
 import bodyParser from 'body-parser';
 import Login  from  '../middlewares/Authen.js';
+import CourseModel from '../models/Course.model.js'
+import Student from '../controllers/student.controller.js';
 var jsonParser = bodyParser.json();
 const router = express.Router();
 
@@ -22,6 +24,19 @@ router.get('/login',(req,res)=>{
     res.render('vwAccount/login');
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
+router.post("/courseDetail/:id",  async (req,res)=>{
+  const course = await CourseModel.find().lean();
+  const dataAccount = await Student.UpdateRating(req);
+  const user = req.session.authAccount;
+  console.log(dataAccount)
+
+  CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+      if (err) return (err);
+      res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });
+  
+  });
+
+  })
 router.get("/home", Account.topCourse);
 
 

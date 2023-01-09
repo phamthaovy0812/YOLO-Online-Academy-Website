@@ -125,6 +125,14 @@ const UpdateInfoAccount = async (req) => {
   // }
 };
 
+// const isLogin=async (req,res)=>{
+//   const accAuth=req.session.auth;
+//   const dataRes=req.session.authAccount;
+//   res.render('/layouts/main',{islogin:accAuth,data:dataRes});
+
+
+// }
+
 const CreateAccount = async (req) => {
   const { email, username, password, role, avatar } = req.body;
 

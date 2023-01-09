@@ -42,6 +42,8 @@ router.get("/courseDetail",(req,res)=>{
     res.render('Student/courseDetail');
 })
 
+router.get("/viewlesson/:id",Student.detailCourseUI);
+
 
 
 router.get("/Category", Student.categoryUI);
@@ -55,6 +57,10 @@ router.get("/category",(req,res)=>{
 router.get("/home",Student.topCourse);
 router.get("/profile", Student.profile);
 router.get("/shopping",Student.payCourse);
+
+router.get('/viewlesson',(req,res)=>{
+    res.render('Student/viewlesson')
+})
 
 
 export default router;  
