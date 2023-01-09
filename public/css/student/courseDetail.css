@@ -213,6 +213,7 @@ b {
 .ud-unstyled-list{
     margin-top: 20px;
     display: block;
+    
 }
 .listItem{
     color: #1c1d1f;
@@ -222,7 +223,6 @@ b {
 }
 .listItem >p {
     margin-left: 1.6rem;
-  
 }
 .course__details__tab__desc> p{
     margin-top: 1.6rem;

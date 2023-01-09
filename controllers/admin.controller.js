@@ -1,4 +1,8 @@
 import Admin from '../models/admin.model.js';
+import Student from '../models/student.model.js';
+import Teacher from '../models/teacher.model.js'; 
+import Category from '../models/Category.model.js';
+import Course from '../models/Course.model.js';
 
 const GetAllAdmin = async(req, res) =>{
     try{
@@ -63,18 +67,29 @@ const DeleteAdmin = async (req, res, id_account) => {
   };
 
   const categoryCensor = async(req, res) => {
-    const categoryList = [{"name":"DEVELOPMENT test"}, {"name":"Business"}, {"name":"Design"}];
-    res.render('Admin/categoryCensor',{category:categoryList})
+    const allCategories = await Category.find().lean();
+    res.render('Admin/categoryCensor',{category:allCategories})
   }
 
   const teacherCensor = async(req, res) => {
-    const teacherList = [{"fullname":"Nguyen Thi Minh Thao", "skill":"ReactJS, React Hooks"}, {"fullname": "Bui Quang Thanh", "skill": "Python, Data Science"},{"fullname": "Bui Thi Dung", "skill": "Out Trinh"}];
-    res.render('Admin/teacherCensor',{teacher: teacherList})
+    const allTeacher = await Teacher.find().lean();
+    res.render('Admin/teacherCensor',{teacher: allTeacher})
   }
 
   const studentCensor = async(req, res) => {
-    const studentList = [{"fullname": "Pham Thao Vy"}, {"fullname": "Pham Hong Tan"}, {"fullname": "Ha Thi Thanh Tu"}];
-    res.render('Admin/studentCensor', {student: studentList})
+    const allStudent= await Student.find().lean();
+    res.render('Admin/studentCensor', {student: allStudent})
   }
 
-  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor };
+  const courseCensor = async (req, res) => {
+    // const courseList = [{"title": "Javascipt for Begginers", "image":"/student/JavascriptForBeginner.jpg", "sub-category":"Web Development", "instructorName":"Nguyen Thi Minh Thao"}, 
+    //                     {"title":"1 Hour HTML", "image":"/student/HTML_COURSE.png", "sub-category":"Web Development", "instructorName":"Nguyen Thi Minh Thao"},
+    //                     {"title":"Build Responsive Real-World Websites with HTML and CSS", "image":"/student/HTML_CSS-removebg-preview.png", "sub-category":"Web Development", "instructorName":"Bui Quang Thanh"},
+    //                     {"title":"Create Your First React Native App","image":"/student/mobile.png", "sub-category":"Mobile Development" , "instructorName":"Bui Quang Thanh"}];
+    // const subCategory = [{"subCategoryName":"Mobile Development"},{"subCategoryName":"Web Development"}];
+    const allCourses = await Course.find().lean();
+    res.render('Admin/courseCensor', {course: allCourses});
+  }
+
+// "author_id":{"name":"Thanh",""},
+  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor, courseCensor};

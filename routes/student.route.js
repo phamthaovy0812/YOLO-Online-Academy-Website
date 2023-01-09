@@ -10,7 +10,6 @@ router
 router    
     .route('/:id')
       .patch(jsonParser, Student.UpdateStudent);
-
   
 
 router.get("/Category", Student.categoryUI);
@@ -23,6 +22,4 @@ router.get("/category",(req,res)=>{
 })
 router.get("/home",Student.topCourse);
 
-
-
-export default router;  
+export default router;
