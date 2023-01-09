@@ -67,7 +67,6 @@ const UpdateRating = async (req) => {
     const course = await CourseModel.findOne({"_id":req.params.id});
     course.list_reviews.push(rating);
     await course.save();
-    console.log(course)
     return dataUpdate
   }
 

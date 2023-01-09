@@ -30,6 +30,7 @@ router.post("/courseDetail/:id",  async (req,res)=>{
   const dataAccount = await Student.UpdateRating(req);
   const user = req.session.authAccount;
   
+  
 
   CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
       if (err) return (err);
@@ -39,11 +40,12 @@ router.post("/courseDetail/:id",  async (req,res)=>{
 })
 
 router.post("/buy", async(req, res)=>{
-    console.log("id course",req.body._id, req.session.id)
+    console.log("req.body ",req.body)
+    console.log("session ", req.session)
     const url = `/api/accounts/courseDetail/${req.body._id}`
-    console.log(url)
+    console.log("URL",url)
     const data = await Student.UpdateEnrollCourse(req)
-    console.log(data)
+    
     res.redirect(url);
 })
 router.get("/home", Account.topCourse);
