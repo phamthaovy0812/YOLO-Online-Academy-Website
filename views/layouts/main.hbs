@@ -85,12 +85,13 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{acc.detail.fullname}}
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <form method="post" action="/api/accounts/logout" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/api/students/profile">My Profile</a>
                             <a class="dropdown-item" href="/api/accounts/changeinfo">Edit Profile</a>
                             <a class="dropdown-item" href="/mylearning">My Learning</a>
                             <a class="dropdown-item" href="/shopping">Shopping Cart</a>
-                        </div>
+                            <button class="dropdown-item" type="submit">Log Out</button>
+                        </form>
                     </div>
                 {{else}}
                     <div style="display: flex;">

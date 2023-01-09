@@ -1,4 +1,5 @@
 import Admin from '../models/admin.model.js';
+import AccountModel from '../models/Account.model.js';
 
 const GetAllAdmin = async(req, res) =>{
     try{

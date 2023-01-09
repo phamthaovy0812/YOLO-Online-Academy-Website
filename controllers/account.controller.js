@@ -1,28 +1,44 @@
 import { json } from "express";
 import Account from "../models/Account.model.js";
 import Student from "./student.controller.js";
+import StudentModel from "../models/student.model.js";
 import Teacher from "./teacher.controller.js";
+import TeacherModel from "../models/teacher.model.js";
 import Admin from "./admin.controller.js";
+import AdminModel from '../models/admin.model.js';
 import bcrypt from "bcryptjs";
 import CourseModel from "../models/Course.model.js";
 
 
 
-const GetAllAccount = async (req, res) => {
-  try {
-    const accounts = await Account.find();
-    res.status(200).json({
-      status: "success",
-      length: accounts.length,
-      accounts,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: "Missing require fail",
-    });
+const GetAllAccount = async (req) => {
+  var allAccount =[]
+ 
+  const accounts = await Account.find();
+  
+  console.log(accounts)
+  for(var i=0;i<accounts.length;i++)
+  {
+    var detail ;
+    if(accounts[i].role==0)
+    {
+      detail = await StudentModel.findOne({"id_account":accounts[i]._id});
+
+    }
+    else if(accounts[i].role==1)
+    {
+      detail = await TeacherModel.findOne({"id_account":accounts[i]._id});
+    }
+    else if(accounts[i].role==2)
+    {
+      detail = await AdminModel.findOne({"id_account":accounts[i]._id});
+    }
+    allAccount.push({"account":accounts[i],"detail":detail});
+   
   }
+  return allAccount;
 };
+
 const GetOneAccount = async (req, res) => {
   try {
     const account = await Account.findById(req.params.id);
@@ -210,25 +226,26 @@ const detailCourseUI = async (req, res) => {
   try {
     const user = req.session.authAccount;
    if(user){
+    console.log(1)
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
-       console.log(story);
-       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
+       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title });
        // , 
      });
    }
+   else {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
       console.log(story);
       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
-    });
+    });}
 
     
   } catch (error) {
+    console.log(333)
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
-      console.log(story);
       return res.render("Student/courseDetail", { course: story, chapter: story.chapter });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });
@@ -246,7 +263,7 @@ const topCourse = async (req, res) => {
   const coursetop = await CourseModel.find().lean();
   const toppopularcourse = await CourseModel.find().lean();
   const topviewcourse = await CourseModel.find().lean();
-
+  
   const Newcourse = await CourseModel.find().lean();
 
   const mostCategory = [{ "name": "Mobile Development" }]
