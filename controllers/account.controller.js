@@ -211,11 +211,9 @@ const detailCourseUI = async (req, res) => {
     const course = await CourseModel.find().lean();
     const user = req.session.authAccount;
 
-
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
-      console.log(story);
-      res.render("Student/courseDetail", { course: story, chapter: story.chapter });
+      res.render("Student/courseDetail", { course: story, chapter: story.chapter, id_course : req.params.id, avatar : story.image, title:story.title  });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });
   } catch (error) {

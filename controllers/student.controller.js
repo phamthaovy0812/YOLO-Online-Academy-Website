@@ -75,9 +75,9 @@ const DeleteStudent = async (req, res, id_account) => {
     const data = await Student.findOne({ "id_account" : id})
 
     const course = {
-      id_course : req.body.idCourse,
-      name_course : req.body.name_course,
-      avatar_course : req.body.avatar_course
+      id_course : req.body._id,
+      name_course : req.body.title,
+      avatar_course : req.body.avatar
     }
     const courses_enroll = data.courses_enroll;
     courses_enroll.push(course)
