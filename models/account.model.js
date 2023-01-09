@@ -34,4 +34,5 @@ accountSchema.method.comparePassword = async function (yourPassword) {
   return await bcrypt.compare(yourPassword, this.password);
 };
 
-export default mongoose.model("Account", accountSchema);
+// export default mongoose.model("Account", accountSchema);
+export default mongoose.models['Account'] || mongoose.model('Account', accountSchema);

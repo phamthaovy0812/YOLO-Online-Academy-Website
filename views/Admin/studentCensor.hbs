@@ -5,11 +5,13 @@
         <div id="side">
             <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px; position:absolute!important;">
                 <a href="/api/admins/categoryCensor" class="mySide" class="side w3-bar-item"><i
-                        class="bi bi-house-door fa-xm"></i></a>
+                        class="bi bi-bookmarks"></i></a>
                 <a href="/api/admins/teacherCensor" class="mySide" class="side w3-bar-item "><i
                         class="bi bi-person-workspace"></i></i></a>
                 <a href="/api/admins/studentCensor" class="mySide active" class="side w3-bar-item "><i
                         class="bi bi-person"></i></a>
+                <a href="/api/admins/courseCensor" class="mySide" class="side w3-bar-item "><i 
+                        class="bi bi-camera-reels"></i></a>
             </div>
         </div>
 
@@ -30,54 +32,81 @@
     <!-- End: SIDEBAR -->
 
 
-    <!-- Begin: My List Body -->
+    <!-- Begin: Student Censor Body -->
     <div class="col m-5">
         <h6 class="font-text container">STUDENT LIST</h6>
 
-        {{!-- 2: List of Course --}}
+        {{!-- 2: List of Students --}}
         <div class="listOfUsers">
 
             {{#each student}}
-            <div class="container user border border-dark rounded">
-                <div class=" d-flex userImgAndInfo">
-                    <div class="imgUserBox">
-                        <img src="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png"
-                            alt="This is image of student">
-                    </div>
-                    <div class="ud-unstyled-list ">
-                        <div class="listItem">
-                            <p style="font-weight: 600">{{fullname}}</p>
+                <div class="container user border border-dark rounded">
+                    <div class=" d-flex userImgAndInfo">
+                        <div class="imgUserBox">
+                            <img src="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png"
+                                alt="This is image of student">
                         </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-between flex-wrap">
-                    {{!-- <div class="ud-unstyled-list rating" style="margin-right:5rem;">
-                        <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
-                            <div>5.0</div>
-                            <div class="starColor">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                        <div class="ud-unstyled-list ">
+                            <div class="listItem">
+                                <p style="font-weight: 600">{{fullname}}</p>
                             </div>
                         </div>
-                        <div class="listItem">
-                            <p>Course rating</p>
-                        </div>
-                    </div> --}}
-                    <div class="box_btn_block">
-                        <a href="#"><button type="button"
-                                class="btn btn-danger btn_edit border border-dark">Block</button></a>
                     </div>
-                </div>
 
-            </div>
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div class="box_btn_block">
+                            <form action="/api/admins/blockStudent/{{_id}}" method="POST">
+                                <button type="submit"
+                                        class="btn btn-danger btn_edit border border-dark" onclick="adminBlockStudent()">Block
+                                </button>
+                            </form>
+                            <script>
+                                function adminBlockStudent() {
+                                    alert("Block student {{fullname}} successfully!");
+                                }
+                            </script>
+                        </div>
+  
+                        
+                    </div>
+
+                </div>
             {{/each}}
         </div>
 
     </div>
 
 
+
+{{!-- <p>Link 1</p>
+<a data-toggle="modal" data-id="ISBN564541" title="Add this item" class="open-AddBookDialog btn btn-primary"
+    href="#addBookDialog">test</a>
+
+<p>&nbsp;</p>
+
+
+<p>Link 2</p>
+<a data-toggle="modal" data-id="ISBN-001122" title="Add this item" class="open-AddBookDialog btn btn-primary"
+    href="#addBookDialog">test</a>
+
+<div class="modal hide" id="addBookDialog">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>some content</p>
+        <input type="text" name="bookId" id="bookId" value="" />
+    </div>
 </div>
+<script>
+    $(document).on("click", ".open-AddBookDialog", function () {
+            var myBookId = $(this).data('id');
+            $(".modal-body #bookId").val(myBookId);
+            // As pointed out in comments, 
+            // it is unnecessary to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
+</script>
+
+</div> --}}

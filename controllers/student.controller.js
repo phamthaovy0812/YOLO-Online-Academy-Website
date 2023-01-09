@@ -166,6 +166,12 @@ const DeleteWishList = async (req) => {
     }
   }
 
+  const categoryUI = async (req,res)=>{
+    const categoryView = {"name":"DEVELOPMENT test"}
+    res.render('Student/category',{category:categoryView})
+  };
+  
+  
   const dataUpdate = await Student.findOneAndUpdate(
     { id_account: id },
     { wishlist: wishlist },
