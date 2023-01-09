@@ -44,12 +44,20 @@ router.get("/courseDetailBought",(req,res)=>{
 router.get("/category",(req,res)=>{
     res.render('Student/Category');
 })
+
+router.get("/mylearning",(req,res)=>{
+    res.render('vwStudent/mylearning');
+})
 router.get("/home",Student.topCourse);
 router.get("/profile", Student.profile);
 router.get("/shopping",Student.payCourse);
 
 router.get('/viewlesson',(req,res)=>{
     res.render('Student/viewlesson')
+})
+
+router.get('/shopping',(req,res)=>{
+    res.render('vwStudent/shopping')
 })
 
 

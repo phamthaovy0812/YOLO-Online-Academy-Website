@@ -216,18 +216,28 @@ const payCourse = async (req, res) => {
   const PayCourse = [
     {
       title: "Mobile for beginer",
-      description: "day la mot khoa hoc mobile danh cho nguoi moi bat dau.",
+      sub_category: "Web developmet",
+      author_id: { fullname: "Nguyen Thao" },
+      number_review: "12344",
+      scores_review: "4.5",
+      subtitle: "day la mot khoa hoc mobile danh cho nguoi moi bat dau.",
       price: "$113",
       image: "/student/js.png",
     },
     {
-      title: "web for beginer",
-      description: "day la mot khoa hoc web danh cho nguoi moi bat dau.",
-      price: "$1133",
+      title:
+        "Mobile for beginerrrrrrrrrrr rrrrrrr rrrrrr rrrrrr rrrrr rrrrrrrrr",
+      sub_category: "Web developmet",
+      author_id: { fullname: "Pham Vy" },
+      number_review: "12344",
+      scores_review: "4.5",
+      subtitle: "day la mot khoa hoc mobile danh cho nguoi moi bat dau.",
+      price: "$113",
       image: "/student/js.png",
     },
   ];
-  res.render("vwStudent/shopping", { paycourse: PayCourse });
+  res.render("vwStudent/shopping", { paycourse: PayCourse, isLogin: req.session.auth,
+    acc: req.session.authAccount });
 };
 
 const WishList = async (req, res) => {
@@ -280,6 +290,7 @@ const profile = async (req, res) => {
   const user = req.session.authAccount;
   res.render("vwStudent/profile", {
     infor: user.account,
+    detailinfor:user.detail,
     isLogin: req.session.auth,
     acc: req.session.authAccount,
   });
