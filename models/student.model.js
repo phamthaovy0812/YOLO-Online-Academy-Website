@@ -31,6 +31,11 @@ const studentSchema = new mongoose.Schema({
     type: String, 
     required: true,
   },
+  
+  isBlock :{
+    type : Boolean,
+    default : false 
+  },
   wishlist: [objectCourse],
   rating_list : [rating_list],
   courses_enroll: [objectCourse],

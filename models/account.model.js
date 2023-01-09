@@ -21,10 +21,6 @@ const accountSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  isBlock :{
-    type : Boolean,
-    default : false 
-  }
 });
 
 accountSchema.pre("save", async function (next) {
