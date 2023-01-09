@@ -117,13 +117,15 @@ const UpdateCart = async (req) => {
 
 const UpdateWishList = async (req) => {
   // const id = req.session.authAccount?.account?._id ;
-  const id = "63aa8e69e21b9e47d25fce49";
+  const id = req.session.authAccount._id;
   const data = await Student.findOne({ id_account: id });
-
+  // id_course: req.params.id,
+  //     name_course: courses.title,
+  //     avatar_course: courses.image,
   const course = {
-    id_course: req.body.idCourse,
-    name_course: req.body.name_course,
-    avatar_course: req.body.avatar_course,
+    id_course: req.params.id,
+    name_course:  courses.title,
+    avatar_course:courses.image,
   };
   const wishlist = data.wishlist;
   wishlist.push(course);
@@ -135,7 +137,6 @@ const UpdateWishList = async (req) => {
       returnOriginal: false,
     }
   );
-  console.log(wishlist);
   return dataUpdate;
 };
 
@@ -296,7 +297,6 @@ const detailCourseUI = async (req, res) => {
 const  addWishList = async (req, res) => {
     const userID = req.body.idUser;
     const courseID = req.params.id;
-    console.log(userID+" "+courseID);
     const courses = await CourseModel.findOne({ _id: courseID });
     const objectCourse = {
       id_course: req.params.id,
@@ -304,7 +304,7 @@ const  addWishList = async (req, res) => {
       avatar_course: courses.image,
 
     };
-
+  const updateAccount = UpdateWishList(req)
   const data = await Student.findOne({ "id_account": userID });
     const wishlists = data.wishlist;
     wishlists.push(objectCourse)
@@ -314,11 +314,11 @@ const  addWishList = async (req, res) => {
       returnOriginal: false
     });
 
-  console.log(userCurrent)
+
 
   return res.redirect("/api/accounts/courseDetail/" + courseID);
 
   }
 
 
-export default { addWishList,detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};
+export default { addWishList,detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse,UpdateCart};

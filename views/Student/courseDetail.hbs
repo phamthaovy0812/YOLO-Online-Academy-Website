@@ -29,7 +29,12 @@
                         <p>{{course.subtitle}}</p>
 
                         <div class="d-flex">
-                            <button href="#" type="button" class="btn btn-warning primary-btn">ADD TO CART</button>
+                            <form method="post" action="/api/accounts/tocart" >
+                                <input type="hidden" name="_id" value="{{id_course}}" >
+                                <input type="hidden" name="title" value="{{title}}" >
+                                <input type="hidden" name="avatar" value="{{avatar}}" > 
+                                <button  type="submit" class="btn btn-warning primary-btn">ADD TO CART</button>
+                            </form>
                             <form method="POST" action="/api/students/addWishLists/{{course._id}}">
                                 <input type="hidden" name="idUser" value="{{user._id}}">
                                 <input type="hidden" name="idCourse" value="{{course._id}}">        
