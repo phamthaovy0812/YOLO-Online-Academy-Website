@@ -48,7 +48,7 @@
                         </div>
                         <div class="ud-unstyled-list ">
                             <div class="listItem">
-                                <p style="font-weight: 600">{{fullname}} {{_id}}</p>
+                                <p style="font-weight: 600">{{fullname}}</p>
                             </div>
                         </div>
                     </div>
@@ -57,35 +57,17 @@
                         <div class="box_btn_block">
                             <form action="/api/admins/blockStudent/{{_id}}" method="POST">
                                 <button type="submit"
-                                        class="btn btn-danger btn_edit border border-dark">Block {{_id}}
+                                        class="btn btn-danger btn_edit border border-dark" onclick="adminBlockStudent()">Block
                                 </button>
                             </form>
+                            <script>
+                                function adminBlockStudent() {
+                                    alert("Block student {{fullname}} successfully!");
+                                }
+                            </script>
                         </div>
-                        {{!-- <div class="modal" id="removeStudent">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+  
                         
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Confirm</h4>
-                                        <button type="button" class="close" >&times;</button>
-                                    </div>
-                        
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <label>Are you sure you want to remove this student?</label>   
-                                    </div>
-                        
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <form action="/api/admins/blockStudent/{{_id}}" method="GET">
-                                            <button type="submit" class="btn btn-success">Yes {{_id}}</button>
-                                        </form>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                 </div>

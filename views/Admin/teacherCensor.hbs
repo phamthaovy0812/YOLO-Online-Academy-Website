@@ -35,7 +35,6 @@
 
         {{!-- 2: List of Teacher --}}
         <div class="listOfUsers">
-            
             {{#each teacher}}
                 <div class="container user border border-dark rounded">
                     <div class=" d-flex userImgAndInfo">
@@ -54,23 +53,16 @@
                     </div>
                 
                     <div class="d-flex justify-content-between flex-wrap">
-                        {{!-- <div class="ud-unstyled-list rating" style="margin-right:5rem;">
-                            <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
-                                <div>5.0</div>
-                                <div class="starColor">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="listItem">
-                                <p>Course rating</p>
-                            </div>
-                        </div> --}}
                         <div class="box_btn_block">
-                            <a href="#"><button type="button" class="btn btn-danger btn_edit border border-dark">Block</button></a>
+                            <form action="/api/admins/blockTeacher/{{_id}}" method="POST">
+                                <button type="submit" class="btn btn-danger btn_edit border border-dark" onclick="adminBlockTeacher()">Block
+                                </button>
+                            </form>
+                            <script>
+                                function adminBlockTeacher() {
+                                    alert("Block teacher {{fullname}} successfully!");
+                                }
+                            </script>
                         </div>
                     </div>
                 

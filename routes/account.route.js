@@ -18,33 +18,42 @@ router.post('/signup', (req, res)=>{
     
     Account.CreateAccount(req)
     res.render("vwAccount/signup");
-});''
+});
 
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login');
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
+
 router.post("/courseDetail/:id",  async (req,res)=>{
   const course = await CourseModel.find().lean();
   const dataAccount = await Student.UpdateRating(req);
   const user = req.session.authAccount;
-  console.log(dataAccount)
+  
+  
 
   CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
       if (err) return (err);
       res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });
   
   });
+})
 
-  })
+router.post("/buy", async(req, res)=>{
+    console.log("req.body ",req.body)
+    console.log("session ", req.session)
+    const url = `/api/accounts/courseDetail/${req.body._id}`
+    console.log("URL",url)
+    const data = await Student.UpdateEnrollCourse(req)
+    
+    res.redirect(url);
+})
 router.get("/home", Account.topCourse);
-
 
 router.post('/login', async (req, res)=>{
    
     var dataRes = await  Login(req);
     
-    console.log(dataRes)
     if(dataRes && dataRes.status == 200)
     {
         
@@ -54,7 +63,7 @@ router.post('/login', async (req, res)=>{
        
         req.session.save(function (err) {
             // session saved
-            res.redirect(url); // sua thi sua o day nha Vy, sua dieu huong home a'
+            res.redirect(url); // sua thi sua o day anha Vy, sua dieu huong home a'
         })
     }
 
@@ -67,6 +76,8 @@ router.post('/logout',async function (req,res){
     const url='/api/students/home';
     res.redirect(url);
 })
+
+
 
 
 
@@ -93,9 +104,9 @@ router.post('/changeInfo', async (req, res)=>{
 
     res.render("vwStudent/editprofile") 
 });
-router 
-    .route('/')
-        .get(Account.GetAllAccount);
+// router 
+//     .route('/')
+//         .get(Account.GetAllAccount);
         // .post(jsonParser,Account.CreateAccount)
 router
     .route('/:id')

@@ -1,4 +1,3 @@
-<form class="courseDetail" method="post">
 
     <!-- Begin: Course Detail -->
     <section class="course_detail spad">
@@ -14,28 +13,36 @@
                 <div class="col-md-6">
                     <div class="course__details__text">
                         <h3>{{course.title}}</h3>
-                        <div class="course__details__rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span>({{course.number_review}} reviews)</span>
-                            <span>12,001 students</span>
-                        </div>
+                        
+                            <div class="course__details__rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <span>({{course.number_review}} reviews)</span>
+                                <span>12,001 students</span>
+                            </div>
+                        
+                        
                         <div class="course__details__price">{{course.price}}</div>
                         <p>{{course.subtitle}}</p>
 
                         <div class="d-flex">
                             <button href="#" type="button" class="btn btn-warning primary-btn">ADD TO CART</button>
-                            <form method="POST" action="/api/students/addWishList">
+                            <form method="POST" action="/api/students/addWishLists/{{course._id}}">
                                 <input type="hidden" name="idUser" value="{{user._id}}">
-                                <input type="hidden" name="idCourse" value="{{course._id}}">
+                                <input type="hidden" name="idCourse" value="{{course._id}}">        
                                 <button type="submit" class="heart-icon"><span class="bi bi-heart-fill"></span></button>
                             </form>
                            
                         </div>
-                        <button href="#" type="button" class="btn btn-outline-success btn-buy">Buy now</button>
+                        <form method="POST" action="/api/accounts/buy">
+                            <input type="hidden" name="_id" value="{{id_course}}" >
+                            <input type="hidden" name="title" value="{{title}}" >
+                            <input type="hidden" name="avatar" value="{{avatar}}" >
+                            <button href="#" type="submit" class="btn btn-outline-success btn-buy">Buy now</button>
+                        </form>
                         <hr>
 
                         <ul>
@@ -183,10 +190,11 @@
                         <div class="tab-pane" id="tabs-4" role="tabpanel">
                             <div class="course__details__tab__desc">
                                 <div class="">
-
+                                    
                                 </div>
+
                                 <h6>Đánh giá</h6>
-                                <div style="display: flex; flex-direction: column;"> 
+                                <form class="courseDetail" method="post" style="display: flex; flex-direction: column;"> 
                                     <input type="text" name="comment" style="width:50%; height: 80px; border-radius: 10px; border-width: 2px;" >
 
                                     <label for="cars" style=" margin-top: 10px;">Đánh giá:</label>
@@ -206,7 +214,7 @@
                                     <button class="" style="width: 50%; margin-top: 10px; border-radius: 10px; border-width: 2px; border-color: cornflowerblue; margin-bottom: 10px; background-color: cornflowerblue; color: white" >
                                         Gửi đánh giá
                                     </button>
-                                </div>
+                                </form>
                                
                                 
                                 <div class="reviewsAndRating">

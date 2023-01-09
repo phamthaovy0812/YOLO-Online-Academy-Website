@@ -33,8 +33,10 @@ const teacherSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  isBlock:{
+    type: Boolean,
+    default: false,
+  }
 });
 
 export default mongoose.model("Teacher", teacherSchema);
-
-

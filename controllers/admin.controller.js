@@ -3,7 +3,7 @@ import Student from '../models/student.model.js';
 import Teacher from '../models/teacher.model.js'; 
 import Category from '../models/Category.model.js';
 import Course from '../models/Course.model.js';
-// import Account from '../models/account.model.js';
+import Account from '../models/account.model.js';
 
 const GetAllAdmin = async(req, res) =>{
     try{
@@ -70,11 +70,16 @@ const DeleteAdmin = async (req, res, id_account) => {
   const BlockStudent = async (req, res) => {
   const id_student = req.params.id;
   console.log(id_student);
-  const flag=true;
-  // const dataUpdate = await Account.findOneAndUpdate({"_id":id_student}, {isBlock: true}, {returnOriginal: false});
-  // console.log(dataUpdate)
+  const dataUpdate = await Student.findByIdAndUpdate({_id: id_student},{isBlock:true});
+  console.log(dataUpdate)
   return res.redirect("/api/admins/studentCensor");
-  // return dataUpdate;
+}
+  const BlockTeacher = async (req, res) => {
+  const id_teacher = req.params.id;
+  console.log(id_teacher);
+  const dataUpdate = await Teacher.findByIdAndUpdate({_id: id_teacher},{isBlock:true});
+  console.log(dataUpdate)
+  return res.redirect("/api/admins/teacherCensor");
 }
 
   const categoryCensor = async(req, res) => {
@@ -83,13 +88,13 @@ const DeleteAdmin = async (req, res, id_account) => {
   }
 
   const teacherCensor = async(req, res) => {
-    const allTeacher = await Teacher.find().lean();
+    const allTeacher = await Teacher.find({isBlock:false}).lean();
     res.render('Admin/teacherCensor',{teacher: allTeacher})
   }
 
   const studentCensor = async(req, res) => {
     const allStudent= await Student.find({isBlock:false}).lean();
-    res.render('Admin/studentCensor', {student: allStudent})
+    res.render('Admin/studentCensor', {student: allStudent}) 
   }
 
   const courseCensor = async (req, res) => {
@@ -102,5 +107,5 @@ const DeleteAdmin = async (req, res, id_account) => {
     res.render('Admin/courseCensor', {course: allCourses});
   }
 
-// "author_id":{"name":"Thanh",""},
-  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor, courseCensor, BlockStudent};
+
+  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher};

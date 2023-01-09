@@ -11,7 +11,6 @@ import sendEmail from './middlewares/EmailVerification.js'
 import activate_session from './middlewares/session.js';
 import activate_locals from './middlewares/localStorage.js';
 
-
 const app = express();
 
 

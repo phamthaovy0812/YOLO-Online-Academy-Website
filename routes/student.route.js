@@ -2,6 +2,7 @@ import  express from  'express';
 import Student from "../controllers/student.controller.js";
 import bodyParser from 'body-parser';
 import CourseModel from '../models/Course.model.js';
+import Students from '../models/student.model.js';
 var jsonParser = bodyParser.json();
 const router = express.Router();
 
@@ -26,22 +27,8 @@ router
     .post(jsonParser, Student.UpdateEnrollCourse);
             
             
-router.post("/addWishList", async (req, res) => {
-    try {
-        const infor = req.body;
-        console.log(infor);
-
-        res.redirect("/")
-    } catch (error) {
-        
-    }
-    
-})
+router.post("/addWishLists/:id", Student.addWishList);
   
-router.get("/courseDetail",(req,res)=>{
-    res.render('Student/courseDetail');
-})
-
 router.get("/viewlesson/:id",Student.detailCourseUI);
 
 
