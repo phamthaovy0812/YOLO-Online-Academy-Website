@@ -9,7 +9,7 @@ var jsonParser = bodyParser.json();
 const router = express.Router();
 
 router.get('/signup',(req,res)=>{
-    res.render("vwAccount/signup");
+    res.render("vwAccount/signup",{layout:false});
   })
 
 
@@ -22,7 +22,7 @@ router.post('/signup', (req, res)=>{
 });
 
 router.get('/login',(req,res)=>{
-    res.render('vwAccount/login');
+    res.render('vwAccount/login',{layout:false});
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
 
@@ -63,14 +63,21 @@ router.get("/home", Account.topCourse);
 router.post('/login', async (req, res)=>{
    
     var dataRes = await  Login(req);
+    var url;
     
     if(dataRes && dataRes.status == 200)
     {
         
         req.session.auth = true
-        req.session.authAccount = dataRes
-        const url='/api/accounts/home';
-       
+        req.session.authAccount = dataRes;
+        if (dataRes.account.role==0){
+            url='/api/accounts/home';
+
+        }else if (dataRes.account.role==1){
+            url='/api/teachers/homepage';
+        } else if (dataRes.account.role==2){
+            url='/api/admins/categoryCensor';
+        }
         req.session.save(function (err) {
             // session saved
             res.redirect(url); // sua thi sua o day anha Vy, sua dieu huong home a'
