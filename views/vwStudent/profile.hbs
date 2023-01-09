@@ -8,7 +8,7 @@
                 <div style="padding: 20px;display: flex; ">
                     <img src="/avata.png" name="avatar" alt="..." class="rounded-circle" style="width: 120px;  margin: 20px;">
                     <div style="text-align: left; margin: 40px; ">
-                        <div style="margin-bottom:10px ;">Full name:{{infor.username}}</div>
+                        <div style="margin-bottom:10px ;">Full name: {{ detailinfor.fullname}}</div>
                         <div style="margin-bottom:10px ;">Email: {{infor.email}}</div>
                     </div>
                 </div>
@@ -16,23 +16,37 @@
         </div>
     </div>
      <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
-    <div style="display: flex; justify-content: space-around;">
+    <div style="display: flex; justify-content: space-around; margin: 20px;" >
         {{#each infor}}
             <div class="itemcard" style="display: inline-block; ">
-                <img src="{{image}}" alt="" style="width:223px; height: 150px;">
-                <div class="itemtitle">{{title}}</div>
-                <div class="itemcate"> {{sub_category}}</div>
-                <div class="itemauthor">Teacher: {{author_id.fullname}}</div>
-                <div style="display: flex;">
-                    <div class="itemrate">Rate: {{scores_review}}</div>
-                    <div class="itemnum">({{number_review}})</div>
-                </div>
-                <div class="itemdes">{{subtitle}}</div>
-                <div class="itemprice">{{price}}</div>
-                <div style="display: flex; align-items: flex-end;">
-                    <button><div class="itembtn">Add to Wishlist</div></button>
-                    <button><div class="itembtn">Add to card</div></button>
-                </div>
+                <a href="../accounts/courseDetail/{{_id}}">
+
+                    <div class="col-2 m-3">
+                    <div class="card m-2" style="width: 15rem; ">
+                        <img class="card-img-top" src="/{{image}}" alt="Card image cap">
+                        <div class="card-body">
+                        <h4 class="card-title" style="font-size: medium;"><a href="../accounts/courseDetail/{{_id}}" title="View Product">{{title}}</a></h4>
+                        <p class="card-text"  style="font-size: small;">{{slug_category}}</p>
+                        <p class="card-text" style="font-size: small;">{{subtitle}}</p>
+                    
+                        <div class="row">
+                            <div class="col">
+                    
+                            <p class="btn btn-warning btn-block"><strong>{{price}}</strong></p>
+                            </div>
+                            <div class="col">
+                            <div class="d-flex justify-content-between">
+                            <a href="#" class="btn-sm btn-info ">Add to cart</a>
+                            <a href="#" class="btn-sm btn-info">Add wishlist</a>
+                            </div>
+                            
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                </a>
             </div>
         {{/each}}
 

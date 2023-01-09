@@ -1,34 +1,39 @@
-<div style="display: flex; justify-content: space-around; margin-top: 30px;">
-    <div class="shoppingcart">
-        <div style="font-size: 30px;font-weight: bolder; margin-bottom: 30px;"> Courses in shopping Cart</div>
-        <div style="text-align: center; margin: 30px; font-size: larger; font-weight: bolder; ">Courses that you've wishlisted</div>
-        {{#each paycourse }}
-            <div class="father">
-                <div class="son">
-                    <div style="display: flex; margin-top: 20px;">
-                        <div class="itemcard">
-                        <img src="/student/js.png" alt="" style="width:100px; height: 80px;">
-                        <div class="itemtitle">{{paycourse.title}}</div>
-                        <div class="itemprice">{{paycourse.price}}</div>
-                        <div style="height: 80px;">{{paycourse.description}}</div>
-                        <div style="display: flex;">
-                            <p><button>Add to Wishlist</button></p>
-                            <p><button>Add to Cart</button></p>
-                        </div>
+<div style="display: flex;  margin-top: 30px; margin-left: 30px; ">
+    <div style="width: 75%; " >
+        <div style="font-size: 30px;font-weight: bolder; margin-bottom: 30px;">List of course enroll</div>
+        <div style="display: flex; ">
+            {{#each paycourse }}
+            <div style="display: inline-block;">
+               
+                <div class="col-2 m-3">
+            <div class="card m-2" style="width: 15rem; height: 15rem;">
+                <img class="card-img-top" src="/{{avatar_course}}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title" style="font-size: medium;">{{name_course}}</h4>
+                    <div class="row">                  
+                        <div class="col">
+                            </div>
+                                <div class="col">
+                                    <div class="d-flex justify-content-between">
+                                    </div>             
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {{/each}}
+            {{/each}}
+        </div>
+        
        
     </div>
 
     <div>
-        <div class="border-start shoppingmoney" >
-            <div >Total:</div>
-            <div style="font-weight: bolder; font-size: larger;">đ 12345,000</div>
-            <a href=""><button class="spbtn" >Check out</button></a>
+        {{!-- <div class=" shoppingmoney" style="background-color: rgba(0, 0, 0, 0.577); padding: 30px; border-radius: 20px; margin-left: 30px; " >
+            <div style="font-weight: bolder; font-size: larger; color: white" >Total:</div>
+            <div style="font-weight: bolder; font-size: larger; color: black; margin-top: 5px;">đ 12345,000</div>
+            <a href=""><button class="abtn" >Check out</button></a>
 
-        </div>
+        </div> --}}
     </div>
 </div>

@@ -219,21 +219,14 @@ const topCourse = async (req, res) => {
 };
 
 const payCourse = async (req, res) => {
-  const PayCourse = [
-    {
-      title: "Mobile for beginer",
-      description: "day la mot khoa hoc mobile danh cho nguoi moi bat dau.",
-      price: "$113",
-      image: "/student/js.png",
-    },
-    {
-      title: "web for beginer",
-      description: "day la mot khoa hoc web danh cho nguoi moi bat dau.",
-      price: "$1133",
-      image: "/student/js.png",
-    },
-  ];
-  res.render("vwStudent/shopping", { paycourse: PayCourse });
+  const id = req.session.authAccount?.account?._id ;
+  const data = await Student.findOne({ "id_account" : id})
+ 
+  const PayCourse = data.courses_enroll
+  console.log("=>",PayCourse)
+  console.log({ paycourse: PayCourse})
+  res.render("vwStudent/shopping", { paycourse: PayCourse, isLogin: req.session.auth,
+    acc: req.session.authAccount });
 };
 
 const WishList = async (req, res) => {
@@ -286,6 +279,7 @@ const profile = async (req, res) => {
   const user = req.session.authAccount;
   res.render("vwStudent/profile", {
     infor: user.account,
+    detailinfor:user.detail,
     isLogin: req.session.auth,
     acc: req.session.authAccount,
   });
