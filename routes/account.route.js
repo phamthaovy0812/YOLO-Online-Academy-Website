@@ -54,7 +54,7 @@ router.post('/login', async (req, res)=>{
        
         req.session.save(function (err) {
             // session saved
-            res.redirect(url); // sua thi sua o day nha Vy, sua dieu huong home a'
+            res.redirect(url); // sua thi sua o day anha Vy, sua dieu huong home a'
         })
     }
 
