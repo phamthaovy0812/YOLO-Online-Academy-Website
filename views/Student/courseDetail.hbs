@@ -30,7 +30,7 @@
 
                         <div class="d-flex">
                             <button href="#" type="button" class="btn btn-warning primary-btn">ADD TO CART</button>
-                            <form method="POST" action="/api/students/addWishLists/{{course._id}}">
+                            <form method="GET" action="/api/students/addWishLists/{{course._id}}">
                                 <input type="hidden" name="idUser" value="{{user._id}}">
                                 <input type="hidden" name="idCourse" value="{{course._id}}">        
                                 <button type="submit" class="heart-icon"><span class="bi bi-heart-fill"></span></button>
@@ -218,43 +218,40 @@
                                
                                 
                                 <div class="reviewsAndRating">
-                                    <script>
-                                        const arr_imgStudent = ['/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg', '/student/avtStudent.jpg']
-                                        const arr_nameStudent = ['Brian K.', 'Brian K.', 'Brian K.', 'Brian K.', 'Brian K.']
-                                        for (let i = 0; i < 20; i++) {
-                                            document.write(`<div class=" studentComment">
-                                        <div class="review_Heading">
-                                            <div class="review_Heading_Name_Rating">
-                                                <div class="review_Heading_Rating_1">
-                                                    <a class="imgStudentBox">
-                                                        <img class="imgStudent" src="/student/avtStudent.jpg" alt="">
-                                                    </a>
-                                                    <div>Brian K.</div>
-                                                </div>
-                                                
-                                                <div class="review_Heading_Rating_2">
-                                                    <div>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
+                                    {{#each  review}}
+                                            <div class=" studentComment">
+                                                <div class="review_Heading">
+                                                    <div class="review_Heading_Name_Rating">
+                                                        <div class="review_Heading_Rating_1">
+                                                            <a class="imgStudentBox">
+                                                                <img class="imgStudent" src="/student/avtStudent.jpg" alt="">
+                                                            </a>
+                                                            <div>{{name}}.</div>
+                                                        </div>
+                                            
+                                                        <div class="review_Heading_Rating_2">
+                                                            <div>
+                                                               
+
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                            {{!-- <div class="review_Heading_time">2 months ago</div> --}}
+                                                        </div>
                                                     </div>
-                                                    {{!-- <div class="review_Heading_time">2 months ago</div> --}}
+                                                </div>
+                                                <div style="padding-top: 1rem">
+                                                    <span>
+                                                       {{comment}}
+                                                    </span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        {{!-- <div style="padding-top: 1rem">
-                                            <span>
-                                                I really liked this course from both trainers. The one thing I'd love to see for future would be a bit around these ECMA
-                                                modules and handling those versus require statements. I'm running into that more and more with online training and I was
-                                                really hoping this course would cover that, maybe on future editions? Otherwise, very happy with the value for money and
-                                                training skill.
-                                            </span>
-                                        </div> --}}
-                                    </div>`);
-                                        }
-                                    </script>
+                                    {{/each}}
+                                   
+                                    
                                 </div>
                             </div>
                         </div>

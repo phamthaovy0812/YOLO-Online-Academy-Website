@@ -58,6 +58,14 @@ const DeleteStudent = async (req, res, id_account) => {
       scores : req.body.scores, 
       comment : req.body.comment
     }
+    const ratingCourse = {
+      id_course: req.params.id,
+      scores: req.body.scores,
+      comment: req.body.comment,
+      id_user:id,
+      name:data.fullname,
+      pathImage:"https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.pn",
+    }   
     console.log(data)
     const ratingList = data.rating_list;
     ratingList.push(rating)
@@ -66,10 +74,12 @@ const DeleteStudent = async (req, res, id_account) => {
       returnOriginal: false
     })
     const course = await CourseModel.findOne({"_id":req.params.id});
-    course.list_reviews.push(rating);
-    await course.save();
-    console.log(course)
-    return dataUpdate
+    const newinfor=course.list_reviews;
+    newinfor.push(ratingCourse)
+
+    const updated = await CourseModel.findOneAndUpdate({ "_id": req.params.id }, { list_reviews: newinfor }, { returnOriginal: false });
+    console.log(updated)
+    return dataUpdate;
   }
 
 
@@ -212,7 +222,7 @@ const  addWishList = async (req, res) => {
 
   console.log(userCurrent)
 
-  return res.redirect("/api/accounts/courseDetail/" + courseID);
+  res.redirect("/api/accounts/courseDetail/" + courseID);
 
   }
 

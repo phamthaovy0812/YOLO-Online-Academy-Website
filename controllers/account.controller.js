@@ -213,14 +213,14 @@ const detailCourseUI = async (req, res) => {
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
        console.log(story);
-       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
+       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
        // , 
      });
    }
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
       console.log(story);
-      return res.render("Student/courseDetail", { course: story, chapter: story.chapter });
+      return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });
 
