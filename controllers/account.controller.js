@@ -225,10 +225,28 @@ const AccountData = async (req, res) => {
 const detailCourseUI = async (req, res) => {
   try {
     const user = req.session.authAccount;
+    
    if(user){
+      var account = await StudentModel.findOne({ "id_account":req.session.authAccount.account._id})
+       
+      var isBuy = false ;
+      var isAddCart = false;
+      var listEnroll = account.courses_enroll;
+      for( var i=0;i<listEnroll.length ; i++)
+      {
+        if(listEnroll[i].id_course == req.params.id)
+          isBuy = true;
+      }
+      var listCart = account.cart;
+      for( var i=0;i<listCart.length ; i++)
+      {
+        if(listCart[i].id_course == req.params.id)
+        isAddCart = true;
+      }
+       console.log(" BUY IS ", req.params.id, account.courses_enroll,isBuy)
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
-       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title });
+       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart });
        // , 
      });
    }

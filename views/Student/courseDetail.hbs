@@ -29,12 +29,15 @@
                         <p>{{course.subtitle}}</p>
 
                         <div class="d-flex">
-                            <form method="post" action="/api/accounts/tocart" >
-                                <input type="hidden" name="_id" value="{{id_course}}" >
-                                <input type="hidden" name="title" value="{{title}}" >
-                                <input type="hidden" name="avatar" value="{{avatar}}" > 
-                                <button  type="submit" class="btn btn-warning primary-btn">ADD TO CART</button>
-                            </form>
+                            {{#if isAddCart}}
+                              {{else}}
+                                <form method="post" action="/api/accounts/tocart" >
+                                    <input type="hidden" name="_id" value="{{id_course}}" >
+                                    <input type="hidden" name="title" value="{{title}}" >
+                                    <input type="hidden" name="avatar" value="{{avatar}}" > 
+                                    <button  type="submit" class="btn btn-warning primary-btn">ADD TO CART</button>
+                                </form>
+                              {{/if}}
                             <form method="POST" action="/api/students/addWishLists/{{course._id}}">
                                 <input type="hidden" name="idUser" value="{{user._id}}">
                                 <input type="hidden" name="idCourse" value="{{course._id}}">        
@@ -42,12 +45,22 @@
                             </form>
                            
                         </div>
-                        <form method="POST" action="/api/accounts/buy">
-                            <input type="hidden" name="_id" value="{{id_course}}" >
-                            <input type="hidden" name="title" value="{{title}}" >
-                            <input type="hidden" name="avatar" value="{{avatar}}" >
-                            <button href="#" type="submit" class="btn btn-outline-success btn-buy">Buy now</button>
-                        </form>
+                      
+                     
+                        {{#if isBuy}}
+                            <form method="POST" action="/api/students/gocourse">
+                                <input type="hidden" name="_id" value="{{id_course}}" >
+                                <button href="#" type="submit" class="btn btn-outline-success btn-buy">Go Course </button>
+                           
+                            </form>
+                        {{else}}
+                            <form method="POST" action="/api/accounts/buy">
+                                <input type="hidden" name="_id" value="{{id_course}}" >
+                                <input type="hidden" name="title" value="{{title}}" >
+                                <input type="hidden" name="avatar" value="{{avatar}}" >
+                                <button href="#" type="submit" class="btn btn-outline-success btn-buy">Buy now</button>
+                            </form>
+                        {{/if}}
                         <hr>
 
                         <ul>
