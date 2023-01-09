@@ -9,7 +9,7 @@ var jsonParser = bodyParser.json();
 const router = express.Router();
 
 router.get('/signup',(req,res)=>{
-    res.render("vwAccount/signup");
+    res.render("vwAccount/signup",{layout:false});
   })
 
 
@@ -22,7 +22,7 @@ router.post('/signup', (req, res)=>{
 });
 
 router.get('/login',(req,res)=>{
-    res.render('vwAccount/login');
+    res.render('vwAccount/login',{layout:false});
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
 
