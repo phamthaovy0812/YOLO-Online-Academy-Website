@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/categoryCensor", Admin.categoryCensor);
 router.get("/teacherCensor", Admin.teacherCensor);
 router.get("/studentCensor", Admin.studentCensor);
-router.get("/courseCensor", Admin.courseCensor);
+// router.get("/courseCensor", Adm);
 router.post("/blockStudent/:id", Admin.BlockStudent);
 router.post("/blockTeacher/:id", Admin.BlockTeacher);
 // router.get("/courseCensor",(req,res)=>{

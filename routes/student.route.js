@@ -12,12 +12,12 @@ router
 router    
     .route('/:id')
       .patch(jsonParser, Student.UpdateStudent);
-router    
-    .route('/wishlist/delete')
-        .post(jsonParser, Student.DeleteWishList);
-router    
-    .route('/wishlist/update')
-        .post(jsonParser, Student.UpdateWishList);
+// router    
+//     .route('/wishlist/delete')
+//         .post(jsonParser, Student.DeleteWishList);
+// router    
+//     .route('/wishlist/update')
+//         .post(jsonParser, Student.UpdateWishList);
 
 router    
     .route('/rating')
@@ -30,7 +30,10 @@ router
 router.post("/addWishLists/:id", Student.addWishList);
   
 router.get("/viewlesson/:id",Student.detailCourseUI);
-
+router.post("/gocourse",async (req, res)=>{
+    console.log(req.body._id)
+    res.redirect(`/api/students/viewlesson/${req.body._id}`)
+})
 
 
 router.get("/Category", Student.categoryUI);
