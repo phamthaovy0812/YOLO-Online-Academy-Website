@@ -21,10 +21,6 @@ const accountSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  isBlock :{
-    type : Boolean,
-    default : false 
-  }
 });
 
 accountSchema.pre("save", async function (next) {
@@ -38,4 +34,5 @@ accountSchema.method.comparePassword = async function (yourPassword) {
   return await bcrypt.compare(yourPassword, this.password);
 };
 
-export default mongoose.model("Account", accountSchema);
+// export default mongoose.model("Account", accountSchema);
+export default mongoose.models['Account'] || mongoose.model('Account', accountSchema);

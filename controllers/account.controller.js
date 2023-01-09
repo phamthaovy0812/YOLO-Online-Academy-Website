@@ -80,6 +80,7 @@ const UpdatePasswordAccount = async (req, res) => {
   try {
     const id = req.params.id;
     const password = await bcrypt.hash(req.body.password, 10);
+  
 
     const data = await Account.findByIdAndUpdate(
       id,
@@ -150,7 +151,7 @@ const UpdateInfoAccount = async (req) => {
 // }
 
 const CreateAccount = async (req) => {
-  const { email, username, password, role, avatar } = req.body;
+  const { email, username, password, role, avatar,isBlock } = req.body;
 
   try {
     const handleCreateAccount = async () => {
@@ -160,6 +161,7 @@ const CreateAccount = async (req) => {
         username,
         password,
         role,
+        isBlock
       });
 
       const dataToSave = await newAccount.save();
@@ -203,6 +205,26 @@ const CreateAccount = async (req) => {
     });
   }
 };
+// const BlockAccount = async(req, res)=>{
+//   try{
+//     const id = req.params.id;
+//     const queryAccount = await Account.findById(id);
+//     if(queryAccount.role == 0){
+//       Student.BlockStudent(req);
+//     }
+//     // else if (queryAccount.role == 0){
+//     //   Studen
+//     // }
+//     const data = await Account.findByOneAndUpdate(id);
+//     res.send(`Document with ${data.name} has been blocked..`);
+//   }
+//   catch(err){
+//     res.status(404).json({
+//       status: "fail",
+//       message: "ID invalid",
+//     });
+//   }
+// };
 
 const AccountDataCourse = async (req, res) => {
 
@@ -225,10 +247,36 @@ const AccountData = async (req, res) => {
 const detailCourseUI = async (req, res) => {
   try {
     const user = req.session.authAccount;
+    
    if(user){
+      var account = await StudentModel.findOne({ "id_account":req.session.authAccount.account._id})
+       
+      var isBuy = false ;
+      var isAddCart = false;
+      var isWishList = false ;
+      var listEnroll = account.courses_enroll;
+      for( var i=0;i<listEnroll.length ; i++)
+      {
+        if(listEnroll[i].id_course == req.params.id)
+          isBuy = true;
+      }
+      var listCart = account.cart;
+      for( var i=0;i<listCart.length ; i++)
+      {
+        if(listCart[i].id_course == req.params.id)
+        isAddCart = true;
+      }
+
+      var wishlist = account.wishlist;
+      for( var i=0;i<wishlist.length ; i++)
+      {
+        if(wishlist[i].id_course == req.params.id)
+        isWishList = true;
+      }
+       console.log(" BUY IS ", req.params.id, account.courses_enroll,isBuy)
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
-       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title });
+       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart, isWishList:isWishList });
        // , 
      });
    }  
@@ -236,7 +284,8 @@ const detailCourseUI = async (req, res) => {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
       console.log(story);
-      return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews });
+      return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews, isLogin: req.session.auth,
+        acc: req.session.authAccount, });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });}
 
@@ -244,7 +293,8 @@ const detailCourseUI = async (req, res) => {
   } catch (error) {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
-      return res.render("Student/courseDetail", { course: story, chapter: story.chapter });
+      return res.render("Student/courseDetail", { course: story, chapter: story.chapter, isLogin: req.session.auth,
+        acc: req.session.authAccount, });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });
   }

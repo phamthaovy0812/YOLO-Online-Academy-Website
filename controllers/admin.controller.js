@@ -1,4 +1,7 @@
 import Admin from '../models/admin.model.js';
+import Student from '../models/student.model.js';
+import Teacher from '../models/teacher.model.js';
+// import Category from '../models/category.model.js'
 import AccountModel from '../models/Account.model.js';
 
 const GetAllAdmin = async(req, res) =>{
@@ -63,19 +66,40 @@ const DeleteAdmin = async (req, res, id_account) => {
     return data
   };
 
-  const categoryCensor = async(req, res) => {
-    const categoryList = [{"name":"DEVELOPMENT test"}, {"name":"Business"}, {"name":"Design"}];
-    res.render('Admin/categoryCensor',{category:categoryList})
-  }
+  const BlockStudent = async (req, res) => {
+  const id_student = req.params.id;
+  console.log(id_student);
+  const dataUpdate = await Student.findByIdAndUpdate({_id: id_student},{isBlock:true});
+  console.log(dataUpdate)
+  return res.redirect("/api/admins/studentCensor");
+}
+  const BlockTeacher = async (req, res) => {
+  const id_teacher = req.params.id;
+  console.log(id_teacher);
+  const dataUpdate = await Teacher.findByIdAndUpdate({_id: id_teacher},{isBlock:true});
+  console.log(dataUpdate)
+  return res.redirect("/api/admins/teacherCensor");
+}
+
+  // const categoryCensor = async(req, res) => {
+  //   const allCategories = await Category.find().lean();
+  //   res.render('Admin/categoryCensor',{category:allCategories})
+  // }
 
   const teacherCensor = async(req, res) => {
-    const teacherList = [{"fullname":"Nguyen Thi Minh Thao", "skill":"ReactJS, React Hooks"}, {"fullname": "Bui Quang Thanh", "skill": "Python, Data Science"},{"fullname": "Bui Thi Dung", "skill": "Out Trinh"}];
-    res.render('Admin/teacherCensor',{teacher: teacherList})
+    const allTeacher = await Teacher.find({isBlock:false}).lean();
+    res.render('Admin/teacherCensor',{teacher: allTeacher})
   }
 
   const studentCensor = async(req, res) => {
-    const studentList = [{"fullname": "Pham Thao Vy"}, {"fullname": "Pham Hong Tan"}, {"fullname": "Ha Thi Thanh Tu"}];
-    res.render('Admin/studentCensor', {student: studentList})
+    const allStudent= await Student.find({isBlock:false}).lean();
+    res.render('Admin/studentCensor', {student: allStudent}) 
   }
 
-  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor };
+  const courseCensor = async (req, res) => {
+    const allCourses = await Course.find().lean();
+    res.render('Admin/courseCensor', {course: allCourses});
+  }
+
+
+  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher};

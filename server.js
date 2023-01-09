@@ -61,17 +61,12 @@ app.set('views', './views');
 app.use(rout); // router root 
 
 activate_locals(app);
-app.get("/",(req,res)=>{
-   // console.log("->>>>",req.session.authAccount)
-    res.render("vwAccount/home");
-  })
 
 
-
-//item tes
-app.get("/", (req, res) => {
-  res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
-})
+// //item tes
+// app.get("/", (req, res) => {
+//   res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
+// })
 app.listen(port, () => {
     console.log( `Example app listening at http://localhost:${port}`)
 })

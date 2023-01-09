@@ -1,0 +1,10 @@
+#titleCourse {
+    font-weight: 550;
+}
+.infoCourse {
+    font-size: 14px;
+}
+.listOfCourses{
+    box-sizing: border-box;
+    display: block;
+}

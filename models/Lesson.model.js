@@ -22,7 +22,12 @@ const Lesson = new mongoose.Schema({
     },
     video: {
         type: String,
-    }
+    },
+    
+  isBlock :{
+    type : Boolean,
+    default : false 
+  }
 });
 
 export default mongoose.model('Lesson', Lesson);

@@ -30,7 +30,10 @@ router
 router.post("/addWishLists/:id", Student.addWishList);
   
 router.get("/viewlesson/:id",Student.detailCourseUI);
-
+router.post("/gocourse",async (req, res)=>{
+    console.log(req.body._id)
+    res.redirect(`/api/students/viewlesson/${req.body._id}`)
+})
 
 
 router.get("/Category", Student.categoryUI);
@@ -41,12 +44,20 @@ router.get("/courseDetailBought",(req,res)=>{
 router.get("/category",(req,res)=>{
     res.render('Student/Category');
 })
+
+router.get("/mylearning",(req,res)=>{
+    res.render('vwStudent/mylearning');
+})
 router.get("/home",Student.topCourse);
 router.get("/profile", Student.profile);
 router.get("/shopping",Student.payCourse);
 
 router.get('/viewlesson',(req,res)=>{
     res.render('Student/viewlesson')
+})
+
+router.get('/shopping',(req,res)=>{
+    res.render('vwStudent/shopping')
 })
 
 

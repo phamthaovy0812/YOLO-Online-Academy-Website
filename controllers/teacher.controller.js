@@ -69,7 +69,8 @@ const viewCreateCourse = async (req, res) => {
     if (err) return (err);
     console.log(subCategorys);
 
-    res.render("Teacher/createCourse", { chapters: story, subCategory: subCategorys, user: user });
+    res.render("Teacher/createCourse", { chapters: story, subCategory: subCategorys, user: user, isLogin: req.session.auth,
+      acc: req.session.authAccount});
   });// Ch
 }
 const createCourse = async (req, res) => {
@@ -120,7 +121,8 @@ const createCourse = async (req, res) => {
 const homepage = (req, res) => {
   const user = req.session.authAccount;
   console.log(user);
-  res.render('Teacher/home', { user: user })
+  res.render('Teacher/home', { user: user, isLogin: req.session.auth,
+    acc: req.session.authAccount })
 };
 
 const editCourse = async (req, res) => {
@@ -129,7 +131,8 @@ const editCourse = async (req, res) => {
   const course = await CourseModel.find({ author_id: user.account._id }).lean();
   console.log(course);
 
-  res.render("Teacher/editCourse", { course: course });
+  res.render("Teacher/editCourse", { course: course , isLogin: req.session.auth,
+    acc: req.session.authAccount});
 };
 
 const editCourseDetail = async (req, res) => {
@@ -139,7 +142,8 @@ const editCourseDetail = async (req, res) => {
     const allchap = await ChapterModel.find({ author: user.account._id }).lean();
     CourseModel.findOne({ _id: req.params.id, }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
       if (err) return (err);
-      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: story.chapter, user: user, allChapter: allchap });
+      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: story.chapter, user: user, allChapter: allchap , isLogin: req.session.auth,
+        acc: req.session.authAccount});
 
 
     });// Ch
@@ -199,7 +203,8 @@ const myListCourses = async (req, res) => {
     const course = await CourseModel.find({ author_id: user.account._id }).lean();
     console.log(course);
 
-    res.render("Teacher/myListCourses", { course: course });
+    res.render("Teacher/myListCourses", { course: course, isLogin: req.session.auth,
+      acc: req.session.authAccount });
   } catch (error) {
       return error;
   }
