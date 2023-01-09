@@ -63,11 +63,13 @@ const UpdateRating = async (req) => {
     { rating_list: ratingList },
     {
       returnOriginal: false,
-    }
-  );
-
-  return dataUpdate;
-};
+    });
+    const course = await CourseModel.findOne({"_id":req.params.id});
+    course.list_reviews.push(rating);
+    await course.save();
+    console.log(course)
+    return dataUpdate
+  }
 
 const UpdateEnrollCourse = async (req) => {
   const id = req.session.authAccount?.account?._id;
@@ -87,21 +89,13 @@ const UpdateEnrollCourse = async (req) => {
     {
       returnOriginal: false,
     }
-    console.log(data)
-    const ratingList = data.rating_list;
-    ratingList.push(rating)
+  );
+  return dataUpdate;
+};
 
-    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { rating_list :ratingList }, {
-      returnOriginal: false
-    })
- 
-    return dataUpdate
-  }
-
-
-  const UpdateEnrollCourse = async (req) =>{
-    const id = req.session.authAccount?.account?._id ;
-    const data = await Student.findOne({ "id_account" : id})
+const UpdateCart = async (req) => {
+  const id = req.session.authAccount?.account?._id;
+  const data = await Student.findOne({ id_account: id });
 
   const course = {
     id_course: req.body._id,
@@ -317,5 +311,15 @@ const  addWishList = async (req, res) => {
     wishlists.push(objectCourse)
 
 
+  const userCurrent = await Student.findOneAndUpdate({ "id_account": userID }, { wishlist: wishlists }, {
+      returnOriginal: false
+    });
 
-export default {detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};
+  console.log(userCurrent)
+
+  return res.redirect("/api/accounts/courseDetail/" + courseID);
+
+  }
+
+
+export default { addWishList,detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};
