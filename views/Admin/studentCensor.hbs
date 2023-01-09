@@ -57,12 +57,12 @@
                         <div class="box_btn_block">
                             <form action="/api/admins/blockStudent/{{_id}}" method="POST">
                                 <button type="submit"
-                                        class="btn btn-danger btn_edit border border-dark" onclick="adminBlockStudent()">Block
+                                        class="btn btn-danger btn_edit border border-dark" onclick="adminBlockStudent()">Block {{fullname}}
                                 </button>
                             </form>
                             <script>
                                 function adminBlockStudent() {
-                                    alert("Block student {{fullname}} successfully!");
+                                    alert("Block student successfully!");
                                 }
                             </script>
                         </div>
