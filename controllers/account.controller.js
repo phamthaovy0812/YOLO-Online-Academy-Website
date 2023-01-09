@@ -226,7 +226,6 @@ const detailCourseUI = async (req, res) => {
   try {
     const user = req.session.authAccount;
    if(user){
-    console.log(1)
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
        return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title });
@@ -243,7 +242,6 @@ const detailCourseUI = async (req, res) => {
 
     
   } catch (error) {
-    console.log(333)
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
       return res.render("Student/courseDetail", { course: story, chapter: story.chapter });

@@ -12,12 +12,12 @@ router
 router    
     .route('/:id')
       .patch(jsonParser, Student.UpdateStudent);
-router    
-    .route('/wishlist/delete')
-        .post(jsonParser, Student.DeleteWishList);
-router    
-    .route('/wishlist/update')
-        .post(jsonParser, Student.UpdateWishList);
+// router    
+//     .route('/wishlist/delete')
+//         .post(jsonParser, Student.DeleteWishList);
+// router    
+//     .route('/wishlist/update')
+//         .post(jsonParser, Student.UpdateWishList);
 
 router    
     .route('/rating')
