@@ -42,12 +42,22 @@
                             </form>
                            
                         </div>
-                        <form method="POST" action="/api/accounts/buy">
-                            <input type="hidden" name="_id" value="{{id_course}}" >
-                            <input type="hidden" name="title" value="{{title}}" >
-                            <input type="hidden" name="avatar" value="{{avatar}}" >
-                            <button href="#" type="submit" class="btn btn-outline-success btn-buy">Buy now</button>
-                        </form>
+                      
+                     
+                        {{#if isBuy}}
+                            <form method="POST" action="/api/students/gocourse">
+                                <input type="hidden" name="_id" value="{{id_course}}" >
+                                <button href="#" type="submit" class="btn btn-outline-success btn-buy">Go Course </button>
+                           
+                            </form>
+                        {{else}}
+                            <form method="POST" action="/api/accounts/buy">
+                                <input type="hidden" name="_id" value="{{id_course}}" >
+                                <input type="hidden" name="title" value="{{title}}" >
+                                <input type="hidden" name="avatar" value="{{avatar}}" >
+                                <button href="#" type="submit" class="btn btn-outline-success btn-buy">Buy now</button>
+                            </form>
+                        {{/if}}
                         <hr>
 
                         <ul>
