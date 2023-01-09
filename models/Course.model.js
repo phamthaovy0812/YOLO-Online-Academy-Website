@@ -23,7 +23,7 @@ const Course = new mongoose.Schema({
     },
     author_id:{
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Teacher",
     },
     number_review:{
         type: Number,
@@ -62,6 +62,10 @@ const Course = new mongoose.Schema({
     chapter:{
         type: [Schema.Types.ObjectId],
         ref: "Chapter"
+    },
+    isBlock:{
+        type: Boolean,
+        default: false,
     }
     
 },

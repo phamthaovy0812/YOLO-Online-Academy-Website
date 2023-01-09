@@ -62,76 +62,17 @@ app.set('views', './views');
 app.use(rout); // router root 
 
 activate_locals(app);
-
-/*
-app.get("/",(req,res)=>{
-    return res.send("haha đây là dòng test");
-   
-  })
-*/
-
-// Non Account
-
-///// page 404
-app.get("/404",(req,res)=>{
-    res.render("Error/404",{ layout: false }); // layout false là để k hiển thị header và footer
-})
-//login
-
-// Page SignUp
-
-// Page Home
 app.get("/",(req,res)=>{
    // console.log("->>>>",req.session.authAccount)
     res.render("vwAccount/home");
   })
 
-//Search
-app.get('/search',(req, res)=> {
-  res.render('vwAccount/search');
-});
 
-//item test
-app.get('/item',(req, res)=> {
-  res.render('cources/item');
-});
 
-app.get("/viewlesson", (req, res) => {
-  res.render("Teacher/test");
+//item tes
+app.get("/", (req, res) => {
+  res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
 })
-
-//Student
-
-// Edit Profile
-
-app.get("/edit",(req,res)=>{
-  res.render("vwStudent/editprofile");
-})
-//profile page
-// app.get("/profile",(req,res)=>{
-//   res.render("vwStudent/profile");
-// })
-//my learning page
-app.get("/mylearning",(req,res)=>{
-  res.render("vwStudent/mylearning");
-})
-
-// shopping cart 
-// app.get("/shopping",(req,res)=>{
-//   res.render("vwStudent/shopping");
-// })
-
-//view lesson
-app.get("/viewlesson",(req,res)=>{
-  res.render("Student/viewlesson");
-})
-
-
-// app.get("/",Student.topCourse);
-// app.get("/checkout",(req,res)=>{
-//   res.render("vwStudent/checkout")
-// })
-
 app.listen(port, () => {
     console.log( `Example app listening at http://localhost:${port}`)
 })

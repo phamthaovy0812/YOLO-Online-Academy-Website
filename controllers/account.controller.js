@@ -199,14 +199,21 @@ const AccountData = async (req, res) => {
   res.render("vwStudent/profile", { authaccount: req.session.authAccount });
 };
 const detailCourseUI = async (req, res) => {
-  const course = await CourseModel.find().lean();
-  const user = req.session.authAccount;
+  try {
+    const course = await CourseModel.find().lean();
+    const user = req.session.authAccount;
 
 
-  CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
-    if (err) return (err);
-    res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
-  });
+    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
+      if (err) return (err);
+      console.log(story);
+      res.render("Student/courseDetail", { course: story, chapter: story.chapter });
+      // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
+    });
+  } catch (error) {
+    
+  }
+  
 };
 
 
