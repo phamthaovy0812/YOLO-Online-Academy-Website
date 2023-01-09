@@ -24,6 +24,10 @@ router.post('/signup', (req, res)=>{
 router.get('/login',(req,res)=>{
     res.render('vwAccount/login',{layout:false});
 })
+
+router.get('/otp',(req,res)=>{
+    res.render('vwAccount/otp',{layout:false});
+})
 router.get("/courseDetail/:id",Account.detailCourseUI);
 
 router.post("/courseDetail/:id",  async (req,res)=>{
@@ -133,4 +137,13 @@ router
 // })
 
 // router.get("/home",Account.TopCourse);
+
+// router.get("/fullcourses", async (req,res)=>{
+//     try{
+//         const page= parseInt(req.query.page)-1||0;
+//         const limit = parseInt(req.query.limit)||5;
+//         const search=req.query.sort||"rating";
+        
+//     }
+// })
 export default router ;  

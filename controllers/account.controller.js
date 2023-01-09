@@ -80,6 +80,9 @@ const UpdatePasswordAccount = async (req, res) => {
   try {
     const id = req.params.id;
     const password = await bcrypt.hash(req.body.password, 10);
+    const editdata={
+      
+    }
   
 
     const data = await Account.findByIdAndUpdate(
