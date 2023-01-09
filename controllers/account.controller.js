@@ -224,16 +224,30 @@ const AccountData = async (req, res) => {
 };
 const detailCourseUI = async (req, res) => {
   try {
-    const course = await CourseModel.find().lean();
     const user = req.session.authAccount;
-
+   if(user){
+     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
+       if (err) return (err);
+       console.log(story);
+       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, isLogin: req.session.auth, acc: req.session.authAccount });
+       // , 
+     });
+   }
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
-      res.render("Student/courseDetail", { course: story, chapter: story.chapter, id_course : req.params.id, avatar : story.image, title:story.title  });
+      console.log(story);
+      return res.render("Student/courseDetail", { course: story, chapter: story.chapter });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });
-  } catch (error) {
+
     
+  } catch (error) {
+    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
+      if (err) return (err);
+      console.log(story);
+      return res.render("Student/courseDetail", { course: story, chapter: story.chapter });
+      // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
+    });
   }
   
 };

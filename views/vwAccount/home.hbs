@@ -15,7 +15,7 @@
       <div class="card m-2" style="width: 15rem; ">
         <img class="card-img-top" src="/{{image}}" alt="Card image cap">
         <div class="card-body">
-          <h4 class="card-title" style="font-size: medium;"><a href="product.html" title="View Product">{{title}}</a></h4>
+          <h4 class="card-title" style="font-size: medium;"><a href="../accounts/courseDetail/{{_id}}" title="View Product">{{title}}</a></h4>
           <p class="card-text"  style="font-size: small;">{{slug_category}}</p>
           <p class="card-text" style="font-size: small;">{{subtitle}}</p>
       
@@ -52,13 +52,13 @@
 <div style="justify-content: space-around;width: 100%; ">
   <div class="d-flex flex-wrap">
     {{#each viewcourse}}
-    <a href="../students/courseDetail/{{_id}}">
+    <a href="../accounts/courseDetail/{{_id}}">
 
       <div class="col-2 m-3">
         <div class="card m-2" style="width: 15rem; ">
           <img class="card-img-top" src="/{{image}}" alt="Card image cap">
           <div class="card-body">
-            <h4 class="card-title"><a href="product.html" title="View Product">{{title}}</a></h4>
+            <h4 class="card-title"><a href="../accounts/courseDetail/{{_id}}" title="View Product">{{title}}</a></h4>
             <p class="card-text">{{subtitle}}</p>
             <div class="row">
               <div class="col">
@@ -91,13 +91,13 @@
 <div style="justify-content: space-around;width: 100%;">
   <div class="d-flex flex-wrap">
     {{#each newcourse}}
-    <a href="../students/courseDetail/{{_id}}">
+    <a href="../accounts/courseDetail/{{_id}}">
   
       <div class="col-2 m-3">
         <div class="card m-2" style="width: 15rem; ">
           <img class="card-img-top" src="/{{image}}" alt="Card image cap">
           <div class="card-body">
-            <h4 class="card-title"><a href="product.html" title="View Product">{{title}}</a></h4>
+            <h4 class="card-title"><a href="../accounts/courseDetail/{{_id}}" title="View Product">{{title}}</a></h4>
             <p class="card-text">{{subtitle}}</p>
             <div class="row">
               <div class="col">

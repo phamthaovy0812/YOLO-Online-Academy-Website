@@ -87,13 +87,21 @@ const UpdateEnrollCourse = async (req) => {
     {
       returnOriginal: false,
     }
-  );
-  return dataUpdate;
-};
+    console.log(data)
+    const ratingList = data.rating_list;
+    ratingList.push(rating)
 
-const UpdateCart = async (req) => {
-  const id = req.session.authAccount?.account?._id;
-  const data = await Student.findOne({ id_account: id });
+    const dataUpdate = await Student.findOneAndUpdate({ "id_account" : id}, { rating_list :ratingList }, {
+      returnOriginal: false
+    })
+ 
+    return dataUpdate
+  }
+
+
+  const UpdateEnrollCourse = async (req) =>{
+    const id = req.session.authAccount?.account?._id ;
+    const data = await Student.findOne({ "id_account" : id})
 
   const course = {
     id_course: req.body._id,
@@ -292,21 +300,22 @@ const detailCourseUI = async (req, res) => {
       });
     });
 };
+const  addWishList = async (req, res) => {
+    const userID = req.body.idUser;
+    const courseID = req.params.id;
+    console.log(userID+" "+courseID);
+    const courses = await CourseModel.findOne({ _id: courseID });
+    const objectCourse = {
+      id_course: req.params.id,
+      name_course: courses.title,
+      avatar_course: courses.image,
 
-export default {
-  detailCourseUI,
-  profile,
-  WishList,
-  categoryUI,
-  DeleteWishList,
-  GetAllStudent,
-  CreateStudent,
-  DeleteStudent,
-  UpdateStudent,
-  UpdateRating,
-  UpdateEnrollCourse,
-  UpdateWishList,
-  topCourse,
-  payCourse,
-  UpdateCart,
-};
+    };
+
+  const data = await Student.findOne({ "id_account": userID });
+    const wishlists = data.wishlist;
+    wishlists.push(objectCourse)
+
+
+
+export default {detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse};
