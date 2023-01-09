@@ -8,6 +8,10 @@ const Chapter = new mongoose.Schema({
     timeCreate: {
         type: String,
     },
+    author:{
+        type: Schema.Types.ObjectId,
+        ref: "Account"
+    },
     deleteAt: {
         type: String
     },

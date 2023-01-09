@@ -3,6 +3,7 @@ import Student from '../models/student.model.js';
 import Teacher from '../models/teacher.model.js'; 
 import Category from '../models/Category.model.js';
 import Course from '../models/Course.model.js';
+// import Account from '../models/account.model.js';
 
 const GetAllAdmin = async(req, res) =>{
     try{
@@ -66,6 +67,16 @@ const DeleteAdmin = async (req, res, id_account) => {
     return data
   };
 
+  const BlockStudent = async (req, res) => {
+  const id_student = req.params.id;
+  console.log(id_student);
+  const flag=true;
+  // const dataUpdate = await Account.findOneAndUpdate({"_id":id_student}, {isBlock: true}, {returnOriginal: false});
+  // console.log(dataUpdate)
+  return res.redirect("/api/admins/studentCensor");
+  // return dataUpdate;
+}
+
   const categoryCensor = async(req, res) => {
     const allCategories = await Category.find().lean();
     res.render('Admin/categoryCensor',{category:allCategories})
@@ -77,7 +88,7 @@ const DeleteAdmin = async (req, res, id_account) => {
   }
 
   const studentCensor = async(req, res) => {
-    const allStudent= await Student.find().lean();
+    const allStudent= await Student.find({isBlock:false}).lean();
     res.render('Admin/studentCensor', {student: allStudent})
   }
 
@@ -92,4 +103,4 @@ const DeleteAdmin = async (req, res, id_account) => {
   }
 
 // "author_id":{"name":"Thanh",""},
-  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor, courseCensor};
+  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, categoryCensor, teacherCensor, studentCensor, courseCensor, BlockStudent};

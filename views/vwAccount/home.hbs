@@ -1,80 +1,135 @@
 <div>
-    <img src="/img_headerHome.png" alt="picHome" class="homeimg">       
+  <img src="/img_headerHome.png" alt="picHome" class="homeimg">
 </div>
 <div class="homebg1">
-    <div class="hometext">Top popular course of the past week</div>
-    <div><img src="/home/img_home1.png" alt="" class="homeimg_item"></div>
+  <div class="hometext">Top popular course of the past week</div>
+  <div><img src="/home/img_home1.png" alt="" class="homeimg_item"></div>
 
 </div>
-<div style="display: flex; justify-content: space-around;">
-   {{#each popularcourse}}
-    <div class="itemcard" style="display: inline-block; ">
-      <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-      <div class="itemtitle">{{title}}</div>
-      <div class="itemprice">{{price}}</div>
-      <div style="height: 80px;">{{description}}</div>
-      <div style="display: flex;">
-        <p><button>Add to Wishlist</button></p>
-        <p><button>Add to Cart</button></p>
+<div style="justify-content: space-around;width: 100%; ">
+<div class="d-flex flex-wrap">
+  {{#each popularcourse}}
+  <a href="../accounts/courseDetail/{{_id}}">
+
+    <div class="col-2 m-3">
+      <div class="card m-2" style="width: 15rem; ">
+        <img class="card-img-top" src="/{{image}}" alt="Card image cap">
+        <div class="card-body">
+          <h4 class="card-title" style="font-size: medium;"><a href="product.html" title="View Product">{{title}}</a></h4>
+          <p class="card-text"  style="font-size: small;">{{slug_category}}</p>
+          <p class="card-text" style="font-size: small;">{{subtitle}}</p>
+      
+          <div class="row">
+            <div class="col">
+      
+              <p class="btn btn-warning btn-block"><strong>{{price}}</strong></p>
+            </div>
+            <div class="col">
+              <div class="d-flex justify-content-between">
+              <a href="#" class="btn-sm btn-info ">Add to cart</a>
+              <a href="#" class="btn-sm btn-info">Add wishlist</a>
+              </div>
+            
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-   {{/each}}
 
-    
+  </a>
+  {{/each}}
+</div>
+
+
 </div>
 
 <div class="homebg2">
-    
-    <div><img src="/home/img_home2.png" alt="" class="homeimg_item"></div>
-    <div class="hometext">Top viewed courses</div>
+
+  <div><img src="/home/img_home2.png" alt="" class="homeimg_item"></div>
+  <div class="hometext">Top viewed courses</div>
 
 </div>
-<div style="justify-content: space-around;width: 100%;">
-  {{#each viewcourse}}
-    <div class="itemcard" style="display: inline-block; ">
-      <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-      <div  class="itemtitle">{{title}}</div>
-      <div class="itemprice">{{price}}</div>
-      <div style="height: 80px;">{{description}}</div>
-      <div style="display: flex;">
-        <p><button>Add to Wishlist</button></p>
-        <p><button>Add to Cart</button></p>
+<div style="justify-content: space-around;width: 100%; ">
+  <div class="d-flex flex-wrap">
+    {{#each viewcourse}}
+    <a href="../students/courseDetail/{{_id}}">
+
+      <div class="col-2 m-3">
+        <div class="card m-2" style="width: 15rem; ">
+          <img class="card-img-top" src="/{{image}}" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title"><a href="product.html" title="View Product">{{title}}</a></h4>
+            <p class="card-text">{{subtitle}}</p>
+            <div class="row">
+              <div class="col">
+                <p class="btn btn-warning btn-block"><strong>{{price}}</strong></p>
+              </div>
+              <div class="col">
+                <div class="d-flex justify-content-between">
+                  <a href="#" class="btn-sm btn-info ">Add to cart</a>
+                  <a href="#" class="btn-sm btn-info">Add wishlist</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-   {{/each}}
+
+    </a>
+    {{/each}}
+  </div>
+
+
 </div>
 
 <div class="homebg1">
-    <div class="hometext">New courses</div>
-    <div><img src="/img_login.png" alt="" class="homeimg_item"></div>
+  <div class="hometext">New courses</div>
+  <div><img src="/img_login.png" alt="" class="homeimg_item"></div>
 
 </div>
 
 <div style="justify-content: space-around;width: 100%;">
-  {{#each newcourse}}
-    <div class="itemcard" style="display: inline-block; ">
-      <img src="/img/avata.png" alt="" style="width:100px; height: 80px;">
-      <div  class="itemtitle">{{title}}</div>
-      <div class="itemprice">{{price}}</div>
-      <div style="height: 80px;">{{description}}</div>
-      <div style="display: flex;">
-        <p><button>Add to Wishlist</button></p>
-        <p><button>Add to Cart</button></p>
+  <div class="d-flex flex-wrap">
+    {{#each newcourse}}
+    <a href="../students/courseDetail/{{_id}}">
+  
+      <div class="col-2 m-3">
+        <div class="card m-2" style="width: 15rem; ">
+          <img class="card-img-top" src="/{{image}}" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title"><a href="product.html" title="View Product">{{title}}</a></h4>
+            <p class="card-text">{{subtitle}}</p>
+            <div class="row">
+              <div class="col">
+                  <p class="btn btn-warning btn-block"><strong>{{price}}</strong></p>
+              </div>
+              <div class="col">
+                <div class="d-flex justify-content-between">
+                  <a href="#" class="btn-sm btn-info ">Add to cart</a>
+                  <a href="#" class="btn-sm btn-info">Add wishlist</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-   {{/each}}
+  
+    </a>
+    {{/each}}
+  </div>
+  </div>
 </div>
 
 
 <div class="homebg2">
-    
-    <div><img src="/home/img_home3.png" alt="" class="homeimg_item" ></div>
-    <div>
-        <div class="hometext" style="width: 500px;">The most registered field of study in the last week</div>
-        {{#each mostcategory}}
-        <div  style="color: rgb(209, 17, 17); font-size: 20px; font-weight: bolder;">{{name}}</div>
-        {{/each}}
-    </div>
-    
+
+  <div><img src="/home/img_home3.png" alt="" class="homeimg_item"></div>
+  <div>
+    <div class="hometext" style="width: 500px;">The most registered field of study in the last week</div>
+    {{#each mostcategory}}
+    <div style="color: rgb(209, 17, 17); font-size: 20px; font-weight: bolder;">{{name}}</div>
+    {{/each}}
+  </div>
+
 
 </div>

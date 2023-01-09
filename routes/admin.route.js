@@ -15,6 +15,7 @@ router.get("/categoryCensor", Admin.categoryCensor);
 router.get("/teacherCensor", Admin.teacherCensor);
 router.get("/studentCensor", Admin.studentCensor);
 router.get("/courseCensor", Admin.courseCensor);
+router.post("/blockStudent/:id", Admin.BlockStudent);
 // router.get("/courseCensor",(req,res)=>{
 //     res.render('Admin/courseCensor');
 // })

@@ -1,17 +1,15 @@
-<div class="myListCourse d-flex ">
-    <!-- Begin: SIDEBAR -->
-    <div class="col-md-1 position-relative p-0 m-0">
+<div class="myListCourse  d-flex p-0 " style="height: auto">
+    <div class="col-md-1  position-relative p-0 m-0">
+        <!-- Begin: SIDEBAR -->
         <div id="side">
-            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px; position:absolute!important;">
-                <a href="/api/teachers/homepage" class="mySide" class="side w3-bar-item"><i
+            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge p-0 m-0" style="width:70px;position: absolute !important; box-sizing:border-box;">
+                <a href="/api/teachers/homepage" class="mySide" class="side w3-bar-item" onclick="handleRemove()" ><i
                         class="bi bi-house-door fa-xm"></i></a>
-                <a href="/api/teachers/createCourse" class="mySide " class="side w3-bar-item "><i
+                <a href="/api/teachers/postCourse" class="mySide "  onclick="handleRemove()" class="side w3-bar-item "><i
                         class="bi bi-camera-reels fa-xm"></i></i></a>
-                <a href="/api/teachers/myListCourses" class="mySide active" class="side w3-bar-item "><i
-                        class="bi bi-card-list fa-xm"></i></a>
+                <a href="" class="mySide active" class="side w3-bar-item " onclick="handleRemove()" ><i class="bi bi-card-list fa-xm"></i></a>
             </div>
         </div>
-
         <script>
             // Add active class to the current button (highlight it)
             var header = document.getElementById("side");
@@ -29,38 +27,28 @@
     <!-- End: SIDEBAR -->
 
 
-    <!-- Begin: My List Body -->
-    <div class="col m-5">
-        <h6 class="font-text container">MY LIST</h6>
-        {{!-- 1: Create Course and Filter Search --}}
-        <div class="container d-flex searchInMyList border border-gray rounded">
-
-            {{!-- Search Filter --}}
-            <div class="d-flex align-items-center input-group mr-2">
-                <input class="form-control rounded" id="myInput" type="text" placeholder="Search your course">
-
-                <script>
-                    $(document).ready(function () {
-                        $("#myInput").on("keyup", function () {
-                            var value = $(this).val().toLowerCase();
-                            console.log(value);
-                            $(".listOfCourse").filter(function () {
-                                console.log(typeof $(this).text().toLowerCase().indexOf(value) > -1);
-                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-
-                            });
+<div class="col m-2">
+    <h1 class="font-text">MY LIST</h1>
+    <div class="container d-flex searchInMyList border border-gray rounded">
+    
+        {{!-- Search Filter --}}
+        <div class="d-flex align-items-center input-group mr-2">
+            <input class="form-control rounded" id="myInput" type="text" placeholder="Search your course">
+    
+            <script>
+                $(document).ready(function () {
+                    $("#myInput").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        console.log(value);
+                        $(".listOfCourse").filter(function () {
+                            console.log(typeof $(this).text().toLowerCase().indexOf(value) > -1);
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         });
                     });
-                </script>
-            </div>
-
-            {{!-- Create Course Button --}}
-            <div class="d-flex align-items-center ">
-                <a href="/api/teachers/createCourse"><button type="button"
-                        class="btn btn-lg buttonCreateCourse">New Course</button></a>
-
-            </div>
+                });
+            </script>
         </div>
+<<<<<<< HEAD
 
         {{!-- 2: List of Course --}}
         <script>
@@ -97,20 +85,65 @@
                         <div class="listItem">
                             <p>Course rating</p>
                         </div>
+=======
+    
+        {{!-- Create Course Button --}}
+        <div class="d-flex align-items-center ">
+            <a href="/api/teachers/createCourse"><button type="button" class="btn btn-lg buttonCreateCourse">New
+                    Course</button></a>
+    </div>
+    </div>
+    <div class="listOfCourse">
+        {{#each course}}
+        <div class="container d-flex p-2 course border border-dark rounded">
+            <div class="container  imgAndInfo d-flex m-0  mb-2">
+                <img src="/{{image}}" alt="This is avatar of HTML Course">
+                <div class="info">
+                    <div>
+                        <p>{{title}}</p>
                     </div>
-                    <div class="box_btn_edit">
-                       <a href="/api/teachers/editCourse"><button type="button" class="btn btn-dark btn_edit">Edit</button></a>
+                    <div>
+                        <p>Last Update : {{lastUpdate}}</p>
+>>>>>>> b30f7c99678d21ae12cc84f5fd871f9b569f3622
                     </div>
                 </div>
-
+            </div>
+            <div class="rating ml-2 pl-2">
+                <div>Course rating</div>
+                <div class="starRating ">
+                    <div>4.50</div>
+                    <div class="starColor ml-2">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                </div>
+        
+        
+            </div>
+        
+            <div class="box_btn_edit mr-2">
+                <a href="/api/teachers/edit/{{_id}}" onclick="handleRemove()"><button class="btn_edit"
+                        type="button">Edit</button></a>
             </div>
         </div>
-                            `)
-            }
-        </script>
+        
+        {{/each}}
 
     </div>
+   
+</div>
 
-    <!-- End: My List Body -->
+<script>
+    function handleRemove() {
+        localStorage.removeItem('isFirstLoad');
+    }
+</script>
+
+
+
+   
 
 </div>

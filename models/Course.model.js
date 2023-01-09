@@ -6,6 +6,9 @@ const Course = new mongoose.Schema({
         type: String,
         required: true,
     },
+    slug_category: {
+        type: String,
+    },
     sub_category: {
         type: Schema.Types.ObjectId,
         ref: "SubCategory",
@@ -20,7 +23,7 @@ const Course = new mongoose.Schema({
     },
     author_id:{
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Teacher",
     },
     number_review:{
         type: Number,
@@ -59,6 +62,10 @@ const Course = new mongoose.Schema({
     chapter:{
         type: [Schema.Types.ObjectId],
         ref: "Chapter"
+    },
+    isBlock:{
+        type: Boolean,
+        default: false,
     }
     
 },
