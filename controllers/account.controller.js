@@ -8,6 +8,7 @@ import Admin from "./admin.controller.js";
 import AdminModel from '../models/admin.model.js';
 import bcrypt from "bcryptjs";
 import CourseModel from "../models/Course.model.js";
+import CourseController from "./Course.controller.js";
 
 
 
@@ -321,7 +322,7 @@ const detailCourseUI = async (req, res) => {
        return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart, isWishList:isWishList });
        // , 
      });
-   }
+   }  
    else {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
@@ -350,14 +351,18 @@ const accountUI = async (req, res) => {
 }
 
 const topCourse = async (req, res) => {
-  const coursetop = await CourseModel.find().lean();
-  const toppopularcourse = await CourseModel.find().lean();
-  const topviewcourse = await CourseModel.find().lean();
   
-  const Newcourse = await CourseModel.find().lean();
-
+  const coursetop = await CourseController.getClickManyView(); 
+  const toppopularcourse =await CourseController.getCourseImpress();
+  const Newcourse = await CourseController.getNewCreate();
   const mostCategory = [{ "name": "Mobile Development" }]
-  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: mostCategory, isLogin: req.session.auth, acc: req.session.authAccount });
+  const sub=await CourseController.getSubcategory();
+  var name;
+  sub.map(item=>{
+    name=item.subcategory;
+  })
+  console.log(name);
+  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
 };
 
 const search=async(req,res)=>{

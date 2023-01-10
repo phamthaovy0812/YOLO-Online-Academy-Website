@@ -75,8 +75,13 @@ router.post("/buy", async(req, res)=>{
     const url = `/api/accounts/courseDetail/${req.body._id}`
     console.log("URL",url)
     const data = await Student.UpdateEnrollCourse(req)
-    
-    res.redirect(url);
+    if(data!=null)
+    {
+        res.redirect(url);
+    }
+   else{
+        res.redirect("/api/accounts/login");
+   }
 })
 
 router.post("/tocart", async(req, res)=>{

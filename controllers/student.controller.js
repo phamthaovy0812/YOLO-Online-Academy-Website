@@ -1,5 +1,7 @@
 import CourseModel from "../models/Course.model.js";
 import Student from "../models/student.model.js";
+import CourseController from "./Course.controller.js";
+
 
 const GetAllStudent = async (req, res) => {
   try {
@@ -26,7 +28,7 @@ const CreateStudent = async (req, id_account) => {
 
   try {
     const dataToSave = await data.save();
-    return json(dataToSave);
+    return JSON.stringify(dataToSave);
   } catch (error) {
     return { message: error.message };
   }
@@ -76,29 +78,35 @@ const DeleteStudent = async (req, res, id_account) => {
 
     const updated = await CourseModel.findOneAndUpdate({ "_id": req.params.id }, { list_reviews: newinfor }, { returnOriginal: false });
     console.log(updated)
+
+    const updateNumberReview = await CourseController.updateScoresandReview();
     return dataUpdate;
   }
 
 const UpdateEnrollCourse = async (req) => {
   const id = req.session.authAccount?.account?._id;
-  const data = await Student.findOne({ id_account: id });
+  if(id!=null)
+  {
+    const data = await Student.findOne({ id_account: id });
 
-  const course = {
-    id_course: req.body._id,
-    name_course: req.body.title,
-    avatar_course: req.body.avatar,
-  };
-  const courses_enroll = data.courses_enroll;
-  courses_enroll.push(course);
+    const course = {
+      id_course: req.body._id,
+      name_course: req.body.title,
+      avatar_course: req.body.avatar,
+    };
+    const courses_enroll = data.courses_enroll;
+    courses_enroll.push(course);
 
-  const dataUpdate = await Student.findOneAndUpdate(
-    { id_account: id },
-    { courses_enroll: courses_enroll },
-    {
-      returnOriginal: false,
-    }
-  );
-  return dataUpdate;
+    const dataUpdate = await Student.findOneAndUpdate(
+      { id_account: id },
+      { courses_enroll: courses_enroll },
+      {
+        returnOriginal: false,
+      }
+    );
+    return dataUpdate;
+  }
+  return null;
 };
 
 const UpdateCart = async (req) => {
@@ -125,16 +133,16 @@ const UpdateCart = async (req) => {
 };
 
 const UpdateWishList = async (req) => {
-  // const id = req.session.authAccount?.account?._id ;
-  const id = req.session.authAccount._id;
+  const id = req.session.authAccount?.account?._id ;
+  // const id = req.session.authAccount._id;
   const data = await Student.findOne({ id_account: id });
   // id_course: req.params.id,
   //     name_course: courses.title,
   //     avatar_course: courses.image,
   const course = {
     id_course: req.params.id,
-    name_course:  courses.title,
-    avatar_course:courses.image,
+    name_course:  req.body.title,
+    avatar_course: req.body.image,
   };
   const wishlist = data.wishlist;
   wishlist.push(course);
