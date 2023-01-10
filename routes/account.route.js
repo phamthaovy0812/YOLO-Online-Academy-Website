@@ -7,7 +7,7 @@ import Student from '../controllers/student.controller.js';
 import AccountModel from '../models/Account.model.js';
 var jsonParser = bodyParser.json();
 const router = express.Router();
-
+import sendEmail from '../middlewares/EmailVerification.js'
 router.get('/signup',(req,res)=>{
     res.render("vwAccount/signup",{layout:false});
   })
@@ -16,9 +16,22 @@ router.get('/signup',(req,res)=>{
 router.post('/signup', (req, res)=>{
     req.body.role=0;
     req.body.avatar="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png";
-    
-    Account.CreateAccount(req)
-    res.render("vwAccount/signup");
+    var val = Math.floor(1000 + Math.random() * 9000);
+    console.log(val);
+    req.session.signup = req.body
+    req.session.otp = val;
+    AccountModel.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] }).then(function (doc) {
+        if (doc) {
+            
+          res.render("vwAccount/signup");
+          console.log("account or Email exist");
+        } else {
+            sendEmail(req.session.otp, req.body.email)
+            res.render("vwAccount/otp");
+        }
+      });
+
+    // Account.CreateAccount(req)
 });
 
 router.get('/login',(req,res)=>{
@@ -27,6 +40,16 @@ router.get('/login',(req,res)=>{
 
 router.get('/otp',(req,res)=>{
     res.render('vwAccount/otp',{layout:false});
+})
+router.post('/otp',(req,res)=>{
+    if(req.body.otp == req.session.otp)
+    {
+        Account.CreateAccount(req.session.signup)
+        res.render('vwAccount/login',{layout:false});
+    }
+    else {
+        res.render('vwAccount/otp',{layout:false});
+    }
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
 
