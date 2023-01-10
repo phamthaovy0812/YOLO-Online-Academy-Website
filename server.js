@@ -61,10 +61,10 @@ app.set('views', './views');
 app.use(rout); // router root 
 
 activate_locals(app);
-app.get("/",(req,res)=>{
-   // console.log("->>>>",req.session.authAccount)
-    res.render("vwAccount/home");
-  })
+// app.get("/",(req,res)=>{
+//    // console.log("->>>>",req.session.authAccount)
+//     res.render("vwAccount/home");
+//   })
 
 
 

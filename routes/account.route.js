@@ -89,7 +89,7 @@ router.post('/login', async (req, res)=>{
     }
 
     res.render("vwAccount/login");  
-});
+})
 
 router.post('/logout',async function (req,res){
     req.session.auth=false;
@@ -98,20 +98,45 @@ router.post('/logout',async function (req,res){
     res.redirect(url);
 })
 
-
-router.get('/changeInfo',(req,res)=>{
-    res.render("vwStudent/editprofile")
+router.get('/search',(req,res)=>{
+    res.render('vwAccount/search');
 })
-router.post('/changeInfo', async (req, res)=>{
+
+router.get("/fullcourses", async (req,res)=>{
+    res.render("vwAccount/fullcourses");
+   
+})
+
+router.get('/changeinfo',(req,res)=>{
+    res.render("vwStudent/editprofile",{isLogin: req.session.auth,
+        acc: req.session.authAccount})
+})
+
+router.post ('/updatepass',async (req, res)=>{
+    
+   
+    var dataRes= await Account.UpdatePasswordAccount(req);
+    // var dataRes = await  Login(req);
+    if( dataRes.user!=null)
+    {
+        req.session.authAccount.password= dataRes.password;
+    }
+    
+
+    console.log(req.session.authAccount )
+    res.render("vwStudent/editprofile") 
+});
+
+router.post('/updateinfo', async (req, res)=>{
     
     var dataRes = await Account.UpdateInfoAccount(req);
     // var dataRes = await  Login(req);
     
     
     req.session.authAccount.email = dataRes.email ;
-    req.session.authAccount.fullname = dataRes.detail.fullname
+    req.session.authAccount.fullname = dataRes.detail.fullname;
 
-     console.log(req.session.authAccount )
+    console.log(req.session.authAccount )
     // if(dataRes && dataRes.status == 200)
     // {
     //     console.log(dataRes)
@@ -122,6 +147,10 @@ router.post('/changeInfo', async (req, res)=>{
 
     res.render("vwStudent/editprofile") 
 });
+router.get("*", (req, res) => {
+    res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
+  })
+
 // router 
 //     .route('/')
 //         .get(Account.GetAllAccount);
@@ -137,25 +166,5 @@ router
 // })
 
 // router.get("/home",Account.TopCourse);
-router.get("*", (req, res) => {
-    res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
-  })
 
-router.get("/fullcourses", async (req,res)=>{
-    try{
-        const page= parseInt(req.query.page)-1||0;
-        const limit = parseInt(req.query.limit)||5;
-        const search=req.query.sort||"";
-        let sort =res.query.sort||"price";
-        let genre=req.query.genre||"All";
-    
-
-
-
-        
-    }catch(err)
-    {
-        console.log(err);
-    }
-});
 export default router ;  
