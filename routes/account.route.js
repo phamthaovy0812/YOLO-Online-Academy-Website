@@ -27,7 +27,7 @@ router.post('/signup', (req, res)=>{
           console.log("account or Email exist");
         } else {
             sendEmail(req.session.otp, req.body.email)
-            res.render("vwAccount/otp");
+            res.redirect("/api/accounts/otp");
         }
       });
 
@@ -42,14 +42,18 @@ router.get('/otp',(req,res)=>{
     res.render('vwAccount/otp',{layout:false});
 })
 router.post('/otp',(req,res)=>{
+    
+
     if(req.body.otp == req.session.otp)
     {
+        console.log(1)
         Account.CreateAccount(req.session.signup)
-        res.render('vwAccount/login',{layout:false});
+         res.redirect('/api/accounts/login');
     }
     else {
-        res.render('vwAccount/otp',{layout:false});
-    }
+        console.log(2)
+       res.render('vwAccount/otp',{layout:false});
+   }
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
 
