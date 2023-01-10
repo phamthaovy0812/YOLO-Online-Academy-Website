@@ -44,10 +44,12 @@ router.get('/otp',(req,res)=>{
 router.post('/otp',(req,res)=>{
     if(req.body.otp == req.session.otp)
     {
+        console.log(1);
         Account.CreateAccount(req.session.signup)
         res.render('vwAccount/login',{layout:false});
     }
     else {
+        console.log(2);
         res.render('vwAccount/otp',{layout:false});
     }
 })
