@@ -72,11 +72,11 @@
                         </div>
                     </div>
 
-                <div>
-                    <input type="text" class="inputsearch" placeholder="Search..">
+                <form method="get" action=" /api/accounts/search">
+                    <input type="text" class="inputsearch" name="search" placeholder="Search..">
 
-                    <a href="/search" class="pl-2"><button class="btnlogin">Search</button></a>
-                </div>
+                 <button class="btnlogin" type="submit">Search</button>
+                </form>
 
                 {{#if isLogin}}
                

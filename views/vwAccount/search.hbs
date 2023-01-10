@@ -1,21 +1,40 @@
-<div style="font-size: 30px; font-weight: bolder; margin: 40px;">... Result for ...</div>
+<div style="padding: 30px;">
+    <div style="font-size: 30px; font-weight: bolder;   border-bottom: 4px solid black; margin-bottom: 40px; padding:10px">... results</div>
+    <div style="display: flex;">
+        {{#each item}}
+        <div style="display: inline-block;">
+            <a href="../accounts/courseDetail/{{_id}}">
 
-<div >
-    <div class="d-flex align-items-start search bg-light border">
-        <div class=" nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Course name</button>
-            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Categories name</button>
-           
+                <div class="col-2 m-3">
+                <div class="card m-2" style="width: 15rem; ">
+                    <img class="card-img-top" src="/{{image}}" alt="Card image cap">
+                    <div class="card-body">
+                    <h4 class="card-title" style="font-size: medium;"><a href="../accounts/courseDetail/{{_id}}" title="View Product">{{title}}</a></h4>
+                    <p class="card-text"  style="font-size: small;">{{slug_category}}</p>
+                    <p class="card-text" style="font-size: small;">{{subtitle}}</p>
+                
+                    <div class="row">
+                        <div class="col">
+                
+                        <p class="btn btn-warning btn-block"><strong>{{price}}</strong></p>
+                        </div>
+                        <div class="col">
+                        <div class="d-flex justify-content-between">
+                        <a href="#" class="btn-sm btn-info ">Add to cart</a>
+                        <a href="#" class="btn-sm btn-info">Add wishlist</a>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+            </a>
         </div>
-        <div class="tab-content border-start ml-3 pl-5" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-                <div> item here</div>
-            </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-                <div>items</div>
-            </div>
+        
             
-        </div>
+        {{/each}}
     </div>
-
+    
 </div>

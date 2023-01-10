@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export default function sendEmail(){
+export default function sendEmail(numberOtp, email){
     var transporter = nodemailer.createTransport({
     service : 'gmail',
     auth:{
@@ -11,9 +11,9 @@ export default function sendEmail(){
 
     var mailOptions = {
         from :"nhtan20@clc.fitus.edu.vn",
-        to : "taothao0163@gmail.com",
-        subject:"NODEJS",
-        text:"sadasdas"
+        to : email,
+        subject:"MÃ XÁC NHẬN ONLIEN ACADEMY PROJECT",
+        text:`Mã xác nhận của bạn là : ${numberOtp}`
     }
 
     transporter.sendMail(mailOptions, function(error, info){

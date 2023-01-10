@@ -77,25 +77,66 @@ const DeleteAccount = async (req, res) => {
 };
 
 const UpdatePasswordAccount = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const password = await bcrypt.hash(req.body.password, 10);
+  // try {
+  //   var dataRes;
+  //   const id = req.session.authAccount?.account?._id;
+  //   //const password = await bcrypt.hash(req.body.password, 10);
+  //   const editdata={
+  //     oldpassword:req.body.oldpassword,
+  //     newpassword:req.body.newpassword,
+  //     retypepassword:req.body.retypepassword,
+  //   }
+  //   const Acc= await Account.findById(id);
+  //   const password=  await bcrypt.hash(req.body.oldpassword, 10);
   
+  //   if ( (editdata.newpassword==editdata.retypepassword) && (password==Acc.account.password) ){
+  //     const data = await Account.findByIdAndUpdate(
+  //       id,
+  //       { password:bcrypt.hash(req.body.newpassword, 10)},
+  //       {
+  //         returnOriginal: false,
+  //       }
+  //     );
+      
+  //     console.log(data);
+  //     res.send(data);
+  //   }
+  //   else{
+  //     console.log("error");
+  //   }
+  
+  // } catch (err) {
+  //   res.status(404).json({
+  //     status: "fail",
+  //     message: "ID invalid",
+  //   });
+  // }
+  
+ 
+  const data = {
+    id: req.session.authAccount?.account?._id,
+    oldpassword:req.body.oldpassword,
+    newpassword: req.body.newpassword,
+    retypepassword: req.body.retypepassword,
+  };
+  var dataRes;
+  console.log(req.body)
+  console.log(data);
+  //console.log(bcrypt.compareSync( req.body.oldpassword, req.session.authAccount?.account?.password ));
+  var user=null;
+  if(!bcrypt.compareSync( req.body.oldpassword, req.session.authAccount?.account?.password ) ||data.newpassword!=data.retypepassword){
+    dataRes={status:300,user,message: "can't change pass, error input"};
+    console.log("error update");
 
-    const data = await Account.findByIdAndUpdate(
-      id,
-      { password },
-      {
-        returnOriginal: false,
-      }
-    );
-    res.send(data);
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: "ID invalid",
-    });
+  }else{
+    const newpass=await bcrypt.hash(req.body.newpassword, 10);
+    const response = await Account.findByIdAndUpdate(data.id, { password: newpass },
+      { returnOriginal: false });
+    user=response;
+    dataRes={status:200,user,message: "success"};
   }
+  return dataRes;
+  
 };
 
 const UpdateInfoAccount = async (req) => {
@@ -231,7 +272,8 @@ const AccountDataCourse = async (req, res) => {
   const teacherList = [{ "title": "Mobile for beginer", "description": "day la mot khoa hoc mobile danh cho nguoi moi bat dau.", "price": "$113", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$1133", "image": "/student/js.png" }]
   const studentList = [{ "title": "Mobile for beginer", "description": "day la mot khoa hoc mobile danh cho nguoi moi bat dau.", "price": "$113", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$1133", "image": "/student/js.png" }, { "title": "nau an for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$123", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$13", "image": "/student/js.png" }]
   const wishList = [{ "title": "Mobile for beginer", "description": "day la mot khoa hoc mobile danh cho nguoi moi bat dau.", "price": "$113", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$1133", "image": "/student/js.png" }, { "title": "nau an for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$123", "image": "/student/js.png" }, { "title": "web for beginer", "description": "day la mot khoa hoc web danh cho nguoi moi bat dau.", "price": "$13", "image": "/student/js.png" }]
-  res.render('vwStudent/profile', { studentlist: studentList, teacherlist: teacherList, wishlist: wishList });
+  res.render('vwStudent/profile', { studentlist: studentList, teacherlist: teacherList, wishlist: wishList, isLogin: req.session.auth,
+    acc: req.session.authAccount });
 }
 
 
@@ -317,6 +359,12 @@ const topCourse = async (req, res) => {
   const mostCategory = [{ "name": "Mobile Development" }]
   res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: mostCategory, isLogin: req.session.auth, acc: req.session.authAccount });
 };
+
+const search=async(req,res)=>{
+  const search=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
+  
+
+}
 
 export default {
   GetAllAccount,

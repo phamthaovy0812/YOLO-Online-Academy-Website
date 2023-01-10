@@ -21,6 +21,16 @@ const __filename=fileURLToPath(import.meta.url);
 const __dirname= path.dirname(__filename);
 
 
+// var handlebars = require('handlebars');
+// var helpers = require('handlebars-helpers')({
+//   handlebars: handlebars
+// });
+
+// // or for a specific collection
+// var math = helpers.math({
+//   handlebars: handlebars
+// });
+
 app.use('/public', express.static('public'));
 dotenv.config({ path: './config.env' });
 
@@ -47,7 +57,7 @@ activate_session(app);
 //
 app.engine('hbs', engine({
     extname: 'hbs',
-    defaultLayout: 'main'
+    defaultLayout: 'main',
 }));
 
 app.use(express.static("public/img"));
@@ -61,18 +71,19 @@ app.set('views', './views');
 app.use(rout); // router root 
 
 activate_locals(app);
-app.get("/",(req,res)=>{
-   // console.log("->>>>",req.session.authAccount)
-    res.render("vwAccount/home");
-  })
+// app.get("/",(req,res)=>{
+//    // console.log("->>>>",req.session.authAccount)
+//     res.render("vwAccount/home");
+//   })
 
 
 
 //item tes
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
 })
+
 app.listen(port, () => {
-    console.log( `Example app listening at http://localhost:${port}`)
+    console.log( `Example app listening at http://localhost:${port}/api/accounts/home`)
 })
 // Run :npm start
