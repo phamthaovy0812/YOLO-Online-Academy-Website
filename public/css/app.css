@@ -40,7 +40,7 @@ a :hover {
   display: flex;
   justify-content: space-between;
   padding: 15px;
-  background-color: #e9eaec;
+  background-color: #fdf4db;
 }
 
 .logo {
@@ -58,7 +58,8 @@ a :hover {
   color: grey;
   background-color: white;
   border-radius: 30px;
-  border: 2px;
+
+  border-color: #ff914d;
   font-size: large;
   text-align: justify;
   height: 40px;
@@ -72,7 +73,7 @@ a :hover {
   margin-right: 10px;
   background: whitesmoke;
   color: black;
-  border-color: black;
+  border-color: black ;
   text-align: center;
   border-radius: 5px;
   font-weight: bolder;
@@ -82,7 +83,7 @@ a :hover {
   height: 40px;
   width: 80px;
   margin-right: 70px;
-  background-color: #273238;
+  background-color: black;
   color: whitesmoke;
   border-color: whitesmoke;
   border: 3px;
@@ -183,7 +184,7 @@ a :hover {
   background-color: #fdf4db;
   padding-top: 40px;
   padding-bottom: 40px;
-  height: 555px;
+  height: 100%;
 }
 
 .loginform {

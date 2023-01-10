@@ -7,7 +7,7 @@ import Student from '../controllers/student.controller.js';
 import AccountModel from '../models/Account.model.js';
 var jsonParser = bodyParser.json();
 const router = express.Router();
-
+import sendEmail from '../middlewares/EmailVerification.js'
 router.get('/signup',(req,res)=>{
     res.render("vwAccount/signup",{layout:false});
   })
@@ -16,9 +16,22 @@ router.get('/signup',(req,res)=>{
 router.post('/signup', (req, res)=>{
     req.body.role=0;
     req.body.avatar="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png";
-    
-    Account.CreateAccount(req)
-    res.render("vwAccount/login");
+    var val = Math.floor(1000 + Math.random() * 9000);
+    console.log(val);
+    req.session.signup = req.body
+    req.session.otp = val;
+    AccountModel.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] }).then(function (doc) {
+        if (doc) {
+            
+          res.render("vwAccount/signup");
+          console.log("account or Email exist");
+        } else {
+            sendEmail(req.session.otp, req.body.email)
+            res.redirect("/api/accounts/otp");
+        }
+      });
+
+    // Account.CreateAccount(req)
 });
 
 router.get('/login',(req,res)=>{
@@ -27,6 +40,20 @@ router.get('/login',(req,res)=>{
 
 router.get('/otp',(req,res)=>{
     res.render('vwAccount/otp',{layout:false});
+})
+router.post('/otp',(req,res)=>{
+    
+
+    if(req.body.otp == req.session.otp)
+    {
+        console.log(1)
+        Account.CreateAccount(req.session.signup)
+         res.redirect('/api/accounts/login');
+    }
+    else {
+        console.log(2)
+       res.render('vwAccount/otp',{layout:false});
+   }
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
 
@@ -94,7 +121,7 @@ router.post('/login', async (req, res)=>{
     }
 
     res.render("vwAccount/login");  
-});
+})
 
 router.post('/logout',async function (req,res){
     req.session.auth=false;
@@ -103,20 +130,46 @@ router.post('/logout',async function (req,res){
     res.redirect(url);
 })
 
-
-router.get('/changeInfo',(req,res)=>{
-    res.render("vwStudent/editprofile")
+router.get('/search',(req,res)=>{
+    console.log(req.query);
+    res.render('vwAccount/search');
 })
-router.post('/changeInfo', async (req, res)=>{
+
+router.get("/fullcourses", async (req,res)=>{
+    res.render("vwAccount/fullcourses");
+   
+})
+
+router.get('/changeinfo',(req,res)=>{
+    res.render("vwStudent/editprofile",{isLogin: req.session.auth,
+        acc: req.session.authAccount})
+})
+
+router.post ('/updatepass',async (req, res)=>{
+    
+   
+    var dataRes= await Account.UpdatePasswordAccount(req);
+    // var dataRes = await  Login(req);
+    if( dataRes.user!=null)
+    {
+        req.session.authAccount.password= dataRes.password;
+    }
+    
+
+    console.log(req.session.authAccount )
+    res.render("vwStudent/editprofile") 
+});
+
+router.post('/updateinfo', async (req, res)=>{
     
     var dataRes = await Account.UpdateInfoAccount(req);
     // var dataRes = await  Login(req);
     
     
     req.session.authAccount.email = dataRes.email ;
-    req.session.authAccount.fullname = dataRes.detail.fullname
+    req.session.authAccount.fullname = dataRes.detail.fullname;
 
-     console.log(req.session.authAccount )
+    console.log(req.session.authAccount )
     // if(dataRes && dataRes.status == 200)
     // {
     //     console.log(dataRes)
@@ -127,6 +180,10 @@ router.post('/changeInfo', async (req, res)=>{
 
     res.render("vwStudent/editprofile") 
 });
+router.get("*", (req, res) => {
+    res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
+  })
+
 // router 
 //     .route('/')
 //         .get(Account.GetAllAccount);
@@ -143,12 +200,4 @@ router
 
 // router.get("/home",Account.TopCourse);
 
-// router.get("/fullcourses", async (req,res)=>{
-//     try{
-//         const page= parseInt(req.query.page)-1||0;
-//         const limit = parseInt(req.query.limit)||5;
-//         const search=req.query.sort||"rating";
-        
-//     }
-// })
 export default router ;  

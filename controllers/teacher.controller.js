@@ -24,9 +24,9 @@ const GetAllTeacher = async (req, res) => {
 const CreateTeacher = async (req, res, id_account) => {
   const data = new Teacher({
     id_account: id_account,
-    fullname: req.body.fullname,
-    skill: req.body.skill,
-    description: req.body.description,
+    fullname: req.fullname,
+    skill: req.skill,
+    description: req.description,
   });
 
   const dataToSave = await data.save();

@@ -17,6 +17,9 @@ router.get("/studentCensor", Admin.studentCensor);
 // router.get("/courseCensor", Adm);
 router.post("/blockStudent/:id", Admin.BlockStudent);
 router.post("/blockTeacher/:id", Admin.BlockTeacher);
+router.get("*", (req, res) => {
+    res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
+  })
 // router.get("/courseCensor",(req,res)=>{
 //     res.render('Admin/courseCensor');
 // })

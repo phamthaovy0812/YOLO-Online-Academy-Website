@@ -23,7 +23,7 @@ const GetAllStudent = async (req, res) => {
 const CreateStudent = async (req, id_account) => {
   const data = new Student({
     id_account: id_account,
-    fullname: req.body.fullname,
+    fullname: req.fullname,
   });
 
   try {

@@ -11,6 +11,8 @@ export default function (app) {
   // {
   //     auth : boolean
   //     authAccount : object
+  //      otp : string
+  //      signup : object
   // }
   app.set('trust proxy', 1) // trust first proxy
   app.use(session({

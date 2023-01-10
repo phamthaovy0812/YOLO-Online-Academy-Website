@@ -26,4 +26,8 @@ router.get("/myListCourses",Teacher.myListCourses );
 router.get("/postCourse", Teacher.viewCreateCourse);
 router.post("/postCourse", upload.fields([{ name: 'image', maxCount: 1 }, { name: 'videoDemo', maxCount: 1 }]), Teacher.createCourse);
 
+router.get("*", (req, res) => {
+    res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
+  })
+
 export default router;  
