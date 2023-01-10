@@ -21,6 +21,16 @@ const __filename=fileURLToPath(import.meta.url);
 const __dirname= path.dirname(__filename);
 
 
+// var handlebars = require('handlebars');
+// var helpers = require('handlebars-helpers')({
+//   handlebars: handlebars
+// });
+
+// // or for a specific collection
+// var math = helpers.math({
+//   handlebars: handlebars
+// });
+
 app.use('/public', express.static('public'));
 dotenv.config({ path: './config.env' });
 
@@ -47,7 +57,7 @@ activate_session(app);
 //
 app.engine('hbs', engine({
     extname: 'hbs',
-    defaultLayout: 'main'
+    defaultLayout: 'main',
 }));
 
 app.use(express.static("public/img"));

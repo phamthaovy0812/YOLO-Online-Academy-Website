@@ -99,6 +99,7 @@ router.post('/logout',async function (req,res){
 })
 
 router.get('/search',(req,res)=>{
+    console.log(req.query);
     res.render('vwAccount/search');
 })
 
