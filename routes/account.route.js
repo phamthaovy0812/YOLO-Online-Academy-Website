@@ -137,13 +137,25 @@ router
 // })
 
 // router.get("/home",Account.TopCourse);
+router.get("*", (req, res) => {
+    res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
+  })
 
-// router.get("/fullcourses", async (req,res)=>{
-//     try{
-//         const page= parseInt(req.query.page)-1||0;
-//         const limit = parseInt(req.query.limit)||5;
-//         const search=req.query.sort||"rating";
+router.get("/fullcourses", async (req,res)=>{
+    try{
+        const page= parseInt(req.query.page)-1||0;
+        const limit = parseInt(req.query.limit)||5;
+        const search=req.query.sort||"";
+        let sort =res.query.sort||"price";
+        let genre=req.query.genre||"All";
+    
+
+
+
         
-//     }
-// })
+    }catch(err)
+    {
+        console.log(err);
+    }
+});
 export default router ;  

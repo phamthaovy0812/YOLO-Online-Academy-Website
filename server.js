@@ -69,10 +69,11 @@ app.get("/",(req,res)=>{
 
 
 //item tes
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
 })
+
 app.listen(port, () => {
-    console.log( `Example app listening at http://localhost:${port}`)
+    console.log( `Example app listening at http://localhost:${port}/api/accounts/home`)
 })
 // Run :npm start
