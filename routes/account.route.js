@@ -46,11 +46,13 @@ router.post('/otp',(req,res)=>{
 
     if(req.body.otp == req.session.otp)
     {
+        console.log(1)
         Account.CreateAccount(req.session.signup)
          res.redirect('/api/accounts/login');
     }
     else {
-       res.redirect('/api/accounts/otp');
+        console.log(2)
+       res.render('vwAccount/otp',{layout:false});
    }
 })
 router.get("/courseDetail/:id",Account.detailCourseUI);
