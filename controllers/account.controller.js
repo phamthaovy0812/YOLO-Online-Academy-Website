@@ -192,7 +192,7 @@ const UpdateInfoAccount = async (req) => {
 // }
 
 const CreateAccount = async (req) => {
-  const { email, username, password, role, avatar } = req.body;
+  const { email, username, password, role, avatar } = req;
 
   try {
     const handleCreateAccount = async () => {
@@ -201,10 +201,10 @@ const CreateAccount = async (req) => {
         email,
         username,
         password,
-        role,
-        isBlock
+        role
       });
 
+      console.log( { email, username, password, role, avatar } )
       const dataToSave = await newAccount.save();
 
       if (dataToSave.role == 1) {
@@ -227,7 +227,7 @@ const CreateAccount = async (req) => {
           }
         });
 
-      const mergedObject = Object.assign({}, req.body, dataToSave._doc);
+      const mergedObject = Object.assign({}, req, dataToSave._doc);
       console.log(mergedObject);
       return json(mergedObject);
     };
