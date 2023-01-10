@@ -66,8 +66,12 @@ const Course = new mongoose.Schema({
     isBlock:{
         type: Boolean,
         default: false,
+    },
+    numberClick:{
+        type: Number,
+        defaultValue: 0, 
     }
-    
+     
 },
     { timestamps: true });
 

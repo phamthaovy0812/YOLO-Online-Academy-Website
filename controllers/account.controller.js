@@ -8,6 +8,7 @@ import Admin from "./admin.controller.js";
 import AdminModel from '../models/admin.model.js';
 import bcrypt from "bcryptjs";
 import CourseModel from "../models/Course.model.js";
+import CourseController from "./Course.controller.js";
 
 
 
@@ -80,6 +81,9 @@ const UpdatePasswordAccount = async (req, res) => {
   try {
     const id = req.params.id;
     const password = await bcrypt.hash(req.body.password, 10);
+    const editdata={
+      
+    }
   
 
     const data = await Account.findByIdAndUpdate(
@@ -308,14 +312,18 @@ const accountUI = async (req, res) => {
 }
 
 const topCourse = async (req, res) => {
-  const coursetop = await CourseModel.find().lean();
-  const toppopularcourse = await CourseModel.find().lean();
-  const topviewcourse = await CourseModel.find().lean();
   
-  const Newcourse = await CourseModel.find().lean();
-
+  const coursetop = await CourseController.getClickManyView(); 
+  const toppopularcourse =await CourseController.getCourseImpress();
+  const Newcourse = await CourseController.getNewCreate();
   const mostCategory = [{ "name": "Mobile Development" }]
-  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: mostCategory, isLogin: req.session.auth, acc: req.session.authAccount });
+  const sub=await CourseController.getSubcategory();
+  var name;
+  sub.map(item=>{
+    name=item.subcategory;
+  })
+  console.log(name);
+  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
 };
 
 export default {
