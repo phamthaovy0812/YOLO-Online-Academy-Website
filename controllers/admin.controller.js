@@ -26,7 +26,7 @@ const GetAllAdmin = async(req, res) =>{
 const CreateAdmin = async(req, res, id_account ) =>{
   const data = new Admin({
       id_account: id_account,
-      fullname: req.body.fullname
+      fullname: req.fullname
   })
 
   try {
