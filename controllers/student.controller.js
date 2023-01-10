@@ -28,7 +28,7 @@ const CreateStudent = async (req, id_account) => {
     const dataToSave = await data.save();
     return json(dataToSave);
   } catch (error) {
-    return json({ message: error.message });
+    return { message: error.message };
   }
 };
 
