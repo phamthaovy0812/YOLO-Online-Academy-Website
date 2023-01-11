@@ -28,10 +28,12 @@ const teacherSchema = new mongoose.Schema({
   },
   course_posted : [objectCourse],
   skill: {
-    type: String
+    type: String,
+    default : "gi"
   },
   description: {
     type: String,
+    default:" "
   },
   isBlock:{
     type: Boolean,

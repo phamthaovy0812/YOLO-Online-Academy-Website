@@ -1,4 +1,4 @@
-<div class="courseCensor d-flex" style="height:auto;">
+<div class="courseCensor d-flex"style="height:1200px;">
 
     <!-- BeginSIDEBAR -->
     <div class="col-md-1 position-relative p-0 m-0">
@@ -6,15 +6,15 @@
             <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px; position:absolute!important;">
                 <a href="/api/admins/categoryCensor" class="mySide" class="side w3-bar-item"><i
                         class="bi bi-bookmarks"></i></a>
-                <a href="/api/admins/teacherCensor" class="mySide active" class="side w3-bar-item "><i
+                <a href="/api/admins/teacherCensor" class="mySide" class="side w3-bar-item "><i
                         class="bi bi-person-workspace"></i></i></a>
-                <a href="/api/admins/studentCensor" class="mySide" class="side w3-bar-item "><i
+                <a href="/api/admins/studentCensor" class="mySide " class="side w3-bar-item "><i
                         class="bi bi-person"></i></a>
-                <a href="/api/admins/courseCensor" class="mySide" class="side w3-bar-item "><i
+                <a href="/api/admins/courseCensor" class="mySide active" class="side w3-bar-item "><i
                         class="bi bi-camera-reels"></i></a>
             </div>
         </div>
-
+    
         <script>
             // Add active class to the current button (highlight it)
             var header = document.getElementById("side");
@@ -29,79 +29,77 @@
             }               
         </script>
     </div>
-    <div class="col m-5">
-        <h6 class="font-text container">COURSES LIST</h6>
+    <!-- End: SIDEBAR -->
 
-        {{!-- 1. Filter --}}
-        <div class="d-flex align-items-center input-group mr-2">
-            {{!-- <input class="form-control rounded" id="myInput" type="text" placeholder="Search your course"> --}}
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                    aria-expanded="false">
-                    Sub-Category
-                </button>
-                <br>
-                <br>
-                <ul class="dropdown-menu" id="subCategoryFilter">
-                    {{#each subCategory}}
-                    <li><button type="button">{{name}}</button></li>
-                    {{/each}}
-                </ul>
+        <!-- Begin: Course Censor Body -->
+        <div class="col m-5">
+            <h6 class="font-text container">COURSES LIST</h6>
+        
+            {{!-- 1. Filter --}}
+            <div class="d-flex align-items-center input-group mr-2">
+                {{!-- <input class="form-control rounded" id="myInput" type="text" placeholder="Search your course"> --}}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                        Sub-Category
+                    </button>
+
+                    <ul class="dropdown-menu" id="subCategoryFilter" >
+                        {{#each course}}
+                            <li><button type="button">{{sub-category}}</button></li>
+                        {{/each}}
+                    </ul>
+                </div>
+                
             </div>
 
-        </div>
 
-
-        {{!-- 2: List of Courses --}}
-        <div class="listOfCourses">
-            {{#each course}}
-            <div class="listOfCourse">
-                <div class="container course border border-dark rounded">
-                    <div class=" d-flex courseImgAndInfo">
-                        <div class="imgCourseBox">
-                            <img src="/{{image}}" alt="This is image of {{title}} course">
-                        </div>
-                        <div class="ud-unstyled-list ">
-                            <div class="listItem">
-                                <p id="titleCourse">{{title}}</p>
+            {{!-- 2: List of Courses --}}
+            <div class="listOfCourses">
+                {{#each course}}
+                <div class="listOfCourse">
+                    <div class="container course border border-dark rounded">
+                        <div class=" d-flex courseImgAndInfo">
+                            <div class="imgCourseBox">
+                                <img src={{image}} alt="This is image of {{title}} course">
                             </div>
-                            <div class="listItem">
-                                <p class="infoCourse">{{instructorName}}</p>
-                            </div>
-                            <div class="listItem">
-                                <p class="infoCourse">{{sub-category}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between flex-wrap">
-                        <div class=" ud-unstyled-list rating" style="margin-right:5rem;">
-                            <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
-                                <div>5.0</div>
-                                <div class="starColor">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                            <div class="ud-unstyled-list ">
+                                <div class="listItem">
+                                    <p id="titleCourse">{{title}}</p>
+                                </div>
+                                <div class="listItem">
+                                    <p class="infoCourse">{{instructorName}}</p>
+                                </div>
+                                <div class="listItem">
+                                    <p class="infoCourse">{{sub-category}}</p>
                                 </div>
                             </div>
-                            <div class="listItem">
-                                <p>Course rating</p>
+                        </div>
+                
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <div class=" ud-unstyled-list rating" style="margin-right:5rem;">
+                                <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
+                                    <div>5.0</div>
+                                    <div class="starColor">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="listItem">
+                                    <p>Course rating</p>
+                                </div>
+                            </div>
+                            <div class="box_btn_edit">
+                                <a href="#"><button type="button" class="btn btn-danger btn_edit">Disable</button></a>
                             </div>
                         </div>
-                        <form action="/api/admins/blockCourse/{{_id}}" method="post">
-                            <div class="box_btn_edit">
-                              <button type="submit" class="btn btn-danger btn_edit">Disable</button>
-                            </div>
-                        </form>
-                     
+                
                     </div>
-
                 </div>
+                {{/each}}
             </div>
-            {{/each}}
+        
         </div>
-
-    </div>
 </div>

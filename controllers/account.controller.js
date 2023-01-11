@@ -1,5 +1,5 @@
 import { json } from "express";
-import Account from "../models/Account.model.js";
+import Account from "../models/account.model.js";
 import Student from "./student.controller.js";
 import StudentModel from "../models/student.model.js";
 import Teacher from "./teacher.controller.js";
@@ -81,41 +81,6 @@ const DeleteAccount = async (req, res) => {
 };
 
 const UpdatePasswordAccount = async (req, res) => {
-  // try {
-  //   var dataRes;
-  //   const id = req.session.authAccount?.account?._id;
-  //   //const password = await bcrypt.hash(req.body.password, 10);
-  //   const editdata={
-  //     oldpassword:req.body.oldpassword,
-  //     newpassword:req.body.newpassword,
-  //     retypepassword:req.body.retypepassword,
-  //   }
-  //   const Acc= await Account.findById(id);
-  //   const password=  await bcrypt.hash(req.body.oldpassword, 10);
-  
-  //   if ( (editdata.newpassword==editdata.retypepassword) && (password==Acc.account.password) ){
-  //     const data = await Account.findByIdAndUpdate(
-  //       id,
-  //       { password:bcrypt.hash(req.body.newpassword, 10)},
-  //       {
-  //         returnOriginal: false,
-  //       }
-  //     );
-      
-  //     console.log(data);
-  //     res.send(data);
-  //   }
-  //   else{
-  //     console.log("error");
-  //   }
-  
-  // } catch (err) {
-  //   res.status(404).json({
-  //     status: "fail",
-  //     message: "ID invalid",
-  //   });
-  // }
-  
  
   const data = {
     id: req.session.authAccount?.account?._id,
@@ -211,9 +176,11 @@ const CreateAccount = async (req) => {
       console.log( { email, username, password, role, avatar } )
       const dataToSave = await newAccount.save();
 
-      if (dataToSave.role == 1) {
+      if (dataToSave.role === 1) {
+        
+        console.log("ID:", req, dataToSave._id)
         Teacher.CreateTeacher(req, dataToSave._id);
-      } else if (dataToSave.role == 2) {
+      } else if (dataToSave.role === 2) {
         Admin.CreateAdmin(req, dataToSave._id);
       } else {
         Student.CreateStudent(req, dataToSave._id);
@@ -250,6 +217,16 @@ const CreateAccount = async (req) => {
     });
   }
 };
+
+const profile = async (req, res) => {
+  const user = req.session.authAccount;
+  res.render("vwStudent/profile", {
+    infor: user.account,
+    detailinfor:user.detail,
+    isLogin: req.session.auth,
+    acc: req.session.authAccount,
+  });
+};
 // const BlockAccount = async(req, res)=>{
 //   try{
 //     const id = req.params.id;
@@ -281,15 +258,15 @@ const AccountDataCourse = async (req, res) => {
 }
 
 
-const AccountData = async (req, res) => {
-  // const toppopularcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
-  // const topviewcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
-  // const Newcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
-  // const mostCategory=[{"name":"Mobile Development"}]
-  //   res.render('vwAccount/home',{viewcourse: topviewcourse,newcourse: Newcourse, popularcourse:toppopularcourse,mostcategory:mostCategory,isLogin:req.session.auth,acc: req.session.authAccount});
+// const AccountData = async (req, res) => {
+//   // const toppopularcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
+//   // const topviewcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
+//   // const Newcourse=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"}]
+//   // const mostCategory=[{"name":"Mobile Development"}]
+//   //   res.render('vwAccount/home',{viewcourse: topviewcourse,newcourse: Newcourse, popularcourse:toppopularcourse,mostcategory:mostCategory,isLogin:req.session.auth,acc: req.session.authAccount});
 
-  res.render("vwStudent/profile", { authaccount: req.session.authAccount });
-};
+//   res.render("vwStudent/profile", { authaccount: req.session.authAccount });
+// };
 const detailCourseUI = async (req, res) => {
   try {
     const user = req.session.authAccount;
@@ -456,10 +433,10 @@ export default {
   GetOneAccount,
   UpdatePasswordAccount,
   UpdateInfoAccount,
-  AccountData,
   AccountDataCourse,
   accountUI,
   detailCourseUI,
   topCourse,
-  SearchCourse
+  SearchCourse,
+  profile
 };

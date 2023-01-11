@@ -1,6 +1,8 @@
 import  express from  'express';
 import Admin from "../controllers/admin.controller.js";
 import bodyParser from 'body-parser';
+import Account  from  '../controllers/account.controller.js';
+import AccountModel from '../models/account.model.js';
 var jsonParser = bodyParser.json();
 const router = express.Router();
 
@@ -12,6 +14,22 @@ const router = express.Router();
 //         .patch(jsonParser, Admin.UpdateAdmin);
 
 // router.get("/categoryCensor", Admin.categoryCensor);
+router.get("/createTeacher", Admin.createAccountTeacher);
+router.post("/createTeacher", async(req,res)=>{
+  req.body.role=1;
+  req.body.avatar="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png";
+  AccountModel.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] }).then(function (doc) {
+    if (doc) {
+        
+      res.render("/api/admins/createTeacher");
+      console.log("account or Email exist");
+    } else {
+        Account.CreateAccount(req.body)
+        res.redirect("/api/admins/teacherCensor");
+    }
+  });
+});
+
 router.get("/teacherCensor", Admin.teacherCensor);
 router.get("/studentCensor", Admin.studentCensor);
 // router.get("/courseCensor", Adm);

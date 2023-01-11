@@ -4,7 +4,8 @@ import bodyParser from 'body-parser';
 import Login  from  '../middlewares/Authen.js';
 import CourseModel from '../models/Course.model.js'
 import Student from '../controllers/student.controller.js';
-import AccountModel from '../models/Account.model.js';
+import AccountModel from '../models/account.model.js';
+// /../models/Account.model.js
 var jsonParser = bodyParser.json();
 const router = express.Router();
 import sendEmail from '../middlewares/EmailVerification.js'
@@ -38,6 +39,33 @@ router.get('/login',(req,res)=>{
     res.render('vwAccount/login',{layout:false});
 })
 
+router.post('/login', async (req, res)=>{
+   
+    var dataRes = await Login(req);
+    var url;
+    
+    if(dataRes && dataRes.status == 200)
+    {
+        
+        req.session.auth = true
+        req.session.authAccount = dataRes;
+        if (dataRes.account.role==0){
+            url='/api/accounts/home';
+        }else if (dataRes.account.role==1){
+            url='/api/teachers/homepage';
+        } else if (dataRes.account.role==2){
+            url='/api/admins/teacherCensor';
+        }
+        req.session.save(function (err) {
+            // session saved
+            res.redirect(url); // sua thi sua o day anha Vy, sua dieu huong home a'
+        })
+    }
+
+    res.render("vwAccount/login");  
+})
+
+
 router.get('/otp',(req,res)=>{
     res.render('vwAccount/otp',{layout:false});
 })
@@ -46,12 +74,10 @@ router.post('/otp',(req,res)=>{
 
     if(req.body.otp == req.session.otp)
     {
-        console.log(1)
         Account.CreateAccount(req.session.signup)
-         res.redirect('/api/accounts/login');
+        res.redirect('/api/accounts/login');
     }
     else {
-        console.log(2)
        res.render('vwAccount/otp',{layout:false});
    }
 })
@@ -110,32 +136,6 @@ router.get("/fullcourseSub/:id", Account.ViewGetfullcourseSub);
 router.post("/fullcourseSub/:id", Account.getfullcourseSub);
 router.get('/search',Account.SearchCourse);
 
-router.post('/login', async (req, res)=>{
-   
-    var dataRes = await  Login(req);
-    var url;
-    
-    if(dataRes && dataRes.status == 200)
-    {
-        
-        req.session.auth = true
-        req.session.authAccount = dataRes;
-        if (dataRes.account.role==0){
-            url='/api/accounts/home';
-
-        }else if (dataRes.account.role==1){
-            url='/api/teachers/homepage';
-        } else if (dataRes.account.role==2){
-            url ='/api/admins/teacherCensor';
-        }
-        req.session.save(function (err) {
-            // session saved
-            res.redirect(url); // sua thi sua o day anha Vy, sua dieu huong home a'
-        })
-    }
-
-    res.render("vwAccount/login");  
-})
 
 router.post('/logout',async function (req,res){
     req.session.auth=false;
@@ -152,6 +152,12 @@ router.get('/search',(req,res)=>{
 router.get("/fullcourses", async (req,res)=>{
     res.render("vwAccount/fullcourses");
    
+})
+
+router.get("/profile", Account.profile);
+router.get("/profile",async(req,res)=>{
+    res.render("vwStudent/profile",{isLogin: req.session.auth,
+        acc: req.session.authAccount})
 })
 
 router.get('/changeinfo',(req,res)=>{

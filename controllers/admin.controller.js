@@ -2,7 +2,7 @@ import Admin from '../models/admin.model.js';
 import Student from '../models/student.model.js';
 import Teacher from '../models/teacher.model.js';
 // import Category from '../models/category.model.js'
-import AccountModel from '../models/Account.model.js';
+import AccountModel from '../models/account.model.js';
 import CategoryModel from '../models/Category.model.js';
 import CourseModel from '../models/Course.model.js';
 import SubCategoryModel from '../models/SubCategory.model.js';
@@ -26,19 +26,19 @@ const GetAllAdmin = async(req, res) =>{
     }
 };
  
-const CreateAdmin = async(req, res, id_account ) =>{
+const CreateAdmin = async(req,  id_account ) =>{
   const data = new Admin({
       id_account: id_account,
       fullname: req.fullname
   })
 
-  try {
-      const dataToSave = await data.save();
-      res.status(200).json(dataToSave)
-  }
-  catch (error) {
-      res.status(400).json({message: error.message})
-  }
+  // try {
+  //     const dataToSave = await data.save();
+  //     res.status(200).json(dataToSave)
+  // }
+  // catch (error) {
+  //     res.status(400).json({message: error.message})
+  // }
 } 
 
 
@@ -46,7 +46,7 @@ const DeleteAdmin = async (req, res, id_account) => {
     try {
       const id = req.params.id;
       const data = await Admin.findOneAndDelete({ "id_account" : id_account})
-      res.send(`Document with data has been deleted..`)
+      res.send('Document with data has been deleted..')
     } catch (err) {
       res.status(404).json({
         status: "fail",
@@ -91,21 +91,25 @@ const DeleteAdmin = async (req, res, id_account) => {
 
   const teacherCensor = async(req, res) => {
     const allTeacher = await Teacher.find({isBlock:false}).lean();
-    res.render('Admin/teacherCensor',{teacher: allTeacher})
+    res.render('Admin/teacherCensor',{teacher: allTeacher, isLogin: req.session.auth,
+      acc: req.session.authAccount,})
   }
 
   const studentCensor = async(req, res) => {
     const allStudent= await Student.find({isBlock:false}).lean();
-    res.render('Admin/studentCensor', {student: allStudent}) 
+    res.render('Admin/studentCensor', {student: allStudent, isLogin: req.session.auth,
+      acc: req.session.authAccount,}) 
   }
 
   const courseCensor = async (req, res) => {
     const allCourses = await Course.find().lean();
-    res.render('Admin/courseCensor', {course: allCourses});
+    res.render('Admin/courseCensor', {course: allCourses, isLogin: req.session.auth,
+      acc: req.session.authAccount,});
   }
 const createCategory = async (req, res) => {
   const allCategories = await CategoryModel.find().lean();
-  res.render('Admin/creataCate',{category: allCategories});
+  res.render('Admin/creataCate',{category: allCategories, isLogin: req.session.auth,
+    acc: req.session.authAccount,});
   }
 const postCategory = async (req, res) => {
     try {
@@ -134,11 +138,16 @@ const getAllCourse = async (req, res) => {
   try {
     const course = await CourseModel.find({isBlock:false}).populate({path:"author_id"}).lean();
     const subCategory = await SubCategoryModel.find().lean();
-    res.render('Admin/courseCensor', { course: course, subCategory: subCategory });
+    res.render('Admin/courseCensor', { course: course, subCategory: subCategory, isLogin: req.session.auth,
+      acc: req.session.authAccount, });
   } catch (error) {
     
   }
 }
+const createAccountTeacher = async(req, res)=>{
+    res.render("Admin/createTeacher")
+}
+
 const blockCourse = async (req,res)=>{
   const id=req.params.id;
   const course = await CourseModel.findOneAndUpdate({ _id: id }, { isBlock: true }, { returnOriginal: true });
@@ -167,6 +176,7 @@ const getAllComment = async (req, res) => {
    
   }
   console.log(storeAllCommet);
-  res.render('Admin/allComment',{allComment: storeAllCommet})
+  res.render('Admin/allComment',{allComment: storeAllCommet, isLogin: req.session.auth,
+    acc: req.session.authAccount,})
 }
-export default { getAllComment,getCourseBlock, blockCourse, getAllCourse, editCat,createCategory, postCategory, getAllCategory,deleteCat,GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher};
+export default { getAllComment,getCourseBlock, blockCourse, getAllCourse, editCat,createCategory, postCategory, getAllCategory,deleteCat,GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher,createAccountTeacher};
