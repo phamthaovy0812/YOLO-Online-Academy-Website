@@ -1,0 +1,66 @@
+<div class="teacherCensor d-flex" style="height:1200px;">
+
+    <!-- BeginSIDEBAR -->
+    <div class="col-md-1 position-relative p-0 m-0">
+        <div id="side">
+            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px; position:absolute!important;">
+                <a href="/api/admins/categoryCensor" class="mySide" class="side w3-bar-item"><i class="bi bi-bookmarks"></i></a>
+                <a href="/api/admins/teacherCensor" class="mySide " class="side w3-bar-item "><i class="bi bi-person-workspace"></i></i></a>
+                <a href="/api/admins/studentCensor" class="mySide" class="side w3-bar-item "><i class="bi bi-person"></i></a>
+                <a href="/api/admins/courseCensor" class="mySide" class="side w3-bar-item "><i class="bi bi-camera-reels"></i></a>
+                <a href="/api/admins/createTeacher" class="mySide active" class="side w3-bar-item "><i class="bi bi-person-fill-add"></i></a>
+            </div>
+        </div>
+     
+        <script>
+            // Add active class to the current button (highlight it)
+            var header = document.getElementById("side");
+            var btns = header.getElementsByClassName("mySide");
+
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function () {
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                });
+            }               
+        </script>
+    </div>
+    <!-- End: SIDEBAR -->
+
+
+        <!-- Begin: Teacher Censor Body -->
+      <form  method="post" style="margin-left:auto; margin-right: auto; padding-top: 50px;">
+        <div style="color: #FF914D; font-size: 30px;font-weight: bolder; padding-bottom: 5px; text-align: center;">SIGN UP ACCOUNT TEACHER</div>
+            <div class="signupform">        
+                    <div>
+                        <input class="signupinput" name="fullname" placeholder="Full Name..">
+                    </div>
+                    <div>
+                        <input class="signupinput" name="username"  placeholder="User Name..">
+                    </div>
+                    <div>
+                        <input class="signupinput" name="email"  placeholder="Email..">
+                    </div>
+                    <div>
+                        <input class="signupinput" name="password"  placeholder="Password.." type="password">
+                        <input class="signupinput" name="isBlock" type="hidden">
+
+                    </div>
+                    <div>
+                        <input class="signupinput"  name="confirmpassword"  placeholder="Confirm Password.." type="password">
+                    </div>
+                    <div class="father">
+                        <div class="son">
+                            <button class="abtn"> 
+                                Sign Up
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <div>
+        </div>
+    </form>
+
+
+</div>

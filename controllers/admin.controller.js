@@ -26,19 +26,19 @@ const GetAllAdmin = async(req, res) =>{
     }
 };
  
-const CreateAdmin = async(req, res, id_account ) =>{
+const CreateAdmin = async(req,  id_account ) =>{
   const data = new Admin({
       id_account: id_account,
       fullname: req.fullname
   })
 
-  try {
-      const dataToSave = await data.save();
-      res.status(200).json(dataToSave)
-  }
-  catch (error) {
-      res.status(400).json({message: error.message})
-  }
+  // try {
+  //     const dataToSave = await data.save();
+  //     res.status(200).json(dataToSave)
+  // }
+  // catch (error) {
+  //     res.status(400).json({message: error.message})
+  // }
 } 
 
 
@@ -144,6 +144,11 @@ const getAllCourse = async (req, res) => {
     
   }
 }
+const createAccountTeacher = async(req, res)=>{
+    res.render("Admin/createTeacher")
+}
+
+
 const blockCourse = async (req,res)=>{
   const id=req.params.id;
   const course = await CourseModel.findOneAndUpdate({ _id: id }, { isBlock: true }, { returnOriginal: true });
@@ -175,4 +180,4 @@ const getAllComment = async (req, res) => {
   res.render('Admin/allComment',{allComment: storeAllCommet, isLogin: req.session.auth,
     acc: req.session.authAccount,})
 }
-export default { getAllComment,getCourseBlock, blockCourse, getAllCourse, editCat,createCategory, postCategory, getAllCategory,deleteCat,GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher};
+export default { getAllComment,getCourseBlock, blockCourse, getAllCourse, editCat,createCategory, postCategory, getAllCategory,deleteCat,GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher,createAccountTeacher};

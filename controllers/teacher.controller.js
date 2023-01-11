@@ -4,6 +4,7 @@ import LessonModel from '../models/Lesson.model.js';
 import TeacherSevice from "../services/Teacher.sevice.js";
 import CourseModel from "../models/Course.model.js";
 import CourseController from "./Course.controller.js";
+
 const GetAllTeacher = async (req, res) => {
   try {
     const teacher = await Teacher.find();
@@ -21,7 +22,7 @@ const GetAllTeacher = async (req, res) => {
   }
 };
 
-const CreateTeacher = async (req, res, id_account) => {
+const CreateTeacher = async (req, id_account) => {
   const data = new Teacher({
     id_account: id_account,
     fullname: req.fullname,
@@ -29,6 +30,12 @@ const CreateTeacher = async (req, res, id_account) => {
     description: req.description,
   });
 
+  console.log({
+    id_account: id_account,
+    fullname: req.fullname,
+    skill: req.skill,
+    description: req.description,
+  })
   const dataToSave = await data.save();
 };
 

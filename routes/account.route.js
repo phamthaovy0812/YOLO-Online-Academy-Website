@@ -74,12 +74,10 @@ router.post('/otp',(req,res)=>{
 
     if(req.body.otp == req.session.otp)
     {
-        console.log(1)
         Account.CreateAccount(req.session.signup)
-         res.redirect('/api/accounts/login');
+        res.redirect('/api/accounts/login');
     }
     else {
-        console.log(2)
        res.render('vwAccount/otp',{layout:false});
    }
 })

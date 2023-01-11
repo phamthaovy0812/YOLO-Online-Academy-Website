@@ -174,9 +174,11 @@ const CreateAccount = async (req) => {
       console.log( { email, username, password, role, avatar } )
       const dataToSave = await newAccount.save();
 
-      if (dataToSave.role == 1) {
+      if (dataToSave.role === 1) {
+        
+        console.log("ID:", req, dataToSave._id)
         Teacher.CreateTeacher(req, dataToSave._id);
-      } else if (dataToSave.role == 2) {
+      } else if (dataToSave.role === 2) {
         Admin.CreateAdmin(req, dataToSave._id);
       } else {
         Student.CreateStudent(req, dataToSave._id);
