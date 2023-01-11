@@ -50,14 +50,22 @@ router.get("/mylearning",(req,res)=>{
 })
 router.get("/home",Student.topCourse);
 router.get("/profile", Student.profile);
-router.get("/shopping",Student.payCourse);
+// router.get("/shopping",Student.payCourse);
 
 router.get('/viewlesson',(req,res)=>{
     res.render('Student/viewlesson')
 })
 
 router.get('/shopping',(req,res)=>{
-    res.render('vwStudent/shopping')
+    console.log(req.session.authAccount.detail.courses_enroll)
+    res.render('vwStudent/shopping',{paycourse:req.session.authAccount.detail.courses_enroll, isLogin: req.session.auth,
+        acc: req.session.authAccount,})
+})
+
+router.get('/wishlist',(req,res)=>{
+    console.log(req.session.authAccount.detail.wishlist)
+    res.render('vwStudent/wishlist',{paycourse:req.session.authAccount.detail.wishlist, isLogin: req.session.auth,
+        acc: req.session.authAccount,})
 })
 
 router.get("*", (req, res) => {

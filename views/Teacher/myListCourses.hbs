@@ -48,6 +48,7 @@
                             });
                         });
                     });
+<<<<<<< HEAD
                 </script>
             </div>
 
@@ -82,6 +83,29 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
                         </div>
+=======
+                });
+            </script>
+        </div>
+    
+        {{!-- Create Course Button --}}
+        <div class="d-flex align-items-center ">
+            <a href="/api/teachers/createCourse"><button type="button" class="btn btn-lg buttonCreateCourse">New
+                    Course</button></a>
+    </div>
+    </div>
+    <div class="listOfCourse">
+        {{#each course}}
+        <div class="container d-flex p-2 course border border-dark rounded">
+            <div class="container  imgAndInfo d-flex m-0  mb-2">
+                <img src="/{{image}}" alt="This is avatar of HTML Course">
+                <div class="info">
+                    <div>
+                        <p>{{title}}</p>
+                    </div>
+                    <div>
+                        <p>Last Update : {{lastUpdate}}</p>
+>>>>>>> 10ad2d2f4a0839dbf899d55d62053cc611204b26
                     </div>
 
 

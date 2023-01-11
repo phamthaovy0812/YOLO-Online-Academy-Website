@@ -61,9 +61,6 @@ router.post("/courseDetail/:id",  async (req,res)=>{
   const course = await CourseModel.find().lean();
   const dataAccount = await Student.UpdateRating(req);
   const user = req.session.authAccount;
-  
-  
-
   CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
       if (err) return (err);
       res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user });
@@ -71,12 +68,29 @@ router.post("/courseDetail/:id",  async (req,res)=>{
   });
 })
 
+
+router.post("/redirect/:id",  async (req,res)=>{
+  
+    const user = req.session.authAccount;
+    CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
+        if (err) return (err);
+        res.redirect("Student/courseDetail", { course: story, chapter: story.chapter, user: user });
+    
+    });
+  })
+
+  
 router.post("/buy", async(req, res)=>{
     const url = `/api/accounts/courseDetail/${req.body._id}`
     console.log("URL",url)
     const data = await Student.UpdateEnrollCourse(req)
-    
-    res.redirect(url);
+    if(data!=null)
+    {
+        res.redirect(url);
+    }
+   else{
+        res.redirect("/api/accounts/login");
+   }
 })
 
 router.post("/tocart", async(req, res)=>{
@@ -90,6 +104,7 @@ router.post("/tocart", async(req, res)=>{
 })
 
 router.get("/home", Account.topCourse);
+router.get('/search',Account.SearchCourse);
 
 router.post('/login', async (req, res)=>{
    

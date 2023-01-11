@@ -24,4 +24,6 @@ router.use('/api/teachers', TeacherRoute);
 router.use('/api/admins', AdminRoute); 
 router.use('/api/login', AuthenRoute);
 
+
+
 export default router;

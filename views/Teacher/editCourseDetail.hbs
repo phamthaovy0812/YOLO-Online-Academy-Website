@@ -297,7 +297,7 @@
     </div>
     <div class="col border borde-dark">
 
-        <form id="createChapter" method="POST" action="/api/chapter/create">
+        <form id="createChapter" method="POST" action="/api/chapter/createChapter/{{course._id}}">
             <div class="modal fade" id="modalChapter" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog  mw-100 w-75">
                     <div class="modal-content">
@@ -313,11 +313,14 @@
                                 <label data-error="wrong" data-success="right" for="defaultForm-email"
                                     id="nameChapter">Name of
                                     chapter</label>
+
+\
                                 <input type="text" id="defaultForm-email" class="form-control validate" name="name">
                             </div>
                             <div class="md-form mb-5">
 
                                 <input type="hidden" name="type" value="edit">
+                                <input type="hidden" name="iduser" value="{{user._id}}">
                                 <input type="hidden" id="lessonArray" class="form-control validate" name="lessons">
                             </div>
                             <div class="md-form mb-5">
@@ -343,7 +346,7 @@
             <script>
                 function handleChapter() {
 
-                    const time = Date.now();
+                    {{!-- const time = Date.now();
                     $("#timeCreate").val(time)
                     let lessonArray = new Array();
                     if (localStorage.getItem(names)) {
@@ -354,7 +357,8 @@
                           lessonArray.push(time);
                     const lessonJSON = JSON.stringify(lessonArray);
                     localStorage.setItem(names, lessonJSON);
-                    }
+                    } --}}
+                  
                   
                 }
 

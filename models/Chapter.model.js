@@ -12,6 +12,9 @@ const Chapter = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "Account"
     },
+    id_Course:{
+       type:String,
+    },
     deleteAt: {
         type: String
     },

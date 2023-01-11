@@ -24,9 +24,9 @@ const GetAllTeacher = async (req, res) => {
 const CreateTeacher = async (req, res, id_account) => {
   const data = new Teacher({
     id_account: id_account,
-    fullname: req.body.fullname,
-    skill: req.body.skill,
-    description: req.body.description,
+    fullname: req.fullname,
+    skill: req.skill,
+    description: req.description,
   });
 
   const dataToSave = await data.save();
@@ -107,7 +107,7 @@ const createCourse = async (req, res) => {
     const value = await course_Data.save();
 
     if (value) {
-      res.redirect("/api/teachers/homepage");
+      res.redirect("/api/teachers/homepage"); 
     }
     else {
       res.status(200).json({ message: "Failed" });
@@ -180,7 +180,7 @@ const handleUpdateCourse = async (req, res) => {
       promotion: courseUpdatePagram.promotion||"No",
       syllabus: courseUpdatePagram.syllabus,
       videoDemo: file.videoDemo[0].path,
-      
+
     }, { new: true });
 
 

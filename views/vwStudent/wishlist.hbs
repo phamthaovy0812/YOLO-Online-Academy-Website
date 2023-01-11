@@ -1,0 +1,38 @@
+<div style="display: flex;  margin-top: 30px; margin-left: 30px; ">
+    <div style="width: 75%; " >
+        <div style="font-size: 30px;font-weight: bolder; margin-bottom: 30px;">List of course wishlist</div>
+        <div style="display: flex; ">
+            {{#each paycourse }}
+                <div style="display: inline-block;">
+                    <div class="col-2 m-3"  >
+                        <a href="/api/accounts/courseDetail/{{id_course}}" class="card m-2" style="width: 15rem; height: 15rem; cursor: pointer;" type="submit">
+                            <img class="card-img-top" src="/{{avatar_course}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title" style="font-size: medium;">{{name_course}}</h4>
+                                <div class="row">                  
+                                    <div class="col">
+                                        </div>
+                                            <div class="col">
+                                                <div class="d-flex justify-content-between">
+                                        </div>             
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        
+       
+    </div>
+
+    <div>
+        {{!-- <div class=" shoppingmoney" style="background-color: rgba(0, 0, 0, 0.577); padding: 30px; border-radius: 20px; margin-left: 30px; " >
+            <div style="font-weight: bolder; font-size: larger; color: white" >Total:</div>
+            <div style="font-weight: bolder; font-size: larger; color: black; margin-top: 5px;">đ 12345,000</div>
+            <a href=""><button class="abtn" >Check out</button></a>
+
+        </div> --}}
+    </div>
+</div>

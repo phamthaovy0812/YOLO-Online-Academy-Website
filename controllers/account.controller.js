@@ -8,6 +8,8 @@ import Admin from "./admin.controller.js";
 import AdminModel from '../models/admin.model.js';
 import bcrypt from "bcryptjs";
 import CourseModel from "../models/Course.model.js";
+import CourseController from "./Course.controller.js";
+import db from "../utils/db.js";
 
 
 
@@ -321,7 +323,7 @@ const detailCourseUI = async (req, res) => {
        return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart, isWishList:isWishList });
        // , 
      });
-   }
+   }  
    else {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
@@ -350,19 +352,57 @@ const accountUI = async (req, res) => {
 }
 
 const topCourse = async (req, res) => {
-  const coursetop = await CourseModel.find().lean();
-  const toppopularcourse = await CourseModel.find().lean();
-  const topviewcourse = await CourseModel.find().lean();
   
-  const Newcourse = await CourseModel.find().lean();
-
+  const coursetop = await CourseController.getClickManyView(); 
+  const toppopularcourse =await CourseController.getCourseImpress();
+  const Newcourse = await CourseController.getNewCreate();
   const mostCategory = [{ "name": "Mobile Development" }]
-  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: mostCategory, isLogin: req.session.auth, acc: req.session.authAccount });
+  const sub=await CourseController.getSubcategory();
+  var name;
+  sub.map(item=>{
+    name=item.subcategory;
+  })
+  console.log(name);
+  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
 };
 
-const search=async(req,res)=>{
-  const search=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
-  
+const SearchCourse=async(req,res)=>{
+  try{
+    var search='';
+    if (req.query.search){
+      search= req.query.search;
+    }
+    
+    var page=1;
+    if (req.query.page){
+      page= req.query.page;
+    }
+    const limit =5;
+
+    // console.log(req.query.search)
+    const dataCourse=await CourseModel.find({
+      $or:[
+        { title: { $regex: search, $options: 'i'}},
+        { slug_category: { $regex: search, $options: 'i'}}
+      ]
+    }
+    ).limit(limit*1).skip((page-1)*limit).lean();
+
+    const count=await CourseModel.find({
+      $or:[
+        { title: { $regex: search, $options: 'i'}},
+        { slug_category: { $regex: search, $options: 'i'}}
+      ]
+    }
+    ).countDocuments();
+    // console.log(dataCourse);
+    res.render('vwAccount/search',{courseSearch: dataCourse, totalPage:Math.ceil(count/limit), currentPage:page})
+
+  }catch (error)
+  {
+    console.log(error.message); 
+
+  }
 
 }
 
@@ -377,5 +417,6 @@ export default {
   AccountDataCourse,
   accountUI,
   detailCourseUI,
-  topCourse
+  topCourse,
+  SearchCourse
 };

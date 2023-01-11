@@ -4,6 +4,7 @@ import Chapter from '../controllers/Chapter.controller.js'
 
 const ChapterRoute = express.Router();
 ChapterRoute.post('/create', Chapter.create);
+ChapterRoute.post('/createChapter/:id', Chapter.createChapter);
 ChapterRoute.post('/update/:id', Chapter.update);
 ChapterRoute.post('/delete/:id', Chapter.deleteChapter);
 ChapterRoute.get('/getAllChapter', Chapter.getAllChapter);
