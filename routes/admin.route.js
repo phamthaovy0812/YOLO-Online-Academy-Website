@@ -43,6 +43,6 @@ router.get("/getAllComment", Admin.getAllComment);
 router.get("*", (req, res) => {
   res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
 })
-
+//adsd
 
 export default  router ;
