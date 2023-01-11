@@ -20,6 +20,7 @@ export default  async( req ) =>{
             { 
                 const teacher = await Teacher.findOne({"id_account":data.id});
                 dataRes =  {"status":200, account , detail : teacher};
+                
             }
             else if(data.role==2)
             {
