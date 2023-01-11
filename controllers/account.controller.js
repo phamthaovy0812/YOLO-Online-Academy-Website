@@ -1,5 +1,5 @@
 import { json } from "express";
-import Account from "../models/Account.model.js";
+import Account from "../models/account.model.js";
 import Student from "./student.controller.js";
 import StudentModel from "../models/student.model.js";
 import Teacher from "./teacher.controller.js";

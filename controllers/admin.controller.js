@@ -2,7 +2,7 @@ import Admin from '../models/admin.model.js';
 import Student from '../models/student.model.js';
 import Teacher from '../models/teacher.model.js';
 // import Category from '../models/category.model.js'
-import AccountModel from '../models/Account.model.js';
+import AccountModel from '../models/account.model.js';
 import CategoryModel from '../models/Category.model.js';
 import CourseModel from '../models/Course.model.js';
 import SubCategoryModel from '../models/SubCategory.model.js';
