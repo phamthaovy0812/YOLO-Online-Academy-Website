@@ -29,7 +29,7 @@ router.post("/blockTeacher/:id", Admin.BlockTeacher);
 //     res.render('Admin/teacherCensor');
 // })
 
-router.get("/createCategory", Admin.createCategory);
+router.get("/+", Admin.createCategory);
 router.post("/createCategory", Admin.postCategory);
 router.get("/getAllCategory", Admin.getAllCategory);
 router.post("/deleteCat/:id", Admin.deleteCat);
