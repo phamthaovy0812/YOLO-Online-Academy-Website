@@ -2,12 +2,14 @@
     <div class="col-md-1  position-relative p-0 m-0">
         <!-- Begin: SIDEBAR -->
         <div id="side">
-            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge p-0 m-0" style="width:70px;position: absolute !important; box-sizing:border-box;">
-                <a href="/api/teachers/homepage" class="mySide" class="side w3-bar-item" onclick="handleRemove()" ><i
+            <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge p-0 m-0"
+                style="width:70px;position: absolute !important; box-sizing:border-box;">
+                <a href="/api/teachers/homepage" class="mySide" class="side w3-bar-item" onclick="handleRemove()"><i
                         class="bi bi-house-door fa-xm"></i></a>
-                <a href="/api/teachers/postCourse" class="mySide "  onclick="handleRemove()" class="side w3-bar-item "><i
+                <a href="/api/teachers/postCourse" class="mySide " onclick="handleRemove()" class="side w3-bar-item "><i
                         class="bi bi-camera-reels fa-xm"></i></i></a>
-                <a href="" class="mySide active" class="side w3-bar-item " onclick="handleRemove()" ><i class="bi bi-card-list fa-xm"></i></a>
+                <a href="" class="mySide active" class="side w3-bar-item " onclick="handleRemove()"><i
+                        class="bi bi-card-list fa-xm"></i></a>
             </div>
         </div>
         <script>
@@ -27,123 +29,80 @@
     <!-- End: SIDEBAR -->
 
 
-<div class="col m-2">
-    <h1 class="font-text">MY LIST</h1>
-    <div class="container d-flex searchInMyList border border-gray rounded">
-    
-        {{!-- Search Filter --}}
-        <div class="d-flex align-items-center input-group mr-2">
-            <input class="form-control rounded" id="myInput" type="text" placeholder="Search your course">
-    
-            <script>
-                $(document).ready(function () {
-                    $("#myInput").on("keyup", function () {
-                        var value = $(this).val().toLowerCase();
-                        console.log(value);
-                        $(".listOfCourse").filter(function () {
-                            console.log(typeof $(this).text().toLowerCase().indexOf(value) > -1);
-                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    <div class="col m-2">
+        <h1 class="font-text">MY LIST</h1>
+        <div class="container d-flex searchInMyList border border-gray rounded">
+
+            {{!-- Search Filter --}}
+            <div class="d-flex align-items-center input-group mr-2">
+                <input class="form-control rounded" id="myInput" type="text" placeholder="Search your course">
+
+                <script>
+                    $(document).ready(function () {
+                        $("#myInput").on("keyup", function () {
+                            var value = $(this).val().toLowerCase();
+                            console.log(value);
+                            $(".listOfCourse").filter(function () {
+                                console.log(typeof $(this).text().toLowerCase().indexOf(value) > -1);
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
                         });
                     });
-                });
-            </script>
-        </div>
-<<<<<<< HEAD
-
-        {{!-- 2: List of Course --}}
-        <script>
-            for (let i = 0; i < 5; i++) {
-                document.write(`
-                            <div class="listOfCourse">
-            <div class="container course border border-dark rounded">
-                <div class=" d-flex courseImgAndInfo">
-                    <a href="/api/teachers/editCourse" class="imgCourseBox">
-                        <img src="/student/HTML_COURSE.png" alt="This is image of HTML course">
-                    </a>
-                    <div class="ud-unstyled-list">
-                        <div class="listItem">
-                            <p id="titleCourse">${i} Hour HTML</p>
-                        </div>
-                        <div class="listItem">
-                            <p>Last update: ${i+1}/2022</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-between flex-wrap" >
-                    <div class="ud-unstyled-list rating" style="margin-right:5rem;">
-                        <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
-                            <div>5.0</div>
-                            <div class="starColor">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="listItem">
-                            <p>Course rating</p>
-                        </div>
-=======
-    
-        {{!-- Create Course Button --}}
-        <div class="d-flex align-items-center ">
-            <a href="/api/teachers/createCourse"><button type="button" class="btn btn-lg buttonCreateCourse">New
-                    Course</button></a>
-    </div>
-    </div>
-    <div class="listOfCourse">
-        {{#each course}}
-        <div class="container d-flex p-2 course border border-dark rounded">
-            <div class="container  imgAndInfo d-flex m-0  mb-2">
-                <img src="/{{image}}" alt="This is avatar of HTML Course">
-                <div class="info">
-                    <div>
-                        <p>{{title}}</p>
-                    </div>
-                    <div>
-                        <p>Last Update : {{lastUpdate}}</p>
->>>>>>> b30f7c99678d21ae12cc84f5fd871f9b569f3622
-                    </div>
-                </div>
+                </script>
             </div>
-            <div class="rating ml-2 pl-2">
-                <div>Course rating</div>
-                <div class="starRating ">
-                    <div>4.50</div>
-                    <div class="starColor ml-2">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                    </div>
-                </div>
-        
-        
-            </div>
-        
-            <div class="box_btn_edit mr-2">
-                <a href="/api/teachers/edit/{{_id}}" onclick="handleRemove()"><button class="btn_edit"
-                        type="button">Edit</button></a>
+
+            {{!-- Create Course Button --}}
+            <div class="d-flex align-items-center ">
+                <a href="/api/teachers/createCourse"><button type="button" class="btn btn-lg buttonCreateCourse">New
+                        Course</button></a>
             </div>
         </div>
-        
-        {{/each}}
+        <div class="listOfCourse">
+            {{#each course}}
+            <div class="container d-flex p-2 course border border-dark rounded">
+                <div class="container  imgAndInfo d-flex m-0  mb-2">
+                    <img src="/{{image}}" alt="This is avatar of HTML Course">
+                    <div class="info">
+                        <div>
+                            <p>{{title}}</p>
+                        </div>
+                        <div>
+                            <p>Last Update : {{lastUpdate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="rating ml-2 pl-2">
+                    <div>Course rating</div>
+                    <div class="starRating ">
+                        <div>4.50</div>
+                        <div class="starColor ml-2">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="box_btn_edit mr-2">
+                    <a href="/api/teachers/edit/{{_id}}" onclick="handleRemove()"><button class="btn_edit"
+                            type="button">Edit</button></a>
+                </div>
+            </div>
+
+            {{/each}}
+
+        </div>
 
     </div>
-   
-</div>
 
-<script>
-    function handleRemove() {
-        localStorage.removeItem('isFirstLoad');
-    }
-</script>
-
-
-
-   
+    <script>
+        function handleRemove() {
+            localStorage.removeItem('isFirstLoad');
+        }
+    </script>
 
 </div>

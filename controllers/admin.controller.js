@@ -3,6 +3,9 @@ import Student from '../models/student.model.js';
 import Teacher from '../models/teacher.model.js';
 // import Category from '../models/category.model.js'
 import AccountModel from '../models/Account.model.js';
+import CategoryModel from '../models/Category.model.js';
+import CourseModel from '../models/Course.model.js';
+import SubCategoryModel from '../models/SubCategory.model.js';
 
 const GetAllAdmin = async(req, res) =>{
     try{
@@ -26,7 +29,7 @@ const GetAllAdmin = async(req, res) =>{
 const CreateAdmin = async(req, res, id_account ) =>{
   const data = new Admin({
       id_account: id_account,
-      fullname: req.body.fullname
+      fullname: req.fullname
   })
 
   try {
@@ -43,7 +46,7 @@ const DeleteAdmin = async (req, res, id_account) => {
     try {
       const id = req.params.id;
       const data = await Admin.findOneAndDelete({ "id_account" : id_account})
-      res.send(`Document with data has been deleted..`)
+      res.send('Document with data has been deleted..')
     } catch (err) {
       res.status(404).json({
         status: "fail",
@@ -100,6 +103,70 @@ const DeleteAdmin = async (req, res, id_account) => {
     const allCourses = await Course.find().lean();
     res.render('Admin/courseCensor', {course: allCourses});
   }
+const createCategory = async (req, res) => {
+  const allCategories = await CategoryModel.find().lean();
+  res.render('Admin/creataCate',{category: allCategories});
+  }
+const postCategory = async (req, res) => {
+    try {
+        console.log(req.body);
+        const  cate = new CategoryModel(req.body);
+        await cate.save();
+      res.redirect('/api/admins/createCategory');
+    } catch (error) {
+      
+    }
+  }
+const getAllCategory = async (req, res) => {
 
+  }
+const deleteCat = async (req, res) => {
+  await CategoryModel.findByIdAndDelete(req.params.id);
+  console.log(req.params.id);
+  res.redirect('/api/admins/createCategory'); 
+  }
+  const editCat = async (req, res) => {
+    const cate = req.body;
+    const updateCate = await CategoryModel.findByIdAndUpdate(req.params.id, { name: cate.name, sub_categories: cate.sub_categories }, { new: true });
+    res.redirect('/api/admins/createCategory');
+  }
+const getAllCourse = async (req, res) => {
+  try {
+    const course = await CourseModel.find({isBlock:false}).populate({path:"author_id"}).lean();
+    const subCategory = await SubCategoryModel.find().lean();
+    res.render('Admin/courseCensor', { course: course, subCategory: subCategory });
+  } catch (error) {
+    
+  }
+}
+const blockCourse = async (req,res)=>{
+  const id=req.params.id;
+  const course = await CourseModel.findOneAndUpdate({ _id: id }, { isBlock: true }, { returnOriginal: true });
 
-  export default { GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher};
+  res.redirect('/api/admins/getAllCourse');
+
+}
+const getCourseBlock = async (req, res) => {
+ 
+  const course = await CourseModel.find({isBlock:true}).lean();
+  res.redirect('/api/admins/getAllCourse');
+}
+const getAllComment = async (req, res) => {
+  const storeAllCommet=[];
+  const course = await CourseModel.find({ "list_reviews.0": { "$exists": true } }).lean();
+  for(let item of course)
+  {
+    for (let comment of item.list_reviews)
+    {
+      if(comment.comment && comment.name)
+    {
+        storeAllCommet.push(comment);
+    }
+     
+    }
+   
+  }
+  console.log(storeAllCommet);
+  res.render('Admin/allComment',{allComment: storeAllCommet})
+}
+export default { getAllComment,getCourseBlock, blockCourse, getAllCourse, editCat,createCategory, postCategory, getAllCategory,deleteCat,GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher};

@@ -1,4 +1,4 @@
-<div class="courseCensor d-flex" style="height:auto;">
+<div class="allcomment d-flex" style="height:auto;">
 
     <!-- BeginSIDEBAR -->
     <div class="col-md-1 position-relative p-0 m-0">
@@ -30,43 +30,23 @@
         </script>
     </div>
     <div class="col m-5">
-        <h6 class="font-text container">COURSES LIST</h6>
-
-        {{!-- 1. Filter --}}
-        <div class="d-flex align-items-center input-group mr-2">
-            {{!-- <input class="form-control rounded" id="myInput" type="text" placeholder="Search your course"> --}}
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                    aria-expanded="false">
-                    Sub-Category
-                </button>
-                <br>
-                <br>
-                <ul class="dropdown-menu" id="subCategoryFilter">
-                    {{#each subCategory}}
-                    <li><button type="button">{{name}}</button></li>
-                    {{/each}}
-                </ul>
-            </div>
-
-        </div>
-
+        <h6 class="font-text container">ALL COMMENT LIST</h6>
 
         {{!-- 2: List of Courses --}}
         <div class="listOfCourses">
-            {{#each course}}
+            {{#each allComment}}
             <div class="listOfCourse">
                 <div class="container course border border-dark rounded">
                     <div class=" d-flex courseImgAndInfo">
                         <div class="imgCourseBox">
-                            <img src="/{{image}}" alt="This is image of {{title}} course">
+                            <img src="{{pathImage}}" alt="This is image of default avartar">
                         </div>
                         <div class="ud-unstyled-list ">
                             <div class="listItem">
-                                <p id="titleCourse">{{title}}</p>
+                                <p id="titleCourse">{{name}}</p>
                             </div>
                             <div class="listItem">
-                                <p class="infoCourse">{{instructorName}}</p>
+                                <p class="infoCourse">Content:{{comment}}</p>
                             </div>
                             <div class="listItem">
                                 <p class="infoCourse">{{sub-category}}</p>
@@ -77,7 +57,7 @@
                     <div class="d-flex justify-content-between flex-wrap">
                         <div class=" ud-unstyled-list rating" style="margin-right:5rem;">
                             <div class="listItem justify-content-between" style="width: 9.5rem; height: 2.5rem">
-                                <div>5.0</div>
+                                <div>{{scores}}</div>
                                 <div class="starColor">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
