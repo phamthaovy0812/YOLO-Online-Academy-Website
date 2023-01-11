@@ -49,7 +49,7 @@ router.get("/mylearning",(req,res)=>{
     res.render('vwStudent/mylearning');
 })
 router.get("/home",Student.topCourse);
-router.get("/profile", Student.profile);
+//router.get("/profile", Student.profile);
 // router.get("/shopping",Student.payCourse);
 
 router.get('/viewlesson',(req,res)=>{

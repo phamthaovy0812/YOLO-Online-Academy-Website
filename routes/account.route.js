@@ -152,6 +152,12 @@ router.get("/fullcourses", async (req,res)=>{
    
 })
 
+router.get("/profile", Account.profile);
+router.get("/profile",async(req,res)=>{
+    res.render("vwStudent/profile",{isLogin: req.session.auth,
+        acc: req.session.authAccount})
+})
+
 router.get('/changeinfo',(req,res)=>{
     res.render("vwStudent/editprofile",{isLogin: req.session.auth,
         acc: req.session.authAccount})

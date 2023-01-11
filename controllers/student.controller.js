@@ -283,15 +283,15 @@ const WishList = async (req, res) => {
   ];
   res.render("vwStudent/profile", { wish: wishList ,});
 };
-const profile = async (req, res) => {
-  const user = req.session.authAccount;
-  res.render("vwStudent/profile", {
-    infor: user.account,
-    detailinfor:user.detail,
-    isLogin: req.session.auth,
-    acc: req.session.authAccount,
-  });
-};
+// const profile = async (req, res) => {
+//   const user = req.session.authAccount;
+//   res.render("vwStudent/profile", {
+//     infor: user.account,
+//     detailinfor:user.detail,
+//     isLogin: req.session.auth,
+//     acc: req.session.authAccount,
+//   });
+// };
 
 const detailCourseUI = async (req, res) => {
   const course = await CourseModel.find().lean();
@@ -338,4 +338,4 @@ const  addWishList = async (req, res) => {
   }
 
 
-export default { addWishList,detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse,UpdateCart};
+export default { addWishList,detailCourseUI, WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse,UpdateCart};
