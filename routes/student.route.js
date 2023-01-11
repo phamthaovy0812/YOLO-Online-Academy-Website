@@ -60,7 +60,8 @@ router.get('/viewlesson',(req,res)=>{
 
 router.get('/shopping',(req,res)=>{
     console.log(req.session.authAccount.detail.courses_enroll)
-    res.render('vwStudent/shopping',{paycourse:req.session.authAccount.detail.courses_enroll})
+    res.render('vwStudent/shopping',{paycourse:req.session.authAccount.detail.courses_enroll, isLogin: req.session.auth,
+        acc: req.session.authAccount,})
 })
 
 router.get('/wishlist',async (req,res)=>{
@@ -73,7 +74,9 @@ router.get('/wishlist',async (req,res)=>{
         if (JSON.stringify(userModel.wishlist)=="[]"){
             empty=true;
         }
-        res.render('vwStudent/wishlist', { userid: user.detail, paycourse: userModel.wishlist, empty: empty })
+        res.render('vwStudent/wishlist', {
+            userid: user.detail, paycourse: userModel.wishlist, empty: empty, isLogin: req.session.auth,
+            acc: req.session.authAccount })
     }
     else 
     {

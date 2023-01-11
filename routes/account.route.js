@@ -106,6 +106,10 @@ router.post("/tocart", async(req, res)=>{
 router.get("/home", Account.topCourse);
 router.get("/fullcourse/:id", Account.fullcouse);
 router.post("/fullcourse/:id", Account.handleFullCourse);
+router.get("/fullcourseSub/:id", Account.ViewGetfullcourseSub);
+router.post("/fullcourseSub/:id", Account.getfullcourseSub);
+router.get('/search',Account.SearchCourse);
+
 router.post('/login', async (req, res)=>{
    
     var dataRes = await  Login(req);

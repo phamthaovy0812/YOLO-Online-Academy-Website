@@ -11,6 +11,7 @@ import CourseModel from "../models/Course.model.js";
 import CourseController from "./Course.controller.js";
 import SubCategoryModel from "../models/SubCategory.model.js";
 import CategoryModel from "../models/Category.model.js";
+import db from "../utils/db.js";
 
 
 
@@ -72,7 +73,7 @@ const DeleteAccount = async (req, res) => {
     const data = await Account.findByIdAndDelete(id);
     res.send(`Document with ${data.name} has been deleted..`);
   } catch (err) {
-    res.status(404).json({
+    res.status(404).json({  
       status: "fail",
       message: "ID invalid",
     });
@@ -359,7 +360,7 @@ const accountUI = async (req, res) => {
 
 const topCourse = async (req, res) => {
   const allSubcategory = await SubCategoryModel.find().lean();
-  const categories = await CategoryModel.find().lean();
+  const categories = await CategoryModel.find().populate({ path: "sub_categories" }).lean();
   const coursetop = await CourseController.getClickManyView(); 
   const toppopularcourse =await CourseController.getCourseImpress();
   const Newcourse = await CourseController.getNewCreate();
@@ -373,9 +374,43 @@ const topCourse = async (req, res) => {
   res.render('vwAccount/home', { cate:categories,subcate:allSubcategory,viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
 };
 
-const search=async(req,res)=>{
-  const search=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
-  
+const SearchCourse=async(req,res)=>{
+  try{
+    var search='';
+    if (req.query.search){
+      search= req.query.search;
+    }
+    
+    var page=1;
+    if (req.query.page){
+      page= req.query.page;
+    }
+    const limit =5;
+
+    // console.log(req.query.search)
+    const dataCourse=await CourseModel.find({
+      $or:[
+        { title: { $regex: search, $options: 'i'}},
+        { slug_category: { $regex: search, $options: 'i'}}
+      ]
+    }
+    ).limit(limit*1).skip((page-1)*limit).lean();
+
+    const count=await CourseModel.find({
+      $or:[
+        { title: { $regex: search, $options: 'i'}},
+        { slug_category: { $regex: search, $options: 'i'}}
+      ]
+    }
+    ).countDocuments();
+    // console.log(dataCourse);
+    res.render('vwAccount/search',{courseSearch: dataCourse, totalPage:Math.ceil(count/limit), currentPage:page})
+
+  }catch (error)
+  {
+    console.log(error.message); 
+
+  }
 
 }
 const fullcouse = async (req, res) => {
@@ -385,7 +420,34 @@ const handleFullCourse = async (req, res) => {
   const listCourse = await CourseModel.find({ sub_category: req.params.id }).lean();
   res.render('wAccount/fullcourses', { listCourse: listCourse });
 }
+
+ const getfullcourseSub= async(req, res)=>{
+ 
+   const id = req.params.id;
+   console.log(id);
+   const course = await CourseModel.find({sub_category: req.params.id}).lean();
+   const subcategory = await SubCategoryModel.find({_id:id}).lean();
+  console.log(course);  
+   console.log(subcategory);
+   const allSubcategory = await SubCategoryModel.find().lean();
+   const categories = await CategoryModel.find().populate({ path: "sub_categories" }).lean();
+
+    var empty=true;
+    if(course){
+      empty=false;
+    }
+   res.render('vwAccount/fullcourses', { cate: categories, subcate:allSubcategory,course: course, check: empty, name: subcategory[0].name });
+  
+}
+const ViewGetfullcourseSub = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+ 
+  res.render('vwAccount/fullcourses');
+    }
 export default {
+  getfullcourseSub,
+  ViewGetfullcourseSub,
   fullcouse,
   handleFullCourse,
   GetAllAccount,
@@ -398,5 +460,6 @@ export default {
   AccountDataCourse,
   accountUI,
   detailCourseUI,
-  topCourse
+  topCourse,
+  SearchCourse
 };

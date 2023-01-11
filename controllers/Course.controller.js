@@ -262,7 +262,10 @@ export default {
     ,
     async getNewCreate(req,res){
         try {
-            const lastedCreate=CourseModel.find().sort({ "created_at": 1 }).limit(10).lean();
+            const lastedCreate = await CourseModel.find().sort({ "createdAt": -1 }).limit(10).lean();
+            console.log("--------------------------------------------------------");
+            console.log(lastedCreate);
+            console.log("--------------------------------------------------------");
             return lastedCreate;
         } catch (error) {
             return errors.message
@@ -355,7 +358,8 @@ export default {
         }
         
         return kq;
-    }
+    },
+   
 
            
 

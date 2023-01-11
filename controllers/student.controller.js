@@ -281,7 +281,7 @@ const WishList = async (req, res) => {
       image: "/student/js.png",
     },
   ];
-  res.render("vwStudent/profile", { wish: wishList });
+  res.render("vwStudent/profile", { wish: wishList ,});
 };
 const profile = async (req, res) => {
   const user = req.session.authAccount;

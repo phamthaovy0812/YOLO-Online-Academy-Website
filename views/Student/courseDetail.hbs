@@ -25,7 +25,8 @@
                             </div>
                         
                         
-                        <div class="course__details__price">{{course.price}}</div>
+                        <div class="course__details__price">{{course.price}}  <a class="course__details__price">{{course.promotion}}</a></div>
+                        
                         <p>{{course.subtitle}}</p>
 
                         <div class="d-flex">
@@ -68,9 +69,9 @@
                         <hr>
 
                         <ul>
-                            <li><b>Last updated</b>{{course.lastUpdate}}</li>
-                            <li><b>Course outline</b>
-                                <span>{{course.syllabus}}</span>
+                            <li><b>Last updated : {{course.lastUpdate}}</b></li>
+                            <li><b>Course outline: <a href="{{course.syllabus}}" style="color:blue">Click here to show</a></b>
+                                
                             </li>
                         </ul>
 
@@ -107,7 +108,7 @@
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="course__details__tab__desc">
                                 <h6>Course Infomation</h6>
-                                <p>{{course.description}}</p>
+                            <p>{{{course.description}}}</p>
                             </div>
                         </div>
                         {{!-- End: TAB 1 - Description --}}
@@ -131,8 +132,15 @@
                                                     <p>{{name}}</p>
                                                 </a>
                                                 <div class="d-flex ">
-                                                    <a href="#" class="mr-2" style="color: #EEB00D">Preview</a>
-                                                    <div>Duration</div>
+                                                   
+                                                    <button class="btn btn-lg video" data-video="/{{video}}" data-toggle="modal"
+                                                        data-target="#videoModal">Play Video Preview</button>
+                                                    
+                                                    
+
+                                                    
+
+                                                    
                                                 </div>
                                             </div>
 
@@ -140,12 +148,50 @@
                                         </div>
                                     </div>
                                 {{/each}}
+                                
 
-
+                                <script type="text/javascript">
+                                    function handleIDVideo(id){
+                                      
+                                       
+                                        const idvideo= id.value;
+                                        
+                                         document.getElementById('videodemo1').setAttribute('src', id.value);
+                                        
+                                    }
+                                    $(function () {
+                                            $(".video").click(function () {
+                                                var theModal = $(this).data("target"),
+                                                    videoSRC = $(this).attr("data-video"),
+                                                    videoSRCauto = videoSRC + "";
+                                                $(theModal + ' source').attr('src', videoSRCauto);
+                                                $(theModal + ' video').load();
+                                                $(theModal + ' button.close').click(function () {
+                                                    $(theModal + ' source').attr('src', videoSRC);
+                                                });
+                                            });
+                                        });
+                                    
+                                </script>
+                                <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                        aria-hidden="true">&times;</span></button>
+                                                <video controls width="100%">
+                                                    <source src="" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
-                      
+                        
+
+                        
                         <script>
                             $(document).ready(function () {
                                 $(".flip_chapter").click(function () {
@@ -175,7 +221,7 @@
                                         <div>
                                             <div class="listItem">
                                                 <i class="bi bi-bookmark-star-fill"></i>
-                                                <p>100,017 Reviews</p>
+                                                <p>{{list_reviews.length}}</p>
                                             </div>
                                         </div>
                                         <div>
@@ -215,7 +261,7 @@
                                     
                                 </div>
 
-                                <h6>Đánh giá</h6>
+                                <h6>Rating</h6>
                                
                                 
                                 <div class="reviewsAndRating">
@@ -257,7 +303,7 @@
                                 <form class="courseDetail" method="post" style="display: flex; flex-direction: column;">
                                     <input type="text" name="comment" style="width:50%; height: 80px; border-radius: 10px; border-width: 2px;">
                                 
-                                    <label for="cars" style=" margin-top: 10px;">Đánh giá:</label>
+                                    <label for="cars" style=" margin-top: 10px;">Rating:</label>
                                     <select name="scores" id="cars" style="width: 50%;  border-radius: 10px; border-width: 2px;">
                                         <option value="0">0</option>
                                         <option value="0.5">0.5</option>
@@ -273,7 +319,7 @@
                                     </select>
                                     <button class=""
                                         style="width: 50%; margin-top: 10px; border-radius: 10px; border-width: 2px; border-color: cornflowerblue; margin-bottom: 10px; background-color: cornflowerblue; color: white">
-                                        Gửi đánh giá
+                                        Send Rating 
                                     </button>
                                 </form>
                             </div>
@@ -290,46 +336,6 @@
 
 
     {{!-- Begin: 5 other courses in the same category are bought the most --}}
-    <section class="featured-course">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title featured__product__title">
-                        <h2>Featured Courses</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <script>
-                    const img_arr = ['/student/HTML_COURSE.png', '/student/HTML_COURSE.png', '/student/HTML_COURSE.png', '/student/HTML_COURSE.png', '/student/HTML_COURSE.png']
-                    const courseName_arr = ['1 Hour HTML', '1 Hour HTML', '1 Hour HTML', '1 Hour HTML', '1 Hour HTML']
-                    const cost_arr = ['$30.00', '$30.00', '$30.00', '$30.00', '$30.00']
-
-                    for (let i = 0; i < 5; i++) {
-                        document.write(`
-                            <div class="m-2">
-                                <div class= "course__item " >
-                                    <div class="course__item__pic set-bg">
-                                        <a href="#">
-                                            <img src="${img_arr[i]}" alt="">
-                                        </a>
-                                        <ul class="course__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="course__item__text">
-                                        <h6><a href="#">${courseName_arr[i]}</a></h6>
-                                        <h5>${cost_arr[i]}</h5> 
-                                    </div>
-                                </div>
-                            </div>
-                    `);
-                    }
-                </script>
-            </div>
-        </div>
-    </section>
+   
     {{!-- End: 5 other courses in the same category are bought the most --}}
 </div>
