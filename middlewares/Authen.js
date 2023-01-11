@@ -1,4 +1,4 @@
-import Account from "../models/Account.model.js";
+import Account from "../models/account.model.js";
 import Student from "../models/student.model.js";
 import Teacher from "../models/teacher.model.js";
 import Admin from "../models/admin.model.js";
