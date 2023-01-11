@@ -30,7 +30,7 @@ const CreateStudent = async (req, id_account) => {
     const dataToSave = await data.save();
     return JSON.stringify(dataToSave);
   } catch (error) {
-    return JSON.stringify({ message: error.message });
+    return { message: error.message };
   }
 };
 
