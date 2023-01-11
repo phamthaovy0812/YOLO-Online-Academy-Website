@@ -91,21 +91,25 @@ const DeleteAdmin = async (req, res, id_account) => {
 
   const teacherCensor = async(req, res) => {
     const allTeacher = await Teacher.find({isBlock:false}).lean();
-    res.render('Admin/teacherCensor',{teacher: allTeacher})
+    res.render('Admin/teacherCensor',{teacher: allTeacher, isLogin: req.session.auth,
+      acc: req.session.authAccount,})
   }
 
   const studentCensor = async(req, res) => {
     const allStudent= await Student.find({isBlock:false}).lean();
-    res.render('Admin/studentCensor', {student: allStudent}) 
+    res.render('Admin/studentCensor', {student: allStudent, isLogin: req.session.auth,
+      acc: req.session.authAccount,}) 
   }
 
   const courseCensor = async (req, res) => {
     const allCourses = await Course.find().lean();
-    res.render('Admin/courseCensor', {course: allCourses});
+    res.render('Admin/courseCensor', {course: allCourses, isLogin: req.session.auth,
+      acc: req.session.authAccount,});
   }
 const createCategory = async (req, res) => {
   const allCategories = await CategoryModel.find().lean();
-  res.render('Admin/creataCate',{category: allCategories});
+  res.render('Admin/creataCate',{category: allCategories, isLogin: req.session.auth,
+    acc: req.session.authAccount,});
   }
 const postCategory = async (req, res) => {
     try {
@@ -134,7 +138,8 @@ const getAllCourse = async (req, res) => {
   try {
     const course = await CourseModel.find({isBlock:false}).populate({path:"author_id"}).lean();
     const subCategory = await SubCategoryModel.find().lean();
-    res.render('Admin/courseCensor', { course: course, subCategory: subCategory });
+    res.render('Admin/courseCensor', { course: course, subCategory: subCategory, isLogin: req.session.auth,
+      acc: req.session.authAccount, });
   } catch (error) {
     
   }
@@ -167,6 +172,7 @@ const getAllComment = async (req, res) => {
    
   }
   console.log(storeAllCommet);
-  res.render('Admin/allComment',{allComment: storeAllCommet})
+  res.render('Admin/allComment',{allComment: storeAllCommet, isLogin: req.session.auth,
+    acc: req.session.authAccount,})
 }
 export default { getAllComment,getCourseBlock, blockCourse, getAllCourse, editCat,createCategory, postCategory, getAllCategory,deleteCat,GetAllAdmin, CreateAdmin, DeleteAdmin, UpdateAdmin, teacherCensor, studentCensor, courseCensor, BlockStudent, BlockTeacher};
