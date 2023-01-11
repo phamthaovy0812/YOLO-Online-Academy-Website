@@ -18,5 +18,20 @@ CourseRoute.get('/getAllCourses', Course.getAllCourse);
 CourseRoute.get('/getCourse/:id', Course.getCourse);
 CourseRoute.delete('/delete/:id', Course.deleteCourse);
 CourseRoute.get('/show', Course.show);
+CourseRoute.get('/getCourseManyRating', Course.getCourseManyRating);
+CourseRoute.get('/getCourseImpress', Course.getCourseImpress);
+CourseRoute.get('/updateScoreAndRevire', Course.updateScoresandReview);
+CourseRoute.get('/getNewCreate', Course.getNewCreate);
+CourseRoute.get('/getCourseLastEnroll', Course.getCourseLastEnroll);
+// CourseRoute.get('/getNumberStudentEnroll', Course.getNumberStudentEnroll);
+CourseRoute.post('/addView', Course.addView);
+CourseRoute.get('/getClickManyView', Course.getClickManyView);
+CourseRoute.get('/getSubcategory', Course.getSubcategory);
+
+
+
+
+
+
 
 export default CourseRoute;

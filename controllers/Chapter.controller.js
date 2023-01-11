@@ -1,13 +1,17 @@
 import { ExpressHandlebars } from "express-handlebars";
 import ChapterModel from "../models/Chapter.model.js";
+import CourseModel from "../models/Course.model.js";
 export default {
     test(req, res) {
         res.send("Test api chapter ")
     },
     async create(req, res) {
         try {
+            console.log("Creating");
+
             const user = req.session.authAccount;
             const chapterValue = req.body;
+           
             const chapter = {
                 name: chapterValue.name || "",
                 lessons: chapterValue.lessons || [],
@@ -16,7 +20,7 @@ export default {
             }
             const chapterModel = new ChapterModel(chapter);
             const chaptermain = await chapterModel.save();
-            console.log(chapterValue);
+            
             if (chapterValue.type=="postCourse"){
                 return res.redirect("../teachers/postCourse");
             }
@@ -25,6 +29,45 @@ export default {
             }
 
            
+
+        } catch (error) {
+            res.status(500).json(error);
+        }
+
+    },
+    async createChapter(req, res) {
+        try {
+            console.log("here");
+            console.log(req.params.id);
+
+          
+            const chapterValue = req.body;
+           
+            const chapter = {
+                name: chapterValue.name || "",
+                lessons: chapterValue.lessons || [],
+                timeCreate: chapterValue.timeCreate || "",
+                
+            }
+            const chapterModel = new ChapterModel(chapter);
+            await chapterModel.save();
+            const course = await CourseModel.findOne({ _id: req.params.id });
+            const chap=course.chapter;
+            chap.push(chapterModel._id);
+
+            const courseupdate = await CourseModel.findOneAndUpdate({ "_id": req.params.id }, { chapter: chap }, {
+                returnOriginal: false,
+            });
+            console.log(courseupdate);
+            
+            if (chapterValue.type == "postCourse") {
+                return res.redirect("../../teachers/postCourse");
+            }
+            else {
+                return res.redirect("../../teachers/edit/" + req.params.id);
+            }
+
+
 
         } catch (error) {
             res.status(500).json(error);
@@ -65,7 +108,7 @@ export default {
     async getChapter(req,res){
         try {
 
-            const  chapter = await ChapterModel.findById(req.params.id);
+            const  chapter = await ChapterModel.findById(req.params.id)
             if(chapter){
                 res.status(200).json(chapter);
             }else{
