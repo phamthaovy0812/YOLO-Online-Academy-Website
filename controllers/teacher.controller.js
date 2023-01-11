@@ -120,7 +120,7 @@ const createCourse = async (req, res) => {
 
 const homepage = (req, res) => {
   const user = req.session.authAccount;
-  console.log(user);
+ 
   res.render('Teacher/home', { user: user, isLogin: req.session.auth,
     acc: req.session.authAccount })
 };

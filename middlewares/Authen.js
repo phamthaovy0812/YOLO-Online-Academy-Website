@@ -1,4 +1,4 @@
-import Account from "../models/Account.model.js";
+import Account from "../models/account.model.js";
 import Student from "../models/student.model.js";
 import Teacher from "../models/teacher.model.js";
 import Admin from "../models/admin.model.js";
@@ -16,13 +16,16 @@ export default  async( req ) =>{
         }
         else {
             const account = await Account.findById(data.id);
-            if(data.role==1)
+            console.log("DATA ", data.role===1)
+            if(data.role===1)
             { 
                 const teacher = await Teacher.findOne({"id_account":data.id});
                 dataRes =  {"status":200, account , detail : teacher};
+                
             }
-            else if(data.role==2)
-            {
+            else if(data.role===2)
+            { 
+                console.log(1)
                 const admin = await Admin.findOne({"id_account":data.id});
                 dataRes = {"status":200, account , detail : admin};
             }
