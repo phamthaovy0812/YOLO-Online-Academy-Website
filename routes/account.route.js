@@ -4,7 +4,8 @@ import bodyParser from 'body-parser';
 import Login  from  '../middlewares/Authen.js';
 import CourseModel from '../models/Course.model.js'
 import Student from '../controllers/student.controller.js';
-import AccountModel from '../models/Account.model.js';
+import AccountModel from '../models/account.model.js';
+// /../models/Account.model.js
 var jsonParser = bodyParser.json();
 const router = express.Router();
 import sendEmail from '../middlewares/EmailVerification.js'
