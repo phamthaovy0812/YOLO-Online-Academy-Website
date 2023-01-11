@@ -4,6 +4,7 @@ import LessonModel from '../models/Lesson.model.js';
 import TeacherSevice from "../services/Teacher.sevice.js";
 import CourseModel from "../models/Course.model.js";
 import CourseController from "./Course.controller.js";
+import SubCategoryModel from "../models/SubCategory.model.js";
 
 const GetAllTeacher = async (req, res) => {
   try {
@@ -150,21 +151,24 @@ const editCourse = async (req, res) => {
 };
 
 const editCourseDetail = async (req, res) => {
-  try {
-    const user = req.session.authAccount;
-    const subCategorys = await TeacherSevice.getSubCategory();
-    const allchap = await ChapterModel.find({ author: user.account._id }).lean();
-    CourseModel.findOne({ _id: req.params.id, }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).exec(function (err, story) {
-      if (err) return (err);
-      res.render("Teacher/editCourseDetail", { course: story, subCategory: subCategorys, chapters: story.chapter, user: user, allChapter: allchap , isLogin: req.session.auth,
-        acc: req.session.authAccount});
-
-
-    });// Ch
-  } catch (error) {
-    return error
-  } 
   
+  const id = req.params.id;
+  const user = req.session.authAccount;
+  if (user) {
+    const allSubcategory = await SubCategoryModel.find().lean();
+    CourseModel.findOne({ _id: id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, course) {
+      if (err) return (err);
+      console.log(course);
+      return res.render('Teacher/editCourseDetail', { data: course, subCategory: allSubcategory, user: user.account, chapters: course.chapter });
+    });
+
+
+
+
+  }
+  else {
+    res.render('Error/NoAuthen');
+  }
 
 
 

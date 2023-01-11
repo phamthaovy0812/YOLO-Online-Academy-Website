@@ -1,63 +1,6 @@
-<script>
-    // Run on page load
-     let lessonArray = new Array();
-
-    const names = "{{course._id}}"
-    console.log(names)
-    var isFirstLoad = localStorage.getItem('isFirstLoad');
-
-    if (!isFirstLoad) {
-        sessionStorage.setItem("title", "{{course.title}}");
-        sessionStorage.setItem("subcate", "{{course.slug_category}}");
-        sessionStorage.setItem("sub", "{{course.subtitle}}");
-        sessionStorage.setItem("des", "{{course.description}}");
-        sessionStorage.setItem("price", "{{course.price}}");
-        sessionStorage.setItem("pro", "{{course.promotion}}");
-        sessionStorage.setItem("sys", "{{course.syllabus}}");
-
-        localStorage.setItem('isFirstLoad', 'true');
-    }
 
 
-    window.onload = function () {
-
-        $("#dropdownMenuButton").text(sessionStorage.getItem('subcate'));
-        // If values are not blank, restore them to the fields
-        var name = sessionStorage.getItem('title');
-        if (name !== null) $('#ftitle').val(name);
-
-        var email = sessionStorage.getItem('subcate');
-        if (email !== null) $('#fsubcategory').val(email);
-
-        var subject = sessionStorage.getItem('sub');
-        if (subject !== null) $('#fsubtitle').val(subject);
-
-        var message = sessionStorage.getItem('des');
-        if (message !== null) $('#fdescription').val(message);
-
-        var message = sessionStorage.getItem('price');
-        if (message !== null) $('#fprice').val(message);
-
-        var message = sessionStorage.getItem('pro');
-        if (message !== null) $('#promotion').val(message);
-
-        var message = sessionStorage.getItem('sys');
-        if (message !== null) $('#fsyllabus').val(message);
-    }
-
-    // Before refreshing the page, save the form data to sessionStorage
-    window.onbeforeunload = function () {
-        sessionStorage.setItem("title", $('#ftitle').val());
-        sessionStorage.setItem("subcate", $('#fsubcategory').val());
-        sessionStorage.setItem("sub", $('#fsubtitle').val());
-        sessionStorage.setItem("des", $('#fdescription').val());
-        sessionStorage.setItem("price", $('#fprice').val());
-        sessionStorage.setItem("pro", $('#promotion').val());
-        sessionStorage.setItem("sys", $('#fsyllabus').val());
-    }
-</script>
-
-<div class="editDetail d-flex p-0 m-0 " style="box-sizing:border-box; height:1300px;">
+<div class="postCodeByTeacher d-flex p-0 m-0 " style="box-sizing:border-box; height:1500px;">
     <div class="col-md-1  position-relative p-0 m-0">
         <!-- Begin: SIDEBAR -->
         <div id="side p-0 m-0">
@@ -86,313 +29,264 @@
             }
         </script>
     </div>
-    <div class="col">
-        <h1><strong>Update Detail</strong></h1>
-        <form enctype="multipart/form-data" onsubmit="handleSubmit()" method="POST"
-            action="/api/teachers/edit/{{course._id}}">
+    <div class="formSubmit container">
+        <div class="row">
 
-            <div class="form-group">
-                <h5 for="ftitle">Title Course</h5>
-                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control " id="ftitle"
-                    name="title" placeholder="Enter title of course">
-            </div>
-            <div class="form-group">
-                <h5 for="fsubcategory">SubCategory</h5>
-                <div class="dropdown border boder-dark" style="width: 100% !important;">
-                    <button class="btn btn-secondary dropdown-toggle  text-left"
-                        style="width: 100% !important; background-color:rgb( 233 234	236	); color:black;" type="button"
-                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        SubCategory
+            <div class="col-sm border border-gray  d-flex  justify-content-between flex-lg-wrap mb-2 rounded">
+                <div class="wrapper">
+                    <button class="btn m-2 bg-info" id="information">
+                        Add information
                     </button>
-
-                    <div class="dropdown-menu" style="width: 100% !important;" aria-labelledby="dropdownMenuButton">
-
-                        {{#each subCategory}}
-                        <a class="dropdown-item" href="#">{{name}}</a>
-
-                        {{/each}}
-                    </div>
-                    <script>
-                        $(".dropdown-menu a").click(function () {
-                            event.preventDefault();
-                            $(this).parents(".dropdown").find('.btn').html($(this).text() + '    <span class="caret"></span>');
-                            $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-                            console.log($(this).text());
-                            $("#fsubcategory").val($(this).text());
-
-                        });
-                    </script>
+                    <button class="btn m-2 bg-info " id="iamgeupload">
+                        Add image and video deomo
+                    </button>
+                    <button class="btn m-2 bg-info" id="uploaChapterbtn">
+                        Add chapter
+                    </button>
+                </div>
+                <div class="wrapperbtnSubmitall">
+                    <button class="btn p-3 boder boder-dark rounded " style="color: red; text-decoration:none;"><a href="/api/teachers/myListCourses">Save Change</a></button>
                 </div>
 
-                <br>
-                <br>
-                <input type="hidden" class="form-control" id="fsubcategory" name="sub_category">
-
             </div>
-
-            <div class="form-group ">
-                <h5 for="fsubcategory">Subtitle</h5>
-                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fsubtitle"
-                    name="subtitle" placeholder="Enter title of subtitle">
-            </div>
-
-            <div class="form-group ">
-                <h5 for="fdescription">Description</h5>
-                <textarea style="background-color:rgb( 233 234	236	); height:200px;" type="text" class="form-control"
-                    id="fdescription" name="description" placeholder="Enter description"></textarea>
-            </div>
-
-            <div class="form-group ">
-            
-                <input style="background-color:rgb( 233 234	236	);" type="hidden" class="form-control" id="fauthor" name="author_id"
-                    value="{{user.account._id}}" placeholder="Enter title of author">
-            </div>
-
-
-
-            <input type="hidden" name="type" value="edit">
-
-
-            <div class="form-group ">
-                <h5 for="fprice">Price</h5>
-                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fprice"
-                    name="price" placeholder="Enter title of price">
-            </div>
-
-            <div class="form-group ">
-                <h5 for="price">Promotion</h5>
-                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="promotion"
-                    name="promotion" placeholder="Enter title of promotion">
-            </div>
-
-            <div class="form-group ">
-                <h5 for="fsyslabus">Syslabus</h5>
-                <input style="background-color:rgb( 233 234	236	);" type="text" class="form-control" id="fsyllabus"
-                    name="syllabus" placeholder="Enter link syllabus">
-            </div>
-
-
-
-
-            <div class="form-group ">
-                <input style="background-color:rgb( 233 234	236	);" type="hidden" class="form-control" id="fchapter"
-                    name="chapter" placeholder="Enter link Chapter">
-            </div>
-
-
-            <script>
-                $(document).ready(function () {
-                    $(document).on('change', '.btn-file :file', function () {
-                        var input = $(this),
-                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                        input.trigger('fileselect', [label]);
-                    });
-
-                    $('.btn-file :file').on('fileselect', function (event, label) {
-
-                        var input = $(this).parents('.input-group').find(':text'),
-                            log = label;
-
-                        if (input.length) {
-                            input.val(log);
-                        } else {
-                            if (log) alert(log);
-                        }
-
-                    });
-                    function readURL(input) {
-                        if (input.files && input.files[0]) {
-                            var reader = new FileReader();
-
-                            reader.onload = function (e) {
-                                $('#img-upload').attr('src', e.target.result);
-                            }
-
-                            reader.readAsDataURL(input.files[0]);
-                        }
-                    }
-
-                    $("#imgInp").change(function () {
-                        readURL(this);
-                    });
-                });
-
-
-
-
-
-            </script>
-
-
-
-            <div class="modal fade" id="uploadAvartar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Please add avatar or video</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Upload Image</label>
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <span class="btn btn-default btn-file">
-                                            Browse… <input type="file" id="imgInp" name="image">
-                                        </span>
-                                    </span>
-                                    <input type="text" class="form-control" readonly>
-                                </div>
-
-                                <img id='img-upload' />
-                            </div>
-                            <div class="form-group">
-                                <input type='file' id='videoUpload' name="videoDemo" />
-
-                                <video width="320" height="240" style="display:none" controls autoplay>
-                                    Your browser does not support the video tag.
-                                </video>
-                                <script>
-                                    document.getElementById("videoUpload").onchange = function (event) {
-                                        let file = event.target.files[0];
-                                        let blobURL = URL.createObjectURL(file);
-                                        document.querySelector("video").style.display = 'block';
-                                        document.querySelector("video").src = blobURL;
-                                    }
-
-                                </script>
-                            </div>
-
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="handleSave()">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-
-                function handleImage() {
-                    $('#uploadAvartar').modal('toggle');
-                    event.preventDefault();
-                }
-
-                function handleImage() {
-                    $('#uploadAvartar').modal('toggle');
-                    event.preventDefault();
-                }
-            </script>
-
-
-
-            <button onclick="handleImage()" class="btn btn-primary w-100 bg-success">Upload information</button>
-
-        </form>
-    </div>
-    <div class="col border borde-dark">
-
-        <form id="createChapter" method="POST" action="/api/chapter/createChapter/{{course._id}}">
-            <div class="modal fade" id="modalChapter" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog  mw-100 w-75">
-                    <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h4 class="modal-title w-100 font-weight-bold">Create chapter</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body mx-3">
-                            <div class="md-form mb-5">
-
-                                <label data-error="wrong" data-success="right" for="defaultForm-email"
-                                    id="nameChapter">Name of
-                                    chapter</label>
-
-\
-                                <input type="text" id="defaultForm-email" class="form-control validate" name="name">
-                            </div>
-                            <div class="md-form mb-5">
-
-                                <input type="hidden" name="type" value="edit">
-                                <input type="hidden" name="iduser" value="{{user._id}}">
-                                <input type="hidden" id="lessonArray" class="form-control validate" name="lessons">
-                            </div>
-                            <div class="md-form mb-5">
-
-
-                                <input type="hidden" id="timeCreate" class="form-control validate" name="timeCreate">
-                            </div>
-
-                            <table id="cartTableBody">
-
-                            </table>
-
-
-
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button type="submit" class="btn btn-default" onclick="handleChapter()">Save
-                                Chapter</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-                function handleChapter() {
-
-                    {{!-- const time = Date.now();
-                    $("#timeCreate").val(time)
-                    let lessonArray = new Array();
-                    if (localStorage.getItem(names)) {
-                        lessonArray = JSON.parse(localStorage.getItem(names));
-                    }
-                    if(!lessonArray.includes(time))
-                    {
-                          lessonArray.push(time);
-                    const lessonJSON = JSON.stringify(lessonArray);
-                    localStorage.setItem(names, lessonJSON);
-                    } --}}
-                  
-                  
-                }
-
-                function handleGroup(id) {
-
-                    document.getElementById("chapterIDLabel").innerHTML = id.value;
-                    document.getElementById("chapterID").value = id.value;
-
-
-
-                }
-
-                function handleSubmit() {
-                    const s = localStorage.getItem(names);
-                    $("#fchapter").val(s);
-                    window.localStorage.removeItem(names);
-
-                }
-            </script>
-
-
-
-
-        </form>
-
-        <div class="text-center mt-5">
-            <a href="" class="btn btn-default btn-rounded mb-4 border border-dark rounded" data-toggle="modal"
-                data-target="#modalChapter">Add Chapter
-            </a>
-
 
         </div>
+        <div class="row">
 
-        <form id="createLesson" enctype="multipart/form-data" method="POST" action="/api/lesson/create">
+            <div class="col border border-gray rounded m-0 p-0" style="height: 1200px;">
+                <div class="containerform data">
+                    <div class="row">
+                        <div class="col-25"><label for="ftitle">
+                                <h3><strong>
+                                        Create Course Detail
+                                    </strong></h3>
+                            </label>
+                        </div>
+                    </div>
+
+                    <form action="/api/courses/updateinfor/{{data._id}}" method="post">
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="ftitle"><strong>Title Course</strong></label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="ftitle" name="title" placeholder="Your title course.."
+                                    value="{{data.title}}">
+                            </div>
+                        </div>
+                        <input type="hidden" value="{{user._id}}" name="author_id">
+                        <div class="row">
+                            <div class="col-25">
+
+                                <label for="fsubcategory"><strong>Short decription</strong></lable>
+                            </div>
+                            <div class="col-75">
+                                <textarea id="subject" name="subtitle" placeholder="{{data.subtitle}}" 
+                                    style="height:200px">{{data.subtitle}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="country"><strong>Subcategory</strong></label>
+                            </div>
+                            <div class="col-75">
+                                <div class="dropdown border boder-dark" style="width: 100% !important;">
+                                    <button class="btn btn-secondary dropdown-toggle  text-left"
+                                        style="width: 100% !important; background-color:rgb( 233 234	236	); color:black;"
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        Please select subcategory
+                                    </button>
+                                    <input type="hidden" class="form-control" id="fsubcategory" name="sub_category">
+                                    <div class="dropdown-menu" style="width: 100% !important;"
+                                        aria-labelledby="dropdownMenuButton">
+
+                                        {{#each subCategory}}
+                                        <a class="dropdown-item" href="#">{{name}}</a>
+
+                                        {{/each}}
+                                    </div>
+                                    <script>
+                                        $(".dropdown-menu a").click(function () {
+                                            event.preventDefault();
+                                            $(this).parents(".dropdown").find('.btn').html($(this).text() + '    <span class="caret"></span>');
+                                            $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+                                            console.log($(this).text());
+                                            $("#fsubcategory").val($(this).text());
+
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="subject"><strong>Syslabus</strong></label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="fsyllabus" value="{{data.syllabus}}" name="syllabus" placeholder="Your last name..">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="subject"><strong>Price</strong></label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="fprice" value="{{data.price}}" name="price" placeholder="Ex: 200,000 VND">
+                            </div>
+                        </div>
+                        <br>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="subject"><strong>Promotion</strong></label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="fpromotion" value="{{data.promotion}}" name="promotion" placeholder="Ex: 200,000 || NO">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="subject"><strong>Description</strong></label>
+                            </div>
+                            <div class="col-75">
+                                <textarea id="mytextarea" class="col-75"
+                                    name="description">{{data.description}}</textarea>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="rowsubmit">
+                            <input type="submit" value="Save information">
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="uploadImageAndVideo invisible">
+                    <div class="d-flex">
+                        <div class="m-5 p-2 border boder-gray">
+                            <h4>Avartar Course</h4>
+                            <img src="/{{data.image}}" style="width: 300px; height:200px;"alt="">
+                        </div>
+                        <div class="m-5 p-2 border boder-gray">
+                            <h4>Video demo</h4>
+                            <video src="/{{data.videoDemo}}" style="width: 300px; height:auto;"></video>
+                        </div>
+
+                    </div>
+                    
+                   
+                   
+                 
+
+                    <form enctype="multipart/form-data" action="/api/courses/updateImage/{{data._id}}" method="post">
+                        <div class="form-group">
+                            <label><strong>Upload Image</strong></label>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-default btn-file">
+                                        Browse… <input type="file" id="imgInp" name="image">
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" readonly>
+                            </div>
+
+                            <img id='img-upload' />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Upload Video Demo</strong></label>
+                            <input type='file' id='videoUpload' name="videoDemo" />
+
+                            <video width="465px" height="auto" style="display:none;" controls autoplay>
+                                Your browser does not support the video tag.
+                            </video>
+                            <script>
+                                document.getElementById("videoUpload").onchange = function (event) {
+                                    let file = event.target.files[0];
+                                    let blobURL = URL.createObjectURL(file);
+                                    document.querySelector("video").style.display = 'block';
+                                    document.querySelector("video").src = blobURL;
+                                }
+
+                            </script>
+                        </div>
+                        <div class="rowsubmit">
+                            <input type="submit" value="Save Image And Video">
+                        </div>
+                    </form>
+                </div>
+                <div class="uploadChapter invisible">
+                    <form action="/api/courses/updateChapter/{{data._id}}" method="post">
+                    <div class="text-center mt-2"><a href="" class="btn btn-default btn-rounded mb-4 border border-dark rounded" data-toggle="modal"
+                        data-target="#modalChapter"><strong>Add Chapter</strong>
+                    </a></div>
+                     
+                        <div class="modal fade" id="modalChapter" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog  mw-100 w-75">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h4 class="modal-title w-100 font-weight-bold">Create chapter</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body mx-3">
+                                        <div class="md-form mb-5">
+
+                                            <label data-error="wrong" data-success="right" for="defaultForm-email"
+                                                id="nameChapter">Name of
+                                                chapter</label>
+                                            <input type="text" id="defaultForm-email" class="form-control validate"
+                                                name="name">
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-default" onclick="handleChapter()">Save
+                                            Chapter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    {{#each chapters}}
+                    <div class="flip_chapter_create m-1"><button onclick="handleGroup(this)"
+                            class="text-left w-100 mr-1" value="{{_id}}">
+                            {{ name }} </button></div>
+
+
+                    <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST"
+                            action="/api/lesson/delete/{{_id}}">
+                            <div class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}"
+                                    class="d-flex" style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i>
+                                    <p>{{name}}</p>
+
+
+                                </a>
+                                <div class="d-flex "> </div> <button class="btn btn_del_les" value={{_id}}><i
+                                        class="fa fa-remove" style="color:red;"></i></button>
+                            </div>
+                        </form>{{/each}} <div class="d-flex justify-content-between"><button class="btn "
+                                data-toggle="modal" data-target="#modalLesson">Add lesson</button>
+                            <form method="POST" action="/api/chapter/delete/{{_id}}" id={{_id }}> <button
+                                    class="btn btn_del_chapter" value={{ _id }}> Remove chapter <i class="fa fa-remove"
+                                        style="color:black;"></i></button></form>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                </div>
+
+            </div>
+
+        </div>
+        <form id="createLesson" method="POST" action="/api/lesson/create" enctype="multipart/form-data">
             <div class="modal fade " id="modalLesson" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog  modal-dialog-centered mw-80 w-65">
@@ -410,7 +304,8 @@
                                 <label data-error="wrong" data-success="right" id="chapterIDLabel"
                                     for="orangeForm-name">Chapter</label>
                                 <input type="hidden" id="chapterID" name="chapterID">
-                                <input type="hidden" name="type" value="edit">
+                                <input type="hidden" name="type" value="postCourse">
+                                <input type="hidden" name="id_courselesson" value="{{data._id}}">
                             </div>
                             <div class="md-form mb-5">
                                 <i class="fas fa-user prefix grey-text"></i>
@@ -443,83 +338,100 @@
                 </div>
             </div>
         </form>
-          
-        <div class="displayChapterTemp_edit">
-           
-            <table id="lessonCount_edit">
-
-                {{#each chapters}}
-                <div class="flip_chapter_create m-1"><button onclick="handleGroup(this)" class="text-left w-100 mr-1"
-                        value="{{_id}}">
-                        {{ name }} </button></div>
-
-               
-                <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST"
-                        action="/api/lesson/delete/{{_id}}">
-                        <div class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}"
-                                class="d-flex" style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i>
-                                <p>{{name}}</p>
-
-                            </a>
-                            <div class="d-flex "> </div> <button class="btn btn_del_les" value={{_id}}><i
-                                    class="fa fa-remove" style="color:red;"></i></button>
-                        </div>
-                    </form>{{/each}} <div class="d-flex justify-content-between"><button class="btn "
-                            data-toggle="modal" data-target="#modalLesson">Add lesson</button>
-                        <form method="POST" action="/api/chapter/delete/{{_id}}" id={{_id }}> <button
-                                class="btn btn_del_chapter" value={{ _id }}> Remove chapter <i class="fa fa-remove"
-                                    style="color:black;"></i></button></form>
-                    </div>
-                </div>
-                {{/each}}
-           
-                {{!-- {{#each allChapter}}
-                <tr>
-                    <script>
-
-                        if () {
-
-                            const templateDropDown_edit = '<div class="flip_chapter_create m-1"><button  onclick="handleGroup(this)"  class="text-left w-100 mr-1" value="{{_id}}"> {{ name }} </button></div>  <div class="panel_lessons_create">{{#each lessons}} <form id={{ _id }} method="POST" action="/api/lesson/delete/{{_id}}"> <div  class="link_video_lesson border border-dark p-2 m-2"> <a href="http://{{video}}" class="d-flex" style="color: #EEB00D"> <i class="bi bi-play-circle-fill mr-2"></i> <p>{{name}}</p> </a> <div class="d-flex ">  </div> <button class="btn btn_del_les" value={{_id}}><i class="fa fa-remove" style="color:red;"></i></button> </div></form>{{/each}} <div class="d-flex justify-content-between"><button class="btn "  data-toggle="modal" data-target="#modalLesson">Add lesson</button> <form method="POST" action="/api/chapter/delete/{{_id}}" id={{ _id }}> <button class="btn btn_del_chapter" value = {{ _id }}> Remove chapter <i class="fa fa-remove" style="color:black;"></i></button ></form></div></div>'
-                            document.write(templateDropDown_edit)
 
 
-
-                        }
-
-                    </script>
-
-                </tr>
-
-                {{/each}} --}}
-            </table>
-
-
-            </table>
-            <script>
-                $(document).ready(function () {
-
-                    $(".flip_chapter_create").click(function () {
-                        event.preventDefault();
-
-                        $(this).next(".panel_lessons_create").slideToggle("slow");
-                    });
-                });
-                $(".btn_del_les").click(function () {
-                    event.preventDefault();
-                    alert(this.value)
-
-                    $("#" + this.value).submit();
-                });
-                $(".btn_del_chapter").click(function () {
-                    event.preventDefault();
-                    alert(this.value)
-
-                    $("#" + this.value).submit();
-
-                });
-            </script>
-
-        </div>
 
     </div>
+
+
+    <script>
+        function handleGroup(id) {
+
+            document.getElementById("chapterIDLabel").innerHTML = id.value;
+            document.getElementById("chapterID").value = id.value;
+
+
+
+        }
+        $(document).ready(function () {
+
+            $(".flip_chapter_create").click(function () {
+                event.preventDefault();
+
+                $(this).next(".panel_lessons_create").slideToggle("slow");
+            });
+        });
+        $(".btn_del_les").click(function () {
+            event.preventDefault();
+            alert(this.value)
+
+            $("#" + this.value).submit();
+        });
+        $(".btn_del_chapter").click(function () {
+            event.preventDefault();
+            alert(this.value)
+
+            $("#" + this.value).submit();
+
+        });
+
+        $(document).ready(function () {
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
+
+            $('.btn-file :file').on('fileselect', function (event, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#img-upload').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#imgInp").change(function () {
+                readURL(this);
+            });
+        });
+        $("#information").click(function () {
+            $(".uploadImageAndVideo").css("display", "none");
+            $(".uploadChapter").css("display", "none");
+            $(".data").css("display", "block");
+
+        });
+
+        $("#iamgeupload").click(function () {
+            $(".data").css("display", "none");
+            $(".uploadChapter").css("display", "none");
+            $(".uploadImageAndVideo").css("display", "block");
+
+            $('.uploadImageAndVideo').attr('style', 'visibility: visible !important');
+
+        });
+
+        $("#uploaChapterbtn").click(function () {
+            $(".data").css("display", "none");
+            $(".uploadChapter").css("display", "block");
+            $(".uploadImageAndVideo").css("display", "none");
+            $('.uploadChapter').attr('style', 'visibility: visible !important');
+        });
+
+    </script>
 </div>
