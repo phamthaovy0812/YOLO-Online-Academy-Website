@@ -39,6 +39,32 @@ router.get('/login',(req,res)=>{
     res.render('vwAccount/login',{layout:false});
 })
 
+router.post('/login', async (req, res)=>{
+   
+    var dataRes = await Login(req);
+    var url;
+    
+    if(dataRes && dataRes.status == 200)
+    {
+        
+        req.session.auth = true
+        req.session.authAccount = dataRes;
+        if (dataRes.account.role==0){
+            url='/api/accounts/home';
+        }else if (dataRes.account.role==1){
+            url='/api/teachers/homepage';
+        } else if (dataRes.account.role==2){
+            url='/api/admins/categoryCensor';
+        }
+        req.session.save(function (err) {
+            res.redirect(url); 
+        })
+    }
+    else {
+        res.redirect("/api/accounts/login");  
+    }
+})
+
 router.get('/otp',(req,res)=>{
     res.render('vwAccount/otp',{layout:false});
 })
@@ -107,32 +133,7 @@ router.post("/tocart", async(req, res)=>{
 router.get("/home", Account.topCourse);
 router.get('/search',Account.SearchCourse);
 
-router.post('/login', async (req, res)=>{
-   
-    var dataRes = await  Login(req);
-    var url;
-    
-    if(dataRes && dataRes.status == 200)
-    {
-        
-        req.session.auth = true
-        req.session.authAccount = dataRes;
-        if (dataRes.account.role==0){
-            url='/api/accounts/home';
 
-        }else if (dataRes.account.role==1){
-            url='/api/teachers/homepage';
-        } else if (dataRes.account.role==2){
-            url='/api/admins/categoryCensor';
-        }
-        req.session.save(function (err) {
-            // session saved
-            res.redirect(url); // sua thi sua o day anha Vy, sua dieu huong home a'
-        })
-    }
-
-    res.render("vwAccount/login");  
-})
 
 router.post('/logout',async function (req,res){
     req.session.auth=false;

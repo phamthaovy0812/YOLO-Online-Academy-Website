@@ -362,7 +362,7 @@ const topCourse = async (req, res) => {
   sub.map(item=>{
     name=item.subcategory;
   })
-  console.log(name);
+ 
   res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
 };
 
