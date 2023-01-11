@@ -40,9 +40,11 @@
                             <p>Jump Into Course Creation</p>
                         </div>
                         <div class="container d-flex align-items-center justify-content-center item">
-                            <a href="/api/teachers/postCourse" type="button"
-                                class="btn btn-lg text-light  buttonCreateCourse">Create
-                                Your Course</a>
+                            <form action="/api/courses/createNew" method="post">
+                                <button type="submit" class="btn btn-lg text-light  buttonCreateCourse">Create
+                                    Your Course</button>
+                            </form>
+                           
                         </div>
             
                     </div>

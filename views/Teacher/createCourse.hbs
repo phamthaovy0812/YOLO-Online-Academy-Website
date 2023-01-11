@@ -14,7 +14,7 @@
     
 
     // Run on page load
-    window.onload = function () {
+    {{!-- window.onload = function () {
 
 
 
@@ -50,7 +50,7 @@
         sessionStorage.setItem("price", $('#fprice').val());
         sessionStorage.setItem("pro", $('#promotion').val());
         sessionStorage.setItem("sys", $('#fsyllabus').val());
-    }
+    } --}}
 </script>
 
 <div class="postCodeByTeacher d-flex p-0 m-0 " style="box-sizing:border-box; height:1300px;">
@@ -83,7 +83,8 @@
         </script>
     </div>
     <div class="col">
-        <h1>Detail</h1>
+        <h1>Create Course Detail</h1>
+        
         <form enctype="multipart/form-data" onsubmit="handleSubmit()" method="POST" action="/api/teachers/postCourse">
 
             <div class="form-group">
@@ -427,7 +428,7 @@ background: linear-gradient(0deg, rgba(243,244,239,1) 12%, rgba(234,226,200,1) 9
                             </div>
 
                             <button type="submit" class="btn btn-deep-orange">Create Lesson</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
 
 
                         </div>

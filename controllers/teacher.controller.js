@@ -62,16 +62,23 @@ const UpdateTeacher = async (req) => {
 
 const viewCreateCourse = async (req, res) => {
   const user = req.session.authAccount;
-  const subCategorys = await TeacherSevice.getSubCategory();
-  let chapters = await ChapterModel.find().lean();
-  
-  ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
-    if (err) return (err);
-    console.log(subCategorys);
+  if (user && user.account.role == 1 ){
+    const subCategorys = await TeacherSevice.getSubCategory();
+    let chapters = await ChapterModel.find().lean();
 
-    res.render("Teacher/createCourse", { chapters: story, subCategory: subCategorys, user: user, isLogin: req.session.auth,
-      acc: req.session.authAccount});
-  });// Ch
+    ChapterModel.find({}).lean().populate('lessons').exec(function (err, story) {
+      if (err) return (err);
+      console.log(subCategorys);
+
+      res.render("Teacher/createCourse", {
+        chapters: story, subCategory: subCategorys, user: user, isLogin: req.session.auth,
+        acc: req.session.authAccount
+      });
+    });// Ch
+  }else{  
+    res.render("Error/NoAuthen"); 
+  }
+  
 }
 const createCourse = async (req, res) => {
   try {
@@ -199,12 +206,21 @@ const handleUpdateCourse = async (req, res) => {
 const myListCourses = async (req, res) => {
   try {
     const user = req.session.authAccount;
-    console.log(user);
-    const course = await CourseModel.find({ author_id: user.account._id }).lean();
-    console.log(course);
+    if (user && user.account.role==1)
+    {
+      console.log(user);
+      const course = await CourseModel.find({ author_id: user.account._id }).lean();
+      console.log(course);
 
-    res.render("Teacher/myListCourses", { course: course, isLogin: req.session.auth,
-      acc: req.session.authAccount });
+      res.render("Teacher/myListCourses", {
+        course: course, isLogin: req.session.auth,
+        acc: req.session.authAccount
+      });
+    }
+    else{
+      res.render("Error/NoAuthen");
+    }
+  
   } catch (error) {
       return error;
   }

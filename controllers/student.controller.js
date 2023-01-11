@@ -63,7 +63,7 @@ const DeleteStudent = async (req, res, id_account) => {
       comment: req.body.comment,
       id_user:id,
       name:data.fullname,
-      pathImage:"https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.pn",
+      pathImage:"https://cdn3d.iconscout.com/3d/premium/thumb/graduate-student-6368706-5250853.png",
     }   
     console.log(data)
     const ratingList = data.rating_list;

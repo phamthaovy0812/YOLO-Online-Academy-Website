@@ -27,11 +27,11 @@ const Course = new mongoose.Schema({
     },
     number_review:{
         type: Number,
-        defaultValue:0,
+        default:0,
     },
     scores_review: {
         type: Number,
-        defaultValue: 0,
+        default: 0,
     },
     list_reviews:{
         type:Array,
@@ -69,7 +69,7 @@ const Course = new mongoose.Schema({
     },
     numberClick:{
         type: Number,
-        defaultValue: 0, 
+        default: 0, 
     }
      
 },

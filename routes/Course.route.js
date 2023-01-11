@@ -27,6 +27,15 @@ CourseRoute.get('/getCourseLastEnroll', Course.getCourseLastEnroll);
 CourseRoute.post('/addView', Course.addView);
 CourseRoute.get('/getClickManyView', Course.getClickManyView);
 CourseRoute.get('/getSubcategory', Course.getSubcategory);
+CourseRoute.get('/test', Course.test);
+CourseRoute.post('/createNew', Course.createNew);
+CourseRoute.get('/create/:id', Course.createDetail);
+CourseRoute.post('/updateImage/:id', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'videoDemo', maxCount: 1 }]) ,Course.updateImage);
+CourseRoute.post('/updateChapter/:id', Course.updateChapter);
+CourseRoute.post('/updateinfor/:id', Course.updateInfor);
+// CourseRoute.get('/updateinfor/:id', Course.updateInfor);
+
+
 
 
 

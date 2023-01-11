@@ -12,13 +12,14 @@ export default {
                 video:  file.path || "",
                 chapterID: lessonParam.chapterID,
             }
+            const id = req.body.id_courselesson;
             const LessonSchema = new Lesson(lessonObject);
             await LessonSchema.save();
             const chapter = await ChapterModel.findById(lessonParam.chapterID);
             chapter.lessons.push(LessonSchema._id)
             await chapter.save();
             if (lessonParam.type=="postCourse"){
-                res.redirect("../teachers/postCourse");
+                res.redirect("../courses/create/"+id);
             }
             else{
                 res.redirect("../teachers/edit");

@@ -112,7 +112,7 @@ router.post('/login', async (req, res)=>{
         }else if (dataRes.account.role==1){
             url='/api/teachers/homepage';
         } else if (dataRes.account.role==2){
-            url='/api/admins/categoryCensor';
+            url ='/api/admins/teacherCensor';
         }
         req.session.save(function (err) {
             // session saved

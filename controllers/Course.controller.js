@@ -1,10 +1,108 @@
+import ChapterModel from "../models/Chapter.model.js";
 import CourseModel from "../models/Course.model.js";
 import SubCategoryModel from "../models/SubCategory.model.js";
 import studentModel from "../models/student.model.js";
+import TeacherSevice from "../services/Teacher.sevice.js";
 export default {
     test(req, res) {
 
-        res.render('courses/create');
+        res.render('Teacher/postCourse');
+    },
+    async createNew(req,res){
+       
+        const course_Data = new CourseModel({ title: "Title course ..", description: "Decription ..", subtitle: "Short description ..", image: " ", videoDemo:" " });
+
+        const value = await course_Data.save();
+        const id = course_Data._id;
+        res.redirect("/api/courses/create/"+id)
+    },
+    async createDetail(req, res){
+        const  id=req.params.id;
+        const user = req.session.authAccount;
+        if(user){
+            const allSubcategory = await SubCategoryModel.find().lean();
+            CourseModel.findOne({ _id: id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function(err, course){
+                if (err) return (err);
+                console.log(course);
+                return res.render('Teacher/postCourse', { data: course, subCategory: allSubcategory, user: user.account, chapters: course.chapter });
+            });
+        
+           
+            
+           
+        }
+        else {
+            res.render('Error/NoAuthen');
+        }
+    },
+    async updateImage(req, res){
+        try {
+            const id = req.params.id;
+            const file=req.files;
+            console.log(id);
+            console.log(file.image[0].path)
+            console.log(file.videoDemo[0].path)
+            var datetime = new Date();
+            const cours = await CourseModel.findOneAndUpdate({ _id: id }, {
+                image: file.image[0].path,
+                videoDemo: file.videoDemo[0].path,
+                lastUpdate: datetime.toISOString().slice(0, 10) || 2022
+            }, { returnOriginal: true });
+
+            res.redirect("/api/courses/create/"+id);
+        } catch (error) {
+            
+        }
+    },
+
+    async updateInfor(req,res){
+        try {
+            const  id= req.params.id;
+            var datetime = new Date();
+            console.log(req.body);
+            const IDSubCategory = await TeacherSevice.getIDCategory(req.body.sub_category);
+            console.log(IDSubCategory);
+    
+            const cours = await CourseModel.findOneAndUpdate({_id:id},{
+                title:req.body.title,
+                subtitle:req.body.subtitle,
+                sub_category: IDSubCategory,
+                syllabus: req.body.syllabus,
+                price:req.body.price,
+                promotion:req.body.promotion,
+                slug_category: req.body.sub_category,
+                description:req.body.description,
+                author_id: req.body.author_id,
+                number_review: 0,
+                scores_review: 0,
+                list_reviews: [],
+                lastUpdate: datetime.toISOString().slice(0, 10) || 2022,
+            },{returnOriginal:true});
+            
+             res.redirect("/api/courses/create/"+id);
+        } catch (error) {
+            
+        }
+    },
+    async updateChapter(req, res) {
+        try {
+            const id = req.params.id;
+            var datetime = new Date();
+            console.log(req.body)
+            console.log("ID"+id);
+            const oldCourse = await CourseModel.findOne({ _id: id }).lean();
+            var oldChapter = oldCourse.chapter;
+            const newChapter = new ChapterModel({name:req.body.name});
+            await newChapter.save();
+            oldChapter.push(newChapter._id)
+            const cours = await CourseModel.findOneAndUpdate({ _id: id }, {
+                chapter: oldChapter
+            }, { returnOriginal: true });
+
+            res.redirect("/api/courses/create/" + id);
+        } catch (error) {
+            
+        }
     },
     async create(req, res) {
         try {

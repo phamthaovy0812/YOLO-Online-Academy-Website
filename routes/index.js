@@ -23,7 +23,10 @@ router.use('/api/students', StudentRoute);
 router.use('/api/teachers', TeacherRoute); 
 router.use('/api/admins', AdminRoute); 
 router.use('/api/login', AuthenRoute);
-
+//item tes
+router.get("*", (req, res) => {
+    res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
+})
 
 
 export default router;

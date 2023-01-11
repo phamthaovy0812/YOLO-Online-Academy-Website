@@ -10,7 +10,7 @@ export default {
         const timeChapter=JSON.parse(time);
         const chapter = await Chapter.find(); 
         console.log(chapter);
-        let chapterList=[];
+    let chapterList=[];
         timeChapter.forEach(item =>{
             for (let i = 0; i < chapter.length; i++) {
                 if (chapter[i].timeCreate == item) {
