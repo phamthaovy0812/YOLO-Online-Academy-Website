@@ -58,12 +58,14 @@ router.get('/viewlesson',(req,res)=>{
 
 router.get('/shopping',(req,res)=>{
     console.log(req.session.authAccount.detail.courses_enroll)
-    res.render('vwStudent/shopping',{paycourse:req.session.authAccount.detail.courses_enroll})
+    res.render('vwStudent/shopping',{paycourse:req.session.authAccount.detail.courses_enroll, isLogin: req.session.auth,
+        acc: req.session.authAccount,})
 })
 
 router.get('/wishlist',(req,res)=>{
     console.log(req.session.authAccount.detail.wishlist)
-    res.render('vwStudent/wishlist',{paycourse:req.session.authAccount.detail.wishlist})
+    res.render('vwStudent/wishlist',{paycourse:req.session.authAccount.detail.wishlist, isLogin: req.session.auth,
+        acc: req.session.authAccount,})
 })
 
 router.get("*", (req, res) => {

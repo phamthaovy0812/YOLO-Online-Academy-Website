@@ -9,6 +9,7 @@ import AdminModel from '../models/admin.model.js';
 import bcrypt from "bcryptjs";
 import CourseModel from "../models/Course.model.js";
 import CourseController from "./Course.controller.js";
+import db from "../utils/db.js";
 
 
 
@@ -365,9 +366,43 @@ const topCourse = async (req, res) => {
   res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
 };
 
-const search=async(req,res)=>{
-  const search=[{"title":"Mobile for beginer","description":"day la mot khoa hoc mobile danh cho nguoi moi bat dau.","price":"$113","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$1133","image":"/student/js.png"},{"title":"nau an for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$123","image":"/student/js.png"},{"title":"web for beginer","description":"day la mot khoa hoc web danh cho nguoi moi bat dau.","price":"$13","image":"/student/js.png"}]
-  
+const SearchCourse=async(req,res)=>{
+  try{
+    var search='';
+    if (req.query.search){
+      search= req.query.search;
+    }
+    
+    var page=1;
+    if (req.query.page){
+      page= req.query.page;
+    }
+    const limit =5;
+
+    // console.log(req.query.search)
+    const dataCourse=await CourseModel.find({
+      $or:[
+        { title: { $regex: search, $options: 'i'}},
+        { slug_category: { $regex: search, $options: 'i'}}
+      ]
+    }
+    ).limit(limit*1).skip((page-1)*limit).lean();
+
+    const count=await CourseModel.find({
+      $or:[
+        { title: { $regex: search, $options: 'i'}},
+        { slug_category: { $regex: search, $options: 'i'}}
+      ]
+    }
+    ).countDocuments();
+    // console.log(dataCourse);
+    res.render('vwAccount/search',{courseSearch: dataCourse, totalPage:Math.ceil(count/limit), currentPage:page})
+
+  }catch (error)
+  {
+    console.log(error.message); 
+
+  }
 
 }
 
@@ -382,5 +417,6 @@ export default {
   AccountDataCourse,
   accountUI,
   detailCourseUI,
-  topCourse
+  topCourse,
+  SearchCourse
 };

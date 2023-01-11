@@ -104,6 +104,7 @@ router.post("/tocart", async(req, res)=>{
 })
 
 router.get("/home", Account.topCourse);
+router.get('/search',Account.SearchCourse);
 
 router.post('/login', async (req, res)=>{
    

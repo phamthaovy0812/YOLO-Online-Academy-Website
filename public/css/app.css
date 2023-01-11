@@ -393,3 +393,31 @@ a :hover {
   padding: 30px;
   margin-left: 150px;
 }
+
+.pagination {
+  display: inline-block;
+
+}
+
+.pagination a {
+  color: black;
+  background-color: #f0ac00a9;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border-radius: 5px;
+  margin: 1px;
+ 
+  
+}
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
