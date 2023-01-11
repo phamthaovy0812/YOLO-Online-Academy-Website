@@ -267,7 +267,7 @@ const WishList = async (req, res) => {
       number_review: "12344",
       scores_review: "4.5",
       subtitle: "day la mot khoa hoc mobile danh cho nguoi moi bat dau.",
-      price: "$113",
+      price: "$113",  
       image: "/student/js.png",
     },
     {
@@ -321,7 +321,7 @@ const  addWishList = async (req, res) => {
       avatar_course: courses.image,
 
     };
-  const updateAccount = UpdateWishList(req)
+  // const updateAccount = UpdateWishList(req)
   const data = await Student.findOne({ "id_account": userID });
     const wishlists = data.wishlist;
     wishlists.push(objectCourse)
@@ -336,6 +336,23 @@ const  addWishList = async (req, res) => {
   res.redirect("/api/accounts/courseDetail/" + courseID);
 
   }
+const removeWishlist = async (req, res) => {
+  
+
+  const user = await Student.findOne({ "id_account": req.params.id });
+
+  const newWishList=[];
+  for(let item of user.wishlist){
+   
+    if ((item.id_course.localeCompare(req.body.id_course)!=0)) {
+       newWishList.push(item);
+    }
+  }
+  // console.log(newWishList);
+  const newUser = await Student.findOneAndUpdate({ "id_account": req.params.id }, { wishlist: newWishList },{returnOriginal:true});
+  res.redirect("/api/students/wishlist");
+
+}
 
 
-export default { addWishList,detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse,UpdateCart};
+export default { removeWishlist,addWishList,detailCourseUI, profile,WishList,categoryUI,DeleteWishList, GetAllStudent, CreateStudent, DeleteStudent, UpdateStudent, UpdateRating, UpdateEnrollCourse, UpdateWishList,topCourse,payCourse,UpdateCart};

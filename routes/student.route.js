@@ -45,6 +45,8 @@ router.get("/category",(req,res)=>{
     res.render('Student/Category');
 })
 
+router.post("/remove/:id",Student.removeWishlist);
+
 router.get("/mylearning",(req,res)=>{
     res.render('vwStudent/mylearning');
 })
@@ -61,9 +63,23 @@ router.get('/shopping',(req,res)=>{
     res.render('vwStudent/shopping',{paycourse:req.session.authAccount.detail.courses_enroll})
 })
 
-router.get('/wishlist',(req,res)=>{
-    console.log(req.session.authAccount.detail.wishlist)
-    res.render('vwStudent/wishlist',{paycourse:req.session.authAccount.detail.wishlist})
+router.get('/wishlist',async (req,res)=>{
+   
+    const user = req.session.authAccount;
+    const listCours=[];
+    let empty=false;
+    const userModel = await Students.findOne({ "id_account": user.detail.id_account }).lean();
+    if(user){
+        if (JSON.stringify(userModel.wishlist)=="[]"){
+            empty=true;
+        }
+        res.render('vwStudent/wishlist', { userid: user.detail, paycourse: userModel.wishlist, empty: empty })
+    }
+    else 
+    {
+        res.render('Error/NoAuthen')
+    }
+  
 })
 
 router.get("*", (req, res) => {

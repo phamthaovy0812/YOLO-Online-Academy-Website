@@ -72,10 +72,28 @@
                         <button class="btn btn-secondary dropdown-toggle mt-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Categories
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Web development</a>
-                            <a class="dropdown-item" href="#">Mobile development</a>
+                        <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                            {{#each cate}}
+                                <a class="dropdown-item hoverCate" href="#">{{name}}</a>
+                            {{/each}}
+                            <style>
+                                .hoverCate:hover{
+                                    background-color: green;
+                                    display: block; 
+                                    
+                                }
+                            </style>
+                            <div class="subca d-none">
+                                {{#each subcate}}
+                                <a class="dropdown-item hoverSub" href="#">{{name}}</a>
+                                {{/each}}
+                            </div>
+                                
+                             
                         </div>
+                 
+
+                       
                     </div>
 
                 <form method="get" action=" /api/accounts/search">

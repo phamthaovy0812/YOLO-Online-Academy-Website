@@ -104,7 +104,8 @@ router.post("/tocart", async(req, res)=>{
 })
 
 router.get("/home", Account.topCourse);
-
+router.get("/fullcourse/:id", Account.fullcouse);
+router.post("/fullcourse/:id", Account.handleFullCourse);
 router.post('/login', async (req, res)=>{
    
     var dataRes = await  Login(req);

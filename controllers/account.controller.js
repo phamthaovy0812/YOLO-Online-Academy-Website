@@ -9,6 +9,8 @@ import AdminModel from '../models/admin.model.js';
 import bcrypt from "bcryptjs";
 import CourseModel from "../models/Course.model.js";
 import CourseController from "./Course.controller.js";
+import SubCategoryModel from "../models/SubCategory.model.js";
+import CategoryModel from "../models/Category.model.js";
 
 
 
@@ -290,7 +292,9 @@ const AccountData = async (req, res) => {
 const detailCourseUI = async (req, res) => {
   try {
     const user = req.session.authAccount;
-    
+    const allSubcategory = await SubCategoryModel.find().lean();
+    const categories = await CategoryModel.find().lean();
+    console.log(allSubcategory);
    if(user){
       var account = await StudentModel.findOne({ "id_account":req.session.authAccount.account._id})
        
@@ -317,9 +321,10 @@ const detailCourseUI = async (req, res) => {
         isWishList = true;
       }
        console.log(" BUY IS ", req.params.id, account.courses_enroll,isBuy)
+      
      CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
        if (err) return (err);
-       return res.render("Student/courseDetail", { course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart, isWishList:isWishList });
+       return res.render("Student/courseDetail", { cate: categories, subcate:allSubcategory,course: story, chapter: story.chapter, user: user.account, review:story.list_reviews,isLogin: req.session.auth, acc: req.session.authAccount , id_course : req.params.id, avatar : story.image, title:story.title,isBuy:isBuy, isAddCart:isAddCart, isWishList:isWishList });
        // , 
      });
    }  
@@ -327,7 +332,9 @@ const detailCourseUI = async (req, res) => {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
       console.log(story);
-      return res.render("Student/courseDetail", { course: story, chapter: story.chapter, review: story.list_reviews, isLogin: req.session.auth,
+      return res.render("Student/courseDetail", {
+        cate: categories,
+        subcate: allSubcategory, course: story, chapter: story.chapter, review: story.list_reviews, isLogin: req.session.auth,
         acc: req.session.authAccount, });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });}
@@ -336,7 +343,7 @@ const detailCourseUI = async (req, res) => {
   } catch (error) {
     CourseModel.findOne({ _id: req.params.id }).lean().populate({ path: 'chapter', populate: { path: 'lessons' } }).populate({ path: "author_id" }).exec(function (err, story) {
       if (err) return (err);
-      return res.render("Student/courseDetail", { course: story, chapter: story.chapter, isLogin: req.session.auth,
+      return res.render("Student/courseDetail", { cate:categories,course: story, chapter: story.chapter, isLogin: req.session.auth,
         acc: req.session.authAccount, });
       // , user: user.account, isLogin: req.session.auth, acc: req.session.authAccount
     });
@@ -351,7 +358,8 @@ const accountUI = async (req, res) => {
 }
 
 const topCourse = async (req, res) => {
-  
+  const allSubcategory = await SubCategoryModel.find().lean();
+  const categories = await CategoryModel.find().lean();
   const coursetop = await CourseController.getClickManyView(); 
   const toppopularcourse =await CourseController.getCourseImpress();
   const Newcourse = await CourseController.getNewCreate();
@@ -362,7 +370,7 @@ const topCourse = async (req, res) => {
     name=item.subcategory;
   })
   console.log(name);
-  res.render('vwAccount/home', { viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
+  res.render('vwAccount/home', { cate:categories,subcate:allSubcategory,viewcourse: coursetop, newcourse: Newcourse, popularcourse: toppopularcourse, mostcategory: name, isLogin: req.session.auth, acc: req.session.authAccount });
 };
 
 const search=async(req,res)=>{
@@ -370,8 +378,16 @@ const search=async(req,res)=>{
   
 
 }
-
+const fullcouse = async (req, res) => {
+  
+}
+const handleFullCourse = async (req, res) => {
+  const listCourse = await CourseModel.find({ sub_category: req.params.id }).lean();
+  res.render('wAccount/fullcourses', { listCourse: listCourse });
+}
 export default {
+  fullcouse,
+  handleFullCourse,
   GetAllAccount,
   CreateAccount,
   DeleteAccount,
