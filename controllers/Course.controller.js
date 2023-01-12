@@ -252,7 +252,6 @@ export default {
         }
 
         const scores_reviews_test = await CourseModel.find({ "list_reviews.0": { "$exists": true } });
-        res.json(scores_reviews_test)
     },
             
     async getCourseImpress(req, res) {
@@ -263,9 +262,7 @@ export default {
     async getNewCreate(req,res){
         try {
             const lastedCreate = await CourseModel.find().sort({ "createdAt": -1 }).limit(10).lean();
-            console.log("--------------------------------------------------------");
-            console.log(lastedCreate);
-            console.log("--------------------------------------------------------");
+            
             return lastedCreate;
         } catch (error) {
             return errors.message
@@ -320,7 +317,9 @@ export default {
         }
     },
     async getClickManyView(req,res){
-        const course = await CourseModel.find({ "numberClick": { "$exists": true } }).sort({ "numberClick": -1 }).limit(10).lean()
+        const course = await CourseModel.find({ "numberClick": { "$exists": true } }).populate({ path: "author_id" }).sort({ "numberClick": -1 }).populate({path:"author_id"}).limit(10).lean()
+        console.log(course);    
+        console.log("here");
         return course;
     },
     async getSubcategory(req,res){
@@ -330,10 +329,10 @@ export default {
         
         for (let [key, value] of IDCouse) {
             const course_SortObject = await CourseModel.findOne({ _id: key }).lean();
-            category_Have_User.push({ id_subcate: course_SortObject.sub_category.valueOf(), id_course: key, numberstudent: value, nameCourses: course_SortObject.title});
-
-            
-            
+            if (course_SortObject)
+            {
+                category_Have_User.push({ id_subcate: course_SortObject.sub_category, id_course: key, numberstudent: value, nameCourses: course_SortObject.title });
+            }
         }
         let map = category_Have_User.reduce((prev, next) => {
             if (next.id_subcate in prev) {

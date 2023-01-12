@@ -200,14 +200,15 @@ router.post('/updateinfo', async (req, res)=>{
 
     res.render("vwStudent/editprofile") 
 });
+
+// router
+//     .route('/')
+//     .get(Account.GetAllAccount);
 router.get("*", (req, res) => {
     res.render("Error/404", { layout: false }); // layout false là để k hiển thị header và footer
   })
 
-// router 
-//     .route('/')
-//         .get(Account.GetAllAccount);
-        // .post(jsonParser,Account.CreateAccount)
+
 router
     .route('/:id')
         .delete(Account.DeleteAccount)

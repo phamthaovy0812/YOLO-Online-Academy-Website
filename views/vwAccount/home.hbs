@@ -8,32 +8,6 @@
 </div>
 <div style="justify-content: space-around;width: 100%; ">
   <div class="d-flex flex-wrap">
-{{!-- {{#each popularcourse}}
-    <section class="featured-course">
-      
-        <div class="row">
-            <div class="m-2">
-              <div class=" border border-dark">
-                <div class="course__item__pic ">
-                  <a href="#">
-                    <img src="/{{image}}" alt="">
-                  </a>
-                  <ul class="course__item__pic__hover">
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                  </ul>
-                </div>
-                <div class="course__item__text">
-                  <h6><a href="#">{{title}}</a></h6>
-                  <h5>{{price}}</h5>
-                </div>
-              </div>
-            </div>
-       
-      </div>
-    </section>
-  {{/each}} --}}
 
     {{#each popularcourse}}
     <a href="../accounts/courseDetail/{{_id}}" class="{{_id}}">
@@ -88,7 +62,9 @@
           <img class="card-img-top" src="/{{image}}" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title"><a href="../accounts/courseDetail/{{_id}}" title="View Product">{{title}}</a></h4>
-            <p class="card-text">{{subtitle}}</p>
+            <p class="card-text">{{subtitle}} {{author_id}}</p>
+
+
             <div class="row">
               <div class="col">
                 <p class="btn btn-warning btn-block"><strong>{{price}}</strong></p>

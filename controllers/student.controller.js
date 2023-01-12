@@ -80,6 +80,7 @@ const DeleteStudent = async (req, res, id_account) => {
     console.log(updated)
 
     const updateNumberReview = await CourseController.updateScoresandReview();
+    console.log(updateNumberReview);
     return dataUpdate;
   }
 

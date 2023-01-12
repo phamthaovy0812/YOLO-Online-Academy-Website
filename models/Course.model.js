@@ -23,7 +23,7 @@ const Course = new mongoose.Schema({
     },
     author_id:{
         type: Schema.Types.ObjectId,
-        ref: "Teacher",
+        ref: "Account", 
     },
     number_review:{
         type: Number,

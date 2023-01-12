@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-75">
                                 <textarea id="subject" name="subtitle" placeholder="{{data.subtitle}}"
-                                    style="height:200px"></textarea>
+                                    style="height:200px">{{data.subtitle}}</textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -131,7 +131,7 @@
                                 <label for="subject"><strong>Price</strong></label>
                             </div>
                             <div class="col-75">
-                                <input type="text" id="fprice" name="price" placeholder="Ex: 200,000 VND">
+                                <input type="text" id="fprice" name="price" value="{{data.price}}" placeholder="Ex: 200,000 VND">
                             </div>
                         </div>
                         <br>
@@ -142,7 +142,7 @@
                                 <label for="subject"><strong>Promotion</strong></label>
                             </div>
                             <div class="col-75">
-                                <input type="text" id="fpromotion" name="promotion" placeholder="Ex: 200,000 || NO">
+                                <input type="text" id="fpromotion" name="promotion" value="{{data.promotion}}" placeholder="Ex: 200,000 || NO">
                             </div>
                         </div>
                         <br>
